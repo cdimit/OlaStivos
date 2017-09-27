@@ -4,16 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CompetitionSeries extends Model
+class Competition extends Model
 {
-
-    public function competition()
+    
+    public function series()
     {
-        return $this->hasMany('App\Competition');
+        return $this->belongsTo('App\CompetitionSeries');
     }
 
     public function result()
     {
         return $this->hasMany('App\Result');
     }
+
 }
