@@ -13,12 +13,15 @@ class CreateResultRecordTable extends Migration
      */
     public function up()
     {
-        Schema::table('result_record', function (Blueprint $table) {
+        Schema::create('result_record', function (Blueprint $table) {
             $table->increments('id');
+            
             $table->integer('record_id')->unsigned();
             $table->integer('result_id')->unsigned();
+
             $table->foreign('record_id')->references('id')->on('records');
             $table->foreign('result_id')->references('id')->on('results');
+            
             $table->integer('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events');
             $table->timestamps();
@@ -32,8 +35,7 @@ class CreateResultRecordTable extends Migration
      */
     public function down()
     {
-        Schema::table('result_record', function (Blueprint $table) {
-             Schema::dropIfExists('result_record');
-        });
+        Schema::dropIfExists('result_record');
+
     }
 }

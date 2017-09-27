@@ -15,15 +15,14 @@ class CreateCompetitionsTable extends Migration
     {
         Schema::create('competitions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('competition_series_id')->unsigned();
-            $table->foreign('competition_series_id')->references('id')->on('competition_series');
             $table->string('name');
             $table->date('date_start');
             $table->date('date_finish');
-            $table->string('name');
             $table->string('country');
             $table->string('city');
             $table->string('venue');
+            $table->integer('competition_series_id')->unsigned();
+            $table->foreign('competition_series_id')->references('id')->on('competition_series');
             $table->timestamps();
         });
     }

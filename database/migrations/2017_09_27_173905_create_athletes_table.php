@@ -20,8 +20,8 @@ class CreateAthletesTable extends Migration
             $table->date('dob');
             $table->string('picture');
             $table->integer('club_id')->unsigned();
-
-            $table->foreign('club_id')->references('id')->on('club');
+            
+            $table->foreign('club_id')->references('id')->on('clubs');
 
             $table->timestamps();
         });
