@@ -16,4 +16,9 @@ class Athlete extends Model
     return $this->belongsTo('App\Club', 'club_id');
   }
 
+  public function links()
+  {
+    return $this->morphMany('App\Link', 'linkable');
+  }
+
 }
