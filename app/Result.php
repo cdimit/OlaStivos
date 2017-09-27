@@ -22,4 +22,9 @@ class Result extends Model
         return $this->belongsTo('App\Event');
     }
 
+    public function record()
+    {
+        return $this->belongsToMany(Record::class)->withTimestamps();
+    }
+
 }

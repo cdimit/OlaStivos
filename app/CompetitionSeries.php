@@ -12,8 +12,4 @@ class CompetitionSeries extends Model
         return $this->hasMany('App\Competition');
     }
 
-    public function result()
-    {
-        return $this->hasMany('App\Result');
-    }
 }
