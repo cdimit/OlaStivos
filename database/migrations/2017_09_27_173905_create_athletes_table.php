@@ -20,6 +20,7 @@ class CreateAthletesTable extends Migration
             $table->date('dob');
             $table->string('gender');// male, female
             $table->string('picture')->default('athlete.jpg');
+
             $table->integer('club_id')->unsigned();
 
             $table->foreign('club_id')->references('id')->on('clubs');

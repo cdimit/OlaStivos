@@ -72,9 +72,27 @@
         </nav>
 
 
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="list-group">
+                        <a href="{{ route('club.index') }}" class="list-group-item">
+                        Clubs</a>
+                        <a href="{{ route('athlete.index') }}" class="list-group-item list-group-item-action">Athletes</a>
+                        <a href="{{ route('series.index') }}" class="list-group-item list-group-item-action">Series</a>
+                        <a href="{{ route('competition.index') }}" class="list-group-item list-group-item-action">Competitions</a>
+                        <a href="#" class="list-group-item list-group-item-action">Results</a>
+                    </div>
 
-        @yield('content')
-
+                </div>
+                <div class="col-sm-8">
+                    @yield('content')
+                </div>
+                <div class="col-sm-2">
+                    @yield('right_col')
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->

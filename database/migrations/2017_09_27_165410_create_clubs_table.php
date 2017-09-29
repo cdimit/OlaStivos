@@ -18,8 +18,8 @@ class CreateClubsTable extends Migration
             $table->string('name');
             $table->string('acronym')->unique();
             $table->string('city');
-            $table->string('dof'); //Date Of Foundation
             $table->string('picture')->default('club.jpg');
+            $table->integer('since'); //Date Of Foundation
 
             $table->timestamps();
         });
