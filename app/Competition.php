@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Competition extends Model
 {
-<<<<<<< HEAD
 
-=======
->>>>>>> 7b79c51c73cd761ca0f126241a22bbdb6c4873a1
     public function series()
     {
-        return $this->belongsTo('App\CompetitionSeries');
+        return $this->belongsTo('App\CompetitionSeries', 'competition_series_id');
     }
 
     public function results()

@@ -7,7 +7,7 @@ $factory->define(App\Club::class, function (Faker $faker) {
       'name' => $faker->name,
       'acronym' => $faker->unique()->word,
       'city' => $faker->city,
-      'dof' => $faker->year($max = 'now'),
+      'since' => $faker->year($max = 'now'),
 
     ];
 });
