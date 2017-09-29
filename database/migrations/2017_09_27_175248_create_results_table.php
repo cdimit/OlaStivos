@@ -20,7 +20,7 @@ class CreateResultsTable extends Migration
             $table->date('date');
             $table->integer('score');
             $table->string('race');
-            $table->time('age');
+            $table->integer('age')->unsigned();
 
             $table->integer('event_id')->unsigned();
             $table->foreign('event_id')->references('id')->on('events');

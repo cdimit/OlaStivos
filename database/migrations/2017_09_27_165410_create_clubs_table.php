@@ -16,10 +16,10 @@ class CreateClubsTable extends Migration
         Schema::create('clubs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('acronym');
+            $table->string('acronym')->unique();
             $table->string('city');
             $table->string('dof'); //Date Of Foundation
-            $table->string('picture');
+            $table->string('picture')->default('club.jpg');
 
             $table->timestamps();
         });

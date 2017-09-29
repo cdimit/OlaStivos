@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Result extends Model
 {
-	
+
     public function competition()
     {
         return $this->belongsTo('App\Competition');
     }
- 
+
     public function athlete()
     {
         return $this->belongsTo('App\Athlete');
@@ -22,9 +22,9 @@ class Result extends Model
         return $this->belongsTo('App\Event');
     }
 
-    public function record()
+    public function records()
     {
-        return $this->belongsToMany(Record::class)->withTimestamps();
+				return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id');
     }
 
 }

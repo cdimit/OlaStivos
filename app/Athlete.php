@@ -21,8 +21,18 @@ class Athlete extends Model
       return $this->morphMany('App\Link', 'linkable');
     }
 
-    public function result()
+    public function results()
     {
       return $this->hasMany('App\Result');
     }
+
+		public function videos()
+		{
+			return $this->morphToMany(Video::class, 'videable');
+		}
+
+		public function images()
+		{
+			return $this->morphToMany(Image::class, 'imageable');
+		}
 }

@@ -16,4 +16,14 @@ class Club extends Model
   {
     return $this->morphMany('App\Link', 'linkable');
   }
+
+  public function videos()
+  {
+    return $this->morphToMany(Video::class, 'videable');
+  }
+
+  public function images()
+  {
+    return $this->morphToMany(Image::class, 'imageable');
+  }
 }

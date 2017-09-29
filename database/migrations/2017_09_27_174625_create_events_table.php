@@ -19,6 +19,8 @@ class CreateEventsTable extends Migration
             $table->string('type');
             $table->string('season');
             $table->string('gender');// male, female, mix
+
+            $table->unique(['name','type', 'season', 'gender']);
             $table->timestamps();
         });
     }

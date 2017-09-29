@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-  public function videable()
+  protected $guarded = [];
+
+  public function athletes()
   {
-    return $this->morphTo();
+    return $this->morphedByMany('App\Athlete', 'videable');
+
+    // return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id');
+
   }
 }
