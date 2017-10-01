@@ -11,8 +11,16 @@ class Video extends Model
   public function athletes()
   {
     return $this->morphedByMany('App\Athlete', 'videable');
-
-    // return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id');
-
   }
+
+  public function clubs()
+  {
+    return $this->morphedByMany('App\Club', 'videable');
+  }
+
+  public function competitions()
+  {
+    return $this->morphedByMany('App\Competition', 'videable');
+  }
+
 }

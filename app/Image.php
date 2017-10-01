@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-  public function imageable()
+
+  public function athletes()
   {
-    return $this->morphTo();
+    return $this->morphedByMany('App\Athlete', 'imageable');
   }
 }

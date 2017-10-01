@@ -19,11 +19,11 @@ class Club extends Model
 
   public function videos()
   {
-    return $this->morphToMany(Video::class, 'videable');
+    return $this->morphToMany('App\Video', 'videable');
   }
 
   public function images()
   {
-    return $this->morphToMany(Image::class, 'imageable');
+    return $this->morphToMany('App\Image', 'imageable');
   }
 }
