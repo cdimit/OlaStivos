@@ -24,7 +24,7 @@ class Result extends Model
 
     public function records()
     {
-				return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id');
+		return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id')->withTimestamps();
     }
 
 }

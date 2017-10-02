@@ -32,5 +32,7 @@ Route::resource('dashboard/club', 'Dashboard\ClubCrudController', ['except' => [
 Route::resource('dashboard/athlete', 'Dashboard\AthleteCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/series', 'Dashboard\SeriesCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', ['except' => ['show', 'destroy']]);
+Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
+
 
 Route::get('/home', 'HomeController@index')->name('home');

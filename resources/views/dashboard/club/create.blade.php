@@ -4,7 +4,7 @@
     <p><u><h4>Add New Club</h4></u></p>
     {!! Form::open(
         array(
-            'route' => 'athlete.store', 
+            'route' => 'club.store', 
             'class' => 'form-horizontal',  
             'files' => true)
         ) 

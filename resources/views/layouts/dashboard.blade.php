@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -81,7 +82,7 @@
                         <a href="{{ route('athlete.index') }}" class="list-group-item list-group-item-action">Athletes</a>
                         <a href="{{ route('series.index') }}" class="list-group-item list-group-item-action">Series</a>
                         <a href="{{ route('competition.index') }}" class="list-group-item list-group-item-action">Competitions</a>
-                        <a href="#" class="list-group-item list-group-item-action">Results</a>
+                        <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action">Results</a>
                     </div>
 
                 </div>
@@ -97,5 +98,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

@@ -59,9 +59,9 @@ class ClubCrudController extends Controller
         $club->since = $request->since;
 
         if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/clubs'.$club->id);
+            $picture = $request['picture']->store('pictures/clubs/'.$club->id);
         }else{
-            $picture = 'default_club.png';
+            $picture = '';
         }
         $club->picture = $picture;
 
