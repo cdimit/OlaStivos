@@ -22,7 +22,7 @@ class ResultCrudController extends Controller
     {
         $results = Result::all();
 
-        return view('dashboard.result.index')->with('results',$results);    
+        return view('dashboard.result.index')->with('results',$results);
     }
 
     /**
@@ -33,11 +33,11 @@ class ResultCrudController extends Controller
     public function create()
     {
 
-        $athletes = Athlete::all(); 
+        $athletes = Athlete::all();
         $events = Event::all();
         $competitions = Competition::all();
         $records = Record::all();
-        
+
         return view('dashboard.result.create')->with('athletes',$athletes)->with('events',$events)->with('competitions',$competitions)->with('records',$records);
     }
 
@@ -78,7 +78,6 @@ class ResultCrudController extends Controller
         //
         // 1. Get athlete DOB
         $athlete = Athlete::find($request->athlete_id);
-        $athlete_dob = $athlete->dob;
         // 2. Find difference between DOB and result date
         $date = new \DateTime($request->date);
         $difference = $date->diff(new \DateTime($athlete->dob));
@@ -89,14 +88,23 @@ class ResultCrudController extends Controller
         $result->save();
 
         //Attach all records made
-        if ($request->records){
-            foreach($request->records as $record){
-                //atach result with record and event
-                $result->records()->attach($record, ['event_id' => $request->event_id]);
-            }
-        }
-        
-        return redirect()->route('result.index');    }
+        // if ($request->records){
+        //     foreach($request->records as $record){
+        //         //atach result with record and event
+        //         $result->records()->attach($record, ['event_id' => $request->event_id]);
+        //     }
+        // }
+
+        $athlete->setRecordIfExist($result);
+
+        // if(!$athlete->setPbIfExist($result)){
+        //   $athlete->setSbIfExist()
+        // }
+
+
+
+        return redirect()->route('result.index');
+      }
 
 
 
@@ -109,7 +117,7 @@ class ResultCrudController extends Controller
     public function edit($id)
     {
         $result=Result::find($id);
-        $athletes = Athlete::all(); 
+        $athletes = Athlete::all();
         $events = Event::all();
         $competitions = Competition::all();
         $records = Record::all();
@@ -121,10 +129,10 @@ class ResultCrudController extends Controller
         //this helps in the edit form
         $achievements = collect([]);
         foreach($resultRecords as $record){
-            $achievements->push($record->id);                
+            $achievements->push($record->id);
         }
-        
-        return view('dashboard.result.edit')->with('result',$result)->with('athletes',$athletes)->with('events',$events)->with('competitions',$competitions)->with('records',$records)->with('achievements',$achievements);   
+
+        return view('dashboard.result.edit')->with('result',$result)->with('athletes',$athletes)->with('events',$events)->with('competitions',$competitions)->with('records',$records)->with('achievements',$achievements);
     }
 
     /**
@@ -178,16 +186,16 @@ class ResultCrudController extends Controller
         //
         //EDIT Records
         //
-        // 1. Detach all records of this result
+        // 1. Detach all records from result
         $resultRecords = $result->records()->detach();
-        // 2. Add new records if they exist
-        if($request->records){ 
+        // 2. Add new record if they exist
+        if($request->records){
             foreach($request->records as $record){
                 //atach result with record and event
                 $result->records()->attach($record, ['event_id' => $request->event_id]  );
             }
         }
-        return redirect()->route('result.index');    
+        return redirect()->route('result.index');
     }
 
 }

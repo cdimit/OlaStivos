@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Record;
+use App\Age;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,12 @@ class DatabaseSeeder extends Seeder
       Record::forceCreate(['name' => 'Area Record', 'acronym' => 'AR']);
       Record::forceCreate(['name' => 'Personal Best', 'acronym' => 'PB']);
       Record::forceCreate(['name' => 'Season Best', 'acronym' => 'SB']);
+
+      //Age::forceCreate(['name' => '', 'min' => '', 'max' => '']);
+      Age::forceCreate(['name' => 'u23', 'min' => '20', 'max' => '22']);
+      Age::forceCreate(['name' => 'u20', 'min' => '0', 'max' => '19']);
+      Age::forceCreate(['name' => 'u18', 'min' => '0', 'max' => '17']);
+      Age::forceCreate(['name' => 'u16', 'min' => '0', 'max' => '15']);
+
     }
 }

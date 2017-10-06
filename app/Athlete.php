@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Age;
 
 class Athlete extends Model
 {
@@ -12,7 +14,7 @@ class Athlete extends Model
     /**********************************
     //  Relationships
     ***********************************/
-  	
+
     public function club()
   	{
   		return $this->belongsTo('App\Club', 'club_id');
@@ -43,6 +45,37 @@ class Athlete extends Model
     //  Functions that return results
     ***********************************/
 
+    public function getAgeAttribute(): string
+    {
+      $date = new \DateTime('now');
+      $difference = $date->diff(new \DateTime($this->dob));
+      return $difference->format('%y');
+    }
+
+    public function isU16()
+    {
+      $age = Age::where('name', 'u16')->first();
+      return $this->age >= $age->min && $this->age <= $age->max;
+    }
+
+    public function isU18()
+    {
+      $age = Age::where('name', 'u18')->first();
+      return $this->age >= $age->min && $this->age <= $age->max;
+    }
+
+    public function isU20()
+    {
+      $age = Age::where('name', 'u20')->first();
+      return $this->age >= $age->min && $this->age <= $age->max;
+    }
+
+    public function isU23()
+    {
+      $age = Age::where('name', 'u23')->first();
+      return $this->age >= $age->min && $this->age <= $age->max;
+    }
+
     /*
     ** Returns a collection of all results of this athlete over the years
     ** partitioned based on events ($key = $event_id , $value= collection of $Results )
@@ -52,10 +85,10 @@ class Athlete extends Model
 
       //Get all results of athlete
       $results = Result::where('athlete_id',$this->id)->orderBy('date','ASC')->get();
-      
+
       //Find events in which athlete has results
       $events = $this->uniqueEvents($results);
-      
+
       //create a collection with keys the event_id and values the Result records
       $collection=collect([]);
       foreach($events as $event){
@@ -83,19 +116,19 @@ class Athlete extends Model
                           ->where('position','=',$position)
                           ->orderBy('date','DESC')
                           ->get()->count();
-        
+
         $count = $count+$results;
       }
-    
+
       return $count;
     }
 
 
 
-    
+
     /**********************************
     //  Functions that return records
-    //  -----     PB      ----- 
+    //  -----     PB      -----
     ***********************************/
 
     /*
@@ -112,10 +145,10 @@ class Athlete extends Model
       $pbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
       })->where('athlete_id',$this->id)->get();
-      
+
       //Find events in which athlete has pbs
       $events = $this->uniqueEvents($pbs);
-      
+
       //create a collection with keys the event_id and values the PBs
       $collection=collect([]);
       foreach($events as $event){
@@ -135,21 +168,21 @@ class Athlete extends Model
       //Get PB record ID
       $record = Record::where('acronym','PB')->first();
       $recordId = $record->id;
-      
+
       //Get all PBs of athlete
       $pbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
       })->where('athlete_id',$this->id)->get();
-      
+
       //Find events in which athlete has pbs
       $events = $this->uniqueEvents($pbs);
-      
+
       //create a collection with keys the event_id and values the PBs
       $collection=collect([]);
       foreach($events as $event){
         //All PBs made for the event by the athlete
         $eventPbs = $pbs->where('event_id',$event);
-        //Find best PB 
+        //Find best PB
         $eventPb = $this->bestRecord(Event::find($event),$eventPbs);
 
         //Add PB to collection with key the event id
@@ -160,7 +193,7 @@ class Athlete extends Model
     }
 
     /*
-    ** Returns a collection of all PBs of this athlete for a specific EVENT over 
+    ** Returns a collection of all PBs of this athlete for a specific EVENT over
     ** the years
     */
     public function getPbsEvent($event)
@@ -185,7 +218,7 @@ class Athlete extends Model
       //Get PB record ID
       $record = Record::where('acronym','PB')->first();
       $recordId = $record->id;
-      
+
       //Get all PBs of athlete for this event
       $pbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
@@ -202,9 +235,9 @@ class Athlete extends Model
 
     /**********************************
     //  Functions that return records
-    //  -----     SB      ----- 
+    //  -----     SB      -----
     ***********************************/
-    
+
     /*
     // Returns a collection of all SBs of this athlete for a specific YEAR
     */
@@ -213,12 +246,12 @@ class Athlete extends Model
       //Get SB record ID
       $record = Record::where('acronym','SB')->first();
       $recordId = $record->id;
-      
+
       //Get SB of athlete for the year
       $sbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
       })->where('athlete_id',$this->id)->where(DB::raw('YEAR(date)'), '=',$year)->get();
-      
+
       return $sbs;
     }
 
@@ -239,13 +272,13 @@ class Athlete extends Model
 
       //Find events in which athlete has pbs
       $events = $this->uniqueEvents($sbs);
-      
+
       //create a collection with keys the event_id and values the SBs
       $collection=collect([]);
       foreach($events as $event){
         //All SBs made for the event by the athlete
         $eventSbs = $sbs->where('event_id',$event);
-        //Find best SB 
+        //Find best SB
         $eventSb = $this->bestRecord(Event::find($event),$eventSbs);
 
         //Add PB to collection with key the event id
@@ -264,12 +297,12 @@ class Athlete extends Model
       //Get SB record ID
       $record = Record::where('acronym','SB')->first();
       $recordId = $record->id;
-      
+
       //Get SB of athlete for the year
       $sbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
       })->where('athlete_id',$this->id)->where(DB::raw('YEAR(date)'), '=',$year)->where('event_id',$event->id)->get();
-      
+
       return $sbs;
     }
 
@@ -282,7 +315,7 @@ class Athlete extends Model
       //Get SB record ID
       $record = Record::where('acronym','SB')->first();
       $recordId = $record->id;
-      
+
       //Get SB of athlete for the year
       $sbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
@@ -292,14 +325,14 @@ class Athlete extends Model
       $sb = $this->bestRecord($event,$sbs);
       return $sb;
     }
-  
+
 
 
 
 
     /**********************************
     //  Functions that return records
-    //  -----     NR      ----- 
+    //  -----     NR      -----
     ***********************************/
 
 
@@ -314,7 +347,7 @@ class Athlete extends Model
       //Get NR record ID
       $record = Record::where('acronym','like',$acronym)->first();
       $recordId = $record->id;
-      
+
       //Get all NRs of athlete
       $NRs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
@@ -322,13 +355,13 @@ class Athlete extends Model
 
       //Find events in which athlete has NRs
       $events = $this->uniqueEvents($NRs);
-      
+
       //create a collection with keys the event_id and values the NRs
       $collection=collect([]);
       foreach($events as $event){
         //All NRs made for the event by the athlete
         $eventNRs = $NRs->where('event_id',$event);
-        //Find best NR 
+        //Find best NR
         $eventNR = $this->bestRecord(Event::find($event),$eventNRs);
 
         //Add NR to collection with key the event id
@@ -342,7 +375,7 @@ class Athlete extends Model
 
     /**********************************
     //  HELPER FUNCTIONS
-    //   
+    //
     ***********************************/
     /*
     // Returns an array with all the unique events of the results
@@ -361,12 +394,184 @@ class Athlete extends Model
     */
     public function bestRecord($event,$records)
     {
-      if ($event->type == 'field'){
+      if ($event->isField()){
         $pb = $records->where('mark','=',$records->max('mark'))->first();
       }else{
         $pb = $records->where('mark','=',$records->min('mark'))->first();
       }
 
       return $pb;
+    }
+
+    public function setPbIfExist($result)
+    {
+      $pb = $this->getPb($result->event);
+
+      if(!$pb){
+        $result->setPb();
+        return true;
+      }
+
+      if($result->event->isTrack()){
+        if($pb->mark>=$result->mark){
+          $result->setPb();
+          return true;
+        }
+      }else{
+        if($pb->mark<=$result->mark){
+          $result->setPb();
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function setSbIfExist($result)
+    {
+      $date = Carbon::parse($result->date);
+      $sb = $this->getSb($date->year ,$result->event);
+
+      if(!$sb){
+        $result->setSb();
+        return true;
+      }
+
+      if($result->event->isTrack()){
+        if($sb->mark>=$result->mark){
+          $result->setSb();
+          return true;
+        }
+      }else{
+        if($sb->mark<=$result->mark){
+          $result->setSb();
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function setNRIfExist($result)
+    {
+      $NR = $result->event->getNR();
+
+      if(!$NR){
+        $result->setNR();
+        return true;
+      }
+
+      if($result->event->isTrack()){
+        if($NR->mark>=$result->mark){
+          $result->setNR();
+          return true;
+        }
+      }else{
+        if($NR->mark<=$result->mark){
+          $result->setNR();
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function setNURIfExist($result)
+    {
+
+      if(!Age::isU23($result->age)){
+        return false;
+      }
+
+      $NUR = $result->event->getNUR();
+
+      if(!$NUR){
+        $result->setNUR();
+        return true;
+      }
+
+      if($result->event->isTrack()){
+        if($NUR->mark>=$result->mark){
+          $result->setNUR();
+          return true;
+        }
+      }else{
+        if($NUR->mark<=$result->mark){
+          $result->setNUR();
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function setNJRIfExist($result)
+    {
+
+      if(!Age::isU20($result->age)){
+        return false;
+      }
+
+      $NJR = $result->event->getNJR();
+
+      if(!$NJR){
+        $result->setNJR();
+        return true;
+      }
+
+      if($result->event->isTrack()){
+        if($NJR->mark>=$result->mark){
+          $result->setNJR();
+          return true;
+        }
+      }else{
+        if($NJR->mark<=$result->mark){
+          $result->setNJR();
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function setNYRIfExist($result)
+    {
+
+      if(!Age::isU18($result->age)){
+        return false;
+      }
+
+      $NYR = $result->event->getNYR();
+
+      if(!$NYR){
+        $result->setNYR();
+        return true;
+      }
+
+      if($result->event->isTrack()){
+        if($NYR->mark>=$result->mark){
+          $result->setNYR();
+          return true;
+        }
+      }else{
+        if($NYR->mark<=$result->mark){
+          $result->setNYR();
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    public function setRecordIfExist($result)
+    {
+
+      $this->setPbIfExist($result);
+      $this->setSbIfExist($result);
+      $this->setNYRIfexist($result);
+      $this->setNJRIfExist($result);
+      $this->setNURIfExist($result);
+      $this->setNRIfExist($result);
+
     }
 }

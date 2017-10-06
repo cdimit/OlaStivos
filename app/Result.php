@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Record;
 
 class Result extends Model
 {
@@ -27,4 +28,35 @@ class Result extends Model
 		return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id')->withTimestamps();
     }
 
+    public function setPb()
+    {
+      return $this->records()->attach(Record::where('acronym', 'PB')->first()->id, ['event_id' => $this->event->id]);
+
+    }
+
+    public function setSb()
+    {
+      return $this->records()->attach(Record::where('acronym', 'SB')->first()->id, ['event_id' => $this->event->id]);
+    }
+
+    public function setNR()
+    {
+      return $this->records()->attach(Record::where('acronym', 'NR')->first()->id, ['event_id' => $this->event->id]);
+
+    }
+
+    public function setNUR()
+    {
+      return $this->records()->attach(Record::where('acronym', 'NUR')->first()->id, ['event_id' => $this->event->id]);
+    }
+
+    public function setNJR()
+    {
+      return $this->records()->attach(Record::where('acronym', 'NJR')->first()->id, ['event_id' => $this->event->id]);
+    }
+
+    public function setNYR()
+    {
+      return $this->records()->attach(Record::where('acronym', 'NYR')->first()->id, ['event_id' => $this->event->id]);
+    }
 }

@@ -18,6 +18,6 @@ $factory->define(App\Result::class, function (Faker $faker) {
         'date' => $faker->date,
         'score' => $faker->numberBetween($min = 0, $max = 2000),
         'race' => $faker->randomElement(['Heat', 'Semi-Final', 'Final']),
-        'age' => $faker->unixTime($max = 'now'),
+        'age' => $faker->numberBetween($min = 13, $max = 60),
     ];
 });
