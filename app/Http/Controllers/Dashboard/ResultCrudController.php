@@ -178,9 +178,9 @@ class ResultCrudController extends Controller
         //
         //EDIT Records
         //
-        // 1. Detach all records from result
+        // 1. Detach all records of this result
         $resultRecords = $result->records()->detach();
-        // 2. Add new record if they exist
+        // 2. Add new records if they exist
         if($request->records){ 
             foreach($request->records as $record){
                 //atach result with record and event

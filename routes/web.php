@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 
+Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show');
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN DASHBOARD Routes
