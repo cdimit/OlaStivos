@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 
 class AthleteController extends Controller
 {
-    public function show($id)
+    public function show(Athlete $athlete)
     {
-        //GET athlete
-        $athlete = Athlete::find($id);
 
         //Get best PBs and SBs
         $pbs= $athlete->getPbs();
@@ -34,9 +32,10 @@ class AthleteController extends Controller
         $NJRs= $athlete->getNRs('NJR');
         $NYRs= $athlete->getNRs('NYR');
 
+
         //GET National competition wins
         $nwins = $athlete->countPlaces(\App\CompetitionSeries::find('1'),'1');
-        
+
         return view('athlete.show')->with('athlete',$athlete)
         						->with('pbs',$pbs)
         						->with('sbs',$sbs)

@@ -84,7 +84,7 @@ class Athlete extends Model
     {
 
       //Get all results of athlete
-      $results = Result::where('athlete_id',$this->id)->orderBy('date','ASC')->get();
+      $results = $this->results->sortBy('date');
 
       //Find events in which athlete has results
       $events = $this->uniqueEvents($results);
@@ -361,6 +361,7 @@ class Athlete extends Model
       foreach($events as $event){
         //All NRs made for the event by the athlete
         $eventNRs = $NRs->where('event_id',$event);
+
         //Find best NR
         $eventNR = $this->bestRecord(Event::find($event),$eventNRs);
 
@@ -402,6 +403,7 @@ class Athlete extends Model
 
       return $pb;
     }
+
 
     public function setPbIfExist($result)
     {

@@ -17,8 +17,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
+/*
+|--------------------------------------------------------------------------
+| Athletes Routes
+|--------------------------------------------------------------------------
+|	
+*/
 Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show');
+
+/*
+|--------------------------------------------------------------------------
+| Records Routes
+|--------------------------------------------------------------------------
+|	
+*/
+Route::get('/records/nationals', 'RecordController@showNRs')->name('record.showNRs');
+Route::post('/records/nationals', 'RecordController@searchNRs')->name('record.searchNRs');
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +51,10 @@ Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', 
 Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
 
 
+/*
+|--------------------------------------------------------------------------
+| HOME route
+|--------------------------------------------------------------------------
+|
+*/
 Route::get('/home', 'HomeController@index')->name('home');

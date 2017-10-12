@@ -59,4 +59,5 @@ class Result extends Model
     {
       return $this->records()->attach(Record::where('acronym', 'NYR')->first()->id, ['event_id' => $this->event->id]);
     }
+
 }
