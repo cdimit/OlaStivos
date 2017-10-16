@@ -61,7 +61,11 @@ class RecordController extends Controller
 
     public function showNRsHistory()
     {
-        return view('record.nationals_history');
+        return view('record.nationals_history')->with('event',null)
+                                            ->with('records',null)
+                                            ->with('season',null)
+                                            ->with('category',null)
+                                            ->with('chartRecords',null);;
     }
 
 
@@ -70,7 +74,6 @@ class RecordController extends Controller
 
         //get event
         $event = Event::find($request->event);
-
         if($request->category == 'Senior'){
             $records = $event->getAllRecords('NR'); 
         }elseif($request->category == 'U23'){
@@ -81,10 +84,13 @@ class RecordController extends Controller
             $records = $event->getAllRecords('NYR');
         }
         
+        $chartRecords = $this->toChartData($records);
+      
         return view('record.nationals_history')->with('event',$event)
                                     ->with('records',$records)
                                     ->with('season',$request->season)
-                                    ->with('category',$request->category);
+                                    ->with('category',$request->category)
+                                    ->with('chartRecords',$chartRecords);
     }
 
 
@@ -93,6 +99,17 @@ class RecordController extends Controller
         $events = Event::where('gender',request('gender'))->where('season',request('season'))->get();
 
         return response()->json($events);
+    }
+
+    public function toChartData($results)
+    {
+        $collection=collect([]);
+
+        foreach($results as $result){
+            $array = [$result->date,$result->mark];
+            $collection->push($array);
+        }
+        return $collection->toArray();
     }
 
 }
