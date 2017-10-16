@@ -10,7 +10,7 @@ class RecordController extends Controller
     public function showNRs()
     {
     	//get all events
-    	$events = Event::all();
+    	$events = Event::where('season','outdoor')->get();
     	
     	//EMPTY collections of national records
     	$records = collect([]);
@@ -23,7 +23,7 @@ class RecordController extends Controller
     	
     	return view('record.nationals')->with('events',$events)
     								->with('records',$records)
-    								->with('season','All Seasons')
+    								->with('season','Outdoor')
     								->with('category','Senior');
     }
 
@@ -31,11 +31,8 @@ class RecordController extends Controller
     {	
 
     	//get all events
-    	if ($request->season != 'All Seasons'){
-    		$events = Event::where('season',$request->season)->get();
-    	}else{
-    		$events = Event::all();
-    	}
+        $events = Event::where('season',$request->season)->get();
+
 
     	//EMPTY collections of national records
     	$records = collect([]);
@@ -62,6 +59,40 @@ class RecordController extends Controller
     								->with('category',$request->category);
     }
 
+    public function showNRsHistory()
+    {
+        return view('record.nationals_history');
+    }
 
+
+    public function searchNRsHistory(Request $request)
+    {   
+
+        //get event
+        $event = Event::find($request->event);
+
+        if($request->category == 'Senior'){
+            $records = $event->getAllRecords('NR'); 
+        }elseif($request->category == 'U23'){
+            $records = $event->getAllRecords('NUR');
+        }elseif($request->category == 'Junior'){
+            $records = $event->getAllRecords('NJR');
+        }elseif($request->category == 'Youth'){
+            $records = $event->getAllRecords('NYR');
+        }
+        
+        return view('record.nationals_history')->with('event',$event)
+                                    ->with('records',$records)
+                                    ->with('season',$request->season)
+                                    ->with('category',$request->category);
+    }
+
+
+    public function getEvents()
+    {
+        $events = Event::where('gender',request('gender'))->where('season',request('season'))->get();
+
+        return response()->json($events);
+    }
 
 }

@@ -67,4 +67,16 @@ class Event extends Model
 
       return null;
     }
+
+    public function getAllRecords($acronym)
+    {
+      $results = $this->records->where('record_id', Record::where('acronym', $acronym)->first()->id);
+
+      $records = collect([]);
+      foreach ($results as $result) {
+        $records->push(Result::find($result->id));
+      }
+      
+      return $records->sortBy('date');
+    }
 }

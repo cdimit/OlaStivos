@@ -31,8 +31,13 @@ Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show')
 |--------------------------------------------------------------------------
 |	
 */
+/* GET events for national record form */
+Route::post('/records/nationals/history/events', 'RecordController@getEvents')->name('record.getEvents');
+Route::get('/records/nationals/history', 'RecordController@showNRsHistory')->name('record.showNRsHistory');
+Route::post('/records/nationals/history', 'RecordController@searchNRsHistory')->name('record.searchNRsHistory');
 Route::get('/records/nationals', 'RecordController@showNRs')->name('record.showNRs');
 Route::post('/records/nationals', 'RecordController@searchNRs')->name('record.searchNRs');
+
 
 /*
 |--------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('styles')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" />
+
 <style type="text/css">
     .form-horizontal{
         /*font-size: 11px;*/
@@ -47,9 +47,8 @@
                         <div class="form-group">
                             <label for="season">Season</label>
                             <select  id="season" name="season" class="form-control">
-                                <option value="All Seasons">All Seasons</option>
-                                <option value="indoor">Indoor</option>
                                 <option value="outdoor">Outdoor</option>
+                                <option value="indoor">Indoor</option>
                                 <option value="road">Road</option>
                                 <option value="cross country">Cross Country</option>
                             </select>
@@ -111,9 +110,5 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 @endsection
 
