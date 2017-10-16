@@ -40,7 +40,7 @@ $factory->define(App\Event::class, function (Faker $faker) {
             '4x100m',
             '4x400m']),
       'type' => $faker->randomElement(['track', 'field']),
-      'season' => $faker->randomElement(['indoor', 'outdoor', 'cross country', 'road']),
+      'season' => $faker->randomElement(['indoor', 'outdoor', 'cross country']),
       'gender' => $faker->randomElement(['male', 'female']),
     ];
 });

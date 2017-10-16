@@ -69,12 +69,16 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+                    <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    <a href="{{ route('record.showNRs') }}">National Records</a>
+                    <a href="{{ route('toplist.show') }}">Top List</a>
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endauth
+
                 </div>
             @endif
 

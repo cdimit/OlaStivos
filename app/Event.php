@@ -76,5 +76,16 @@ class Event extends Model
     public function scopeIndoor($query)
     {
       return $query->where('season', 'indoor')->get();
+
+    public function getAllRecords($acronym)
+    {
+      $results = $this->records->where('record_id', Record::where('acronym', $acronym)->first()->id);
+
+      $records = collect([]);
+      foreach ($results as $result) {
+        $records->push(Result::find($result->id));
+      }
+
+      return $records->sortBy('date');
     }
 }

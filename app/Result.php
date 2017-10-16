@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Record;
+use Carbon\Carbon;
 
 class Result extends Model
 {
@@ -58,6 +59,24 @@ class Result extends Model
     public function setNYR()
     {
       return $this->records()->attach(Record::where('acronym', 'NYR')->first()->id, ['event_id' => $this->event->id]);
+    }
+
+
+    public function scopeYears($query)
+    {
+      $dates = $query->pluck('date')->sort()->unique();
+
+      $years = collect([]);
+      foreach($dates as $date){
+        $years->push(Carbon::parse($date)->year);
+      }
+
+      return $years->unique();
+    }
+
+    public function scopeFromYear($query, $year)
+    {
+      return $query->whereYear('date', $year)->get();
     }
 
 }
