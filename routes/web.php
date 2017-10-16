@@ -21,7 +21,7 @@ Auth::routes();
 |--------------------------------------------------------------------------
 | Athletes Routes
 |--------------------------------------------------------------------------
-|	
+|
 */
 Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show');
 
@@ -29,17 +29,26 @@ Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show')
 |--------------------------------------------------------------------------
 | Records Routes
 |--------------------------------------------------------------------------
-|	
+|
 */
 Route::get('/records/nationals', 'RecordController@showNRs')->name('record.showNRs');
 Route::post('/records/nationals', 'RecordController@searchNRs')->name('record.searchNRs');
 
 /*
 |--------------------------------------------------------------------------
+| Top-List Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/toplist', 'TopListController@show')->name('toplist.show');
+Route::post('/toplist', 'TopListController@search')->name('toplist.search');
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN DASHBOARD Routes
 |--------------------------------------------------------------------------
 |	resource routes for CRUD
-|	all the controllers are in App/Dashboard 
+|	all the controllers are in App/Dashboard
 */
 Route::get('dashboard', function () {
     return view('dashboard/home');

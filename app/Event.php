@@ -67,4 +67,14 @@ class Event extends Model
 
       return null;
     }
+
+    public function scopeOutdoor($query)
+    {
+      return $query->where('season', 'outdoor')->get();
+    }
+
+    public function scopeIndoor($query)
+    {
+      return $query->where('season', 'indoor')->get();
+    }
 }
