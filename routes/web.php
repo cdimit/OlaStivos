@@ -27,6 +27,15 @@ Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show')
 
 /*
 |--------------------------------------------------------------------------
+| Competitions Routes
+|--------------------------------------------------------------------------
+|	
+*/
+Route::get('/competition/{competition}', 'CompetitionController@show')->name('competition.show');
+
+
+/*
+|--------------------------------------------------------------------------
 | Records Routes
 |--------------------------------------------------------------------------
 |	

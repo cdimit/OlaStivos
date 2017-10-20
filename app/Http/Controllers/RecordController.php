@@ -106,7 +106,9 @@ class RecordController extends Controller
         $collection=collect([]);
 
         foreach($results as $result){
+
             $array = [$result->date,$result->mark];
+            dd($array);
             $collection->push($array);
         }
         return $collection->toArray();
