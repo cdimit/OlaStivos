@@ -54,6 +54,7 @@
         background: url(https://images.pexels.com/photos/401896/pexels-photo-401896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb) no-repeat center;
         background-size:100% 100%;
         min-height: 300px;
+        margin-top: 51px;
     }
 </style>
 

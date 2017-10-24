@@ -34,11 +34,11 @@ class Competition extends Model
     ** Returns a collection of all results of this competition
     ** partitioned based on events ($key = $event_id , $value= collection of $Results )
     */
-    public function getAllResults()
+    public function getAllResultsByEvent()
     {
 
       //Get all results of competition
-      $results = $this->results->sortBy('date')->sortBy('position');
+      $results = $this->results->sortBy('position');
 
       //Find events in which athlete has results
       $events = $this->uniqueEvents($results);
@@ -53,7 +53,7 @@ class Competition extends Model
       return $collection;
     }
 
-    /*
+        /*
     // Returns an array with all the unique events of the results
     */
     public function uniqueEvents($results)
@@ -64,9 +64,5 @@ class Competition extends Model
 
       return $events->toArray();
     }
-
-
-
-
 
 }
