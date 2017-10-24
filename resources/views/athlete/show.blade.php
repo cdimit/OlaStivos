@@ -40,6 +40,24 @@
         float: left;
         margin-left: -2px;
     }
+    .panel.with-nav-tabs .panel-heading{
+        padding: 5px 5px 0 5px;
+    }
+    .panel.with-nav-tabs .nav-tabs{
+        border-bottom: none;
+    }
+    .panel.with-nav-tabs .nav-justified{
+        margin-bottom: -1px;
+    }
+
+    .well {
+       background-color: rgba(245, 245, 245, 0.4);
+       margin-left: 1px;
+       margin-right: 1px;
+       margin-top: 1px;
+       margin-bottom: 1px;
+       border: 0;
+    }
 
 
 

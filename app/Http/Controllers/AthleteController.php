@@ -16,7 +16,7 @@ class AthleteController extends Controller
 
         //Get all results of athlete
         //$results:	KEYS: event_id VALUES: collection of results for the key event
-        $results = $athlete->getAllResults();
+        $results = $athlete->getAllResultsByEvent();
         $chartsResults = $this->chartData($results); 
 
         //Get all Personal Bests of athlete all over the years

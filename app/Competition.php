@@ -22,9 +22,47 @@ class Competition extends Model
 			return $this->morphToMany('App\Video', 'videable');
 		}
 
-		public function images()
-		{
-			return $this->morphToMany('App\Image', 'imageable');
-		}
+	public function images()
+	   {
+		  return $this->morphToMany('App\Image', 'imageable');
+	   }
+
+
+
+
+    /*
+    ** Returns a collection of all results of this competition
+    ** partitioned based on events ($key = $event_id , $value= collection of $Results )
+    */
+    public function getAllResultsByEvent()
+    {
+
+      //Get all results of competition
+      $results = $this->results->sortBy('position');
+
+      //Find events in which athlete has results
+      $events = $this->uniqueEvents($results);
+
+      //create a collection with keys the event_id and values the Results
+      $collection=collect([]);
+      foreach($events as $event){
+        $eventResults = $results->where('event_id',$event);
+        $collection = $collection->put($event, $eventResults);
+      }
+
+      return $collection;
+    }
+
+        /*
+    // Returns an array with all the unique events of the results
+    */
+    public function uniqueEvents($results)
+    {
+      $events = $results->mapWithKeys(function ($item) {
+        return [$item['event_id']=>$item];
+      })->keys();
+
+      return $events->toArray();
+    }
 
 }

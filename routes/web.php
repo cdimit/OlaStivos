@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -24,6 +24,15 @@ Auth::routes();
 |
 */
 Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show');
+
+/*
+|--------------------------------------------------------------------------
+| Competitions Routes
+|--------------------------------------------------------------------------
+|	
+*/
+Route::get('/competition/{competition}', 'CompetitionController@show')->name('competition.show');
+
 
 /*
 |--------------------------------------------------------------------------

@@ -80,7 +80,7 @@ class Athlete extends Model
     ** Returns a collection of all results of this athlete over the years
     ** partitioned based on events ($key = $event_id , $value= collection of $Results )
     */
-    public function getAllResults()
+    public function getAllResultsByEvent()
     {
 
       //Get all results of athlete
