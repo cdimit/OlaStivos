@@ -32,7 +32,7 @@ class Event extends Model
     {
       $result = $this->records->where('record_id', Record::where('acronym', 'NR')->first()->id)->sortByDesc('date')->first();
       if($result){
-        return Result::find($result->id);
+        return Result::find($result->result_id);
       }
 
       return null;
@@ -42,7 +42,7 @@ class Event extends Model
     {
       $result = $this->records->where('record_id', Record::where('acronym', 'NUR')->first()->id)->sortByDesc('date')->first();
       if($result){
-        return Result::find($result->id);
+        return Result::find($result->result_id);
       }
 
       return null;
@@ -52,7 +52,7 @@ class Event extends Model
     {
       $result = $this->records->where('record_id', Record::where('acronym', 'NJR')->first()->id)->sortByDesc('date')->first();
       if($result){
-        return Result::find($result->id);
+        return Result::find($result->result_id);
       }
 
       return null;
@@ -62,7 +62,7 @@ class Event extends Model
     {
       $result = $this->records->where('record_id', Record::where('acronym', 'NYR')->first()->id)->sortByDesc('date')->first();
       if($result){
-        return Result::find($result->id);
+        return Result::find($result->result_id);
       }
 
       return null;
@@ -82,10 +82,10 @@ class Event extends Model
     public function getAllRecords($acronym)
     {
       $results = $this->records->where('record_id', Record::where('acronym', $acronym)->first()->id);
-
+    
       $records = collect([]);
       foreach ($results as $result) {
-        $records->push(Result::find($result->id));
+        $records->push(Result::find($result->result_id));
       }
 
       return $records->sortBy('date');

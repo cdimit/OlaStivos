@@ -53,12 +53,14 @@
 
 
             	
-	        <h1><a href="{{ route('athlete.show',['athlete'=>1]) }}" id="startchange">Athlete Page: {{\App\Athlete::find(1)->first_name}} {{\App\Athlete::find(1)->last_name}}</a>
-	        </h1>
-	        <br>
-	        <h1>
+	        <h3><a href="{{ route('athlete.show',['athlete'=>1]) }}" id="startchange">Athlete Page: {{\App\Athlete::find(1)->first_name}} {{\App\Athlete::find(1)->last_name}}</a>
+	        </h3>
+	        <h3>
 	        <a href="{{ route('competition.show',['competition'=>1]) }}">Competition Page: {{\App\Competition::find(1)->name}}</a>
-	        </h1>
+	        </h3>
+          <h3>
+          <a href="{{ route('club.show',['club'=>1]) }}">Club Page: {{\App\Club::find(1)->name}}</a>
+          </h3>
             
             <img src="https://aff.bstatic.com/images/hotel/840x460/201/2016824.jpg" class="img-responsive center" style="max-width: auto; max-height: auto;">
 

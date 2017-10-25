@@ -151,35 +151,35 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                   
+
                     <!-- Main Content -->
-                    @if($event)
-                    
-                    <div class="col-lg-12">
+                    @if($records->first())                    
+                        <div class="col-lg-12">
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3>{{$event->name}} {{$event->gender}} {{$category}} Records - {{strtoupper($season)}}</h3></div>
-                            <div class="panel-body">
-                                <table width="100%">
-                                    @foreach($records as $record)
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h3>{{$event->name}} {{$event->gender}} {{$category}} Records - {{strtoupper($season)}}</h3></div>
+                                <div class="panel-body">
+                                    <table width="100%">
 
-                                        <tr>
-                                            <td>{{$record->event->name}}</td>
-                                            <td>
-                                            <a href="/athlete/{{$record->athlete->id}}">
-                                            {{$record->athlete->first_name}} {{$record->athlete->last_name}}</a>
-                                            </td>
-                                            <td>{{$record->date}}</td>
-                                            <td>{{$record->mark}}</td>
-                                        </tr>
+                                        @foreach($records as $record)
 
-                                    @endforeach
+                                            <tr>
+                                                <td>{{$record->event->name}}</td>
+                                                <td>
+                                                <a href="/athlete/{{$record->athlete->id}}">
+                                                {{$record->athlete->first_name}} {{$record->athlete->last_name}}</a>
+                                                </td>
+                                                <td>{{$record->date}}</td>
+                                                <td>{{$record->mark}}</td>
+                                            </tr>
 
-                                </table> 
+                                        @endforeach
+
+                                    </table> 
+                                </div>
                             </div>
+                            <div id="chart1" style="width:100%; height:200px;"></div>
                         </div>
-                        <div id="chart1" style="width:100%; height:200px;"></div>
-                    </div>
                     @endif                   
                     
                 </div>
@@ -239,31 +239,8 @@
             }
             return;
         }
-        $(function () { 
-            var chartData =  <?php echo json_encode($chartRecords); ?>;;
-            console.log(chartData);
-            var dates = Object.keys(chartData);
-            var marks = Object.values(chartData);
 
-            var myChart = Highcharts.chart('chart1', {
-                chart: {
-                    type: 'line'
-                },
-                title: {
-                    text: 'Dummy Data - Record History'
-                },
-                xAxis: {
-                    type: 'datetime'
-                },
-                yAxis: {
 
-                },
-                series: [{
-                    data: [1,2,3,5],
-                    showInLegend: false,  
-                }],
-            });
-        });
 
     });
 
