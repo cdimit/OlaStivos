@@ -47,6 +47,21 @@
         // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
             // put your options and callbacks here
+            header: {
+                center: 'prev,next today',
+                right: 'month,listMonth,listYear,'
+            },
+            views: {
+                month: {
+                    buttonText: 'Ημερολόγιο'
+                },
+                listYear: {
+                    buttonText: 'Χρονιά'
+                },
+                listMonth:{
+                    buttonText: 'Μήνας'
+                }
+            },
             events : [
                 @foreach($competitions as $competition)
                 {
