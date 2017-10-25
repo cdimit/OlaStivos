@@ -56,6 +56,7 @@ class ResultCrudController extends Controller
             'event_id' => 'required|integer',
             'competition_id' => 'required|integer',
             'mark' => 'required|string',
+            'wind' => 'numeric|nullable',
             'date'  => 'date',
             'race' => 'string|nullable',
             'score' => 'integer|nullable',
@@ -69,6 +70,7 @@ class ResultCrudController extends Controller
         $result->event_id = $request->event_id;
         $result->competition_id = $request->competition_id;
         $result->mark = $request->mark;
+        $result->wind = $request->wind;
         $result->date = $request->date;
         $result->race = $request->race;
         $result->score = $request->score;
@@ -164,6 +166,7 @@ class ResultCrudController extends Controller
         $result->event_id = $request->event_id;
         $result->competition_id = $request->competition_id;
         $result->mark = $request->mark;
+        $result->wind = $request->wind;
         $result->date = $request->date;
         $result->race = $request->race;
         $result->score = $request->score;

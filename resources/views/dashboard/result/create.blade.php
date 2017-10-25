@@ -10,13 +10,13 @@
     <p><u><h4>Add New Result</h4></u></p>
     {!! Form::open(
         array(
-            'route' => 'result.store', 
+            'route' => 'result.store',
             'class' => 'form-horizontal'
             )
-        ) 
+        )
     !!}
-    
-    {{ csrf_field() }}     
+
+    {{ csrf_field() }}
 
         <!--Position input field-->
         <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
@@ -76,6 +76,20 @@
                 @if ($errors->has('mark'))
                     <span class="help-block">
                         <strong>{{ $errors->first('mark') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <!--Wind input field-->
+        <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">
+            <label for="wind" class="col-md-4 control-label">Wind</label>
+            <div class="col-md-6">
+                <input id="wind" type="text" class="form-control" name="wind" value="{{ old('wind') }}" required>
+
+                @if ($errors->has('wind'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('wind') }}</strong>
                     </span>
                 @endif
             </div>
@@ -148,9 +162,9 @@
                 <input id="records[]" name="records[]" type="checkbox" value="{{$record->id}}">
             </div>
         @endforeach
-        
 
-                        
+
+
         <div class="form-group">
 
             <div class="col-md-2 col-md-offset-4">

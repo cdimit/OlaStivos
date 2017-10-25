@@ -17,6 +17,7 @@ class CreateResultsTable extends Migration
             $table->increments('id');
             $table->string('position');
             $table->string('mark');
+            $table->float('wind')->nullable();
             $table->date('date');
             $table->integer('score');
             $table->string('race');

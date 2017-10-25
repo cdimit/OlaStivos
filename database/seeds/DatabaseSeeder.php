@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Record;
 use App\Age;
+use App\Club;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,14 @@ class DatabaseSeeder extends Seeder
       Age::forceCreate(['name' => 'u20', 'min' => '0', 'max' => '19']);
       Age::forceCreate(['name' => 'u18', 'min' => '0', 'max' => '17']);
       Age::forceCreate(['name' => 'u16', 'min' => '0', 'max' => '15']);
+
+      Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος Τα Παγκύπρια', 'acronym' => 'ΓΣΠ', 'city' => 'Λευκωσία', 'since' => '1894']);
+      Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος τα Ολύμπια', 'acronym' => 'ΓΣΟ', 'city' => 'Λεμεσός', 'since' => '1892']);
+      Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος Ευαγόρας', 'acronym' => 'ΓΣΕ', 'city' => 'Αμμόχωστος', 'since' => '1903']);
+      Club::forceCreate(['name' => 'Γυμναστικού Συλλόγου Ζήνων', 'acronym' => 'ΓΣΖ', 'city' => 'Λάρνακα', 'since' => '1896']);
+      Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος Κόροιβος', 'acronym' => 'ΓΣΚ', 'city' => 'Πάφος', 'since' => '1898']);
+      Club::forceCreate(['name' => 'Γυμναστικός Συλλογος Πράξανδρος', 'acronym' => 'ΓΣΠΡ', 'city' => 'Κερύνεια', 'since' => '1919']);
+
 
     }
 }

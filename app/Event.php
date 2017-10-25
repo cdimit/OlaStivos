@@ -76,6 +76,8 @@ class Event extends Model
     public function scopeIndoor($query)
     {
       return $query->where('season', 'indoor')->get();
+    }
+
 
     public function getAllRecords($acronym)
     {
