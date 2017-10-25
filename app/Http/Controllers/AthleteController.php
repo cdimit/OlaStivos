@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Athlete;
+use \Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AthleteController extends Controller
@@ -19,6 +20,10 @@ class AthleteController extends Controller
         $results = $athlete->getAllResultsByEvent();
         $chartsResults = $this->chartData($results); 
 
+        $results = $athlete->results->sortByDesc('date')->groupBy(function($attributes) {
+                return Carbon::parse($attributes->date)->format('Y'); // grouping by years
+            });
+        
         //Get all Personal Bests of athlete all over the years
         //$allPbs:	KEYS: event_id VALUES: collection of PBs made for the key event
         $allPbs = $athlete->getAllPbs();

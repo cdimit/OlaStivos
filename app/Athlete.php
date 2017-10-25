@@ -99,8 +99,6 @@ class Athlete extends Model
       return $collection;
     }
 
-
-
     /*
     ** Returns a collection of all results of this athlete
     ** in competition of the series= $series
@@ -389,6 +387,7 @@ class Athlete extends Model
 
       return $events->toArray();
     }
+
 
     /*
     // Returns the best record among records based on type of event TRACK or FIELD
