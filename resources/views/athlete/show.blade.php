@@ -40,8 +40,10 @@
         float: left;
         margin-left: -2px;
     }
+
     .panel.with-nav-tabs .panel-heading{
         padding: 5px 5px 0 5px;
+
     }
     .panel.with-nav-tabs .nav-tabs{
         border-bottom: none;
@@ -67,7 +69,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel with-nav-tabs panel-default">
+            <div class="panel with-nav-tabs panel-default" style="margin-top: 51px;">
                 <div class="panel-heading">
                         <!-- TABS List -->
                         <ul class="nav nav-tabs">
