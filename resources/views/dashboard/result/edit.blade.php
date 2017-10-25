@@ -8,9 +8,9 @@
 
     <p><u><h4>Edit Result</h4></u></p>
     {!! Form::model($result, ['route' => ['result.update',$result->id],'class'=>'form-horizontal']) !!}
-                    
+
         {{ Form::token() }}
-        {{ method_field('PATCH') }}   
+        {{ method_field('PATCH') }}
 
         <!--Position input field-->
         <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
@@ -70,6 +70,20 @@
                 @if ($errors->has('mark'))
                     <span class="help-block">
                         <strong>{{ $errors->first('mark') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <!--Wind input field-->
+        <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">
+            <label for="wind" class="col-md-4 control-label">Wind</label>
+            <div class="col-md-6">
+                {{ Form::text('wind',null,["class"=> 'form-control'])}}
+
+                @if ($errors->has('wind'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('wind') }}</strong>
                     </span>
                 @endif
             </div>
@@ -141,9 +155,9 @@
                 <input id="records[]" name="records[]" type="checkbox" value="{{$record->id}}" @if($achievements->contains($record->id)) checked @endif>
             </div>
         @endforeach
-        
 
-                        
+
+
         <div class="form-group">
 
             <div class="col-md-2 col-md-offset-4">

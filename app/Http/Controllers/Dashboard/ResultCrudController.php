@@ -153,6 +153,7 @@ class ResultCrudController extends Controller
             'event_id' => 'required|integer',
             'competition_id' => 'required|integer',
             'mark' => 'required|string',
+            'wind' => 'numeric|nullable',
             'date'  => 'date',
             'race' => 'string|nullable',
             'score' => 'integer|nullable',
