@@ -48,7 +48,7 @@
                         <li><a href="#">Τοπ Λίστες Σεζόν</a></li>
                         <li><a href="{{ route('record.showNRs') }}">Παγκύπρια Ρεκόρ</a></li>
                         <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
-                        <li><a href="#">Ημερολόγιο Αγώνων</a></li>
+                        <li><a href="{{ route('competition.calendar') }}">Ημερολόγιο Αγώνων</a></li>
                         <li><a href="#">Επικοινωνία</a></li>
                         
                     </ul>

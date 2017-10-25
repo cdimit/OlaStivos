@@ -32,6 +32,7 @@ Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show')
 |	
 */
 Route::get('/competition/{competition}', 'CompetitionController@show')->name('competition.show');
+Route::get('/calendar', 'CompetitionController@showCalendar')->name('competition.calendar');
 
 
 /*
