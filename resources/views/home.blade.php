@@ -27,10 +27,10 @@
 .divWithBgImage {
   width: 100%;
   height: 200px;
-  background-image: url(http://pentekykloi.gr/wp-content/uploads/2016/05/stivos.jpg);
+  background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);
   background-repeat: no-repeat;
   background-size: 100% ;
-  background-position: center -200px;
+  background-position: center -230px;
 /*
   background-size: 100% 100%; //stretch resize
 */

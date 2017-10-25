@@ -71,9 +71,9 @@
 
              <!-- Heading and Search Form -->
             <div class="col-lg-12 image-back">
-                <h1>National Records History</h1>
+                <h1>Πρόοδος Παγκύπριων Ρεκόρ</h1>
                 <div class="col-md-6 well">
-                <h4>Input National Record to find its history:</h4>
+                <h4>Εισάγετε Παγκύπριο Ρεκόρ για να δείτε την πρόοδο του:</h4>
                 {!! Form::open(
                         array(
                             'route' => 'record.searchNRsHistory', 
@@ -85,54 +85,53 @@
                     {{ csrf_field() }} 
 
                     <div class="form-group">
-                        <div class="col-xs-4 text-left">
-                            <label for="category">Age Category</label>
+                        <div class="col-xs-5 text-left">
+                            <label for="category">Ηλικιακή Κατηγορία</label>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <select  id="category" name="category" class="form-control" style="width: auto; height:auto; font-size: 10px; overflow: hidden;">
-                                <option value="Senior">Senior</option>
-                                <option value="U23">U23</option>
-                                <option value="Junior">Junior</option>
-                                <option value="Youth">Youth</option>
+                                <option value="Senior">Άνδρες/Γυναίκες</option>
+                                <option value="U23">Κάτω των 23</option>
+                                <option value="Junior">Έφηφοι/Νεανίδες</option>
+                                <option value="Youth">Παίδες/Κορασίδες</option>
                             </select>
                         </div>
 
                     </div>
                   
                     <div class="form-group">
-                        <div class="col-xs-4 text-left">
-                            <label for="season">Season</label>
+                        <div class="col-xs-5 text-left">
+                            <label for="season">Σεζόν</label>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <select  id="season" name="season" class="form-control">
-                                <option value="outdoor">Outdoor</option>
-                                <option value="indoor">Indoor</option>
-                                <option value="road">Road</option>
-                                <option value="cross country">Cross Country</option>
+                                <option value="outdoor">Ανοικτός</option>
+                                <option value="indoor">Κλειστός</option>
+                                <option value="cross country">Ανώμαλος Δρόμος</option>
                             </select>
                         </div>
                         
                     </div>
 
                     <div class="form-group">
-                        <div class="col-xs-4 text-left">
-                            <label for="gender">Gender</label>
+                        <div class="col-xs-5 text-left">
+                            <label for="gender">Φύλο</label>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <select  id="gender" name="gender" class="form-control" required>
                                 <option value="" disabled selected>Select your option</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="male">Άνδρες</option>
+                                <option value="female">Γυναίκες</option>
                             </select>
                         </div>
                   
                     </div>
 
                     <div id="event_select" class="form-group">
-                        <div class="col-xs-4 text-left">
-                            <label for="event">Event</label>
+                        <div class="col-xs-5 text-left">
+                            <label for="event">Αγωνισμα</label>
                         </div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <select  id="event" name="event" class="form-control"  required>
                                 <option id='1' value="">-- select one -- </option>
                             </select>
@@ -141,7 +140,7 @@
 
                     <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
                         <div class="col-xs-10 col-xs-offset-2">
-                            <button id="submit" type="submit" class="btn btn-default" >Find History of Record</button>
+                            <button id="submit" type="submit" class="btn btn-default" >Βρές προιστορία ρεκόρ</button>
                         </div>
                     </div>
                 {!! Form::close() !!}
