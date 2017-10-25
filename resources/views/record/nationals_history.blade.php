@@ -153,7 +153,7 @@
                 <div class="panel-body">
 
                     <!-- Main Content -->
-                    @if($records->first())                    
+                    @if($records)                    
                         <div class="col-lg-12">
 
                             <div class="panel panel-default">
