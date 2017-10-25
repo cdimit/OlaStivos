@@ -128,13 +128,13 @@
             </div>
             </div>
   
-            @if($records->first()) 
+
             <div class="panel panel-default">            
                 <div class="panel-body">
                     <!-- Main Content -->
                     <h3> Παγκύπρια Ρεκόρ - {{strtoupper($season)}} -           
 
-                    @if($records->first()->event->gender == 'male') 
+                    @if($events->first()->gender == 'male') 
                         @if($category == 'Senior')
                             Άνδρες
                         @elseif ($category == 'U23') 
@@ -181,7 +181,7 @@
                     </div>
                 </div>
             </div>
-            @endif
+
         </div>
     </div>
 </div>

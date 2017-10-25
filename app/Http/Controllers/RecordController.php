@@ -48,11 +48,9 @@ class RecordController extends Controller
     		}elseif($request->category == 'Youth'){
     			$records->push($event->getNYR());
     		}
-
-
     	}
     	
-        
+
     	return view('record.nationals')->with('events',$events)
     								->with('records',$records)
     								->with('season',$request->season)
