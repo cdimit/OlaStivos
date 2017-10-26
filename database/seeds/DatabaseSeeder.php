@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
       Record::forceCreate(['name' => 'Personal Best', 'acronym' => 'PB']);
       Record::forceCreate(['name' => 'Season Best', 'acronym' => 'SB']);
 
-      Age::forceCreate(['name' => 'Άνδρες/Γυναίκες', 'min' => '0', 'max' => '99']);
-      Age::forceCreate(['name' => 'Κάτω των 23', 'min' => '20', 'max' => '22']);
-      Age::forceCreate(['name' => 'Έφηφοι/Νεανίδες', 'min' => '0', 'max' => '19']);
-      Age::forceCreate(['name' => 'Παίδες/Κορασίδες', 'min' => '0', 'max' => '17']);
-      Age::forceCreate(['name' => 'u16', 'min' => '0', 'max' => '15']);
+      Age::forceCreate(['name' => 'Άνδρες/Γυναίκες', 'category' => 'senior', 'min' => '0', 'max' => '99']);
+      Age::forceCreate(['name' => 'Κάτω των 23', 'category' => 'u23', 'min' => '20', 'max' => '22']);
+      Age::forceCreate(['name' => 'Έφηφοι/Νεανίδες', 'category' => 'u20', 'min' => '0', 'max' => '19']);
+      Age::forceCreate(['name' => 'Παίδες/Κορασίδες', 'category' => 'u18', 'min' => '0', 'max' => '17']);
+      Age::forceCreate(['name' => 'u16', 'category' => 'u16', 'min' => '0', 'max' => '15']);
 
       Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος Τα Παγκύπρια', 'acronym' => 'ΓΣΠ', 'city' => 'Λευκωσία', 'since' => '1894']);
       Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος τα Ολύμπια', 'acronym' => 'ΓΣΟ', 'city' => 'Λεμεσός', 'since' => '1892']);

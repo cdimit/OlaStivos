@@ -54,25 +54,25 @@ class Athlete extends Model
 
     public function isU16()
     {
-      $age = Age::where('name', 'u16')->first();
+      $age = Age::where('category', 'u16')->first();
       return $this->age >= $age->min && $this->age <= $age->max;
     }
 
     public function isU18()
     {
-      $age = Age::where('name', 'u18')->first();
+      $age = Age::where('category', 'u18')->first();
       return $this->age >= $age->min && $this->age <= $age->max;
     }
 
     public function isU20()
     {
-      $age = Age::where('name', 'u20')->first();
+      $age = Age::where('category', 'u20')->first();
       return $this->age >= $age->min && $this->age <= $age->max;
     }
 
     public function isU23()
     {
-      $age = Age::where('name', 'u23')->first();
+      $age = Age::where('category', 'u23')->first();
       return $this->age >= $age->min && $this->age <= $age->max;
     }
 

@@ -16,6 +16,7 @@ class CreateAgesTable extends Migration
         Schema::create('ages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('category');
             $table->integer('min')->unsigned()->nullable();
             $table->integer('max')->unsigned();
             $table->timestamps();
