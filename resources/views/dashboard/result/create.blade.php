@@ -85,7 +85,7 @@
         <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">
             <label for="wind" class="col-md-4 control-label">Wind</label>
             <div class="col-md-6">
-                <input id="wind" type="text" class="form-control" name="wind" value="{{ old('wind') }}" required>
+                <input id="wind" type="text" class="form-control" name="wind" value="{{ old('wind') }}" >
 
                 @if ($errors->has('wind'))
                     <span class="help-block">

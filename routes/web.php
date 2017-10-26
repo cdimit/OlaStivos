@@ -29,7 +29,7 @@ Route::get('/athlete/{athlete}', 'AthleteController@show')->name('athlete.show')
 |--------------------------------------------------------------------------
 | Competitions Routes
 |--------------------------------------------------------------------------
-|	
+|
 */
 Route::get('/competition/{competition}', 'CompetitionController@show')->name('competition.show');
 Route::get('/calendar', 'CompetitionController@showCalendar')->name('competition.calendar');
@@ -65,6 +65,8 @@ Route::post('/records/nationals', 'RecordController@searchNRs')->name('record.se
 */
 Route::get('/toplist', 'TopListController@show')->name('toplist.show');
 Route::post('/toplist', 'TopListController@search')->name('toplist.search');
+Route::post('/toplist/events', 'TopListController@getEvents')->name('toplist.getEvents');
+
 
 /*
 |--------------------------------------------------------------------------

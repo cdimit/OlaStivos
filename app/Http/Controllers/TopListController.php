@@ -13,16 +13,19 @@ class TopListController extends Controller
   public function show()
   {
     //get all events
-    $events = Event::outdoor();
+    // $events = Event::outdoor();
     $ages = Age::all();
     $years = Result::years();
-    $event = $events->first();
+    $event = Event::outdoor()->first();
 
 
     $results = Result::fromYear(Carbon::now()->year)->where('event_id', $event->id);
 
-    return view('toplist.seasonal')->with('events', $events)
-                                   ->with('ages',$ages)
+
+
+
+    return view('toplist.seasonal')->with('event', $event)
+                                   ->with('ages', $ages)
                                    ->with('years',$years)
                                    ->with('results',$results);
 
@@ -31,35 +34,46 @@ class TopListController extends Controller
   public function search(Request $request)
   {
 
-    //get all events
-    if ($request->season != 'All Seasons'){
-      $events = Event::where('season',$request->season)->get();
-    }else{
-      $events = Event::all();
+    //year
+    //age
+    //season(indoor, outdoor)
+    //gender
+    //event
+
+
+    $event = Event::find($request->event);
+    $ages = Age::all();
+    $years = Result::years();
+    $age = Age::find($request->age);
+
+    $results = Result::fromYear($request->year)->where('event_id', $event->id)
+                                                ->where('age', '<', $age->max)
+                                                ->where('age', '>', $age->min);
+
+    return view('toplist.seasonal')->with('event', $event)
+                                   ->with('years',$years)
+                                   ->with('ages', $ages)
+                                   ->with('results',$results);
+
+
+  }
+
+  public function getEvents()
+  {
+
+    $age = Age::find(request('age'));
+    $results = Result::fromYear(request('year'))->where('age', '<', $age->max)
+                                              ->where('age', '>', $age->min);
+
+    $filtered = collect([]);
+
+    foreach($results->unique('event_id') as $result){
+      $filtered->push($result->event);
     }
 
-    //EMPTY collections of national records
-    $records = collect([]);
-
-    //for each event add the NR in the collection
-    foreach($events as $event){
-      if($request->category == 'Senior'){
-        $records->push($event->getNR());
-      }elseif($request->category == 'U23'){
-        $records->push($event->getNUR());
-      }elseif($request->category == 'Junior'){
-          $records->push($event->getNJR());
-      }elseif($request->category == 'Youth'){
-        $records->push($event->getNYR());
-      }
+    $events = $filtered->where('gender',request('gender'))->where('season',request('season'));
 
 
-    }
-
-
-    return view('toplist.seasonal')->with('events',$events)
-                  ->with('records',$records)
-                  ->with('season',$request->season)
-                  ->with('category',$request->category);
+    return response()->json($events);
   }
 }

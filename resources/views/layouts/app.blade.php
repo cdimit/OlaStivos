@@ -44,13 +44,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Navbar Links -->
-                        <li><a href="#">Τοπ Λίστες</a></li>
-                        <li><a href="#">Τοπ Λίστες Σεζόν</a></li>
+                        <li><a href="#">All-Time Best</a></li>
+                        <li><a href="{{route('toplist.show')}}">Τοπ Λίστες Σεζόν</a></li>
                         <li><a href="{{ route('record.showNRs') }}">Παγκύπρια Ρεκόρ</a></li>
                         <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
                         <li><a href="{{ route('competition.calendar') }}">Ημερολόγιο Αγώνων</a></li>
                         <li><a href="#">Επικοινωνία</a></li>
-                        
+
                     </ul>
                 </div>
             </div>
