@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+/*
+|--------------------------------------------------------------------------
+| HOME route
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
@@ -85,10 +89,4 @@ Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', 
 Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
 
 
-/*
-|--------------------------------------------------------------------------
-| HOME route
-|--------------------------------------------------------------------------
-|
-*/
-Route::get('/home', 'HomeController@index')->name('home');
+
