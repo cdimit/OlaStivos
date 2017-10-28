@@ -32,10 +32,8 @@ class HomeController extends Controller
 
         //Athlete with birthday
         $birthdayAthlete = $this->birthdayAthlete();
-        $now = Carbon::now();
-        $dob = new Carbon($birthdayAthlete->dob);
-        $d = $now->diffInYears($dob);
-        return view('home')->with('competitions',$competitions)->with('birthdayAthlete',$birthdayAthlete)->with('d',$d);
+
+        return view('home')->with('competitions',$competitions)->with('birthdayAthlete',$birthdayAthlete);
     }
 
 
