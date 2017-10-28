@@ -56,5 +56,6 @@ class HomeController extends Controller
         //Get a random athlete that has birthday
         $athlete = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->first();
         return $athlete;
+        
     }
 }

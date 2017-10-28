@@ -148,21 +148,26 @@ color: black;
         </div>
       </div>
 
-       <div class="row">
-        <div class="col-sm-5">
-          <div class="panel">
-            <div class="panel-heading">Έχει Γενέθλια Σήμερα!</div>
-            <div class="panel-body">
-              <div well="">
-                <img src="/storage/{{ $birthdayAthlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
-                <a href="{{ route('athlete.show',['athlete'=>$birthdayAthlete->id]) }}">
-                  {{$birthdayAthlete->first_name}} {{$birthdayAthlete->last_name }} - {{\Carbon\Carbon::now()->diffInYears(new \Carbon\Carbon($birthdayAthlete->dob))}} ετών
-                </a>
+      <!-- An den exei athlitis genethlia den emfanizete -->
+      @if($birthdayAthlete)
+         <div class="row">
+          <div class="col-sm-5">
+            <div class="panel">
+
+              <div class="panel-heading">Έχει Γενέθλια Σήμερα!</div>
+              <div class="panel-body">
+                <div well="">
+                  <img src="/storage/{{ $birthdayAthlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+                  <a href="{{ route('athlete.show',['athlete'=>$birthdayAthlete->id]) }}">
+                    {{$birthdayAthlete->first_name}} {{$birthdayAthlete->last_name }} - {{\Carbon\Carbon::now()->diffInYears(new \Carbon\Carbon($birthdayAthlete->dob))}} ετών
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      @endif
+
 
       <p>
         <img src="https://aff.bstatic.com/images/hotel/840x460/201/2016824.jpg" class="img-responsive center" style="max-width: auto; max-height: auto;">
