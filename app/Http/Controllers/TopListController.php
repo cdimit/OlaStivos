@@ -46,9 +46,15 @@ class TopListController extends Controller
     $years = Result::years();
     $age = Age::find($request->age);
 
-    $results = Result::fromYear($request->year)->where('event_id', $event->id)
+    $res = Result::fromYear($request->year)->where('event_id', $event->id)
                                                 ->where('age', '<', $age->max)
                                                 ->where('age', '>', $age->min);
+
+    if($event->isField()){
+      $results = $res->sortByDesc('mark');
+    }else{
+      $results = $res->sortBy('mark');
+    }
 
     return view('toplist.seasonal')->with('event', $event)
                                    ->with('years',$years)

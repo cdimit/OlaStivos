@@ -3,6 +3,8 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Result::class, function (Faker $faker) {
+
+
     return [
         'event_id' => function () {
             return factory('App\Event')->create()->id;
@@ -20,4 +22,5 @@ $factory->define(App\Result::class, function (Faker $faker) {
         'race' => $faker->randomElement(['Heat', 'Semi-Final', 'Final']),
         'age' => $faker->numberBetween($min = 13, $max = 60),
     ];
+
 });

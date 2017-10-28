@@ -172,17 +172,47 @@
                                 <div class="panel-heading"><h3>{{$event->name}} {{$event->gender}} Top-List</h3></div>
                                 <div class="panel-body">
                                     <table width="100%">
+                                      <th>Rank</th>
+                                      <th>Mark</th>
+                                      <th>Athlete</th>
+                                      <th>Club</th>
+                                      <th>Position</th>
+                                      <th>Competition</th>
+                                      <th>Place</th>
+                                      <th>Date</th>
 
-                                        @foreach($results as $record)
+                                      <?php $count=1;
+                                            $check = collect([]);
+                                            $check->push(0);
 
+                                      ?>
+                                        @foreach($results as $result)
+                                          <?php
+                                            if(!$check->search($result->athlete->id, true)){
+                                              $check->push($result->athlete->id);
+                                              $rank = $count;
+                                              $count++;
+                                            }else{
+                                              $rank = '-';
+                                            }
+                                          ?>
                                             <tr>
-                                                <td>{{$record->event->name}}</td>
+                                                <td>{{$rank}}</td>
+                                                <td>{{$result->mark}}</td>
                                                 <td>
-                                                <a href="/athlete/{{$record->athlete->id}}">
-                                                {{$record->athlete->first_name}} {{$record->athlete->last_name}}</a>
+                                                <a href="/athlete/{{$result->athlete->id}}">
+                                                {{$result->athlete->first_name}} {{$result->athlete->last_name}}</a>
                                                 </td>
-                                                <td>{{$record->date}}</td>
-                                                <td>{{$record->mark}}</td>
+                                                <td>
+                                                  <a href="/club/{{$result->athlete->club->id}}">{{$result->athlete->club->acronym}}</a>
+                                                </td>
+                                                <td>{{$result->position}}</td>
+                                                <td>
+                                                  <a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a>
+                                                </td>
+                                                <td>{{$result->competition->city}}, {{$result->competition->country}}</td>
+                                                <td>{{$result->date}}</td>
+
                                             </tr>
 
                                         @endforeach
