@@ -76,6 +76,26 @@ class Athlete extends Model
       return $this->age >= $age->min && $this->age <= $age->max;
     }
 
+    public function isMale()
+    {
+      return $this->gender=='male'
+    }
+
+    public function isFemale()
+    {
+      return $this->gender=='female'
+    }
+
+    public function scopeMale($query)
+    {
+      return $query->where('gender', 'male')->get();
+    }
+
+    public function scopeFemale($query)
+    {
+      return $query->where('gender', 'female')->get();
+    }
+
     /*
     ** Returns a collection of all results of this athlete over the years
     ** partitioned based on events ($key = $event_id , $value= collection of $Results )

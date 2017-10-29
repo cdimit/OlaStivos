@@ -78,11 +78,21 @@ class Event extends Model
       return $query->where('season', 'indoor')->get();
     }
 
+    public function scopeMale($query)
+    {
+      return $query->where('gender', 'male')->get();
+    }
+
+    public function scopeFemale($query)
+    {
+      return $query->where('gender', 'female')->get();
+    }
+
 
     public function getAllRecords($acronym)
     {
       $results = $this->records->where('record_id', Record::where('acronym', $acronym)->first()->id);
-    
+
       $records = collect([]);
       foreach ($results as $result) {
         $records->push(Result::find($result->result_id));
