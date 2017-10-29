@@ -74,6 +74,16 @@ Route::post('/toplist/events', 'TopListController@getEvents')->name('toplist.get
 
 /*
 |--------------------------------------------------------------------------
+| All-Time Performance Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/alltime', 'AllTimeController@show')->name('alltime.show');
+Route::post('/alltime', 'AllTimeController@search')->name('alltime.search');
+Route::post('/alltime/events', 'AllTimeController@getEvents')->name('alltime.getEvents');
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN DASHBOARD Routes
 |--------------------------------------------------------------------------
 |	resource routes for CRUD
@@ -87,6 +97,3 @@ Route::resource('dashboard/athlete', 'Dashboard\AthleteCrudController', ['except
 Route::resource('dashboard/series', 'Dashboard\SeriesCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
-
-
-

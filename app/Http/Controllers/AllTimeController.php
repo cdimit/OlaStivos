@@ -8,19 +8,17 @@ use App\Age;
 use App\Result;
 use Carbon\Carbon;
 
-class TopListController extends Controller
+class AllTimeController extends Controller
 {
   public function show()
   {
     //get all events
     // $events = Event::outdoor();
     $ages = Age::all();
-    $years = Result::years();
     $event = Event::outdoor()->first();
 
 
-    $res = Result::fromYear(Carbon::now()->year)->where('event_id', $event->id);
-
+    $res = Result::where('event_id', $event->id)->get();
 
     if($event->isField()){
       $results = $res->sortByDesc('mark');
@@ -28,9 +26,9 @@ class TopListController extends Controller
       $results = $res->sortBy('mark');
     }
 
-    return view('toplist.seasonal')->with('event', $event)
+
+    return view('alltime.best_by_event')->with('event', $event)
                                    ->with('ages', $ages)
-                                   ->with('years',$years)
                                    ->with('results',$results);
 
   }
@@ -47,12 +45,11 @@ class TopListController extends Controller
 
     $event = Event::find($request->event);
     $ages = Age::all();
-    $years = Result::years();
     $age = Age::find($request->age);
 
-    $res = Result::fromYear($request->year)->where('event_id', $event->id)
-                                                ->where('age', '<', $age->max)
-                                                ->where('age', '>', $age->min);
+    $res = Result::where('event_id', $event->id)
+                  ->where('age', '<', $age->max)
+                  ->where('age', '>', $age->min)->get();
 
     if($event->isField()){
       $results = $res->sortByDesc('mark');
@@ -60,8 +57,7 @@ class TopListController extends Controller
       $results = $res->sortBy('mark');
     }
 
-    return view('toplist.seasonal')->with('event', $event)
-                                   ->with('years',$years)
+    return view('alltime.best_by_event')->with('event', $event)
                                    ->with('ages', $ages)
                                    ->with('results',$results);
 
@@ -72,8 +68,8 @@ class TopListController extends Controller
   {
 
     $age = Age::find(request('age'));
-    $results = Result::fromYear(request('year'))->where('age', '<', $age->max)
-                                              ->where('age', '>', $age->min);
+    $results = Result::where('age', '<', $age->max)
+                      ->where('age', '>', $age->min)->get();
 
     $filtered = collect([]);
 
