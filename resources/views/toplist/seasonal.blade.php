@@ -156,6 +156,8 @@
                         </div>
                     </div>
                 {!! Form::close() !!}
+
+                <input type="checkbox" id="unique">Unique
                 </div>
             </div>
 
@@ -196,7 +198,7 @@
                                               $rank = '-';
                                             }
                                           ?>
-                                            <tr>
+                                            <tr class={{$rank}}>
                                                 <td>{{$rank}}</td>
                                                 <td>{{$result->mark}}</td>
                                                 <td>
@@ -231,6 +233,14 @@
 </div>
 @endsection
 @section('scripts')
+
+  <script>
+  $(document).ready(function(){
+    $('#unique').on('change',function(){
+        $(".-").toggle();
+    });
+  });
+  </script>
 
 <script type="text/javascript">
     jQuery(document).ready(function(){
