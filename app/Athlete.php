@@ -78,12 +78,12 @@ class Athlete extends Model
 
     public function isMale()
     {
-      return $this->gender=='male'
+      return $this->gender=='male';
     }
 
     public function isFemale()
     {
-      return $this->gender=='female'
+      return $this->gender=='female';
     }
 
     public function scopeMale($query)
