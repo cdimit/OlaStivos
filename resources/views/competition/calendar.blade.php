@@ -45,6 +45,7 @@
 <script>
     $(document).ready(function() {
         // page is now ready, initialize the calendar...
+
         $('#calendar').fullCalendar({
             // put your options and callbacks here
             header: {
@@ -66,12 +67,22 @@
                 @foreach($competitions as $competition)
                 {
                     title : '{{ $competition->name }}',
-                    start : '{{ $competition->date_start }}',
-                    end : '{{ $competition->date_finish }}',
-                    url : '{{ route('competition.show', $competition->id) }}'
+                    url : '{{ route('competition.show', $competition->id) }}',
+                    start: '{{ $competition->date_start }}',
+                    end: '{{ $competition->date_finish }}',
+                    @if( \Carbon\Carbon::now() < $competition->date_start )
+                        color  : '#15ACA0', // Blue for future event
+                    @elseif (\Carbon\Carbon::now() > $competition->date_finish)
+                        color  : '#D72533', // RED for finished
+                    @else
+                        color  : '#1FC54F', // GREEN for now running
+                    @endif
+
                 },
                 @endforeach
-            ]
+            ],
+
+
         })
     });
 </script>
