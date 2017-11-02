@@ -11,14 +11,15 @@
     <title>{{ config('app.name','Ola Stivos') }}</title>
 
     <!-- Styles -->
-    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-h21C2fcDk/eFsW9sC9h0dhokq5pDinLNklTKoxIZRUn3+hvmgQSffLLQ4G4l2eEr" crossorigin="anonymous">
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     @yield('styles')
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px; font-size: 12px; font-weight: bold;">
+        <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px; font-size: 12px; font-weight: bold;">
             <div class="container">
                 <div class="navbar-header">
 

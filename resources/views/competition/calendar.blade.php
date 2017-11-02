@@ -15,7 +15,6 @@
         background: url(https://static1.squarespace.com/static/586cf745d2b85773859477d2/58bfe2b217bffc3b2fcf9bcd/58c27cb2a5790ae22306e6f9/1491474923990/banner11.png) no-repeat center;
         background-size:100%;
         min-height: 150px;
-        margin-top: 51px;
         margin-bottom: 10px;
     }
 </style>

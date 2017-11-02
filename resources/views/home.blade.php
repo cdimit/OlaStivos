@@ -1,160 +1,11 @@
-@extends('layouts.app')
-
-@section('styles')
-  <style>
-    /* NAV BAR CSS */
-    .navbar-default{
-        /*background: transparent;*/
-        background-color:rgba(0,0,0,0.1);
-        border:none !important;
-    }
-
-    .navbar-nav>li>a:hover{
-        color:#1a1a1a;
-    } 
-    .collapse.in{
-        
-        background-color:#f0f0f0 !important;
-    }
-    .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus
-    .spacer{
-       background-color:#888;   
-    }
-
-    .spacer{
-        height:100px;
-    }
-
-
-    .divWithBgImage {
-      width: 100%;
-      height: 200px;
-      background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);
-      /*filter: sepia(20%) saturate(100%) hue-rotate(150deg);*/
-      background-repeat: no-repeat;
-      background-size: 100% ;
-      background-position: center -250px;
-      margin-bottom: 10px;
-    /*
-      background-size: 100% 100%; //stretch resize
-    */
-    }
-
-    @media screen and (max-width: 600px) {
-      .divWithBgImage {
-        visibility: hidden;
-        clear: both;
-        float: left;
-        margin: 100px auto 5px 20px;
-        width: 28%;
-        display: none;
-      }
-
-    }
-
-    /* Table CSS */
-    table {
-      table-layout: fixed;
-      width: 100%;   
-      font-size: 2vh;
-    }
-
-    th,td {
-      border-style: solid transparent;
-      border-width: 0.01px;
-      word-wrap: normal;
-    }
-
-    td > .right{
-      text-align: right;
-    }
-
-
-    /* Link CSS*/
-    a{
-       color: #1A6B70;
-    }
-    a:hover {
-    color: black;
-    }
-       
-
-    /* PANEL CSS */
-    .panel {
-        border: 0.1px solid #dddddd;
-        border-radius: 0.1px;
-        margin-bottom: 6px;
-
-    }
-
-    .panel-1 > .panel-heading {
-        display: block;
-        padding:0;
-        text-align: center;
-        font-weight: bold;
-        font-size: 18px;
-        color:black;
-        background-color: transparent;
-        border-top: solid 3px;
-        border-top-color: #15ACA0;
-
-    
-    }
-
-    .panel-2 > .panel-heading {
-        height: 20px;
-        padding-top: 0;
-        text-align: left;
-        font-weight: bold;
-        font-size: 18px;
-        color:black;
-        background-color: transparent;
-        border-left: solid 6px;
-        border-left-color: #15ACA0;
-    }
-    
-    .panel-2 > .panel-body {
-        border-left: solid 6px;
-        border-left-color: #15ACA0;
-    }
-    
-    /* Button CSS */
-    .btn {
-      background-color: #15ACA0;
-      border-color:  #15ACA0;
-    }
-
-    /* Panel padding */
-    .padding-0{
-      padding-right:0px;
-      padding-left: 0px;
-    }
-    .padding-1{
-      padding-right:1px;
-      padding-left: 1px;
-    }
-
-    .padding-3{
-      padding-right:5px;
-      padding-left: 5px;
-    }
-
-    .bordered-left{
-      border-left: 0.1px solid #15ACA0;
-    }
-
-
-    /* TABS heading font-size */
-    .nav-tabs li a {font-size:14px;}
-  </style>
-@endsection
+@extends('layouts.home')
 
 @section('content')
 <div class="divWithBgImage">
 </div>
 
-<div class="container" id="startchange">  
-  <div class="row">
+<div class="container" id="startchange" style="background-color: #F9F9F9;">  
+  <div class="row" style="margin-top: 10px;">
     <!--***********-->
     <!-- 1st COLUMN-->
     <!--***********-->
@@ -408,7 +259,7 @@
         <!-- *****************
         *** 3rd Column ******
         *****************-->
-        <div class="col-sm-4">
+        <div class="col-sm-4 padding-3">
             <div class="panel panel-1">
               <div class="panel-heading">Facebook Live Feed</div>
               <div class="panel-body">

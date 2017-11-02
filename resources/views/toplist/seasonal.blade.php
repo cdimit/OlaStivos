@@ -54,7 +54,6 @@
     .image-back {
         background: url(https://images.pexels.com/photos/332835/pexels-photo-332835.jpeg?w=940&h=650&auto=compress&cs=tinysrgb) no-repeat;
         min-height: 300px;
-        margin-top: 51px;
 
     }
 
