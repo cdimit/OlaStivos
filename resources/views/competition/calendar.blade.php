@@ -68,8 +68,8 @@
                 {
                     title : '{{ $competition->name }}',
                     url : '{{ route('competition.show', $competition->id) }}',
-                    start: '{{ $competition->date_start }}',
-                    end: '{{ $competition->date_finish }}',
+                    start: "{{ $competition->date_start }}" + "T00:00:00",
+                    end: "{{ $competition->date_finish }}" + "T23:59:00",
                     @if( \Carbon\Carbon::now() < $competition->date_start )
                         color  : '#15ACA0', // Blue for future event
                     @elseif (\Carbon\Carbon::now() > $competition->date_finish)
@@ -77,11 +77,11 @@
                     @else
                         color  : '#1FC54F', // GREEN for now running
                     @endif
-
+                    
                 },
                 @endforeach
             ],
-
+            displayEventTime: false
 
         })
     });

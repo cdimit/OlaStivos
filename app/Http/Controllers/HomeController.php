@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use \Carbon\Carbon;
 use App\Competition;
 use App\Athlete;
+use App\Event;
+use App\Result;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,7 +35,27 @@ class HomeController extends Controller
         //Athlete with birthday
         $birthdayAthlete = $this->birthdayAthlete();
 
-        return view('home')->with('competitions',$competitions)->with('birthdayAthlete',$birthdayAthlete);
+        //GET National Records
+        $maleNRs = $this->getNationalRecords('outdoor','male');
+        $femaleNRs = $this->getNationalRecords('outdoor','female');
+
+        //Seasonal Bests Outdoor
+        $maleLeaders = $this->getSeasonalLeaders('outdoor','male');
+        $femaleLeaders = $this->getSeasonalLeaders('outdoor','female');
+
+        //Countdown Comp
+        $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
+
+        //Count NRs PBs SBs
+        
+        
+        return view('home')->with('competitions',$competitions)
+                        ->with('birthdayAthlete',$birthdayAthlete)
+                        ->with('maleNRs',$maleNRs)
+                        ->with('femaleNRs',$femaleNRs)
+                        ->with('maleLeaders',$maleLeaders)
+                        ->with('femaleLeaders',$femaleLeaders)
+                        ->with('countdownComp',$countdownComp);
     }
 
 
@@ -57,5 +79,45 @@ class HomeController extends Controller
         $athlete = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->first();
         return $athlete;
         
+    }
+
+
+    public function getNationalRecords($season ,$gender){
+        
+        //get all events
+        $events = Event::where('season',$season)->where('gender',$gender)->get();
+
+
+        //EMPTY collections of national records
+        $records = collect([]);
+               
+        //for each event add the NR in the collection
+        foreach($events as $event){
+            $records->push($event->getNR());
+        }
+
+        return $records;
+    }
+
+    public function getSeasonalLeaders($season ,$gender){
+        
+        //get all events
+        $events = Event::where('season',$season)->where('gender',$gender)->get();
+
+        //EMPTY collections of leading results
+        $leaders = collect([]);
+               
+        //for each event add the NR in the collection
+        foreach($events as $event){
+            $res = Result::fromYear(Carbon::now()->year)->where('event_id', $event->id);
+            if($event->isField()){
+              $results = $res->sortByDesc('mark');
+            }else{
+              $results = $res->sortBy('mark');
+            }
+            $leaders->push($results->first());
+        }
+
+        return $leaders;
     }
 }

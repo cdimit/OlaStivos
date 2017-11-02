@@ -14,6 +14,7 @@
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-h21C2fcDk/eFsW9sC9h0dhokq5pDinLNklTKoxIZRUn3+hvmgQSffLLQ4G4l2eEr" crossorigin="anonymous">
     @yield('styles')
+
 </head>
 <body>
     <div id="app">
@@ -65,5 +66,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
+
 </body>
+
 </html>
