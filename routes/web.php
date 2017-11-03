@@ -97,3 +97,5 @@ Route::resource('dashboard/athlete', 'Dashboard\AthleteCrudController', ['except
 Route::resource('dashboard/series', 'Dashboard\SeriesCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
+Route::get('/dashboard/result/createRace', 'Dashboard\ResultCrudController@createRace')->name('result.createRace');
+Route::post('/dashboard/result/createRace', 'Dashboard\ResultCrudController@storeRace')->name('result.storeRace');

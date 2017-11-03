@@ -33,7 +33,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        Ola Stivos
+                        Όλα Στίβος
                     </a>
                 </div>
 

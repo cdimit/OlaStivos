@@ -6,6 +6,10 @@
     border:none !important;
 }
 
+.navbar-brand{
+  display: none;
+}
+
 .navbar-nav>li>a:hover{
     color:#1a1a1a;
 } 
@@ -40,11 +44,14 @@
 @media screen and (max-width: 600px) {
   .divWithBgImage {
     visibility: hidden;
-    clear: both;
-    float: left;
-    margin: 100px auto 5px 20px;
-    width: 28%;
-    display: none;
+    height: 51px;
+  }
+  .navbar-default{
+    background-color: black !important;
+  }
+
+  .navbar-brand{
+    display: inline !important;
   }
 
 }

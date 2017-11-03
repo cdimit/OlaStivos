@@ -1,7 +1,32 @@
 @extends('layouts.home')
 
+@section('styles')
+<style type="text/css">
+div.image{
+  padding-top: 40px;
+}
+div.image:before {
+
+    position: absolute;
+    content:"";
+    width:22%;
+    height:22%;
+    background:url();
+    background-repeat:no-repeat; 
+    background-position: 100% 0%;
+    background-size: contain;
+}
+</style>
+
+@endsection
+
 @section('content')
 <div class="divWithBgImage">
+  <!--
+  <div class="image">
+  
+  </div>
+  -->
 </div>
 
 <div class="container" id="startchange" style="background-color: #F9F9F9;">  
@@ -297,8 +322,10 @@
   	      scroll_start = $(this).scrollTop();
   	      if(scroll_start > offset.top) {
   	          $(".navbar-default").css('background-color', 'black');
+              $(".navbar-brand").css('display', 'inline');
   	       } else {
   	          $('.navbar-default').css({"background-color":"rgba(0,0,0,0.1)","transition":"background-color 250ms linear"});
+              $(".navbar-brand").css('display', 'none');
   	       }
   	   });
       }

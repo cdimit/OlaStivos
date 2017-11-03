@@ -46,7 +46,6 @@ class HomeController extends Controller
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
 
-        //Count NRs PBs SBs
         
         
         return view('home')->with('competitions',$competitions)

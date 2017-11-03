@@ -2,6 +2,7 @@
 
 @section('content')
     <a href="{{ route('result.create') }}" class="btn btn-success btn-responsive" role="button">Add new Result</a>
+    <a href="{{ route('result.createRace') }}" class="btn btn-info btn-responsive" role="button">Add new Race</a>
 	<table class="table table-bordered table-sm" style="position:static;">
 	  	<thead>
 	    	<tr>
