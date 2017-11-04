@@ -40,6 +40,12 @@ class Athlete extends Model
 			return $this->morphToMany('App\Image', 'imageable');
 		}
 
+    /****************************************************/
+    //    Search Scope
+    /****************************************************/
+    public function scopeSearch($query,$search){
+      return $query->where('first_name','like', '%' .$search. '%')->orWhere('last_name','like', '%' .$search. '%')->orderBy('first_name','asc')->get();
+    }
 
     /**********************************
     //  Functions that return results

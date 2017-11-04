@@ -30,7 +30,6 @@ class Competition extends Model
 
 
 
-
     /*
     ** Returns a collection of all results of this competition
     ** partitioned based on events ($key = $event_id , $value= collection of $Results )
@@ -64,6 +63,14 @@ class Competition extends Model
       })->keys();
 
       return $events->toArray();
+    }
+
+
+    /****************************************************/
+    //    Search Scope
+    /****************************************************/
+    public function scopeSearch($query,$search){
+      return $query->where('name','like', '%' .$search. '%')->orWhere('city','like', '%' .$search. '%')->orWhere('country','like', '%' .$search. '%')->orderBy('name','asc')->get();
     }
 
 

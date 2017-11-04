@@ -46,7 +46,9 @@ class HomeController extends Controller
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
 
-        
+        //Data for Search
+        $athletesSearch = Athlete::all()->sortBy('first_name');
+        $competitionsSearch = Competition::all();        
         
         return view('home')->with('competitions',$competitions)
                         ->with('birthdayAthlete',$birthdayAthlete)
@@ -54,7 +56,10 @@ class HomeController extends Controller
                         ->with('femaleNRs',$femaleNRs)
                         ->with('maleLeaders',$maleLeaders)
                         ->with('femaleLeaders',$femaleLeaders)
-                        ->with('countdownComp',$countdownComp);
+                        ->with('countdownComp',$countdownComp)
+                        ->with('competitionsSearch',$competitionsSearch)
+                        ->with('athletesSearch',$athletesSearch);
+
     }
 
 
@@ -118,5 +123,19 @@ class HomeController extends Controller
         }
 
         return $leaders;
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {        
+        $athletes = Athlete::search(request('searchInput'))->take(5);
+        $competitions = Competition::search(request('searchInput'))->take(5);
+        return response()->json([$athletes,$competitions]);
+
     }
 }
