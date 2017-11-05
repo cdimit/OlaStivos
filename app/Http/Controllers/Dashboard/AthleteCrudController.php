@@ -4,11 +4,25 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Athlete;
 use App\Club;
+use App\Link;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AthleteCrudController extends Controller
 {
+
+    private $form_rules = [
+      'first_name' => 'required|string|max:255|min:1',
+      'last_name' => 'required|string|max:255|min:1',
+      'dob'  => 'date',
+      'club_id' => 'integer',
+      'gender' => 'string|required',
+      'picture' => 'nullable|mimes:jpeg,bmp,png',
+
+      'link_name.*' => 'required|string',
+      'link_path.*' => 'required|string',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +44,7 @@ class AthleteCrudController extends Controller
     public function create()
     {
         $clubs = Club::pluck('name','id'); //list of clubs for select field in create form
-        
+
         return view('dashboard.athlete.create')->with('clubs',$clubs);
     }
 
@@ -43,15 +57,7 @@ class AthleteCrudController extends Controller
     public function store(Request $request)
     {
         //VALIDATE DATA
-        $this->validate($request, [
-            'first_name' => 'required|string|max:255|min:1',
-            'last_name' => 'required|string|max:255|min:1',
-            'dob'  => 'date',
-            'club_id' => 'integer',
-            'gender' => 'string|required',
-            'picture' => 'nullable|mimes:jpeg,bmp,png',
-            
-        ]);
+        $this->validate($request, $this->form_rules);
 
         //CREATE new Athlete instance
         $athlete = new Athlete;
@@ -70,7 +76,15 @@ class AthleteCrudController extends Controller
         $athlete->picture = $picture;
 
         $athlete->save();
-        
+
+        for($i=0; $i<sizeof($request->link_name); $i++){
+          $athlete->links()->create([
+                'name' => $request->link_name[$i],
+                'path' => $request->link_path[$i]
+              ]);
+
+        }
+
         return redirect()->route('athlete.index');
 
     }
@@ -99,15 +113,8 @@ class AthleteCrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'first_name' => 'required|string|max:255|min:1',
-            'last_name' => 'required|string|max:255|min:1',
-            'dob'  => 'date',
-            'club_id' => 'integer',
-            'gender' => 'string|required',
-            'picture' => 'nullable|mimes:jpeg,bmp,png',
-            
-        ]);
+
+        $this->validate($request, $this->form_rules);
 
 
         $athlete = Athlete::find($id);
@@ -124,7 +131,15 @@ class AthleteCrudController extends Controller
         }
 
         $athlete->save();
-        
+
+        $athlete->removeLinks();
+        for($i=0; $i<sizeof($request->link_name); $i++){
+          $athlete->links()->create([
+              'name' => $request->link_name[$i],
+              'path' => $request->link_path[$i]
+          ]);
+        }
+
         return redirect()->route('athlete.index');
 
     }

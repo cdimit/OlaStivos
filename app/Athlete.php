@@ -102,6 +102,7 @@ class Athlete extends Model
       return $query->where('gender', 'female')->get();
     }
 
+
     /*
     ** Returns a collection of all results of this athlete over the years
     ** partitioned based on events ($key = $event_id , $value= collection of $Results )
@@ -601,4 +602,12 @@ class Athlete extends Model
       $this->setNRIfExist($result);
 
     }
+
+    public function removeLinks()
+    {
+      foreach($this->links as $link){
+        $link->delete();
+      }
+    }
+
 }
