@@ -77,13 +77,7 @@ class AthleteCrudController extends Controller
 
         $athlete->save();
 
-        for($i=0; $i<sizeof($request->link_name); $i++){
-          $athlete->links()->create([
-                'name' => $request->link_name[$i],
-                'path' => $request->link_path[$i]
-              ]);
-
-        }
+        Link::store($athlete, $request->link_name, $request->link_path);
 
         return redirect()->route('athlete.index');
 
@@ -132,13 +126,7 @@ class AthleteCrudController extends Controller
 
         $athlete->save();
 
-        $athlete->removeLinks();
-        for($i=0; $i<sizeof($request->link_name); $i++){
-          $athlete->links()->create([
-              'name' => $request->link_name[$i],
-              'path' => $request->link_path[$i]
-          ]);
-        }
+        Link::edit($athlete, $request->link_name, $request->link_path);
 
         return redirect()->route('athlete.index');
 

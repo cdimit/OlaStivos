@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LinkHelper;
 
 class Club extends Model
 {
+
+  use LinkHelper;
 
   public function athletes()
   {

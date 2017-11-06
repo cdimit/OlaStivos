@@ -4,13 +4,13 @@
     <p><u><h4>Add New Club</h4></u></p>
     {!! Form::open(
         array(
-            'route' => 'club.store', 
-            'class' => 'form-horizontal',  
+            'route' => 'club.store',
+            'class' => 'form-horizontal',
             'files' => true)
-        ) 
+        )
     !!}
-    
-        {{ csrf_field() }}     
+
+        {{ csrf_field() }}
 
         <!--Name input form-->
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -74,7 +74,10 @@
             </div>
         </div>
 
-                        
+
+        @include('links.create')
+
+
         <div class="form-group">
 
             <div class="col-md-2 col-md-offset-4">

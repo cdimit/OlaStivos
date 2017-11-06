@@ -18,4 +18,27 @@ class Link extends Model
   {
     return $this->morphTo();
   }
+
+  public static function store($var, $name, $path)
+  {
+    for($i=0; $i<sizeof($name); $i++){
+      $var->links()->create([
+            'name' => $name[$i],
+            'path' => $path[$i]
+          ]);
+
+    }
+  }
+
+  public static function edit($var, $name, $path)
+  {
+    $var->removeLinks();
+    for($i=0; $i<sizeof($name); $i++){
+      $var->links()->create([
+          'name' => $name[$i],
+          'path' => $path[$i]
+      ]);
+    }
+  }
+
 }

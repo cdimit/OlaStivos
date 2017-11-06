@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Age;
+use App\Traits\LinkHelper;
 
 class Athlete extends Model
 {
 
+    use LinkHelper;
 
     /**********************************
     //  Relationships
@@ -601,13 +603,6 @@ class Athlete extends Model
       $this->setNURIfExist($result);
       $this->setNRIfExist($result);
 
-    }
-
-    public function removeLinks()
-    {
-      foreach($this->links as $link){
-        $link->delete();
-      }
     }
 
 }

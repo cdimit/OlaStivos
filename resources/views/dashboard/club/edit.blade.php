@@ -3,10 +3,10 @@
 @section('content')
     <p><u><h4>Edit Club</h4></u></p>
     {!! Form::model($club, ['route' => ['club.update',$club->id],'files' => true,'class'=>'form-horizontal']) !!}
-                    
+
         {{ Form::token() }}
         {{ method_field('PATCH') }}
-        
+
         <!--Name input form-->
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-4 control-label">Club Name</label>
@@ -20,7 +20,7 @@
                 @endif
             </div>
         </div>
-  
+
 
         <!--Acronym input form-->
         <div class="form-group{{ $errors->has('acronym') ? ' has-error' : '' }}">
@@ -69,6 +69,11 @@
                 {!! Form::file('picture', null) !!}
             </div>
         </div>
+
+
+        @include('links.edit', ['var' => $club])
+
+
 
         <div class="form-group">
 

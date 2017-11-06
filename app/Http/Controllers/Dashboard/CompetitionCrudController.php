@@ -4,12 +4,26 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Competition;
 use App\CompetitionSeries;
-
+use App\Link;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CompetitionCrudController extends Controller
 {
+
+    private $form_rules = [
+      'name' => 'required|string|max:255|min:1',
+      'date_start' => 'nullable|date',
+      'date_finish'  => 'nullable|date',
+      'country' => 'string',
+      'city' => 'string',
+      'venue' => 'string',
+      'competition_series_id' => 'nullable|integer',
+
+      'link_name.*' => 'required|string',
+      'link_path.*' => 'required|string',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -44,15 +58,8 @@ class CompetitionCrudController extends Controller
     public function store(Request $request)
     {
         //VALIDATE DATA
-        $this->validate($request, [
-            'name' => 'required|string|max:255|min:1',
-            'date_start' => 'nullable|date',
-            'date_finish'  => 'nullable|date',
-            'country' => 'string',
-            'city' => 'string',
-            'venue' => 'string',
-            'competition_series_id' => 'nullable|integer',            
-        ]);
+        $this->validate($request, $this->form_rules);
+
 
         //CREATE new Competition instance
         $competition = new Competition;
@@ -66,7 +73,9 @@ class CompetitionCrudController extends Controller
         $competition->venue = $request->venue;
 
         $competition->save();
-        
+
+        Link::store($competition, $request->link_name, $request->link_path);
+
         return redirect()->route('competition.index');
     }
 
@@ -93,16 +102,9 @@ class CompetitionCrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-                //VALIDATE DATA
-        $this->validate($request, [
-            'name' => 'required|string|max:255|min:1',
-            'date_start' => 'nullable|date',
-            'date_finish'  => 'nullable|date',
-            'country' => 'string',
-            'city' => 'string',
-            'venue' => 'string',
-            'competition_series_id' => 'nullable|integer',            
-        ]);
+        //VALIDATE DATA
+        $this->validate($request, $this->form_rules);
+
 
         //Get and update Competition instance
         $competition = Competition::find($id);
@@ -116,7 +118,9 @@ class CompetitionCrudController extends Controller
         $competition->venue = $request->venue;
 
         $competition->save();
-        
+
+        Link::edit($competition, $request->link_name, $request->link_path);
+
         return redirect()->route('competition.index');
     }
 

@@ -2,9 +2,9 @@
 
 @section('content')
     <p><u><h4>Edit Competition</h4></u></p>
-   
+
     {!! Form::model($competition, ['route' => ['competition.update',$competition->id],'class'=>'form-horizontal']) !!}
-                    
+
         {{ Form::token() }}
         {{ method_field('PATCH') }}
 
@@ -106,7 +106,10 @@
             </div>
         </div>
 
-                        
+
+        @include('links.edit', ['var' => $competition])
+
+
          <div class="form-group">
 
             <div class="col-md-2 col-md-offset-4">
