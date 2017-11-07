@@ -61,8 +61,6 @@
        border: 0;
     }
 
-
-
 </style>
 @endsection
 @section('content')
@@ -202,7 +200,42 @@
                             </div>
 
                             <div class="row">     
-                                <div class="col-sm-12">                 
+                                <div class="col-sm-12">            
+                                    <!-- SB History -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Πρόοδος SB μέσα στα χρόνια ανά αγώνισμα</div>
+                                        <dir class="panel-body">
+                                            <table class="table table-responsive">
+                                                <thead>
+                                                    <th>Σεζόν</th>
+                                                    @foreach($sbHistory->first()->keys() as $event)
+                                                        
+                                                        <th>{{\App\Event::find($event)->name}}</th>
+                                                        
+                                                    @endforeach
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach($sbHistory as $year=>$sb)
+                                                        <tr>
+                                                            <td>Καλύτερες επιδόσεις {{$year}}</td>
+                                                            @foreach($sb->values() as $s)
+                                                                @if($s)
+                                                                    <td>{{$s->mark}}</td>
+                                                                @else
+                                                                    <td>-</td>
+                                                                @endif              
+                                                            @endforeach     
+                                                        </tr>
+                                                    @endforeach
+                                                    
+                                                </tbody>
+                                            </table>
+                                            
+                                        </dir> 
+                                    </div>
+
+
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
@@ -233,11 +266,7 @@
 
                                     </div>
                                     <!-- -->
-                                </div>
-                            </div>
-                            <div class="row">     
-                                <div class="col-sm-12">  
-
+ 
 
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
@@ -271,8 +300,6 @@
 
                                     </div>
                                     <!-- -->
-
-
                                 </div>
                             </div>
                         </div>
