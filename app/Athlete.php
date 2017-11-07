@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Age;
+use App\Traits\LinkHelper;
 
 class Athlete extends Model
 {
 
+    use LinkHelper;
 
     /**********************************
     //  Relationships
@@ -101,6 +103,7 @@ class Athlete extends Model
     {
       return $query->where('gender', 'female')->get();
     }
+
 
     /*
     ** Returns a collection of all results of this athlete over the years
@@ -349,6 +352,7 @@ class Athlete extends Model
       $sb = $this->bestRecord($event,$sbs);
       return $sb;
     }
+
 
     /*
     // Returns a collection of all sbs of athlete over the years
@@ -618,4 +622,5 @@ class Athlete extends Model
       $this->setNRIfExist($result);
 
     }
+
 }

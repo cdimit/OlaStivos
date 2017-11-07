@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-   
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
 
@@ -9,14 +9,14 @@
     li.uppercase {
         text-transform: uppercase;
     }
-    
+
     .list-inline{display:block;}
-    
+
     .list-inline li{display:inline-block;}
-    
+
     .list-inline li.seperator:after{content:'|'; margin:auto 20px;}
 
-    /* Overrides list-group-item from Bootstrap */ 
+    /* Overrides list-group-item from Bootstrap */
     .list-group-item {
         padding: 3px 10px;
         font-size: 11px;
@@ -75,6 +75,7 @@
                             <li><a href="#tab2default" data-toggle="tab">Αποτελέσματα</a></li>
                             <li><a href="#tab3default" data-toggle="tab">Φωτογραφίες</a></li>
                             <li><a href="#tab4default" data-toggle="tab">Βίντεο</a></li>
+                            <li><a href="#tab5default" data-toggle="tab">Σύνδεσμοι</a></li>
                         </ul>
                 </div>
                 <div class="panel-body">
@@ -107,7 +108,7 @@
                                                 <li class="list-group-item icon icon-bullet">
                                                     <span class="list-group-item-achievement">
                                                         <img src="https://cdn3.iconfinder.com/data/icons/glypho-generic-icons/64/prize-badge-512.png" class="img-responsive center">
-                                                    </span> 
+                                                    </span>
                                                     Παγκύπριο ρεκόρ: <i>{{$NR->event->name}} &ensp;  <b>{{$NR->mark}}</b></i>
                                                 </li>
                                             @endforeach
@@ -115,18 +116,18 @@
                                                 <li class="list-group-item">
                                                     Παγκύπριο ρεκόρ U23: <i>{{$NUR->event->name}} &ensp; <b>{{$NUR->mark}}</b></i>
                                                 </li>
-                                            @endforeach       
+                                            @endforeach
                                             @foreach($NJRs as $NJR)
                                                 <li class="list-group-item">Παγκύπριο ρεκόρ U19:<i> {{$NJR->event->name}} &ensp;<b>{{$NJR->mark}}</b></i></li>
                                             @endforeach
                                             @foreach($NYRs as $NYR)
                                                 <li class="list-group-item">Παγκύπριο ρεκόρ U17:<i> {{$NYR->event->name}} &ensp; <b>{{$NYR->mark}}</b></i></li>
-                                            @endforeach                   
+                                            @endforeach
 
-                                            <li class="list-group-item">Παγκύπριες νίκες: &ensp; <i><b>{{$nwins}}</b></i></li>              
+                                            <li class="list-group-item">Παγκύπριες νίκες: &ensp; <i><b>{{$nwins}}</b></i></li>
                                         </ul>
                                     </p>
-                                </div>    
+                                </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
@@ -162,7 +163,7 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            
+
 
                                         </div>
                                     </div>
@@ -193,66 +194,28 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">     
                                 <div class="col-sm-12">            
-                                    <!-- SB History -->
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">Πρόοδος SB μέσα στα χρόνια ανά αγώνισμα</div>
-                                        <dir class="panel-body">
-                                            <table class="table table-responsive">
-                                                <thead>
-                                                    <th>Σεζόν</th>
-                                                    @foreach($sbHistory->first()->keys() as $event)
-                                                        
-                                                        <th>{{\App\Event::find($event)->name}}</th>
-                                                        
-                                                    @endforeach
-                                                </thead>
-                                                <tbody>
-
-                                                    @foreach($sbHistory as $year=>$sb)
-                                                        <tr>
-                                                            <td>Καλύτερες επιδόσεις {{$year}}</td>
-                                                            @foreach($sb->values() as $s)
-                                                                @if($s)
-                                                                    <td>{{$s->mark}}</td>
-                                                                @else
-                                                                    <td>-</td>
-                                                                @endif              
-                                                            @endforeach     
-                                                        </tr>
-                                                    @endforeach
-                                                    
-                                                </tbody>
-                                            </table>
-                                            
-                                        </dir> 
-                                    </div>
-
-
+                                   
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
                                             Αναλυτική Πρόοδος ανά αγώνισμα
                                             <!-- TABS List -->
                                             <ul class="nav nav-tabs">
-                                                @foreach($chartsResults as $event_id =>$chart)     
+                                                @foreach($chartsResults as $event_id =>$chart)
                                                     <li @if(array_keys($chartsResults)[0]== $event_id) class="active" @endif><a href="#tabResult{{$event_id}}" data-toggle="tab">{{\App\Event::find($event_id)->name}}</a></li>
-    
                                                 @endforeach
-
                                             </ul>
- 
                                         </div>
                                         <div class="panel-body">
                                             <div class="tab-content">
-                                                @foreach($chartsResults as $event_id =>$chart)    
+                                                @foreach($chartsResults as $event_id =>$chart)
 
                                                 <div @if(array_keys($chartsResults)[0]== $event_id) class="tab-pane fade in active"@else class ="tab-pane fade" @endif id="tabResult{{$event_id}}">
 
@@ -266,44 +229,34 @@
 
                                     </div>
                                     <!-- -->
- 
 
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
                                             Πρόοδος προσωπικής καλύτερης επίδοσης (PB) ανά αγώνισμα
                                             <!-- TABS List -->
-
- 
                                             <ul class="nav nav-tabs">
-                                                @foreach($chartsPbs as $event_id =>$chart)     
+                                                @foreach($chartsPbs as $event_id =>$chart)
                                                     <li @if(array_keys($chartsPbs)[0]== $event_id) class="active" @endif><a href="#tabPb{{$event_id}}" data-toggle="tab">{{\App\Event::find($event_id)->name}}</a></li>
-    
                                                 @endforeach
-
                                             </ul>
- 
                                         </div>
                                         <div class="panel-body">
                                             <div class="tab-content">
-                                                @foreach($chartsPbs as $event_id =>$chart)    
+                                                @foreach($chartsPbs as $event_id =>$chart)
 
                                                 <div @if(array_keys($chartsPbs)[0]== $event_id) class="tab-pane fade in active"@else class ="tab-pane fade" @endif id="tabPb{{$event_id}}">
 
                                                     <canvas id="pbsChart{{$event_id}}" width="400" height="200"></canvas>
                                                 </div>
                                                 @endforeach
-
-
                                             </div>
                                         </div>
-
                                     </div>
                                     <!-- -->
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- ****************************************** -->
                         <!-- ****************************************** -->
@@ -317,19 +270,19 @@
                                 <div class="panel with-nav-tabs panel-default">
                                     <div class="panel-heading">
                                         <ul class="nav nav-tabs">
-      
+
                                           <li class="dropdown">
                                             <a href="#" data-toggle="dropdown">Χρονιά<span class="caret"></span></a>
                                             <ul class="dropdown-menu" role="menu">
                                                 @foreach($results as $key => $value)
                                                     <li><a href="#tab{{$key}}" data-toggle="tab">{{$key}}</a></li>
                                                 @endforeach
-                                                
+
                                             </ul>
                                           </li>
                                         </ul>
                                     </div>
-                                    
+
                                     <div class="panel-body">
                                         <div class="tab-content">
 
@@ -337,7 +290,7 @@
                                         @foreach($results as $key => $value)
 
                                             <div class="tab-pane fade in active" id="tab{{$key}}">
-                                                
+
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">Αποτελέσματα {{$key}}</div>
                                                     <div class="panel-body">
@@ -352,7 +305,7 @@
                                                                     <th>Πόντοι</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="myTable">                                 
+                                                            <tbody id="myTable">
                                                                 @foreach($value as $result)
                                                                     <tr>
                                                                         <th scope="row">{{$result->date}}</th>
@@ -368,17 +321,17 @@
                                                             </tbody>
 
                                                         </table>
-                                                    
+
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
-                                        
+
                                         @endforeach
                                         </div>
 
-                                    </div>    
-                                    
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -399,7 +352,14 @@
                             Videos of athlete
                         </div>
 
-                        
+                        <!-- ****************************************** -->
+                        <!--              LINKS TAB                    -->
+                        <!-- ****************************************** -->
+                        <div class="tab-pane fade" id="tab5default">
+                            @include('links.show', ['var' => $athlete])
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -413,17 +373,17 @@
 $(document).ready(function(){
     //Pagination
   $('#myTable').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:4});
-    
+
 
   /* CHARTS CODE */
 
   var chartsAll = {!! json_encode($chartsResults) !!};
   var chartsPB = {!! json_encode($chartsPbs) !!};
-  
+
   var chart;
 
 
-  for (chart in chartsPB) { 
+  for (chart in chartsPB) {
     var ctxPB = document.getElementById("pbsChart"+chart).getContext('2d');
 
     var rows = Object.keys(chartsPB[chart]);
@@ -454,10 +414,10 @@ $(document).ready(function(){
             }
         }
     });
-    
+
     }
 
-  for (chart in chartsAll) { 
+  for (chart in chartsAll) {
     var ctxAll = document.getElementById("resultsChart"+chart).getContext('2d');
 
     var rows = Object.keys(chartsAll[chart]);
@@ -477,10 +437,10 @@ $(document).ready(function(){
             }]
 
         },
-        
+
         options: {
             scales: {
-                yAxes: [{   
+                yAxes: [{
 
 
                 }],
@@ -494,7 +454,7 @@ $(document).ready(function(){
 
         }
     });
-    
+
   }
 });
 
@@ -504,7 +464,7 @@ function timeToDecimal(t) {
     var floatArray = [];
     t.forEach(function(item, index, array)  {
         var floatItem = item.split([':']);
-        
+
         var time = item.split(/[.,:]/);
         var duration;
         if (time.length == 2){
@@ -529,16 +489,16 @@ function timeToDecimal(t) {
                 floatArray[index] += number;
             }else{
                 floatArray[index] += number+' ';
-            }    
+            }
         });
         */
         floatArray[index] = parseInt(duration);
-        
+
 
     });
 
     return floatArray;
-}   
+}
 
 
 

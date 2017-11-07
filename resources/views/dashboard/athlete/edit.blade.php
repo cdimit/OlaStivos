@@ -4,9 +4,9 @@
     <p><u><h4>Edit Athlete</h4></u></p>
 
     {!! Form::model($athlete, ['route' => ['athlete.update',$athlete->id],'files' => true,'class'=>'form-horizontal']) !!}
-                    
+
         {{ Form::token() }}
-        {{ method_field('PATCH') }}  
+        {{ method_field('PATCH') }}
 
         <!--First Name input field-->
         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
@@ -85,7 +85,8 @@
             </div>
         </div>
 
-                        
+        @include('links.edit', ['var' => $athlete])
+
         <div class="form-group">
 
             <div class="col-md-2 col-md-offset-4">
@@ -100,4 +101,22 @@
 
 
     {!! Form::close() !!}
+@endsection
+
+@section('scripts')
+  <script>
+  $(document).ready(function() {
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+            $(wrapper).append('<div><input type="text" name="link_name[]"><input type="text" name="link_path[]"><a href="#" class="remove_field">Remove</a></div>'); //add input box
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove();
+    })
+  });
+  </script>
 @endsection

@@ -4,9 +4,12 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\LinkHelper;
 
 class Competition extends Model
 {
+
+    use LinkHelper;
 
     public function series()
     {
@@ -23,11 +26,15 @@ class Competition extends Model
 			return $this->morphToMany('App\Video', 'videable');
 		}
 
-	public function images()
+	   public function images()
 	   {
 		  return $this->morphToMany('App\Image', 'imageable');
 	   }
 
+     public function links()
+     {
+       return $this->morphMany('App\Link', 'linkable');
+     }
 
 
     /*

@@ -3,12 +3,25 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Club;
+use App\Link;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ClubCrudController extends Controller
 {
+
+  private $form_rules = [
+    'name' => 'required|string|max:255|min:1',
+    'acronym' => 'required|string|max:10',
+    'city'  => 'required|string|max:255|min:1',
+    'since' => 'nullable|integer|min:1800|max:2017',
+    'picture' => 'nullable|mimes:jpeg,bmp,png',
+
+    'link_name.*' => 'required|string',
+    'link_path.*' => 'required|string',
+  ];
+
     /**
      * Display a listing of the resource.
      *
@@ -41,14 +54,7 @@ class ClubCrudController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'name' => 'required|string|max:255|min:1',
-            'acronym' => 'required|string|max:10',
-            'city'  => 'required|string|max:255|min:1',
-            'since' => 'nullable|integer|min:1800|max:2017',
-            'picture' => 'nullable|mimes:jpeg,bmp,png',
-            
-        ]);
+        $this->validate($request, $this->form_rules);
 
 
         $club = new Club;
@@ -66,7 +72,9 @@ class ClubCrudController extends Controller
         $club->picture = $picture;
 
         $club->save();
-        
+
+        Link::store($club, $request->link_name, $request->link_path);
+
         return redirect()->route('club.index');
 
     }
@@ -93,15 +101,7 @@ class ClubCrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255|min:1',
-            'acronym' => 'required|string|max:10',
-            'city'  => 'required|string|max:255|min:1',
-            'since' => 'nullable|integer|min:1800|max:2017',
-            'picture' => 'nullable|mimes:jpeg,bmp,png',
-            
-        ]);
-
+        $this->validate($request, $this->form_rules);
 
         $club=Club::find($id);
 
@@ -114,10 +114,12 @@ class ClubCrudController extends Controller
             $picture = $request['picture']->store('pictures/clubs'.$club->id);
             $club->picture = $picture;
         }
- 
+
 
         $club->save();
-        
+
+        Link::edit($club, $request->link_name, $request->link_path);
+
         return redirect()->route('club.index');
 
     }
