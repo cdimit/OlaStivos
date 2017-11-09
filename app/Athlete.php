@@ -354,6 +354,24 @@ class Athlete extends Model
     }
 
 
+    /*
+    // Returns a collection of all sbs of athlete over the years
+    */
+    public function getEverySb()
+    {
+      //Get SB record ID
+      $record = Record::where('acronym','SB')->first();
+      $recordId = $record->id;
+
+      //Get SB of athlete for the year
+      $sbs = Result::whereHas('records',function ($query) use ($recordId) {
+        $query->where('record_id','=', $recordId);
+      })->where('athlete_id',$this->id)->get();
+
+      return $sbs;
+    }
+
+
 
 
 

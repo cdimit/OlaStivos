@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Athlete;
+use App\Result;
+use App\Event;
 use \Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -29,6 +31,9 @@ class AthleteController extends Controller
         $allPbs = $athlete->getAllPbs();
 		$chartsPbs = $this->chartData($allPbs); 
 
+        //History of SBs
+        $sbHistory = $this->getSBHistory($athlete);
+        
         //ACHIEVEMENTS//
 
         //GET NRs : NR, NUR, NJR, NYR
@@ -36,7 +41,6 @@ class AthleteController extends Controller
         $NURs= $athlete->getNRs('NUR');
         $NJRs= $athlete->getNRs('NJR');
         $NYRs= $athlete->getNRs('NYR');
-
 
         //GET National competition wins
         $nwins = $athlete->countPlaces(\App\CompetitionSeries::find('1'),'1');
@@ -52,7 +56,8 @@ class AthleteController extends Controller
         						->with('NYRs',$NYRs)
         						->with('nwins',$nwins)
         						->with('chartsPbs',$chartsPbs)
-        						->with('chartsResults',$chartsResults);
+        						->with('chartsResults',$chartsResults)
+                                ->with('sbHistory',$sbHistory);
         
     }
 
@@ -68,5 +73,30 @@ class AthleteController extends Controller
      		$charts->put($event,$array);
         }
         return $charts->toArray();
+    }
+
+    public function getSBHistory($athlete)
+    {
+        $sbHistory=collect([]);
+        
+        //all results of athlete
+        $results = $athlete->results;
+        //unique events participated
+        $events = $athlete->uniqueEvents($results);
+        //results grouped by year
+        $results = $results->sortBy('date')->groupBy(function($attributes) {
+                return Carbon::parse($attributes->date)->format('Y'); // grouping by years
+            });
+
+        //create sbHistory collection, grouped in years and events
+        foreach ($results->keys() as $year) {
+            $sbsOfYear= collect([]);
+            foreach ($events as $event) {
+                $sbOfEvent = $athlete->getSB($year, Event::find($event));
+                $sbsOfYear->put($event,$sbOfEvent);
+            }           
+            $sbHistory->put($year,$sbsOfYear);
+        }
+        return $sbHistory;
     }
 }

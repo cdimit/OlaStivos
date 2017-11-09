@@ -61,8 +61,6 @@
        border: 0;
     }
 
-
-
 </style>
 @endsection
 @section('content')
@@ -201,9 +199,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">     
+                                <div class="col-sm-12">            
+                                    <!-- SB History -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Πρόοδος SB μέσα στα χρόνια ανά αγώνισμα</div>
+                                        <dir class="panel-body">
+                                            <table class="table table-responsive">
+                                                <thead>
+                                                    <th>Σεζόν</th>
+                                                    @foreach($sbHistory->first()->keys() as $event)
+                                                        
+                                                        <th>{{\App\Event::find($event)->name}}</th>
+                                                        
+                                                    @endforeach
+                                                </thead>
+                                                <tbody>
 
-                            <div class="row">
-                                <div class="col-sm-12">
+                                                    @foreach($sbHistory as $year=>$sb)
+                                                        <tr>
+                                                            <td>Καλύτερες επιδόσεις {{$year}}</td>
+                                                            @foreach($sb->values() as $s)
+                                                                @if($s)
+                                                                    <td>{{$s->mark}}</td>
+                                                                @else
+                                                                    <td>-</td>
+                                                                @endif              
+                                                            @endforeach     
+                                                        </tr>
+                                                    @endforeach
+                                                    
+                                                </tbody>
+                                            </table>
+                                            
+                                        </dir> 
+                                    </div>
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
@@ -212,11 +242,8 @@
                                             <ul class="nav nav-tabs">
                                                 @foreach($chartsResults as $event_id =>$chart)
                                                     <li @if(array_keys($chartsResults)[0]== $event_id) class="active" @endif><a href="#tabResult{{$event_id}}" data-toggle="tab">{{\App\Event::find($event_id)->name}}</a></li>
-
                                                 @endforeach
-
                                             </ul>
-
                                         </div>
                                         <div class="panel-body">
                                             <div class="tab-content">
@@ -234,27 +261,17 @@
 
                                     </div>
                                     <!-- -->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-
 
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
                                             Πρόοδος προσωπικής καλύτερης επίδοσης (PB) ανά αγώνισμα
                                             <!-- TABS List -->
-
-
                                             <ul class="nav nav-tabs">
                                                 @foreach($chartsPbs as $event_id =>$chart)
                                                     <li @if(array_keys($chartsPbs)[0]== $event_id) class="active" @endif><a href="#tabPb{{$event_id}}" data-toggle="tab">{{\App\Event::find($event_id)->name}}</a></li>
-
                                                 @endforeach
-
                                             </ul>
-
                                         </div>
                                         <div class="panel-body">
                                             <div class="tab-content">
@@ -265,19 +282,13 @@
                                                     <canvas id="pbsChart{{$event_id}}" width="400" height="200"></canvas>
                                                 </div>
                                                 @endforeach
-
-
                                             </div>
                                         </div>
-
                                     </div>
                                     <!-- -->
-
-
                                 </div>
                             </div>
                         </div>
-
 
                         <!-- ****************************************** -->
                         <!-- ****************************************** -->
@@ -372,8 +383,6 @@
                         <div class="tab-pane fade" id="tab4default">
                             Videos of athlete
                         </div>
-
-
 
                         <!-- ****************************************** -->
                         <!--              LINKS TAB                    -->

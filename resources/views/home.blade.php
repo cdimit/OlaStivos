@@ -416,10 +416,6 @@ div.image:before {
         $('#searchPanel').show();
       }); 
       
-
-      
-
-      
   });
 </script>
 
