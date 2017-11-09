@@ -46,6 +46,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Navbar Links -->
+                        <li>
+                            @include('search.search_input')
+                        </li>
                         <li><a href="{{route('alltime.show')}}">All-Time Best</a></li>
                         <li><a href="{{route('toplist.show')}}">Τοπ Λίστες Σεζόν</a></li>
                         <li><a href="{{ route('record.showNRs') }}">Παγκύπρια Ρεκόρ</a></li>
@@ -67,7 +70,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
-
+    @yield('scripts_end')
 </body>
 
 </html>

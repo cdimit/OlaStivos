@@ -73,22 +73,25 @@ div.image:before {
           <a href="/calendar" class="btn btn-default btn-sm" role="button">Αναλυτικό ημερολόγιο αγώνων</a>
         </div>
       </div>
+      
+      <!-- An den exei competitions den emfanizete -->
+      @if($countdownComp)
+        <div class="panel panel-2">
+          <div class="panel-heading">Αντίστροφη Μέτρηση</div>
+          <div class="panel-body">
+          
+            <a href="{{ route('competition.show',['competition'=>$countdownComp->id]) }}">
+              <h2 style="text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 0;">
+                {{\Carbon\Carbon::now()->diffInDays(new \Carbon\Carbon($countdownComp->date_start))}} μέρες
+              </h2>
+              <h2 style="text-align: center; margin-top: 0; margin-bottom: 0;">
+                {{$countdownComp->name}}
+              </h2>
+            </a>
 
-      <div class="panel panel-2">
-        <div class="panel-heading">Αντίστροφη Μέτρηση</div>
-        <div class="panel-body">
-        
-          <a href="{{ route('competition.show',['competition'=>$countdownComp->id]) }}">
-            <h2 style="text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 0;">
-              {{\Carbon\Carbon::now()->diffInDays(new \Carbon\Carbon($countdownComp->date_start))}} μέρες
-            </h2>
-            <h2 style="text-align: center; margin-top: 0; margin-bottom: 0;">
-              {{$countdownComp->name}}
-            </h2>
-          </a>
-
+          </div>
         </div>
-      </div>
+      @endif
 
        <!-- An den exei athlitis genethlia den emfanizete -->
       @if($birthdayAthlete)
@@ -288,37 +291,7 @@ div.image:before {
         *** 3rd Column ******
         *****************-->
         <div class="col-sm-4 padding-3">  
-            <div class="panel panel-1">
-              <div class="panel-heading">Search</div>
-              <div class="panel-body">
-                <select class="selectpicker" data-live-search="true" data-size="10" onchange="location = this.value;" title="Ψάξε αθλητή ή αγώνα..." data-width="100%">
-                  <optgroup label="Αθλητές">
-                    @foreach($athletesSearch as $athlete)
-                        <option value="/athlete/{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} - {{$athlete->dob}}</option>
-                    @endforeach
-                  </optgroup>
-                  <optgroup label="Αγώνες">
-                    @foreach($competitionsSearch as $competition)
-                        <option value="/competition/{{$competition->id}}">{{$competition->name}} {{$competition->date_start}}</option>
-                    @endforeach
-                  </optgroup>
-                </select>
-
-                <hr>
-                <div class="search-wrapper">
-                    <label>Ψάξε αθλητή ή αγώνα:</label>
-                    <div id="input"  style="position: relative; display: inline-block;">
-                      <input id="searchInput" type="text" placeholder="Ψάξε αθλητή ή αγώνα..." />
-                      <div id="searchPanel" class="panel" style="position: absolute; left: 0; width: 100%;">
-                        <ul id='resultsSearch' class="list-unstyled">
-                        </ul>
-
-                      </div>
-
-                    </div>
-                </div>
-              </div>
-            </div>
+            
             <div class="panel panel-1">
               <div class="panel-heading">Facebook Live Feed</div>
               <div class="panel-body">
@@ -344,79 +317,27 @@ div.image:before {
 @section('scripts')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function(){     
-  	//Navbar transparent before scrolling down  
-     	var scroll_start = 0;
-     	var startchange = $('#startchange');
-     	var offset = startchange.offset();
+  <script type="text/javascript">
+    $(document).ready(function(){     
+    	//Navbar transparent before scrolling down  
+       	var scroll_start = 0;
+       	var startchange = $('#startchange');
+       	var offset = startchange.offset();
 
-     	if (startchange.length){
-  	   $(document).scroll(function() { 
-  	      scroll_start = $(this).scrollTop();
-  	      if(scroll_start > offset.top) {
-  	          $(".navbar-default").css('background-color', 'black');
-              $(".navbar-brand").css('display', 'inline');
-  	       } else {
-  	          $('.navbar-default').css({"background-color":"rgba(0,0,0,0.1)","transition":"background-color 250ms linear"});
-              //$(".navbar-brand").css('display', 'none');
-  	       }
-  	   });
-      };
-
- 
-
-      $('#searchPanel').hide();
-      $(document).click(function () { 
-        if ($('#searchPanel').is(":visible")){
-          $('#searchPanel').hide();
-        }
-      });
-      
-
-      $('#searchInput').on('change',function(){
-        var myUrl = '/search';
-        var myData = {
-          searchInput: $('#searchInput').val(),
+       	if (startchange.length){
+    	   $(document).scroll(function() { 
+    	      scroll_start = $(this).scrollTop();
+    	      if(scroll_start > offset.top) {
+    	          $(".navbar-default").css('background-color', 'black');
+                $(".navbar-brand").css('display', 'inline');
+    	       } else {
+    	          $('.navbar-default').css({"background-color":"rgba(0,0,0,0.1)","transition":"background-color 250ms linear"});
+                //$(".navbar-brand").css('display', 'none');
+    	       }
+    	   });
         };
-        $('#resultsSearch').empty();  
-        axios.post(myUrl, myData ).then(function (response) {
-          console.log(response.data);
-          
-          $('#resultsSearch').append('<h5 style="margin-bottom:0; margin-top:0;">Αθλητές:</h5>');
-          $.each(response.data[0], function( index, value ) {
-            $('#resultsSearch').append($("<li>",{})).append($("<a>", {
-                  href: '/athlete/'+value.id,
-                  value: value.id,
-                  text: value.first_name+' '+value.last_name+' '+value.dob,
-              }));  
-          });
-          if(response.data[0] == 0){
-            $('#resultsSearch').append('<h6>Δεν βρέθηκαν αθλητές</h6>');
-          }
-
-          $('#resultsSearch').append('<hr style="margin:0;">');
-          $('#resultsSearch').append('<h5 style="margin-bottom:0; margin-top:0;">Αγώνες:</h5>');
-          $.each(response.data[1], function( index, value ) {
-            $('#resultsSearch').append($("<li>",{})).append($("<a>", {
-                  href: '/competition/'+value.id,
-                  value: value.id,
-                  text: value.name+' '+value.date_start,
-              }));  
-          });
-
-          if(response.data[1].length == 0){
-            $('#resultsSearch').append('<h6>Δεν βρέθηκαν αγώνες</h6>');
-          }
-
-        })
-        .catch(function (error) {
-            console.log('error');
-        });
-        $('#searchPanel').show();
-      }); 
-      
-  });
-</script>
+        
+    });
+  </script>
 
 @endsection
