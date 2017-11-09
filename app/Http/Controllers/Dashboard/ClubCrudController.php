@@ -65,7 +65,7 @@ class ClubCrudController extends Controller
         $club->since = $request->since;
 
         if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/clubs/'.$club->id);
+            $picture = $request['picture']->store('pictures/clubs');
         }else{
             $picture = '';
         }
@@ -89,7 +89,7 @@ class ClubCrudController extends Controller
     public function edit($id)
     {
         $club=Club::find($id);
-        return view('dashboard.club.edit')->with('club',$club);
+        return view('dashboard.image.edit')->with('club',$club);
     }
 
     /**
@@ -111,7 +111,7 @@ class ClubCrudController extends Controller
         $club->since = $request->since;
 
         if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/clubs'.$club->id);
+            $picture = $request['picture']->store('pictures/clubs');
             $club->picture = $picture;
         }
 

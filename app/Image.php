@@ -11,4 +11,14 @@ class Image extends Model
   {
     return $this->morphedByMany('App\Athlete', 'imageable');
   }
+
+  public function clubs()
+  {
+    return $this->morphedByMany('App\Club', 'imageable');
+  }
+
+  public function competitions()
+  {
+    return $this->morphedByMany('App\Competition', 'imageable');
+  }
 }

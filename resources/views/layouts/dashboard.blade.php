@@ -83,6 +83,8 @@
                         <a href="{{ route('series.index') }}" class="list-group-item list-group-item-action">Series</a>
                         <a href="{{ route('competition.index') }}" class="list-group-item list-group-item-action">Competitions</a>
                         <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action">Results</a>
+                        <a href="{{ route('image.index') }}" class="list-group-item list-group-item-action">Images</a>
+                        <a href="{{ route('video.index') }}" class="list-group-item list-group-item-action">Videos</a>
                     </div>
 
                 </div>
