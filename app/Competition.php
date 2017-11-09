@@ -4,12 +4,12 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\LinkHelper;
+use App\Traits\Linkable;
 
 class Competition extends Model
 {
 
-    use LinkHelper;
+    use Linkable;
 
     public function series()
     {

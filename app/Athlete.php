@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Age;
-use App\Traits\LinkHelper;
+use App\Traits\Linkable;
 
 class Athlete extends Model
 {
 
-    use LinkHelper;
+    use Linkable;
 
     /**********************************
     //  Relationships
