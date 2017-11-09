@@ -33,7 +33,8 @@ class AthleteController extends Controller
 
         //History of SBs
         $sbHistory = $this->getSBHistory($athlete);
-        
+
+
         //ACHIEVEMENTS//
 
         //GET NRs : NR, NUR, NJR, NYR

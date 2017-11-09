@@ -49,8 +49,13 @@
                         <li>
                             @include('search.search_input')
                         </li>
-                        <li><a href="{{route('alltime.show')}}">All-Time Best</a></li>
-                        <li><a href="{{route('toplist.show')}}">Τοπ Λίστες Σεζόν</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Τοπ Λίστες<span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="color:white; background-color: black;">
+                              <li><a href="{{route('alltime.show')}}" style="color:white;">Κορυφαίές Επιδόσεις</a></li>
+                              <li><a href="{{route('toplist.show')}}" style="color:white;">Ανά Σεζόν</a></li>
+                            </ul>
+                        </li>
                         <li><a href="{{ route('record.showNRs') }}">Παγκύπρια Ρεκόρ</a></li>
                         <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
                         <li><a href="{{ route('competition.calendar') }}">Ημερολόγιο Αγώνων</a></li>

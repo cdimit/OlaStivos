@@ -37,7 +37,7 @@
     }
 
     .well {
-       background-color: rgba(245, 245, 245, 0.4);
+       background-color: rgba(245, 245, 245, 0.9);
        margin-left: 1px;
        margin-right: 1px;
        margin-top: 1px;
@@ -52,9 +52,9 @@
     }
 
     .image-back {
-        background: url(https://images.pexels.com/photos/332835/pexels-photo-332835.jpeg?w=940&h=650&auto=compress&cs=tinysrgb) no-repeat;
+        background: url(http://139.162.250.120/tippfm/wp-content/uploads/sites/20/Running-Track.jpg) no-repeat;
         min-height: 300px;
-
+        background-size: 120% 120%;
     }
 
 
@@ -70,9 +70,9 @@
 
              <!-- Heading and Search Form -->
             <div class="col-lg-12 image-back">
-                <h1>Top List</h1>
+                <h1>Κορυφαίες επιδόσεις όλων των εποχών</h1>
                 <div class="col-md-6 well">
-                <h4>Εισάγετε Παγκύπριο Ρεκόρ για να δείτε την πρόοδο του:</h4>
+                <h4>Εισάγετε δεδομένα για το αγώνισμα που σας ενδιαφέρει:</h4>
                 {!! Form::open(
                         array(
                             'route' => 'alltime.search',
@@ -136,6 +136,17 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-xs-7 text-left">
+                            <label for="season">Ένα αποτέλεσμα ανά αθλητή:</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <input type="checkbox" id="unique" class="form-control">
+                        </div>
+
+                    </div>
+
+
                     <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
                         <div class="col-xs-10 col-xs-offset-2">
                             <button id="submit" type="submit" class="btn btn-default" >Βρές προιστορία ρεκόρ</button>
@@ -143,7 +154,6 @@
                     </div>
                 {!! Form::close() !!}
 
-                <input type="checkbox" id="unique">Unique
                 </div>
             </div>
 

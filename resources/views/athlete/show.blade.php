@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('styles')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+{{--     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
 
-
+ --}}
 <style>
     li.uppercase {
         text-transform: uppercase;
@@ -373,7 +373,7 @@
                         <!--              PHOTOS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab3default">
-                            Photos of athlete
+                            @include('images.gallery', ['var' => $athlete])
                         </div>
 
 
@@ -402,135 +402,135 @@
 
 @section('scripts')
 <script type="text/javascript">
-$(document).ready(function(){
-    //Pagination
-  $('#myTable').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:4});
+// $(document).ready(function(){
+//     //Pagination
+//   $('#myTable').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:4});
 
 
-  /* CHARTS CODE */
+//   /* CHARTS CODE */
 
-  var chartsAll = {!! json_encode($chartsResults) !!};
-  var chartsPB = {!! json_encode($chartsPbs) !!};
+//   var chartsAll = {!! json_encode($chartsResults) !!};
+//   var chartsPB = {!! json_encode($chartsPbs) !!};
 
-  var chart;
-
-
-  for (chart in chartsPB) {
-    var ctxPB = document.getElementById("pbsChart"+chart).getContext('2d');
-
-    var rows = Object.keys(chartsPB[chart]);
-    var collumns = Object.values(chartsPB[chart]);
-
-    var myChart = new Chart(ctxPB, {
-        type: 'line',
-        data: {
-            labels: rows,
-            datasets: [{
-                label: 'Επίδοση',
-                data: timeToDecimal(collumns),
-                borderColor: "#3e95cd",
-                fill: false
-            }]
-
-        },
-        options: {
-            scales: {
-                yAxes: [{
-
-                }],
-                xAxes: [{
-                    type: 'time',
-                    distribution: 'series'
-                }]
-
-            }
-        }
-    });
-
-    }
-
-  for (chart in chartsAll) {
-    var ctxAll = document.getElementById("resultsChart"+chart).getContext('2d');
-
-    var rows = Object.keys(chartsAll[chart]);
-    var collumns = Object.values(chartsAll[chart]);
-    console.log(rows,timeToDecimal(collumns));
+//   var chart;
 
 
-    var myChart = new Chart(ctxAll, {
-        type: 'line',
-        data: {
-            labels: rows,
-            datasets: [{
-                label: 'Επίδοση',
-                data: timeToDecimal(collumns),
-                borderColor: "#3e95cd",
-                fill: false
-            }]
+//   for (chart in chartsPB) {
+//     var ctxPB = document.getElementById("pbsChart"+chart).getContext('2d');
 
-        },
+//     var rows = Object.keys(chartsPB[chart]);
+//     var collumns = Object.values(chartsPB[chart]);
 
-        options: {
-            scales: {
-                yAxes: [{
+//     var myChart = new Chart(ctxPB, {
+//         type: 'line',
+//         data: {
+//             labels: rows,
+//             datasets: [{
+//                 label: 'Επίδοση',
+//                 data: timeToDecimal(collumns),
+//                 borderColor: "#3e95cd",
+//                 fill: false
+//             }]
 
+//         },
+//         options: {
+//             scales: {
+//                 yAxes: [{
 
-                }],
+//                 }],
+//                 xAxes: [{
+//                     type: 'time',
+//                     distribution: 'series'
+//                 }]
 
-                xAxes: [{
-                    type: 'time',
-                    distribution: 'series'
-                }]
+//             }
+//         }
+//     });
 
-            }
+//     }
 
-        }
-    });
+//   for (chart in chartsAll) {
+//     var ctxAll = document.getElementById("resultsChart"+chart).getContext('2d');
 
-  }
-});
-
-function timeToDecimal(t) {
-
-
-    var floatArray = [];
-    t.forEach(function(item, index, array)  {
-        var floatItem = item.split([':']);
-
-        var time = item.split(/[.,:]/);
-        var duration;
-        if (time.length == 2){
-            var duration = time[0]*1000 + time[1];
-        }else if (time.length == 3){
-            var duration = time[0]*60000 + time[1]*1000 + time[0];
-        }else if (time.length == 4){
-            var duration = time[0]*3600000 + time[0]*60000 + time[1]*1000 + time[0];
-        }
+//     var rows = Object.keys(chartsAll[chart]);
+//     var collumns = Object.values(chartsAll[chart]);
+//     console.log(rows,timeToDecimal(collumns));
 
 
-        //console.log('duration ',duration);
-        //console.log(moment.duration(item, "mm:ss:SS"));
-        //console.log('date:',Date.parse(item));
-        //console.log(moment().duration());
+//     var myChart = new Chart(ctxAll, {
+//         type: 'line',
+//         data: {
+//             labels: rows,
+//             datasets: [{
+//                 label: 'Επίδοση',
+//                 data: timeToDecimal(collumns),
+//                 borderColor: "#3e95cd",
+//                 fill: false
+//             }]
 
-        /*
-        floatItem.forEach(function(number, index2, array) {
-            if (index2 == 0){
-                floatArray[index] = number + '.';
-            }else if (index2 == floatItem.length-1){
-                floatArray[index] += number;
-            }else{
-                floatArray[index] += number+' ';
-            }
-        });
-        */
-        floatArray[index] = parseInt(duration);
+//         },
+
+//         options: {
+//             scales: {
+//                 yAxes: [{
 
 
-    });
+//                 }],
 
-    return floatArray;
-}
+//                 xAxes: [{
+//                     type: 'time',
+//                     distribution: 'series'
+//                 }]
+
+//             }
+
+//         }
+//     });
+
+//   }
+// });
+
+// function timeToDecimal(t) {
+
+
+//     var floatArray = [];
+//     t.forEach(function(item, index, array)  {
+//         var floatItem = item.split([':']);
+
+//         var time = item.split(/[.,:]/);
+//         var duration;
+//         if (time.length == 2){
+//             var duration = time[0]*1000 + time[1];
+//         }else if (time.length == 3){
+//             var duration = time[0]*60000 + time[1]*1000 + time[0];
+//         }else if (time.length == 4){
+//             var duration = time[0]*3600000 + time[0]*60000 + time[1]*1000 + time[0];
+//         }
+
+
+//         //console.log('duration ',duration);
+//         //console.log(moment.duration(item, "mm:ss:SS"));
+//         //console.log('date:',Date.parse(item));
+//         //console.log(moment().duration());
+
+//         /*
+//         floatItem.forEach(function(number, index2, array) {
+//             if (index2 == 0){
+//                 floatArray[index] = number + '.';
+//             }else if (index2 == floatItem.length-1){
+//                 floatArray[index] += number;
+//             }else{
+//                 floatArray[index] += number+' ';
+//             }
+//         });
+//         */
+//         floatArray[index] = parseInt(duration);
+
+
+//     });
+
+//     return floatArray;
+// }
 
 
 

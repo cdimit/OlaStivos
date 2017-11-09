@@ -70,9 +70,9 @@
 
              <!-- Heading and Search Form -->
             <div class="col-lg-12 image-back">
-                <h1>Top List</h1>
+                <h1>Τοπ Λίστες</h1>
                 <div class="col-md-6 well">
-                <h4>Εισάγετε Παγκύπριο Ρεκόρ για να δείτε την πρόοδο του:</h4>
+                <h4>Εισάγετε δεδομένα για τη χρονιά που σας ενδιαφέρει:</h4>
                 {!! Form::open(
                         array(
                             'route' => 'toplist.search',
@@ -85,7 +85,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-5 text-left">
-                            <label for="year">Year</label>
+                            <label for="year">Χρονιά</label>
                         </div>
                         <div class="col-xs-7">
                             <select  id="year" name="year" class="form-control" style="width: auto; height:auto; font-size: 10px; overflow: hidden;">
@@ -149,6 +149,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-xs-7 text-left">
+                            <label for="season">Ένα αποτέλεσμα ανά αθλητή:</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <input type="checkbox" id="unique" class="form-control">
+                        </div>
+
+                    </div>
+
                     <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
                         <div class="col-xs-10 col-xs-offset-2">
                             <button id="submit" type="submit" class="btn btn-default" >Βρές προιστορία ρεκόρ</button>
@@ -156,7 +166,7 @@
                     </div>
                 {!! Form::close() !!}
 
-                <input type="checkbox" id="unique">Unique
+
                 </div>
             </div>
 

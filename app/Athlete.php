@@ -60,6 +60,12 @@ class Athlete extends Model
       return $difference->format('%y');
     }
 
+    public function getNameAttribute(): string
+    {
+
+      return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function isU16()
     {
       $age = Age::where('category', 'u16')->first();
