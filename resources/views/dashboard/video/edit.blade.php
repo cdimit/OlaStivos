@@ -14,7 +14,7 @@
 
 
 
-
+{{-- 
         <div class="form-group">
           <label for="picture" class="col-md-4 control-label">Video</label>
             <div class="col-md-6">
@@ -23,6 +23,22 @@
                 Your browser does not support HTML5 video.
               </video>
               {!! Form::file('video', null) !!}
+            </div>
+        </div>
+         --}}
+
+         
+        <!--Path input form-->
+        <div class="form-group{{ $errors->has('path') ? ' has-error' : '' }}">
+            <label for="path" class="col-md-4 control-label">Path</label>
+
+            <div class="col-md-6">
+                {{ Form::text('path',null,["class"=> 'form-control'])}}
+                @if ($errors->has('path'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('path') }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
 

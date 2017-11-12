@@ -202,38 +202,40 @@
                             <div class="row">     
                                 <div class="col-sm-12">            
                                     <!-- SB History -->
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">Πρόοδος SB μέσα στα χρόνια ανά αγώνισμα</div>
-                                        <dir class="panel-body">
-                                            <table class="table table-responsive">
-                                                <thead>
-                                                    <th>Σεζόν</th>
-                                                    @foreach($sbHistory->first()->keys() as $event)
-                                                        
-                                                        <th>{{\App\Event::find($event)->name}}</th>
-                                                        
-                                                    @endforeach
-                                                </thead>
-                                                <tbody>
+                                    @if(!$sbHistory->isEmpty())
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Πρόοδος SB μέσα στα χρόνια ανά αγώνισμα</div>
+                                            <dir class="panel-body">
+                                                <table class="table table-responsive">
+                                                    <thead>
+                                                        <th>Σεζόν</th>
+                                                        @foreach($sbHistory->first()->keys() as $event)
+                                                            
+                                                            <th>{{\App\Event::find($event)->name}}</th>
+                                                            
+                                                        @endforeach
+                                                    </thead>
+                                                    <tbody>
 
-                                                    @foreach($sbHistory as $year=>$sb)
-                                                        <tr>
-                                                            <td>Καλύτερες επιδόσεις {{$year}}</td>
-                                                            @foreach($sb->values() as $s)
-                                                                @if($s)
-                                                                    <td>{{$s->mark}}</td>
-                                                                @else
-                                                                    <td>-</td>
-                                                                @endif              
-                                                            @endforeach     
-                                                        </tr>
-                                                    @endforeach
-                                                    
-                                                </tbody>
-                                            </table>
-                                            
-                                        </dir> 
-                                    </div>
+                                                        @foreach($sbHistory as $year=>$sb)
+                                                            <tr>
+                                                                <td>Καλύτερες επιδόσεις {{$year}}</td>
+                                                                @foreach($sb->values() as $s)
+                                                                    @if($s)
+                                                                        <td>{{$s->mark}}</td>
+                                                                    @else
+                                                                        <td>-</td>
+                                                                    @endif              
+                                                                @endforeach     
+                                                            </tr>
+                                                        @endforeach
+                                                        
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </dir> 
+                                        </div>
+                                    @endif
                                     <!-- GRAPH TABS FOR PBS -->
                                     <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
@@ -373,7 +375,10 @@
                         <!--              PHOTOS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab3default">
-                            @include('images.gallery', ['var' => $athlete])
+                            <h3>Φωτογραφίες Αθλητή</h3>
+                            @if($athlete->images->first())
+                                @include('gallery.images', ['var' => $athlete])
+                            @endif
                         </div>
 
 
@@ -381,14 +386,18 @@
                         <!--              VIDEOS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab4default">
-                            Videos of athlete
+                            <h3>Βίντεο Αθλητή</h3>
+                            @if($athlete->videos->first())
+                                @include('gallery.videos', ['var' => $athlete])
+                            @endif
                         </div>
 
                         <!-- ****************************************** -->
                         <!--              LINKS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab5default">
-                            @include('links.show', ['var' => $athlete])
+                            <h3>Σύνδεσμοι Αθλητή</h3>
+                            @include('gallery.links', ['var' => $athlete])
                         </div>
 
 

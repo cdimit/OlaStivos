@@ -22,6 +22,13 @@
    background-color:#888;   
 }
 
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-image:none !important;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #15ACA0;
+}
+
 .spacer{
     height:100px;
 }

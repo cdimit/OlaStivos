@@ -15,7 +15,8 @@ class VideoCrudController extends Controller
 
     private $form_rules = [
       'name' => 'required|string|max:255|min:1',
-      'video'   => 'required|mimetypes:video/avi,video/mpeg,video/mp4',
+      'path' => 'required|string'
+      //'video'   => 'required|mimetypes:video/avi,video/mpeg,video/mp4',
     ];
 
     /**
@@ -62,7 +63,8 @@ class VideoCrudController extends Controller
       $video = new Video;
 
       $video->name = $request->name;
-      $video->path = $request['video']->store('videos');
+      //$video->path = $request['video']->store('videos');
+      $video->path = $request->path;
 
       $video->save();
 
@@ -121,11 +123,13 @@ class VideoCrudController extends Controller
       $video=Video::find($id);
 
       $video->name = $request->name;
-
+      /*
       if (!empty($request['video'])) {
           $vid = $request['video']->store('videos');
           $video->path = $vid;
       }
+      */
+      $video->path = $request->path;
       $video->save();
 
       $video->athletes()->sync($request->athlete_id);

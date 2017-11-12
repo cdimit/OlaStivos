@@ -23,6 +23,13 @@
         a:hover {
             color: black;
         }
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+          background-image:none !important;
+        }
+        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+            background-color: #15ACA0;
+        }
+
 
     </style>
 </head>

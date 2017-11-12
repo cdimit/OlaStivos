@@ -18,10 +18,24 @@
         {{ csrf_field() }}
 
 
-        <div class="form-group">
+{{--         <div class="form-group">
             <label for="picture" class="col-md-4 control-label">Video</label>
             <div class="col-md-6">
                 {!! Form::file('video', null) !!}
+            </div>
+        </div> --}}
+
+        <!--Path input field-->
+        <div class="form-group{{ $errors->has('path') ? ' has-error' : '' }}">
+            <label for="path" class="col-md-4 control-label">Video Path</label>
+            <div class="col-md-6">
+                <input id="path" type="text" class="form-control" name="path" value="{{ old('path') }}" required autofocus>
+
+                @if ($errors->has('path'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('path') }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
 

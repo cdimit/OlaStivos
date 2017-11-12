@@ -20,11 +20,9 @@
 		    	<tr>
 		      		<th scope="row">{{$video->id}}</th>
 		      		<td>
-                <video width="400" controls>
-                  <source src="/storage/{{$video->path}}" type="video/mp4">
-                  Your browser does not support HTML5 video.
-                </video>
-              </td>
+                		<iframe width="220" height="155" src="{{$video->path}}">
+        				</iframe> 
+              		</td>
 		      		<td>{{$video->name}}</td>
 		     		  <td>{{$video->athletes->count()}}</td>
 		      		<td>{{$video->clubs->count()}}</td>
