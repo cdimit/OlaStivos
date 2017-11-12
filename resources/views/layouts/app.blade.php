@@ -72,7 +72,7 @@
                               <li><a href="{{route('toplist.show')}}" style="color:white;">Ανά Σεζόν</a></li>
                             </ul>
                         </li>
-                        
+
                         <li><a href="{{ route('record.showNRs') }}">Παγκύπρια Ρεκόρ</a></li>
                         <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
                         <li><a href="{{ route('competition.calendar') }}">Ημερολόγιο Αγώνων</a></li>
@@ -88,6 +88,8 @@
         @yield('content')
 
     </div>
+
+    @include('partials.footer')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
