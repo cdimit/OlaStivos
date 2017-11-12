@@ -21,6 +21,11 @@ class Link extends Model
 
   public static function store($var, $name, $path)
   {
+
+    if($name==null){
+      return;
+    }
+
     for($i=0; $i<sizeof($name); $i++){
       $var->links()->create([
             'name' => $name[$i],
@@ -33,6 +38,11 @@ class Link extends Model
   public static function edit($var, $name, $path)
   {
     $var->removeLinks();
+
+    if($name==null){
+      return;
+    }
+
     for($i=0; $i<sizeof($name); $i++){
       $var->links()->create([
           'name' => $name[$i],
