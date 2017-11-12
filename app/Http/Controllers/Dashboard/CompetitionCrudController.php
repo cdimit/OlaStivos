@@ -13,6 +13,7 @@ class CompetitionCrudController extends Controller
 
     private $form_rules = [
       'name' => 'required|string|max:255|min:1',
+      'picture' => 'nullable|mimes:jpeg,bmp,png',
       'date_start' => 'nullable|date',
       'date_finish'  => 'nullable|date',
       'country' => 'string',
@@ -72,6 +73,14 @@ class CompetitionCrudController extends Controller
         $competition->city = $request->city;
         $competition->venue = $request->venue;
 
+        if (!empty($request['picture'])) {
+            $picture = $request['picture']->store('pictures/competitions');
+        }else{
+            $picture = '';
+        }
+        $competition->picture = $picture;
+
+
         $competition->save();
 
         Link::store($competition, $request->link_name, $request->link_path);
@@ -116,6 +125,11 @@ class CompetitionCrudController extends Controller
         $competition->country = $request->country;
         $competition->city = $request->city;
         $competition->venue = $request->venue;
+
+        if (!empty($request['picture'])) {
+            $picture = $request['picture']->store('pictures/competitions');
+            $competition->picture = $picture;
+        }
 
         $competition->save();
 

@@ -22,6 +22,14 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="picture" class="col-md-4 control-label">Competition Image</label>
+            <div class="col-md-6">
+              <img src="/storage/{{ $competition->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;">
+                {!! Form::file('picture', null) !!}
+            </div>
+        </div>
+
         <!--Start Date input field-->
         <div class="form-group{{ $errors->has('date_start') ? ' has-error' : '' }}">
             <label for="date_start" class="col-md-4 control-label">Start Date</label>

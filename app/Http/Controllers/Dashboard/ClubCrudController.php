@@ -89,7 +89,7 @@ class ClubCrudController extends Controller
     public function edit($id)
     {
         $club=Club::find($id);
-        return view('dashboard.image.edit')->with('club',$club);
+        return view('dashboard.club.edit')->with('club',$club);
     }
 
     /**

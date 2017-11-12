@@ -69,7 +69,7 @@ class AthleteCrudController extends Controller
         $athlete->gender = $request->gender;
 
         if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/athletes'.$athlete->id);
+            $picture = $request['picture']->store('pictures/athletes');
         }else{
             $picture = 'default_athlete.png';
         }
@@ -120,7 +120,7 @@ class AthleteCrudController extends Controller
         $athlete->gender = $request->gender;
 
         if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/athletes'.$athlete->id);
+            $picture = $request['picture']->store('pictures/athletes');
             $athlete->picture = $picture;
         }
 
