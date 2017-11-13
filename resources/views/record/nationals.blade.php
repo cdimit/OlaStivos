@@ -21,11 +21,11 @@
     }
 
     h1{
-        color: white;
+        color: black;
         font-weight: bold;
         margin-top: 40px;
         margin-bottom: 20px; 
-        text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     }
     h4{
         color: black;
@@ -40,7 +40,7 @@
     }
 
     .well {
-       background-color: rgba(245, 245, 245, 0.4);
+       background-color: rgba(245, 245, 245, 1);
        margin-left: 1px;
        margin-right: 1px;
        margin-top: 1px;
@@ -49,83 +49,90 @@
     }
 
     .image-back {
-        background: url(https://images.pexels.com/photos/401896/pexels-photo-401896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb) no-repeat center;
+        background: url(https://images.pexels.com/photos/401896/pexels-photo-401896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb) no-repeat center center;
         background-size:100% 100%;
         min-height: 300px;
+        margin-top: 10px;
     }
 </style>
 
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="background-color: #F9F9F9;">
+    <div class="row">
 
+        <div class="col-md-12">
+            <div class="col-md-6">
+
+                {{-- <div class="col-md-12 image-back"  style="margin-bottom: 10px"> --}}
+                <h1>Παγκύπρια Ρεκόρ</h1>
+                <div class="well">
+                    <h4>Ψάξε Παγκύπρια Ρεκόρ:</h4>
+                    <!-- Search Form -->
+                    {!! Form::open(
+                            array(
+                                'route' => 'record.searchNRs', 
+                                'class' => 'form-horizontal'
+                                )
+                            ) 
+                        !!}
+                        
+                        {{ csrf_field() }} 
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="category">Ηλικιακή Κατηγορία</label>
+                            </div> 
+                            <div class="col-xs-7">
+                            <select  id="category" name="category" class="form-control">
+                                <option value="Senior">Άνδρες/Γυναίκες</option>
+                                <option value="U23">Κάτω των 23</option>
+                                <option value="Junior">Έφηφοι/Νεανίδες</option>
+                                <option value="Youth">Παίδες/Κορασίδες</option>
+                            </select>
+                            </div>
+                            
+                        </div>
+                      
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="season">Σεζόν</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <select  id="season" name="season" class="form-control">
+                                    <option value="outdoor">Ανοικτός</option>
+                                    <option value="indoor">Κλειστός</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="gender">Φύλο</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <select  id="gender" name="gender" class="form-control">
+                                    <option value="male">Άνδρες</option>
+                                    <option value="female">Γυναίκες</option>
+                                </select>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group">
+                            <div class="col-xs-2 text-left">
+                                <button type="submit" class="btn btn-default">Ψάξε Παγκύπρια Ρεκόρ</button>
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="image-back"></div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12 image-back"  style="margin-bottom: 10px">
-            <h1>Παγκύπρια Ρεκόρ</h1>
-            <div class="col-md-6 well">
-            <h4>Ψάξε Παγκύπρια Ρεκόρ:</h4>
-            <!-- Search Form -->
-            {!! Form::open(
-                    array(
-                        'route' => 'record.searchNRs', 
-                        'class' => 'form-horizontal'
-                        )
-                    ) 
-                !!}
-                
-                {{ csrf_field() }} 
-                <div class="form-group">
-                    <div class="col-xs-5 text-left">
-                        <label for="category">Ηλικιακή Κατηγορία</label>
-                    </div> 
-                    <div class="col-xs-7">
-                    <select  id="category" name="category" class="form-control">
-                        <option value="Senior">Άνδρες/Γυναίκες</option>
-                        <option value="U23">Κάτω των 23</option>
-                        <option value="Junior">Έφηφοι/Νεανίδες</option>
-                        <option value="Youth">Παίδες/Κορασίδες</option>
-                    </select>
-                    </div>
-                    
-                </div>
-              
-                <div class="form-group">
-                    <div class="col-xs-5 text-left">
-                        <label for="season">Σεζόν</label>
-                    </div>
-                    <div class="col-xs-7">
-                        <select  id="season" name="season" class="form-control">
-                            <option value="outdoor">Ανοικτός</option>
-                            <option value="indoor">Κλειστός</option>
-                            <option value="cross country">Ανώμαλος Δρόμος</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-xs-5 text-left">
-                        <label for="gender">Φύλο</label>
-                    </div>
-                    <div class="col-xs-7">
-                        <select  id="gender" name="gender" class="form-control">
-                            <option value="male">Άνδρες</option>
-                            <option value="female">Γυναίκες</option>
-                        </select>
-                    </div>
-                </div>
-              
-                <div class="form-group">
-                    <div class="col-xs-2 text-left">
-                        <button type="submit" class="btn btn-default">Ψάξε Παγκύπρια Ρεκόρ</button>
-                    </div>
-                </div>
-            {!! Form::close() !!}
-            </div>
-            </div>
-  
-
             <div class="panel panel-default">            
                 <div class="panel-body">
                     <!-- Main Content -->
@@ -181,6 +188,7 @@
 
         </div>
     </div>
+
 </div>
 @endsection
 
