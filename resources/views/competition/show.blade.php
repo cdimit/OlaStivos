@@ -71,7 +71,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading">
                         <!-- TABS List -->
@@ -180,9 +180,10 @@
                         <!--              PHOTOS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab3default">
-                
-                                Photos of competition
-                  
+                            <h3>Φωτογραφίες Αγώνα</h3>
+                            @if($competition->images->first())
+                                @include('gallery.images', ['var' => $competition])
+                            @endif
                             
                         </div>
 
@@ -191,7 +192,11 @@
                         <!--              VIDEOS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab4default">
-                            Videos of competition
+                            <h3>Βίντεο Αγώνα</h3>
+                            @if($competition->videos->first())
+                                @include('gallery.videos', ['var' => $competition])
+                            @endif
+                            
                         </div>
 
                         

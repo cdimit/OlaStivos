@@ -5,68 +5,68 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
 
  --}}
-<style>
-    li.uppercase {
-        text-transform: uppercase;
-    }
+    <style>
+        li.uppercase {
+            text-transform: uppercase;
+        }
 
-    .list-inline{display:block;}
+        .list-inline{display:block;}
 
-    .list-inline li{display:inline-block;}
+        .list-inline li{display:inline-block;}
 
-    .list-inline li.seperator:after{content:'|'; margin:auto 20px;}
+        .list-inline li.seperator:after{content:'|'; margin:auto 20px;}
 
-    /* Overrides list-group-item from Bootstrap */
-    .list-group-item {
-        padding: 3px 10px;
-        font-size: 11px;
-    }
-    li.borderless {
-        border-top: 0 none;
-        border-right: 0 none;
-        border-left: 0 none;
-    }
+        /* Overrides list-group-item from Bootstrap */
+        .list-group-item {
+            padding: 3px 10px;
+            font-size: 11px;
+        }
+        li.borderless {
+            border-top: 0 none;
+            border-right: 0 none;
+            border-left: 0 none;
+        }
 
-    .table-condensed{
-        font-size: 12px;
-    }
+        .table-condensed{
+            font-size: 12px;
+        }
 
 
-    .list-group-item-achievement img{
-        max-height: 20px;
-        max-width: 20px;
-        height: auto;
-        width: auto;
-        float: left;
-        margin-left: -2px;
-    }
+        .list-group-item-achievement img{
+            max-height: 20px;
+            max-width: 20px;
+            height: auto;
+            width: auto;
+            float: left;
+            margin-left: -2px;
+        }
 
-    .panel.with-nav-tabs .panel-heading{
-        padding: 5px 5px 0 5px;
+        .panel.with-nav-tabs .panel-heading{
+            padding: 5px 5px 0 5px;
 
-    }
-    .panel.with-nav-tabs .nav-tabs{
-        border-bottom: none;
-    }
-    .panel.with-nav-tabs .nav-justified{
-        margin-bottom: -1px;
-    }
+        }
+        .panel.with-nav-tabs .nav-tabs{
+            border-bottom: none;
+        }
+        .panel.with-nav-tabs .nav-justified{
+            margin-bottom: -1px;
+        }
 
-    .well {
-       background-color: rgba(245, 245, 245, 0.4);
-       margin-left: 1px;
-       margin-right: 1px;
-       margin-top: 1px;
-       margin-bottom: 1px;
-       border: 0;
-    }
+        .well {
+           background-color: rgba(245, 245, 245, 0.4);
+           margin-left: 1px;
+           margin-right: 1px;
+           margin-top: 1px;
+           margin-bottom: 1px;
+           border: 0;
+        }
 
-</style>
+    </style>
 @endsection
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading">
                         <!-- TABS List -->
@@ -397,7 +397,7 @@
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab5default">
                             <h3>Σύνδεσμοι Αθλητή</h3>
-                            @include('gallery.links', ['var' => $athlete])
+                            @include('links.show', ['var' => $athlete])
                         </div>
 
 

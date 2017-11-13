@@ -66,7 +66,7 @@
 <div id="content" class="container">
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
 
              <!-- Heading and Search Form -->
             <div class="col-lg-12 image-back">

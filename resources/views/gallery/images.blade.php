@@ -16,7 +16,7 @@
 <!--begin modal window-->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog" style="max-width: 80%; width: auto; height: auto; margin-top: 50px;">
-    <div class="modal-content" style="  height: auto; min-height: 100% border-radius: 0; background-color: rgba(250, 250, 250, 0.6);">
+    <div class="modal-content" style="  height: auto; min-height: 100%; border-radius: 0; background-color: rgba(250, 250, 250, 0.6);">
 
       <div class="modal-header" style="background-color:rgba(250, 250, 250, 0.7);">
         <div class="pull-left" >Εικόνες {{$var->name}}</div>

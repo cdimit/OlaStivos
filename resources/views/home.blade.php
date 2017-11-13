@@ -1,39 +1,14 @@
-@extends('layouts.home')
+@extends('layouts.app')
 
 @section('styles')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" />
-  
-<style type="text/css">
-div.image{
-  padding-top: 40px;
-}
-div.image:before {
-
-    position: absolute;
-    content:"";
-    width:22%;
-    height:22%;
-    background:url();
-    background-repeat:no-repeat; 
-    background-position: 100% 0%;
-    background-size: contain;
-}
-
-</style>
 
 @endsection
 
 @section('content')
-<div class="divWithBgImage">
-  <!--
-  <div class="image">
-  
-  </div>
-  -->
-</div>
 
-<div class="container" id="startchange" style="background-color: #F9F9F9;">  
+<div class="container" style="background-color: #F9F9F9;">  
   <div class="row" style="margin-top: 10px;">
     <!--***********-->
     <!-- 1st COLUMN-->
@@ -317,7 +292,7 @@ div.image:before {
 @section('scripts')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-  <script type="text/javascript">
+{{--   <script type="text/javascript">
     $(document).ready(function(){     
     	//Navbar transparent before scrolling down  
        	var scroll_start = 0;
@@ -332,12 +307,12 @@ div.image:before {
                 $(".navbar-brand").css('display', 'inline');
     	       } else {
     	          $('.navbar-default').css({"background-color":"rgba(0,0,0,0.1)","transition":"background-color 250ms linear"});
-                //$(".navbar-brand").css('display', 'none');
+                $(".navbar-brand").css('display', 'none');
     	       }
     	   });
         };
         
     });
-  </script>
+  </script> --}}
 
 @endsection
