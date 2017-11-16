@@ -64,7 +64,7 @@
     </style>
 @endsection
 @section('content')
-<div class="container">
+<div class="container" style="min-height: calc(100vh - 400px);">
     <div class="row">
         <div class="col-md-12">
             <div class="panel with-nav-tabs panel-default">

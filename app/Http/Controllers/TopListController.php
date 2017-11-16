@@ -19,7 +19,7 @@ class TopListController extends Controller
     $event = Event::outdoor()->first();
 
 
-    $res = Result::fromYear(Carbon::now()->year)->where('event_id', $event->id);
+    $res = Result::published()->fromYear(Carbon::now()->year)->where('event_id', $event->id);
 
 
     if($event->isField()){
@@ -50,7 +50,7 @@ class TopListController extends Controller
     $years = Result::years();
     $age = Age::find($request->age);
 
-    $res = Result::fromYear($request->year)->where('event_id', $event->id)
+    $res = Result::published()->fromYear($request->year)->where('event_id', $event->id)
                                                 ->where('age', '<', $age->max)
                                                 ->where('age', '>', $age->min);
 
@@ -72,7 +72,7 @@ class TopListController extends Controller
   {
 
     $age = Age::find(request('age'));
-    $results = Result::fromYear(request('year'))->where('age', '<', $age->max)
+    $results = Result::published()->fromYear(request('year'))->where('age', '<', $age->max)
                                               ->where('age', '>', $age->min);
 
     $filtered = collect([]);

@@ -18,7 +18,7 @@ class AllTimeController extends Controller
     $event = Event::outdoor()->first();
 
 
-    $res = Result::where('event_id', $event->id)->get();
+    $res = Result::published()->where('event_id', $event->id)->get();
 
     if($event->isField()){
       $results = $res->sortByDesc('mark');
@@ -47,7 +47,7 @@ class AllTimeController extends Controller
     $ages = Age::all();
     $age = Age::find($request->age);
 
-    $res = Result::where('event_id', $event->id)
+    $res = Result::published()->where('event_id', $event->id)
                   ->where('age', '<', $age->max)
                   ->where('age', '>', $age->min)->get();
 
@@ -68,7 +68,7 @@ class AllTimeController extends Controller
   {
 
     $age = Age::find(request('age'));
-    $results = Result::where('age', '<', $age->max)
+    $results = Result::published()->where('age', '<', $age->max)
                       ->where('age', '>', $age->min)->get();
 
     $filtered = collect([]);

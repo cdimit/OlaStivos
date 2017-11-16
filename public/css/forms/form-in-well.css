@@ -1,0 +1,36 @@
+/* Well CSS */
+.well {
+   background-color: rgba(220, 220, 220, 1);
+   margin-left: 1px;
+   margin-right: 1px;
+   margin-top: 1px;
+   margin-bottom: 10px;
+   border: 0;
+}
+
+/* Form in well CSS */
+.form-horizontal{
+    font-size: 12px;
+} 
+.form-horizontal .control-label{
+    /* text-align:right; */
+    text-align:left;
+
+}
+.form-group{
+    margin-top:1px;
+    margin-bottom: 1px;
+}
+
+.form-control {
+     width: auto; 
+     height:auto; 
+     font-size: 10px;
+}
+
+/* form-control Label */
+label {
+    line-height: 28px;
+    color: black;
+    font-style:bold;
+}

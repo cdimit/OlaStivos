@@ -42,7 +42,7 @@ class HomeController extends Controller
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('outdoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('outdoor','female');
-
+  
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
 
@@ -69,7 +69,7 @@ class HomeController extends Controller
     */
     public function nextComps($number)
     {
-      $competitions = Competition::where('date_finish', '>=', Carbon::today()->toDateString())->orderBy('date_start')->limit($number)->get();
+      $competitions = Competition::published()->where('date_finish', '>=', Carbon::today()->toDateString())->get()->sortBy('date_start')->take($number);
       return $competitions;
     }
 
@@ -80,7 +80,7 @@ class HomeController extends Controller
     public function birthdayAthlete()
     {
         //Get a random athlete that has birthday
-        $athlete = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->first();
+        $athlete = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->published()->first();
         return $athlete;
         
     }
@@ -113,7 +113,8 @@ class HomeController extends Controller
                
         //for each event add the NR in the collection
         foreach($events as $event){
-            $res = Result::fromYear(Carbon::now()->year)->where('event_id', $event->id);
+            $res = Result::published()->fromYear(Carbon::now()->year)->where('event_id', $event->id);
+
             if($event->isField()){
               $results = $res->sortByDesc('mark');
             }else{
@@ -133,8 +134,8 @@ class HomeController extends Controller
      */
     public function search()
     {        
-        $athletes = Athlete::search(request('searchInput'))->take(5);
-        $competitions = Competition::search(request('searchInput'))->take(5);
+        $athletes = Athlete::search(request('searchInput'))->published()->get()->take(5);
+        $competitions = Competition::search(request('searchInput'))->published()->get()->take(5);
         return response()->json([$athletes,$competitions]);
 
     }

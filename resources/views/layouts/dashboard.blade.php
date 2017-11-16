@@ -85,6 +85,7 @@
                         <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action">Results</a>
                         <a href="{{ route('image.index') }}" class="list-group-item list-group-item-action">Images</a>
                         <a href="{{ route('video.index') }}" class="list-group-item list-group-item-action">Videos</a>
+                        <a href="{{ route('pending.index') }}" class="list-group-item list-group-item-action">Pending</a>
                     </div>
 
                 </div>

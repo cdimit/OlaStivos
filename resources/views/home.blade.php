@@ -155,7 +155,7 @@
                     </thead>
                     <tbody>
                       
-                      @foreach($femaleNRs as $lead)
+                      @foreach($femaleLeaders as $lead)
                         @if($lead)
                         <tr>
                           <td>{{$lead->event->name}}</td>

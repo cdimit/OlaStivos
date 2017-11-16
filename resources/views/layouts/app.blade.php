@@ -21,25 +21,11 @@
     <link rel="stylesheet" href="/css/footer/footer-distributed.css">
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-    <!-- Other CSS -->
-    <style type="text/css">
-        /* Link CSS*/
-/*
-        a{
-           color: #1A6B70;
-        }
-        a:hover {
-            color: black;
-        }*/
-        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-          background-image:none !important;
-        }
-        .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-            background-color: #15ACA0;
-        }
 
-    </style>
+    <!-- Main CSS file  -->
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    
+
 
     @yield('styles')
 

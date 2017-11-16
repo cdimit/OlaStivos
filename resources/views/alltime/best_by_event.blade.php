@@ -1,173 +1,125 @@
 @extends('layouts.app')
 @section('styles')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<style type="text/css">
-    .form-horizontal{
-        font-size: 12px;
-    }
-    .form-horizontal .control-label{
-        /* text-align:right; */
-        text-align:left;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 
-    }
-
-    .form-group{
-        margin-top:1px;
-        margin-bottom: 1px;
-    }
-
-    label {
-        line-height: 28px;
-        color: black;
-        font-style:bold;
-    }
-
-    h1{
-        color: white;
-        font-weight: bold;
-        margin-top: 40px;
-        margin-bottom: 20px;
-        text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-    }
-    h4{
-        color: black;
-        margin-top: 0px;
-    }
-
-    .well {
-       background-color: rgba(245, 245, 245, 0.9);
-       margin-left: 1px;
-       margin-right: 1px;
-       margin-top: 1px;
-       margin-bottom: 1px;
-       border: 0;
-    }
-
-    .form-control {
-         width: auto;
-         height:auto;
-         font-size: 10px;
-    }
-
-    .image-back {
-        background: url(http://139.162.250.120/tippfm/wp-content/uploads/sites/20/Running-Track.jpg) no-repeat;
-        min-height: 300px;
-        background-size: 120% 120%;
-    }
-
-
-</style>
+    <link href="{{ asset('/css/forms/form-in-well.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/headings/heading-in-pages.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/images/img-in-div.css') }}" rel="stylesheet">
 
 @endsection
 
 @section('content')
-<div id="content" class="container">
-
+<div id="content" class="container" style="background-color: #F9F9F9;">
     <div class="row">
+
         <div class="col-md-12">
-
-             <!-- Heading and Search Form -->
-            <div class="col-lg-12 image-back">
+            <div class="col-md-6">
                 <h1>Κορυφαίες επιδόσεις όλων των εποχών</h1>
-                <div class="col-md-6 well">
-                <h4>Εισάγετε δεδομένα για το αγώνισμα που σας ενδιαφέρει:</h4>
-                {!! Form::open(
-                        array(
-                            'route' => 'alltime.search',
-                            'class' => 'form-horizontal'
+                <div class="well">
+                    <h4>Εισάγετε δεδομένα για το αγώνισμα που σας ενδιαφέρει:</h4>
+                    {!! Form::open(
+                            array(
+                                'route' => 'alltime.search',
+                                'class' => 'form-horizontal'
+                                )
                             )
-                        )
-                    !!}
+                        !!}
 
-                    {{ csrf_field() }}
+                        {{ csrf_field() }}
 
 
-                    <div class="form-group">
-                        <div class="col-xs-5 text-left">
-                            <label for="age">Ηλικιακή Κατηγορία</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <select  id="age" name="age" class="form-control" style="width: auto; height:auto; font-size: 10px; overflow: hidden;">
-                              @foreach($ages as $age)
-                                <option value="{{$age->id}}">{{$age->name}}</option>
-                              @endforeach
-                            </select>
-                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="age">Ηλικιακή Κατηγορία</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <select  id="age" name="age" class="form-control" style="width: auto; height:auto; font-size: 10px; overflow: hidden;">
+                                  @foreach($ages as $age)
+                                    <option value="{{$age->id}}">{{$age->name}}</option>
+                                  @endforeach
+                                </select>
+                            </div>
 
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-5 text-left">
-                            <label for="season">Σεζόν</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <select  id="season" name="season" class="form-control">
-                                <option value="outdoor">Ανοικτός</option>
-                                <option value="indoor">Κλειστός</option>
-                            </select>
                         </div>
 
-                    </div>
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="season">Σεζόν</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <select  id="season" name="season" class="form-control">
+                                    <option value="outdoor">Ανοικτός</option>
+                                    <option value="indoor">Κλειστός</option>
+                                </select>
+                            </div>
 
-                    <div class="form-group">
-                        <div class="col-xs-5 text-left">
-                            <label for="gender">Φύλο</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <select  id="gender" name="gender" class="form-control" required>
-                                <option value="" disabled selected>Select your option</option>
-                                <option value="male">Άνδρες</option>
-                                <option value="female">Γυναίκες</option>
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div id="event_select" class="form-group">
-                        <div class="col-xs-5 text-left">
-                            <label for="event">Αγωνισμα</label>
-                        </div>
-                        <div class="col-xs-7">
-                            <select  id="event" name="event" class="form-control"  required>
-                                <option id='1' value="">-- select one -- </option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-7 text-left">
-                            <label for="season">Ένα αποτέλεσμα ανά αθλητή:</label>
-                        </div>
-                        <div class="col-xs-5">
-                            <input type="checkbox" id="unique" class="form-control">
                         </div>
 
-                    </div>
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="gender">Φύλο</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <select  id="gender" name="gender" class="form-control" required>
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option value="male">Άνδρες</option>
+                                    <option value="female">Γυναίκες</option>
+                                </select>
+                            </div>
 
-
-                    <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
-                        <div class="col-xs-10 col-xs-offset-2">
-                            <button id="submit" type="submit" class="btn btn-default" >Βρές προιστορία ρεκόρ</button>
                         </div>
-                    </div>
-                {!! Form::close() !!}
+
+                        <div id="event_select" class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="event">Αγωνισμα</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <select  id="event" name="event" class="form-control"  required>
+                                    <option id='1' value="">-- select one -- </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-5 text-left">
+                                <label for="season">Ένα αποτέλεσμα ανά αθλητή:</label>
+                            </div>
+                            <div class="col-xs-7">
+                                <input type="checkbox" id="unique" class="form-control">
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
+                            <div class="col-xs-10 col-xs-offset-2">
+                                <button id="submit" type="submit" class="btn btn-default" >Βρές προιστορία ρεκόρ</button>
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
 
                 </div>
             </div>
+            <div class="col-md-6">
+                <img class="img-in-div"  src="https://images.pexels.com/photos/332835/pexels-photo-332835.jpeg?w=940&h=650&auto=compress&cs=tinysrgb">
+            </div>
+        </div>
+    </div>
 
-
-
+    <div class="row">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
 
                     <!-- Main Content -->
                     @if($results)
-                        <div class="col-lg-12">
+                        <h3>{{$event->name}} {{$event->gender}} Top-List</h3>
+                        <div class="col-md-12">
 
                             <div class="panel panel-default">
-                                <div class="panel-heading"><h3>{{$event->name}} {{$event->gender}} Top-List</h3></div>
+
                                 <div class="panel-body">
                                     <table width="100%">
                                       <th>Rank</th>

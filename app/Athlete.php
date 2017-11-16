@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Age;
 use App\Traits\Linkable;
+use App\Traits\Statusable;
 
 class Athlete extends Model
 {
 
     use Linkable;
+    use Statusable;
 
     /**********************************
     //  Relationships
@@ -29,7 +31,7 @@ class Athlete extends Model
 
     public function results()
     {
-      return $this->hasMany('App\Result');
+      return $this->hasMany('App\Result')->published();
     }
 
 		public function videos()
@@ -46,7 +48,17 @@ class Athlete extends Model
     //    Search Scope
     /****************************************************/
     public function scopeSearch($query,$search){
-      return $query->where('first_name','like', '%' .$search. '%')->orWhere('last_name','like', '%' .$search. '%')->orderBy('first_name','asc')->get();
+
+      // split on 1+ whitespace & ignore empty (eg. trailing space)
+      $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY); 
+
+      return $query->where(function ($q) use ($searchValues) {
+        foreach ($searchValues as $value) {
+          $q->orWhere('first_name', 'like', "%{$value}%")
+          ->orWhere('last_name','like', "%{$value}%");
+        }
+      })->orderBy('first_name','asc');
+
     }
 
     /**********************************
@@ -62,7 +74,6 @@ class Athlete extends Model
 
     public function getNameAttribute(): string
     {
-
       return $this->first_name . ' ' . $this->last_name;
     }
 
@@ -144,11 +155,11 @@ class Athlete extends Model
       $competitions = Competition::where('competition_series_id',$series->id)->get();
       $count = 0;
       foreach($competitions as $competition){
-        $results = Result::where('competition_id',$competition->id)
+        $results = $competition->results
                           ->where('athlete_id',$this->id)
                           ->where('position','=',$position)
-                          ->orderBy('date','DESC')
-                          ->get()->count();
+                          ->sortByDesc('date')
+                          ->count();
 
         $count = $count+$results;
       }
@@ -628,5 +639,7 @@ class Athlete extends Model
       $this->setNRIfExist($result);
 
     }
+
+
 
 }

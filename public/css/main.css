@@ -15,7 +15,7 @@
 } 
 .collapse.in{
     
-    background-color:#f0f0f0 !important;
+    background-color: rgba(0,0,0,0.9)  !important;
 }
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus
 .spacer{
@@ -23,7 +23,7 @@
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-  background-image:none !important;
+    background-image:none !important;
 }
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
     background-color: #15ACA0;
@@ -39,6 +39,7 @@
   height: 200px;
   background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);
   /*filter: sepia(20%) saturate(100%) hue-rotate(150deg);*/
+  background: linear-gradient(right, black, white);
   background-repeat: no-repeat;
   background-size: 100% ;
   background-position: center -250px;
@@ -46,6 +47,7 @@
 /*
   background-size: 100% 100%; //stretch resize
 */
+
 }
 
 /* Logo Image */

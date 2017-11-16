@@ -5,12 +5,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\Linkable;
+use App\Traits\Statusable;
 
 class Competition extends Model
 {
 
     use Linkable;
-
+    use Statusable;
+    
     public function series()
     {
         return $this->belongsTo('App\CompetitionSeries', 'competition_series_id');
@@ -18,7 +20,7 @@ class Competition extends Model
 
     public function results()
     {
-        return $this->hasMany('App\Result');
+        return $this->hasMany('App\Result')->published();
     }
 
     public function videos()
@@ -77,7 +79,16 @@ class Competition extends Model
     //    Search Scope
     /****************************************************/
     public function scopeSearch($query,$search){
-      return $query->where('name','like', '%' .$search. '%')->orWhere('city','like', '%' .$search. '%')->orWhere('country','like', '%' .$search. '%')->orderBy('name','asc')->get();
+      // split on 1+ whitespace & ignore empty (eg. trailing space)
+      $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY); 
+
+      return $query->where(function ($q) use ($searchValues) {
+        foreach ($searchValues as $value) {
+          $q->orWhere('name', 'like', "%{$value}%")
+          ->orWhere('city','like', "%{$value}%")
+          ->orWhere('country','like', "%{$value}%");
+        }
+      })->orderBy('name','asc');
     }
 
 

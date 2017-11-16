@@ -1,60 +1,9 @@
 @extends('layouts.app')
+
 @section('styles')
-<style type="text/css">
-    .form-horizontal{
-        font-size: 12px;
-    } 
-    .form-horizontal .control-label{
-    /* text-align:right; */
-    text-align:left;
-
-    }
-    .form-group{
-        margin-top:1px;
-        margin-bottom: 1px;
-    }
-
-    label {
-        line-height: 28px;
-        color: black;
-        font-style:bold;
-    }
-
-    h1{
-        color: black;
-        font-weight: bold;
-        margin-top: 40px;
-        margin-bottom: 20px; 
-        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    }
-    h4{
-        color: black;
-        margin-top: 0px;
-    }
-
-
-    .form-control {
-         width: auto; 
-         height:auto; 
-         font-size: 10px;
-    }
-
-    .well {
-       background-color: rgba(245, 245, 245, 1);
-       margin-left: 1px;
-       margin-right: 1px;
-       margin-top: 1px;
-       margin-bottom: 1px;
-       border: 0;
-    }
-
-    .image-back {
-        background: url(https://images.pexels.com/photos/401896/pexels-photo-401896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb) no-repeat center center;
-        background-size:100% 100%;
-        min-height: 300px;
-        margin-top: 10px;
-    }
-</style>
+    <link href="{{ asset('/css/forms/form-in-well.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/headings/heading-in-pages.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/images/img-in-div.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -127,8 +76,9 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="image-back"></div>
+                <img class="img-in-div" src="https://images.pexels.com/photos/401896/pexels-photo-401896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb">
             </div>
+
         </div>
     </div>
     <div class="row">

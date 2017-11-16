@@ -5,9 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Record;
 use Carbon\Carbon;
+use App\Traits\Statusable;
 
 class Result extends Model
 {
+    use Statusable;
 
     public function competition()
     {

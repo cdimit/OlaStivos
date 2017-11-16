@@ -81,6 +81,7 @@ class AthleteController extends Controller
         
         //all results of athlete
         $results = $athlete->results;
+
         //unique events participated
         $events = $athlete->uniqueEvents($results);
         //results grouped by year

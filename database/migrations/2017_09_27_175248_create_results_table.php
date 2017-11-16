@@ -21,6 +21,7 @@ class CreateResultsTable extends Migration
             $table->date('date');
             $table->integer('score');
             $table->string('race');
+            $table->boolean('status')->default(0);
             $table->integer('age')->unsigned();
 
             $table->integer('event_id')->unsigned();

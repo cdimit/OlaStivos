@@ -104,6 +104,11 @@
                                         </p>
                                     </div>    
                                 </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        <img src="/storage/{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+                                    </p>
+                                </div>
                             </div>
 
                             <!-- RESULTS -->

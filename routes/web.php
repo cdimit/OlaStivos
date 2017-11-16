@@ -100,5 +100,9 @@ Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', 
 Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/image', 'Dashboard\ImageCrudController', ['except' => ['show', 'destroy']]);
 Route::resource('dashboard/video', 'Dashboard\VideoCrudController', ['except' => ['show', 'destroy']]);
+
 Route::get('/dashboard/result/createRace', 'Dashboard\ResultCrudController@createRace')->name('result.createRace');
 Route::post('/dashboard/result/createRace', 'Dashboard\ResultCrudController@storeRace')->name('result.storeRace');
+
+Route::get('dashboard/pending', 'Dashboard\PendingController@index')->name('pending.index');
+Route::post('dashboard/pending', 'Dashboard\PendingController@publish')->name('pending.publish');

@@ -20,7 +20,7 @@ class ResultCrudController extends Controller
      */
     public function index()
     {
-        $results = Result::all();
+        $results = Result::published()->get();
 
         return view('dashboard.result.index')->with('results',$results);
     }
@@ -98,7 +98,7 @@ class ResultCrudController extends Controller
         //     }
         // }
 
-        $athlete->setRecordIfExist($result);
+/* $athlete->setRecordIfExist($result); */
 
         // if(!$athlete->setPbIfExist($result)){
         //   $athlete->setSbIfExist()
@@ -277,7 +277,7 @@ class ResultCrudController extends Controller
 
             $result->save();
 
-            $athlete->setRecordIfExist($result);
+// $athlete->setRecordIfExist($result);
 
     
         }

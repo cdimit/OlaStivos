@@ -11,8 +11,14 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Όλα Στίβος
+            <a class="navbar-brand" href="{{ url('/') }}" style="position: relative;
+    background: url(/img/logo3.png) no-repeat;
+    width: 150px;
+    left: 15px;
+    background-size: contain;
+            ">
+            
+                
             </a>
         </div>
 
