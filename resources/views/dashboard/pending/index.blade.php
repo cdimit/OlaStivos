@@ -10,6 +10,7 @@
 		<div class="panel-body">
 			<label>Publish All Athletes</label>
 			<input type="checkbox" id="checkAllAthletes">
+			<div class="table-responsive">
 			<table class="table table-bordered table-sm" style="position:static;">
 			  	<thead>
 			    	<tr>
@@ -46,6 +47,7 @@
 			    	@endforeach
 			  </tbody>
 			</table>
+			</div>
 		</div>
 	</div>
     <button type="submit" class="btn btn-success" style="margin-bottom: 10px;">Publish</button>
@@ -55,6 +57,7 @@
 		<div class="panel-body">
 			<label>Publish All Competitions</label>
 			<input type="checkbox" id="checkAllCompetitions">
+			<div class="table-responsive">
 			<table class="table table-bordered table-sm" style="position:static;">
 			  	<thead>
 			    	<tr>
@@ -93,6 +96,7 @@
 			    	@endforeach
 			  </tbody>
 			</table>
+			</div>
 		</div>
 	</div>
     <button type="submit" class="btn btn-success" style="margin-bottom: 10px;">Publish</button>
@@ -101,6 +105,7 @@
 		<div class="panel-body">
 			<label>Publish All Results</label>
 			<input type="checkbox" id="checkAllResults">
+			<div class="table-responsive">
 			<table class="table table-bordered table-sm table-responsive" style="position:static;">
 			  	<thead>
 			    	<tr>
@@ -141,6 +146,7 @@
 
 			  </tbody>
 			</table>
+			</div>
 		</div>
 	</div>
     <button type="submit" class="btn btn-success" style="margin-bottom: 10px;">Publish</button>

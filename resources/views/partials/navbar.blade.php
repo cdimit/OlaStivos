@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default {{$nav_class}}" style="margin-bottom: 0px; font-size: 12px; font-weight: bold;">
+<nav class="navbar navbar-default {{$nav_class}}" style="font-size: 12px; font-weight: bold;">
     <div class="container">
         <div class="navbar-header">
 
@@ -12,10 +12,10 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}" style="position: relative;
-    background: url(/img/logo3.png) no-repeat;
-    width: 150px;
-    left: 15px;
-    background-size: contain;
+            background: url(/img/logosmall.png) no-repeat;
+            width: 150px;
+            left: 15px;
+            background-size: contain;
             ">
             
                 

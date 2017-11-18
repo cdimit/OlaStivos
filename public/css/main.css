@@ -2,7 +2,7 @@
 /* NAV BAR CSS */
 .navbar-default{
     /*background: transparent;*/
-    background-color:rgba(0,0,0,0.1);
+    background-color:rgba(0,0,0,0.8);
     border:none !important;
 }
 
@@ -36,14 +36,15 @@
 
 .divWithBgImage {
   width: 100%;
-  height: 200px;
-  background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);
+  height: 120px;
+/*  background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);*/
   /*filter: sepia(20%) saturate(100%) hue-rotate(150deg);*/
+   background-image: url("/img/Banner2.jpg");
   background: linear-gradient(right, black, white);
   background-repeat: no-repeat;
   background-size: 100% ;
-  background-position: center -250px;
-
+  background-position: center -30px;
+*/
 /*
   background-size: 100% 100%; //stretch resize
 */
@@ -52,8 +53,8 @@
 
 /* Logo Image */
 div.image{
-  padding-top: 40px;
-        padding-left: 40px;
+  padding-top: 10px;
+  padding-left: 40px;
 }
 div.image:before {
 
@@ -61,7 +62,7 @@ div.image:before {
     content:"";
     width:18%;
     height:18%;
-    background:url("/img/logo.png");
+    background:url("/img/1logo.png");
     background-repeat:no-repeat; 
     background-position: 100% center;
     background-size: contain;
@@ -71,7 +72,7 @@ div.image:before {
 @media screen and (max-width: 600px) {
   .divWithBgImage {
     visibility: hidden;
-    height: 51px;
+    height: 0px;
   }
   .navbar-default{
     background-color: black !important;

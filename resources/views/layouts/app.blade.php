@@ -13,7 +13,7 @@
     <!-- Styles -->
     
     <!-- Bootstrap Styles -->
-    {{--     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+{{--         <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-h21C2fcDk/eFsW9sC9h0dhokq5pDinLNklTKoxIZRUn3+hvmgQSffLLQ4G4l2eEr" crossorigin="anonymous">
 
     <!-- Footer Styles -->
@@ -33,15 +33,16 @@
 <body>
     <div id="app">
         <!-- NAVBAR -->
-        @include('partials.navbar' , ['nav_class' => 'navbar-fixed-top'])
+
         
         <!-- Banner with logo and navbar -->
         <div class="divWithBgImage">
             <div class="image" style="cursor: pointer;" onclick="window.location='/';">
                 <a href="/home"></a>
-      
             </div>
+            
         </div>
+        @include('partials.navbar' , ['nav_class' => 'navbar-static'])
         <div id="startchange"></div>
         
 
