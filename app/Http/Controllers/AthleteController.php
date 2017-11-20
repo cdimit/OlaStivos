@@ -20,20 +20,20 @@ class AthleteController extends Controller
         //Get all results of athlete
         //$results:	KEYS: event_id VALUES: collection of results for the key event
         $results = $athlete->getAllResultsByEvent();
-        $chartsResults = $this->chartData($results); 
+        $chartsResults = $this->chartData($results);
 
         $results = $athlete->results->sortByDesc('date')->groupBy(function($attributes) {
                 return Carbon::parse($attributes->date)->format('Y'); // grouping by years
             });
-        
+
         //Get all Personal Bests of athlete all over the years
         //$allPbs:	KEYS: event_id VALUES: collection of PBs made for the key event
         $allPbs = $athlete->getAllPbs();
-		$chartsPbs = $this->chartData($allPbs); 
+		$chartsPbs = $this->chartData($allPbs);
 
         //History of SBs
         $sbHistory = $this->getSBHistory($athlete);
-       
+
         //ACHIEVEMENTS//
 
         //GET NRs : NR, NUR, NJR, NYR
@@ -58,7 +58,7 @@ class AthleteController extends Controller
         						->with('chartsPbs',$chartsPbs)
         						->with('chartsResults',$chartsResults)
                                 ->with('sbHistory',$sbHistory);
-        
+
     }
 
 
@@ -78,7 +78,7 @@ class AthleteController extends Controller
     public function getSBHistory($athlete)
     {
         $sbHistory=collect([]);
-        
+
         //all results of athlete
         $results = $athlete->results;
 
@@ -95,7 +95,7 @@ class AthleteController extends Controller
             foreach ($events as $event) {
                 $sbOfEvent = $athlete->getSB($year, Event::find($event));
                 $sbsOfYear->put($event,$sbOfEvent);
-            }           
+            }
             $sbHistory->put($year,$sbsOfYear);
         }
         return $sbHistory;

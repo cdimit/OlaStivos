@@ -21,6 +21,11 @@ class Result extends Model
         return $this->belongsTo('App\Athlete');
     }
 
+    public function relayAthletes()
+    {
+      return $this->BelongsToMany('App\Athlete', 'relay_athletes', 'result_id', 'athlete_id');
+    }
+
     public function event()
     {
         return $this->belongsTo('App\Event');

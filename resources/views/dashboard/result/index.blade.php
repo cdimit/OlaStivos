@@ -26,10 +26,10 @@
 		     		<td>{{$result->competition->name}}</td>
 		      		<td>{{$result->race}}</td>
 		      		<td>{{$result->date}}</td>
-		      		<td>{{$result->event->name}}</td>	
-		      		<td>{{$result->mark}}</td>	
+		      		<td>{{$result->event->name}}</td>
+		      		<td>{{$result->mark}}</td>
 		      		<td>{{$result->score}}</td>
-		      		<td>	
+		      		<td>
 		      			<a href="{{ route('result.edit',$result->id)}}" class="btn btn-primary btn-sm">
   							Edit
 						</a>
