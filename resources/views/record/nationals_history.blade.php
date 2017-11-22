@@ -52,7 +52,6 @@
                                 <select  id="season" name="season" class="form-control">
                                     <option value="outdoor">Ανοικτός</option>
                                     <option value="indoor">Κλειστός</option>
-                                    <option value="cross country">Ανώμαλος Δρόμος</option>
                                 </select>
                             </div>
                             
@@ -113,16 +112,19 @@
                                     <table width="100%">
 
                                         @foreach($records as $record)
-
                                             <tr>
-                                                <td>{{$record->event->name}}</td>
-                                                <td>
-                                                <a href="/athlete/{{$record->athlete->id}}">
-                                                {{$record->athlete->first_name}} {{$record->athlete->last_name}}</a>
-                                                </td>
-                                                <td>{{$record->date}}</td>
-                                                <td>{{$record->mark}}</td>
-                                            </tr>
+                                            <th>{{$record->date}}</th>
+                                            <td>{{$record->mark}}</td>
+                                            <td>
+                                                <a href="/athlete/{{$record->athlete->id}}">{{$record->athlete->name}}</a>
+                                            </td>
+                                            <td><a href="/club/{{$record->athlete->club->id}}">{{$record->athlete->club->acronym}}</a></td>
+                                            <td>{{$record->position}}</td>
+                                            <td>
+                                                <a href="/competition/{{$record->competition->id}}">{{$record->competition->name}}</a>
+                                            </td>
+                                             <td>{{$record->competition->city}}, {{$record->competition->country}}</td>
+                                             </tr>
 
                                         @endforeach
 

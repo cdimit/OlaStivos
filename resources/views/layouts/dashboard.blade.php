@@ -12,6 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .red-square {
+            float:right;
+            width: 20px;
+            height: 20px;
+            background: #ffd6cc;
+        }
+    </style>
     @yield('styles')
 </head>
 <body>

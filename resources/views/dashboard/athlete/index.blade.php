@@ -1,7 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <a href="{{ route('athlete.create') }}" class="btn btn-success btn-responsive" role="button">Add new Athlete</a>
+	<p>
+    	<a href="{{ route('athlete.create') }}" class="btn btn-success btn-responsive" role="button">Add new Athlete</a>
+    </p>
+    <div style="width:265px;">
+		*Athletes still pending are in color: 
+		<div class="red-square"></div>
+	</div>
 	<table class="table table-bordered table-sm" style="position:static;">
 	  	<thead>
 	    	<tr>
@@ -18,7 +24,7 @@
 	  	
 	  	<tbody>
 	  		@foreach($athletes as $athlete)
-		    	<tr>
+		    	<tr @if($athlete->isPending()) bgcolor="#ffd6cc" @endif>
 		      		<th scope="row">{{$athlete->id}}</th>
 		      		<td>{{$athlete->first_name}}</td>
 		      		<td>{{$athlete->last_name}}</td>

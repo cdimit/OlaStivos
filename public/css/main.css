@@ -39,11 +39,12 @@
   height: 120px;
 /*  background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);*/
   /*filter: sepia(20%) saturate(100%) hue-rotate(150deg);*/
-   background-image: url("/img/Banner2.jpg");
+  background-image: url("/img/Banner2.jpg");
   background: linear-gradient(right, black, white);
   background-repeat: no-repeat;
   background-size: 100% ;
   background-position: center -30px;
+  overflow: hidden;
 */
 /*
   background-size: 100% 100%; //stretch resize
@@ -51,10 +52,11 @@
 
 }
 
-/* Logo Image */
+/* Logo Image in Banner Div*/
 div.image{
   padding-top: 10px;
   padding-left: 40px;
+  float:left;
 }
 div.image:before {
 
@@ -68,6 +70,25 @@ div.image:before {
     background-size: contain;
     
 }
+/* Div at the right side of the banner */
+div.banner-content-right{
+  padding-top: 10px;
+  margin-right: 400px;
+  float:right;
+}
+/* Div at the center of the banner */
+div.banner-content-center{
+  padding-top: 10px;
+  padding-left:280px;
+  float:left;
+}
+
+div.banner-content-right >ul li{
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+
 
 @media screen and (max-width: 600px) {
   .divWithBgImage {
@@ -107,7 +128,7 @@ a{
    color: #1A6B70;
 }
 a:hover {
-color: black;
+  color: black;
 }
    
 

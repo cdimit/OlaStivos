@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            <label for="picture" class="col-md-4 control-label">Club Image</label>
+            <label for="picture" class="col-md-4 control-label">Competition Image</label>
             <div class="col-md-6">
                 {!! Form::file('picture', null) !!}
             </div>

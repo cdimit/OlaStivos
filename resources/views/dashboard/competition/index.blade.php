@@ -1,7 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <a href="{{ route('competition.create') }}" class="btn btn-success btn-responsive" role="button">Add new Competition</a>
+	<p>
+    	<a href="{{ route('competition.create') }}" class="btn btn-success btn-responsive" role="button">Add new Competition</a>
+    </p>
+    <div style="width:285px;">
+		*Competitions still pending are in color: 
+		<div class="red-square"></div>
+	</div>
 	<table class="table table-bordered table-sm">
 	  	<thead>
 	    	<tr>
@@ -19,7 +25,7 @@
 	  	
 	  	<tbody>
 	  		@foreach($competitions as $competition)
-		    	<tr>
+		    	<tr @if($competition->isPending()) bgcolor="#ffd6cc" @endif>
 		      		<th scope="row">{{$competition->id}}</th>
 		      		<td>{{$competition->name}}</td>
 		      		<td>{{$competition->date_start}}</td>

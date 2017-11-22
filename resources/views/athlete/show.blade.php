@@ -236,8 +236,13 @@
                                             </dir> 
                                         </div>
                                     @endif
+
+
+                                    <!-- GRAPHS -->
+
+                                    
                                     <!-- GRAPH TABS FOR PBS -->
-                                    <div class="panel with-nav-tabs panel-default">
+         {{--                            <div class="panel with-nav-tabs panel-default">
                                         <div class="panel-heading">
                                             Αναλυτική Πρόοδος ανά αγώνισμα
                                             <!-- TABS List -->
@@ -286,7 +291,7 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <!-- -->
                                 </div>
                             </div>

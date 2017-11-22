@@ -257,7 +257,16 @@
             <div style="text-align:center; margin-bottom: 10px;">
               <a href="/records/nationals" class="btn btn-default btn-sm" role="button" >Περισσότερα Παγκύπρια Ρεκόρ</a>
             </div>
-          </div>       
+          </div> 
+
+          <div class="panel panel-1">
+            <div class="panel-heading">Φωτογραφία Ημέρας</div>
+            <div class="panel-body">
+              
+                <img src="https://image.freepik.com/free-photo/person-running_1112-546.jpg" class="img-responsive center">
+
+            </div>
+          </div>      
         
         </div>
 
@@ -266,7 +275,13 @@
         *** 3rd Column ******
         *****************-->
         <div class="col-sm-4 padding-3">  
-            
+            <div class="panel panel-1">
+              <div class="panel-heading">Τελευταία Νέα</div>
+              <div class="panel-body">
+                
+
+              </div>
+            </div>
             <div class="panel panel-1">
               <div class="panel-heading">Facebook Live Feed</div>
               <div class="panel-body">
@@ -275,6 +290,7 @@
 
               </div>
             </div>
+
             
         </div>
 
@@ -282,7 +298,6 @@
 
 
     </div>
-    <img src="https://image.freepik.com/free-photo/person-running_1112-546.jpg" class="img-responsive center" style="max-width: auto; max-height: auto;">
 
 
   </div>

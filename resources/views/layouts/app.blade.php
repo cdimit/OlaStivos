@@ -41,9 +41,17 @@
                 <a href="/home"></a>
             </div>
             
+            <div class="banner-content-center">
+                <a href="#"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter-square fa-3x"></i></a>
+                <a href="#"><i class="fa fa-linkedin-square fa-3x"></i></a>
+                <a href="#"><i class="fa fa-github-square fa-3x"></i></a>
+
+            </div>
         </div>
-        @include('partials.navbar' , ['nav_class' => 'navbar-static'])
         <div id="startchange"></div>
+        @include('partials.navbar' , ['nav_class' => ''])
+
         
 
         @yield('content')

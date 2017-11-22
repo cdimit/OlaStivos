@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img class="img-in-div"  src="https://images.pexels.com/photos/332835/pexels-photo-332835.jpeg?w=940&h=650&auto=compress&cs=tinysrgb">
+                <img class="img-in-div"  src="/img/collage2.jpg">
             </div>
         </div>
     </div>

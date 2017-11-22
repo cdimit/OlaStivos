@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img class="img-in-div" src="https://images.pexels.com/photos/401896/pexels-photo-401896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb">
+                <img class="img-in-div" src="/img/NRCOLLAGE.jpg">
             </div>
 
         </div>
@@ -115,15 +115,31 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <table width="100%">
+                                    <th>Event</th>
+                                    <th>Mark</th>
+                                    <th>Athlete</th>
+                                    <th>Club</th>
+                                    <th>Position</th>
+                                    <th>Competition</th>
+                                    <th>Place</th>
+                                    <th>Date</th>
+
                                     @foreach($records as $record)
                                         @if($record)
                                             <tr>
                                                 <td>{{$record->event->name}}</td>
-                                                <td>
-                                                <a href="/athlete/{{$record->athlete->id}}">
-                                                {{$record->athlete->first_name}} {{$record->athlete->last_name}}</a>
-                                                </td>
                                                 <td>{{$record->mark}}</td>
+                                                <td>
+                                                    <a href="/athlete/{{$record->athlete->id}}">{{$record->athlete->name}}</a>
+                                                </td>
+                                                <td><a href="/club/{{$record->athlete->club->id}}">{{$record->athlete->club->acronym}}</a></td>
+                                                <td>{{$record->position}}</td>
+                                                <td>
+                                                    <a href="/competition/{{$record->competition->id}}">{{$record->competition->name}}</a>
+                                                </td>
+                                                 <td>{{$record->competition->city}}, {{$record->competition->country}}</td>
+                                                <td>{{$record->date}}</td>
+
                                             </tr>
                                         @endif
                                     @endforeach

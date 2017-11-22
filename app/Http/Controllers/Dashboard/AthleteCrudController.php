@@ -31,7 +31,7 @@ class AthleteCrudController extends Controller
     public function index()
     {
         //GET all the athletes
-        $athletes = Athlete::published()->get();
+        $athletes = Athlete::all();
 
         return view('dashboard.athlete.index')->with('athletes',$athletes);
     }
