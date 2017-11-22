@@ -90,6 +90,10 @@ class ResultCrudController extends Controller
 
         $result->save();
 
+        if($request->type=="relay"){
+          $result->relayAthletes()->attach($request->relay_id);
+        }
+
         //Attach all records made
         // if ($request->records){
         //     foreach($request->records as $record){
@@ -135,7 +139,12 @@ class ResultCrudController extends Controller
             $achievements->push($record->id);
         }
 
-        return view('dashboard.result.edit')->with('result',$result)->with('athletes',$athletes)->with('events',$events)->with('competitions',$competitions)->with('records',$records)->with('achievements',$achievements);
+        return view('dashboard.result.edit')->with('result',$result)
+                                            ->with('athletes',$athletes)
+                                            ->with('events',$events)
+                                            ->with('competitions',$competitions)
+                                            ->with('records',$records)
+                                            ->with('achievements',$achievements);
     }
 
     /**
@@ -188,6 +197,10 @@ class ResultCrudController extends Controller
 
         $result->save();
 
+        if($request->type=="relay"){
+          $result->relayAthletes()->sync($request->relay_id);
+        }
+
         //
         //EDIT Records
         //
@@ -217,7 +230,7 @@ class ResultCrudController extends Controller
         $competitions = Competition::all();
         $records = Record::all();
 
-        return view('dashboard.result.createRace')->with('athletes',$athletes)->with('events',$events)->with('competitions',$competitions)->with('records',$records);
+        return view('dashboard.result.create_race')->with('athletes',$athletes)->with('events',$events)->with('competitions',$competitions)->with('records',$records);
     }
 
     /**
@@ -256,7 +269,7 @@ class ResultCrudController extends Controller
             $result->athlete_id = $request->athlete_ids[$key];
             $result->mark = $request->marks[$key];
             $result->score = $request->scores[$key];
-            
+
             $result->event_id = $request->event_id;
             $result->competition_id = $request->competition_id;
             $result->wind = $request->wind;
@@ -279,9 +292,21 @@ class ResultCrudController extends Controller
 
 // $athlete->setRecordIfExist($result);
 
-    
+
         }
-        
+
         return redirect()->route('result.index');
       }
+
+
+        public function getEvents()
+        {
+
+          $events = Event::where('type', request('type'))->get();
+
+
+
+          return response()->json($events);
+        }
+
 }

@@ -32,9 +32,44 @@
             </div>
         </div>
 
+        <!--Event Type input field-->
+        <div class="form-group">
+            <label for="event_id" class="col-md-4 control-label">Event Type</label>
+            <div class="col-md-6">
+                <select  id="type" name="type" class="selectpicker" >
+                    @foreach($events->pluck('type')->unique() as $type)
+                        <option value="{{$type}}">{{$type}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('event_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('event_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+
+        <!--Event input field-->
+        <div class="form-group{{ $errors->has('event_id') ? ' has-error' : '' }}">
+            <label for="event_id" class="col-md-4 control-label">Event</label>
+            <div class="col-md-6">
+                <select  id="event_id" name="event_id" >
+                    @foreach($events as $event)
+                        <option value="{{$event->id}}">{{$event->name}} {{$event->season}} {{$event->gender}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('event_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('event_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
         <!--Athlete input field-->
         <div class="form-group{{ $errors->has('athlete_id') ? ' has-error' : '' }}">
-            <label for="athlete_id" class="col-md-4 control-label">Athlete</label>
+            <label id="athlete_label" for="athlete_id" class="col-md-4 control-label">Athlete</label>
             <div class="col-md-6">
                 <select  id="athlete_id" name="athlete_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
                     @foreach($athletes as $athlete)
@@ -49,19 +84,18 @@
             </div>
         </div>
 
-
-        <!--Event input field-->
-        <div class="form-group{{ $errors->has('event_id') ? ' has-error' : '' }}">
-            <label for="event_id" class="col-md-4 control-label">Event</label>
+        <!--Relay Athletes input field-->
+        <div class="form-group{{ $errors->has('relay_id') ? ' has-error' : '' }}" id="relay_id">
+            <label for="relay_id" class="col-md-4 control-label">Relay Athletes</label>
             <div class="col-md-6">
-                <select  id="event_id" name="event_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
-                    @foreach($events as $event)
-                        <option value="{{$event->id}}">{{$event->name}} {{$event->season}} {{$event->gender}}</option>
+                <select  id="relay_id" name="relay_id[]" class="selectpicker" data-show-subtext="true" data-live-search="true" data-max-options="4" multiple>
+                    @foreach($athletes as $athlete)
+                        <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
                     @endforeach
                 </select>
-                @if ($errors->has('event_id'))
+                @if ($errors->has('relay_id'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('event_id') }}</strong>
+                        <strong>{{ $errors->first('relay_id') }}</strong>
                     </span>
                 @endif
             </div>
@@ -183,4 +217,54 @@
 @section('scripts')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+  <script type="text/javascript">
+      jQuery(document).ready(function(){
+
+
+          $('#relay_id').hide();
+
+          $('#type').on('change',function(){
+              getEvents();
+          });
+
+
+          /* Functions */
+          function getEvents() {
+              document.getElementById('event_id').innerHTML = "";
+              if( $('#type').val()==="relay" ){
+                  $("#relay_id").show();
+                  $("#athlete_label").text("Team");
+              }else{
+                  $("#relay_id").hide();
+                  $("#athlete_label").text("Athlete");
+
+              }
+              var myUrl = '/dashboard/result/events';
+              var myData = {
+                type: $('#type').val(),
+              };
+              var events;
+
+              axios.post(myUrl, myData )
+              .then(function (response) {
+                  $.each(response.data, function( index, value ) {
+                      $('#event_id').append($('<option>', {
+                          value: value.id,
+                          text: value.name + ' ' + value.season + ' ' + value.gender
+                      }));
+                  });
+              })
+              .catch(function (error) {
+                  console.log('error');
+              });
+              return;
+          }
+
+
+
+      });
+
+  </script>
+
 @endsection
