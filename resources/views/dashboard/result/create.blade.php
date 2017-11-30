@@ -150,7 +150,10 @@
         <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
             <label for="date" class="col-md-4 control-label">Date</label>
             <div class="col-md-6">
-                {{Form::date('date', \Carbon\Carbon::now())}}
+                {{-- {{Form::date('date', \Carbon\Carbon::now())}} --}}
+                <select  id="date" name="date" >
+
+                </select>
 
                 @if ($errors->has('date'))
                     <span class="help-block">
@@ -221,11 +224,15 @@
   <script type="text/javascript">
       jQuery(document).ready(function(){
 
-
-          $('#relay_id').hide();
-
+          getDates();
+          getEvents();
+          
           $('#type').on('change',function(){
               getEvents();
+          });
+
+          $('#competition_id').on('change',function(){
+              getDates();
           });
 
 
@@ -253,6 +260,28 @@
                           value: value.id,
                           text: value.name + ' ' + value.season + ' ' + value.gender
                       }));
+                  });
+              })
+              .catch(function (error) {
+                  console.log('error');
+              });
+              return;
+          }
+
+          /* Functions */
+          function getDates() {
+              document.getElementById('date').innerHTML = "";
+
+              var myUrl = '/dashboard/result/dates';
+              var myData = {
+                competition: $('#competition_id').val(),
+              };
+              var dates;
+
+              axios.post(myUrl, myData )
+              .then(function (response) {
+                  $.each(response.data, function( index, value ) {
+                      $('#date').append('<option value="'+value+'">'+value+'</option>');
                   });
               })
               .catch(function (error) {

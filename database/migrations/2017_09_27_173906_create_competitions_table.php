@@ -21,7 +21,7 @@ class CreateCompetitionsTable extends Migration
             $table->string('country');
             $table->string('city');
             $table->string('picture')->default('competition.jpg');
-            $table->string('venue');
+            $table->string('venue')->nullable();
             $table->boolean('status')->default(0);
             $table->integer('competition_series_id')->unsigned();
             $table->foreign('competition_series_id')->references('id')->on('competition_series');
