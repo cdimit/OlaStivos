@@ -473,23 +473,23 @@ class Athlete extends Model
     }
 
 
-    public function setPbIfExist($result)
+    public function setPbIfExist($result, $event)
     {
-      $pb = $this->getPb($result->event);
+      $pb = $this->getPb($event);
 
       if(!$pb){
-        $result->setPb();
+        $result->setPb($event);
         return true;
       }
 
-      if($result->event->isTrack()){
+      if($event->isTrack()){
         if($pb->mark>=$result->mark){
-          $result->setPb();
+          $result->setPb($event);
           return true;
         }
       }else{
         if($pb->mark<=$result->mark){
-          $result->setPb();
+          $result->setPb($event);
           return true;
         }
       }
@@ -497,24 +497,24 @@ class Athlete extends Model
       return false;
     }
 
-    public function setSbIfExist($result)
+    public function setSbIfExist($result, $event)
     {
       $date = Carbon::parse($result->date);
-      $sb = $this->getSb($date->year ,$result->event);
+      $sb = $this->getSb($date->year ,$event);
 
       if(!$sb){
-        $result->setSb();
+        $result->setSb($event);
         return true;
       }
 
-      if($result->event->isTrack()){
+      if($event->isTrack()){
         if($sb->mark>=$result->mark){
-          $result->setSb();
+          $result->setSb($event);
           return true;
         }
       }else{
         if($sb->mark<=$result->mark){
-          $result->setSb();
+          $result->setSb($event);
           return true;
         }
       }
@@ -522,23 +522,23 @@ class Athlete extends Model
       return false;
     }
 
-    public function setNRIfExist($result)
+    public function setNRIfExist($result, $event)
     {
-      $NR = $result->event->getNR();
+      $NR = $event->getNR();
 
       if(!$NR){
-        $result->setNR();
+        $result->setNR($event);
         return true;
       }
 
-      if($result->event->isTrack()){
+      if($event->isTrack()){
         if($NR->mark>=$result->mark){
-          $result->setNR();
+          $result->setNR($event);
           return true;
         }
       }else{
         if($NR->mark<=$result->mark){
-          $result->setNR();
+          $result->setNR($event);
           return true;
         }
       }
@@ -546,28 +546,28 @@ class Athlete extends Model
       return false;
     }
 
-    public function setNURIfExist($result)
+    public function setNURIfExist($result, $event)
     {
 
       if(!Age::isU23($result->age)){
         return false;
       }
 
-      $NUR = $result->event->getNUR();
+      $NUR = $event->getNUR();
 
       if(!$NUR){
-        $result->setNUR();
+        $result->setNUR($event);
         return true;
       }
 
-      if($result->event->isTrack()){
+      if($event->isTrack()){
         if($NUR->mark>=$result->mark){
-          $result->setNUR();
+          $result->setNUR($event);
           return true;
         }
       }else{
         if($NUR->mark<=$result->mark){
-          $result->setNUR();
+          $result->setNUR($event);
           return true;
         }
       }
@@ -575,28 +575,28 @@ class Athlete extends Model
       return false;
     }
 
-    public function setNJRIfExist($result)
+    public function setNJRIfExist($result, $event)
     {
 
       if(!Age::isU20($result->age)){
         return false;
       }
 
-      $NJR = $result->event->getNJR();
+      $NJR = $event->getNJR();
 
       if(!$NJR){
-        $result->setNJR();
+        $result->setNJR($event);
         return true;
       }
 
-      if($result->event->isTrack()){
+      if($event->isTrack()){
         if($NJR->mark>=$result->mark){
-          $result->setNJR();
+          $result->setNJR($event);
           return true;
         }
       }else{
         if($NJR->mark<=$result->mark){
-          $result->setNJR();
+          $result->setNJR($event);
           return true;
         }
       }
@@ -604,28 +604,28 @@ class Athlete extends Model
       return false;
     }
 
-    public function setNYRIfExist($result)
+    public function setNYRIfExist($result, $event)
     {
 
       if(!Age::isU18($result->age)){
         return false;
       }
 
-      $NYR = $result->event->getNYR();
+      $NYR = $event->getNYR();
 
       if(!$NYR){
-        $result->setNYR();
+        $result->setNYR($event);
         return true;
       }
 
-      if($result->event->isTrack()){
+      if($event->isTrack()){
         if($NYR->mark>=$result->mark){
-          $result->setNYR();
+          $result->setNYR($event);
           return true;
         }
       }else{
         if($NYR->mark<=$result->mark){
-          $result->setNYR();
+          $result->setNYR($event);
           return true;
         }
       }
@@ -636,12 +636,29 @@ class Athlete extends Model
     public function setRecordIfExist($result)
     {
 
-      $this->setPbIfExist($result);
-      $this->setSbIfExist($result);
-      $this->setNYRIfexist($result);
-      $this->setNJRIfExist($result);
-      $this->setNURIfExist($result);
-      $this->setNRIfExist($result);
+      $this->setPbIfExist($result, $result->event);
+      $this->setSbIfExist($result, $result->event);
+      $this->setNYRIfexist($result, $result->event);
+      $this->setNJRIfExist($result, $result->event);
+      $this->setNURIfExist($result, $result->event);
+      $this->setNRIfExist($result, $result->event);
+
+      if($result->event->season=='indoor'){
+        $out_event = Event::where('name', $result->event->name)
+                            ->where('type', $result->event->type)
+                            ->where('gender', $result->event->gender)
+                            ->where('season', 'outdoor')->first();
+
+
+        if($out_event){
+          $this->setPbIfExist($result, $out_event);
+          $this->setSbIfExist($result, $out_event);
+          $this->setNYRIfexist($result, $out_event);
+          $this->setNJRIfExist($result, $out_event);
+          $this->setNURIfExist($result, $out_event);
+          $this->setNRIfExist($result, $out_event);
+        }
+      }
 
     }
 

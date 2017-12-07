@@ -36,36 +36,36 @@ class Result extends Model
 		return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id')->withTimestamps();
     }
 
-    public function setPb()
+    public function setPb($event)
     {
-      return $this->records()->attach(Record::where('acronym', 'PB')->first()->id, ['event_id' => $this->event->id]);
+      return $this->records()->attach(Record::where('acronym', 'PB')->first()->id, ['event_id' => $event->id]);
 
     }
 
-    public function setSb()
+    public function setSb($event)
     {
-      return $this->records()->attach(Record::where('acronym', 'SB')->first()->id, ['event_id' => $this->event->id]);
+      return $this->records()->attach(Record::where('acronym', 'SB')->first()->id, ['event_id' => $event->id]);
     }
 
-    public function setNR()
+    public function setNR($event)
     {
-      return $this->records()->attach(Record::where('acronym', 'NR')->first()->id, ['event_id' => $this->event->id]);
+      return $this->records()->attach(Record::where('acronym', 'NR')->first()->id, ['event_id' => $event->id]);
 
     }
 
-    public function setNUR()
+    public function setNUR($event)
     {
-      return $this->records()->attach(Record::where('acronym', 'NUR')->first()->id, ['event_id' => $this->event->id]);
+      return $this->records()->attach(Record::where('acronym', 'NUR')->first()->id, ['event_id' => $event->id]);
     }
 
-    public function setNJR()
+    public function setNJR($event)
     {
-      return $this->records()->attach(Record::where('acronym', 'NJR')->first()->id, ['event_id' => $this->event->id]);
+      return $this->records()->attach(Record::where('acronym', 'NJR')->first()->id, ['event_id' => $event->id]);
     }
 
-    public function setNYR()
+    public function setNYR($event)
     {
-      return $this->records()->attach(Record::where('acronym', 'NYR')->first()->id, ['event_id' => $this->event->id]);
+      return $this->records()->attach(Record::where('acronym', 'NYR')->first()->id, ['event_id' => $event->id]);
     }
 
 
