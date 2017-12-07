@@ -62,7 +62,6 @@ class ResultCrudController extends Controller
             'race' => 'string|nullable',
             'score' => 'integer|nullable',
         ]);
-
         //CREATE new Result instance
         $result = new Result;
 
@@ -75,6 +74,10 @@ class ResultCrudController extends Controller
         $result->date = $request->date;
         $result->race = $request->race;
         $result->score = $request->score;
+
+        if(!$request->recordable || $result->wind > 2){
+          $result->is_recordable = false;
+        }
 
         //
         //Find and store age category
@@ -102,7 +105,7 @@ class ResultCrudController extends Controller
         //     }
         // }
 
-/* $athlete->setRecordIfExist($result); */
+        // $athlete->setRecordIfExist($result);
 
         // if(!$athlete->setPbIfExist($result)){
         //   $athlete->setSbIfExist()

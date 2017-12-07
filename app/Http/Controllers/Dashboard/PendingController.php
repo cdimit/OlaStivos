@@ -26,7 +26,7 @@ class PendingController extends Controller
     	if($request->athletes){
     		$this->publishAthletes($request->athletes);
     	}
-    	
+
     	if($request->competitions){
     		$this->publishCompetitions($request->competitions);
     	}
@@ -65,13 +65,16 @@ class PendingController extends Controller
 		foreach ($results as $result_id) {
     		$result= Result::find($result_id);
     		//To publish the result, the athlete and competition should have been published
-			if($result->athlete->isPublished() && $result->competition->isPublished()){		
-				$result->status = 1;
-				$result->save();
+  			if($result->athlete->isPublished() && $result->competition->isPublished()){
+  				$result->status = 1;
+  				$result->save();
 
-				//Attach Records
-				$result->athlete->setRecordIfExist($result);
-			}
+  				//Attach Records
+          if($result->is_recordable){
+            $result->athlete->setRecordIfExist($result);
+
+          }
+  			}
     	}
     	return;
     }

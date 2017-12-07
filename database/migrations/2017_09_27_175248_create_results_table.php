@@ -19,7 +19,8 @@ class CreateResultsTable extends Migration
             $table->string('mark');
             $table->float('wind')->nullable();
             $table->date('date');
-            $table->integer('score');
+            $table->integer('score')->nullable();
+            $table->boolean('is_recordable')->default(1);
             $table->string('race');
             $table->boolean('status')->default(0);
             $table->integer('age')->unsigned();
