@@ -102,6 +102,8 @@ Route::resource('dashboard/image', 'Dashboard\ImageCrudController', ['except' =>
 Route::resource('dashboard/video', 'Dashboard\VideoCrudController', ['except' => ['show', 'destroy']]);
 
 Route::post('/dashboard/result/events', 'Dashboard\ResultCrudController@getEvents')->name('results.getEvents');
+Route::post('/dashboard/result/dates', 'Dashboard\ResultCrudController@getDates')->name('results.getDates');
+
 Route::get('/dashboard/result/createRace', 'Dashboard\ResultCrudController@createRace')->name('result.createRace');
 Route::post('/dashboard/result/createRace', 'Dashboard\ResultCrudController@storeRace')->name('result.storeRace');
 

@@ -101,7 +101,8 @@ class ClubCrudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->form_rules);
+
+        request()->validate($this->form_rules);
 
         $club=Club::find($id);
 
