@@ -107,7 +107,7 @@
 
                         <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
                             <div class="col-xs-10 col-xs-offset-2">
-                                <button id="submit" type="submit" class="btn btn-default" >Βρές προιστορία ρεκόρ</button>
+                                <button id="submit" type="submit" class="btn btn-default" >Βρές κορυφαίες επιδόσεις</button>
                             </div>
                         </div>
                     {!! Form::close() !!}

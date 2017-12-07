@@ -189,13 +189,13 @@
         </div>
 
 
-        <!--Records input fields-->
+{{--         <!--Records input fields-->
         @foreach($records as $record)
             <div class="form-group">
                 <label for="records[]" class="col-md-4 control-label">{{$record->acronym}}</label>
                 <input id="records[]" name="records[]" type="checkbox" value="{{$record->id}}">
             </div>
-        @endforeach
+        @endforeach --}}
 
 
 

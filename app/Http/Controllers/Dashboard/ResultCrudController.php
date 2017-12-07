@@ -20,7 +20,7 @@ class ResultCrudController extends Controller
      */
     public function index()
     {
-        $results = Result::published()->get();
+        $results = Result::all();
 
         return view('dashboard.result.index')->with('results',$results);
     }

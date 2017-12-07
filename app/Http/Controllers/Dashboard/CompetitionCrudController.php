@@ -33,7 +33,7 @@ class CompetitionCrudController extends Controller
     public function index()
     {
         //GET all the competitions
-        $competitions = Competition::published()->get();
+        $competitions = Competition::all();
 
         return view('dashboard.competition.index')->with('competitions',$competitions);
     }
