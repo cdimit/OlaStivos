@@ -100,4 +100,15 @@ class Event extends Model
 
       return $records->sortBy('date');
     }
+
+    public function getSezonAttribute(): string
+    {
+      if($this->season == 'indoor'){
+        return 'Κλειστός Στίβος';
+      }elseif($this->season == 'outdoor'){
+        return 'Ανοικτός Στίβος';
+      }else{
+        return 'Ανώμαλος Δρόμος';
+      }
+    }
 }

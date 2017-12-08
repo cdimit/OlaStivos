@@ -135,14 +135,14 @@
 
                                 <div class="panel-body">
                                     <table width="100%">
-                                      <th>Rank</th>
-                                      <th>Mark</th>
-                                      <th>Athlete</th>
-                                      <th>Club</th>
-                                      <th>Position</th>
-                                      <th>Competition</th>
-                                      <th>Place</th>
-                                      <th>Date</th>
+                                      <th>Κατάταξη</th>
+                                      <th>Επίδοση</th>
+                                      <th>Αθλητής</th>
+                                      <th>Σύλλογος</th>
+                                      <th>Θέση</th>
+                                      <th>Αγώνας</th>
+                                      <th>Τοποθεσία</th>
+                                      <th>Ημερομηνία</th>
 
                                       <?php $count=1;
                                             $check = collect([]);
@@ -164,7 +164,7 @@
                                                 <td>{{$result->mark}}</td>
                                                 <td>
                                                 <a href="/athlete/{{$result->athlete->id}}">
-                                                {{$result->athlete->first_name}} {{$result->athlete->last_name}}</a>
+                                                {{$result->athlete->name}}</a>
                                                 </td>
                                                 <td>
                                                   <a href="/club/{{$result->athlete->club->id}}">{{$result->athlete->club->acronym}}</a>

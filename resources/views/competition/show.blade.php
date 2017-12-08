@@ -135,41 +135,43 @@
                                         </div>
                                         <div class="panel-body">
                                             <div class="tab-content">
+
                                                 @foreach($results as $key => $value)
                                                     <div class="tab-pane fade" id="tab{{$key}}result">
                                                         
-                                                            <h4>{{$value->first()->event->name}}  -  {{date('d-m-Y', strtotime($value->first()->date))}}</h4>
-                                                            
-                                                                <table class="table table-condensed table-responsive">
-                                                                    <thead>
+                                                        <h4><b>{{$value->first()->event->name}}  -  {{date('d-m-Y', strtotime($value->first()->date))}}</b></h4>
+                                                        
+                                                        @foreach($value->keyby('race')->keys() as $heat)
+                                                            <h4>{{$heat}}</h4>
+                                                            <table class="table table-condensed table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Θέση</th>
+                                                                        <th>Aθλητής</th>
+                                                                        <th>Επίδοση</th>
+                                                                        <th>Πόντοι</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="myTable">                                 
+                                                                    @foreach($value->where('race',$heat) as $result)
                                                                         <tr>
-                                                                            <th>Θέση</th>
-                                                                            <th>Aθλητής</th>
-                                                                            <th>Επίδοση</th>
-                                                                            <th>Πόντοι</th>
-                                                                            <th></th>
+                                                                            <td>{{$result->position}}</th>
+                                                                            <td> <a href="/athlete/{{$result->athlete->id}}">{{$result->athlete->name}} </a></td>
+                                                                            <th>{{$result->mark}}</td>
+                                                                            <td>{{$result->score}}</td>
+                                                                            <td>
+                                                                            @foreach($result->records as $record)
+                                                                                {{$record->acronym}} &nbsp;
+                                                                            @endforeach
+                                                                            </td>
                                                                         </tr>
-                                                                    </thead>
-                                                                    <tbody id="myTable">                                 
-                                                                        @foreach($value as $result)
-                                                                            <tr>
-                                                                                <td>{{$result->position}}</th>
-                                                                                <td>{{$result->athlete->first_name}} {{$result->athlete->last_name}}</td>
-                                                                                <th>{{$result->mark}}</td>
-                                                                                <td>{{$result->score}}</td>
-                                                                                <td>
-                                                                                @foreach($result->records as $record)
-                                                                                    {{$record->acronym}} &nbsp;
-                                                                                @endforeach
-                                                                                </td>
-                                                                            </tr>
 
-                                                                        @endforeach
-                                                                    </tbody>
+                                                                    @endforeach
+                                                                </tbody>
 
-                                                                </table>
-
-                                                    
+                                                            </table>
+                                                        @endforeach
                                                         
                                                     </div>
                                                 

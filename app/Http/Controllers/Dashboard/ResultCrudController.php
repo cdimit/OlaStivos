@@ -97,13 +97,7 @@ class ResultCrudController extends Controller
           $result->relayAthletes()->attach($request->relay_id);
         }
 
-        //Attach all records made
-        // if ($request->records){
-        //     foreach($request->records as $record){
-        //         //atach result with record and event
-        //         $result->records()->attach($record, ['event_id' => $request->event_id]);
-        //     }
-        // }
+
 
         // $athlete->setRecordIfExist($result);
 
