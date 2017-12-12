@@ -9,8 +9,17 @@
 			</button>
 	      </span>
 	      <div id="searchPanel" class="panel" style="position: absolute; left: 0; width: 100%; z-index:10;" >
-	        <ul id='resultsSearch' class="list-unstyled">
+{{-- 	        <ul id='resultsSearch' class="list-unstyled">
+	        </ul> --}}
+
+			<h5 style="margin-bottom:0; margin-top:0;">Αθλητές:</h5>
+	       	<ul id='resultsSearchAthletes' class="list-unstyled">
 	        </ul>
+	        <h5 style="margin-bottom:0; margin-top:0;">Αγώνες:</h5>
+	        <ul id='resultsSearchCompetitions' class="list-unstyled">
+	        </ul>
+
+
 
 	      </div>
 

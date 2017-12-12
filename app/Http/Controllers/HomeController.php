@@ -128,9 +128,7 @@ class HomeController extends Controller
 
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * Search function p stelnei apotelesmata sto navbar avtomata
      */
     public function search()
     {        
@@ -140,7 +138,7 @@ class HomeController extends Controller
 
     }
 
-    
+    // Search function otan patiseis enter sto navbar i otan eisai sto search page
     public function searchShow(Request $request)
     {   
         if($request->type == 'athletes'){
