@@ -21,7 +21,9 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::post('/search/show', 'HomeController@searchShow')->name('search.show');
 Route::post('/search', 'HomeController@search')->name('search');
+
 /*
 |--------------------------------------------------------------------------
 | Athletes Routes

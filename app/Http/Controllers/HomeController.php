@@ -139,4 +139,25 @@ class HomeController extends Controller
         return response()->json([$athletes,$competitions]);
 
     }
+
+    
+    public function searchShow(Request $request)
+    {   
+        if($request->type == 'athletes'){
+            $athletes = Athlete::search($request->searchQuery)->published()->get();
+            $competitions = collect();
+        }elseif($request->type == 'competitions'){
+            $competitions = Competition::search($request->searchQuery)->published()->get();
+            $athletes = collect();
+        }else{
+            $athletes = Athlete::search($request->searchQuery)->published()->get(); 
+            $competitions = Competition::search($request->searchQuery)->published()->get();
+        }
+
+        return view('search.search_page')->with('competitions',$competitions)
+                                        ->with('athletes',$athletes);
+
+    }
+
+    
 }
