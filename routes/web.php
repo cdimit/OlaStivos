@@ -58,8 +58,8 @@ Route::get('/club/{club}', 'ClubController@show')->name('club.show');
 */
 /* GET events for national record form */
 Route::post('/records/nationals/history/events', 'RecordController@getEvents')->name('record.getEvents');
-Route::get('/records/nationals/history', 'RecordController@showNRsHistory')->name('record.showNRsHistory');
-Route::post('/records/nationals/history', 'RecordController@searchNRsHistory')->name('record.searchNRsHistory');
+Route::get('/records/nationals/history', 'RecordController@showNRsHistory')->name('record.showNRsHistory')->middleware('role:admin');
+Route::post('/records/nationals/history', 'RecordController@searchNRsHistory')->name('record.searchNRsHistory')->middleware('role:admin');
 Route::get('/records/nationals', 'RecordController@showNRs')->name('record.showNRs');
 Route::post('/records/nationals', 'RecordController@searchNRs')->name('record.searchNRs');
 
@@ -92,22 +92,30 @@ Route::post('/alltime/events', 'AllTimeController@getEvents')->name('alltime.get
 |	resource routes for CRUD
 |	all the controllers are in App/Dashboard
 */
-Route::get('dashboard', function () {
-    return view('dashboard/home');
+
+//For admins and moderators
+Route::middleware(['auth','role:admin,moderator'])->group(function () {
+	Route::get('dashboard', function () {
+	    return view('dashboard/home');
+	});
+	Route::resource('dashboard/club', 'Dashboard\ClubCrudController', ['except' => ['show', 'destroy']]);
+	Route::resource('dashboard/athlete', 'Dashboard\AthleteCrudController', ['except' => ['show', 'destroy']]);
+	Route::resource('dashboard/series', 'Dashboard\SeriesCrudController', ['except' => ['show', 'destroy']]);
+	Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', ['except' => ['show', 'destroy']]);
+	Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
+	Route::resource('dashboard/image', 'Dashboard\ImageCrudController', ['except' => ['show', 'destroy']]);
+	Route::resource('dashboard/video', 'Dashboard\VideoCrudController', ['except' => ['show', 'destroy']]);
+
+	Route::post('/dashboard/result/events', 'Dashboard\ResultCrudController@getEvents')->name('results.getEvents');
+	Route::post('/dashboard/result/dates', 'Dashboard\ResultCrudController@getDates')->name('results.getDates');
+
+	Route::get('/dashboard/result/createRace', 'Dashboard\ResultCrudController@createRace')->name('result.createRace');
+	Route::post('/dashboard/result/createRace', 'Dashboard\ResultCrudController@storeRace')->name('result.storeRace');
+
 });
-Route::resource('dashboard/club', 'Dashboard\ClubCrudController', ['except' => ['show', 'destroy']]);
-Route::resource('dashboard/athlete', 'Dashboard\AthleteCrudController', ['except' => ['show', 'destroy']]);
-Route::resource('dashboard/series', 'Dashboard\SeriesCrudController', ['except' => ['show', 'destroy']]);
-Route::resource('dashboard/competition', 'Dashboard\CompetitionCrudController', ['except' => ['show', 'destroy']]);
-Route::resource('dashboard/result', 'Dashboard\ResultCrudController', ['except' => ['show', 'destroy']]);
-Route::resource('dashboard/image', 'Dashboard\ImageCrudController', ['except' => ['show', 'destroy']]);
-Route::resource('dashboard/video', 'Dashboard\VideoCrudController', ['except' => ['show', 'destroy']]);
-
-Route::post('/dashboard/result/events', 'Dashboard\ResultCrudController@getEvents')->name('results.getEvents');
-Route::post('/dashboard/result/dates', 'Dashboard\ResultCrudController@getDates')->name('results.getDates');
-
-Route::get('/dashboard/result/createRace', 'Dashboard\ResultCrudController@createRace')->name('result.createRace');
-Route::post('/dashboard/result/createRace', 'Dashboard\ResultCrudController@storeRace')->name('result.storeRace');
-
-Route::get('dashboard/pending', 'Dashboard\PendingController@index')->name('pending.index');
-Route::post('dashboard/pending', 'Dashboard\PendingController@publish')->name('pending.publish');
+//For admins only
+Route::middleware(['auth','role:admin'])->group(function () {
+	Route::resource('dashboard/users', 'Dashboard\UserCrudController', ['except' => ['create','store','show']]);
+	Route::get('dashboard/pending', 'Dashboard\PendingController@index')->name('pending.index');
+	Route::post('dashboard/pending', 'Dashboard\PendingController@publish')->name('pending.publish');
+});

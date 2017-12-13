@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Record;
 use App\Age;
 use App\Club;
-use App\CompetitionSeries;
+use App\Role;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+      // Create User Roles
+      $this->call(RoleTableSeeder::class);
+      // Create Standard Competition Series
+      $this->call(CompetitionSeriesTableSeeder::class);
+
       Record::forceCreate(['name' => 'National Record', 'acronym' => 'NR']);
       Record::forceCreate(['name' => 'National U23 Record', 'acronym' => 'NUR']);
       Record::forceCreate(['name' => 'National U20 Record', 'acronym' => 'NJR']);
@@ -36,6 +41,6 @@ class DatabaseSeeder extends Seeder
       Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος Κόροιβος', 'acronym' => 'ΓΣΚ', 'city' => 'Πάφος', 'since' => '1898']);
       Club::forceCreate(['name' => 'Γυμναστικός Συλλογος Πράξανδρος', 'acronym' => 'ΓΣΠΡ', 'city' => 'Κερύνεια', 'since' => '1919']);
 
-      CompetitionSeries::forceCreate(['name' => 'Παγκύπριο Πρωτάθλημα Ανδρών/Γυναικών']);
+      
     }
 }

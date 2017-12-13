@@ -30,6 +30,9 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
+                @if(Auth::user() && Auth::user()->isAdmin())
+                    <li><a href="\dashboard"><i>Dashboard</i></a></li>
+                @endif
                 <!-- Navbar Links -->
                 <li>
                     @include('search.search_input')
@@ -43,7 +46,9 @@
                 </li>
 
                 <li><a href="{{ route('record.showNRs') }}">Παγκύπρια Ρεκόρ</a></li>
-                <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
+                @if(Auth::user() && Auth::user()->isAdmin())
+                    <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
+                @endif
                 <li><a href="{{ route('competition.calendar') }}">Ημερολόγιο Αγώνων</a></li>
                 <li><a href="#">Επικοινωνία</a></li>
 
