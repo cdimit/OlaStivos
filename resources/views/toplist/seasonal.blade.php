@@ -209,7 +209,7 @@
                                       <h4>Μη αναγνωρισμένες επιδόσης</h4>
                                         @foreach($results->where('is_recordable', false) as $result)
 
-                                            <tr class={{$rank}}>
+                                            <tr class='-'>
                                                 <td>-</td>
                                                 <td>{{$result->mark}}</td>
                                                 <td>{{$result->wind}}</td>

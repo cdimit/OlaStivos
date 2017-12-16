@@ -39,6 +39,7 @@ class HomeController extends Controller
         $maleNRs = $this->getNationalRecords('outdoor','male');
         $femaleNRs = $this->getNationalRecords('outdoor','female');
 
+// dd($maleNRs);
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('outdoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('outdoor','female');

@@ -114,8 +114,9 @@
                 <div class="panel-body">
 
                     <!-- Main Content -->
-                    @if($results)
-                        <h3>{{$event->name}} {{$event->gender}} Top-List</h3>
+                    <h3>{{$event->name}} {{$event->gender}} Top-List</h3>
+
+                    @if($results->where('is_recordable', true)->first())
                         <div class="col-md-12">
 
                             <div class="panel panel-default">
@@ -176,7 +177,7 @@
                     @endif
 
                     <!-- Main Content -->
-                    @if($results->where('is_recordable', false))
+                    @if($results->where('is_recordable', false)->first())
                         <div class="col-md-12">
 
                             <div class="panel panel-default">
@@ -196,7 +197,7 @@
                                       <h4>Μη αναγνωρισμένες επιδόσης</h4>
                                         @foreach($results->where('is_recordable', false) as $result)
 
-                                            <tr class={{$rank}}>
+                                            <tr class='-'>
                                                 <td>-</td>
                                                 <td>{{$result->mark}}</td>
                                                 <td>{{$result->wind}}</td>

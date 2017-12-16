@@ -4,16 +4,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" />
 
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
 @endsection
 
 @section('content')
 
-<div class="container" style="background-color: #F9F9F9;">  
+<div class="container" style="background-color: #F9F9F9;">
   <div class="row" style="margin-top: 10px;">
     <!--***********-->
     <!-- 1st COLUMN-->
     <!--***********-->
-    <div class="col-sm-3 padding-3">          
+    <div class="col-sm-3 padding-3">
       <div class="panel panel-2">
         <div class="panel-heading">Επόμενοι Αγώνες</div>
         <div class="panel-body">
@@ -28,7 +37,7 @@
                 </tr>
               </thead>
               <tbody>
-                
+
                 @foreach($competitions as $competition)
                   <tr>
                     @if($competition->date_start == $competition->date_finish)
@@ -40,7 +49,7 @@
                   </tr>
                 @endforeach
               </tbody>
-            </table> 
+            </table>
 
           @else
             <i style="margin-top: -20px;">Δεν υπάρχουν επόμενοι αγώνες</i>
@@ -48,13 +57,13 @@
           <a href="/calendar" class="btn btn-default btn-sm" role="button">Αναλυτικό ημερολόγιο αγώνων</a>
         </div>
       </div>
-      
+
       <!-- An den exei competitions den emfanizete -->
       @if($countdownComp)
         <div class="panel panel-2">
           <div class="panel-heading">Αντίστροφη Μέτρηση</div>
           <div class="panel-body">
-          
+
             <a href="{{ route('competition.show',['competition'=>$countdownComp->id]) }}">
               <h2 style="text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 0;">
                 {{\Carbon\Carbon::now()->diffInDays(new \Carbon\Carbon($countdownComp->date_start))}} μέρες
@@ -90,7 +99,7 @@
     <div class="col-lg-9">
       <div class="row">
 
-        
+
         <!--***********-->
         <!-- 2nd COLUMN-->
         <!--***********-->
@@ -125,7 +134,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                       @foreach($maleLeaders as $lead)
                         @if($lead)
                         <tr>
@@ -136,7 +145,7 @@
                         @endif
                       @endforeach
                     </tbody>
-                  </table> 
+                  </table>
                 </div>
 
                 <!-- ****************************************** -->
@@ -154,7 +163,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                       @foreach($femaleLeaders as $lead)
                         @if($lead)
                         <tr>
@@ -165,15 +174,15 @@
                         @endif
                       @endforeach
                     </tbody>
-                  </table> 
-              
+                  </table>
+
                 </div>
               </div>
             </div>
             <div style="text-align:center; margin-bottom: 10px;">
               <a href="/toplist" class="btn btn-default btn-sm" role="button" >Περισσότερες Τοπ Λίστες</a>
             </div>
-          </div>       
+          </div>
 
           <div class="well" style="margin-top: 20px; ">
             ADVERTISEMENT
@@ -208,7 +217,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                       @foreach($maleNRs as $nr)
                         @if($nr)
                         <tr>
@@ -219,7 +228,7 @@
                         @endif
                       @endforeach
                     </tbody>
-                  </table> 
+                  </table>
                 </div>
 
 
@@ -238,7 +247,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                       @foreach($femaleNRs as $nr)
                         @if($nr)
                         <tr>
@@ -249,49 +258,48 @@
                         @endif
                       @endforeach
                     </tbody>
-                  </table> 
-              
+                  </table>
+
                 </div>
               </div>
             </div>
             <div style="text-align:center; margin-bottom: 10px;">
               <a href="/records/nationals" class="btn btn-default btn-sm" role="button" >Περισσότερα Παγκύπρια Ρεκόρ</a>
             </div>
-          </div> 
+          </div>
 
           <div class="panel panel-1">
             <div class="panel-heading">Φωτογραφία Ημέρας</div>
             <div class="panel-body">
-              
+
                 <img src="https://image.freepik.com/free-photo/person-running_1112-546.jpg" class="img-responsive center">
 
             </div>
-          </div>      
-        
+          </div>
+
         </div>
 
 
         <!-- *****************
         *** 3rd Column ******
         *****************-->
-        <div class="col-sm-4 padding-3">  
+        <div class="col-sm-4 padding-3">
             <div class="panel panel-1">
               <div class="panel-heading">Τελευταία Νέα</div>
               <div class="panel-body">
-                
+
 
               </div>
             </div>
             <div class="panel panel-1">
               <div class="panel-heading">Facebook Live Feed</div>
               <div class="panel-body">
-                
-                  <img src="https://ps.w.org/custom-facebook-feed/assets/screenshot-3.png?rev=1172284" class="img-responsive center">
 
+<div class="fb-page" data-href="https://www.facebook.com/trackfieldcy/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/trackfieldcy/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/trackfieldcy/">Trackfieldcy</a></blockquote></div>
               </div>
             </div>
 
-            
+
         </div>
 
       </div>
@@ -308,14 +316,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 {{--   <script type="text/javascript">
-    $(document).ready(function(){     
-    	//Navbar transparent before scrolling down  
+    $(document).ready(function(){
+    	//Navbar transparent before scrolling down
        	var scroll_start = 0;
        	var startchange = $('#startchange');
        	var offset = startchange.offset();
 
        	if (startchange.length){
-    	   $(document).scroll(function() { 
+    	   $(document).scroll(function() {
     	      scroll_start = $(this).scrollTop();
     	      if(scroll_start > offset.top) {
     	          $(".navbar-default").css('background-color', 'black');
@@ -326,7 +334,7 @@
     	       }
     	   });
         };
-        
+
     });
   </script> --}}
 

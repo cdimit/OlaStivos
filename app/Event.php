@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Record;
 use App\Result;
+use Carbon\Carbon;
 
 class Event extends Model
 {
@@ -36,6 +37,10 @@ class Event extends Model
     public function getNR($date = null)
     {
 
+      if(!$date){
+        $date = Carbon::now();
+      }
+
       //Get PB record ID
       $record = Record::where('acronym','NR')->first();
       $recordId = $record->id;
@@ -53,6 +58,11 @@ class Event extends Model
 
     public function getNUR($date = null)
     {
+
+      if(!$date){
+        $date = Carbon::now();
+      }
+
       //Get PB record ID
       $record = Record::where('acronym','NUR')->first();
       $recordId = $record->id;
@@ -69,6 +79,11 @@ class Event extends Model
 
     public function getNJR($date = null)
     {
+
+      if(!$date){
+        $date = Carbon::now();
+      }
+
       //Get PB record ID
       $record = Record::where('acronym','NJR')->first();
       $recordId = $record->id;
@@ -85,6 +100,11 @@ class Event extends Model
 
     public function getNYR($date = null)
     {
+
+      if(!$date){
+        $date = Carbon::now();
+      }
+
       //Get PB record ID
       $record = Record::where('acronym','NYR')->first();
       $recordId = $record->id;
