@@ -15,7 +15,7 @@ class HomeController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -42,14 +42,14 @@ class HomeController extends Controller
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('outdoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('outdoor','female');
-  
+
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
 
         //Data for Search
         $athletesSearch = Athlete::all()->sortBy('first_name');
-        $competitionsSearch = Competition::all();        
-        
+        $competitionsSearch = Competition::all();
+
         return view('home')->with('competitions',$competitions)
                         ->with('birthdayAthlete',$birthdayAthlete)
                         ->with('maleNRs',$maleNRs)
@@ -82,19 +82,19 @@ class HomeController extends Controller
         //Get a random athlete that has birthday
         $athlete = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->published()->first();
         return $athlete;
-        
+
     }
 
 
     public function getNationalRecords($season ,$gender){
-        
+
         //get all events
         $events = Event::where('season',$season)->where('gender',$gender)->get();
 
 
         //EMPTY collections of national records
         $records = collect([]);
-               
+
         //for each event add the NR in the collection
         foreach($events as $event){
             $records->push($event->getNR());
@@ -104,16 +104,16 @@ class HomeController extends Controller
     }
 
     public function getSeasonalLeaders($season ,$gender){
-        
+
         //get all events
         $events = Event::where('season',$season)->where('gender',$gender)->get();
 
         //EMPTY collections of leading results
         $leaders = collect([]);
-               
+
         //for each event add the NR in the collection
         foreach($events as $event){
-            $res = Result::published()->fromYear(Carbon::now()->year)->where('event_id', $event->id);
+            $res = Result::published()->fromYear(Carbon::now()->year)->where('event_id', $event->id)->where('is_recordable', true);
 
             if($event->isField()){
               $results = $res->sortByDesc('mark');
@@ -131,7 +131,7 @@ class HomeController extends Controller
      * Search function p stelnei apotelesmata sto navbar avtomata
      */
     public function search()
-    {        
+    {
         $athletes = Athlete::search(request('searchInput'))->published()->get()->take(5);
         $competitions = Competition::search(request('searchInput'))->published()->get()->take(5);
         return response()->json([$athletes,$competitions]);
@@ -140,7 +140,7 @@ class HomeController extends Controller
 
     // Search function otan patiseis enter sto navbar i otan eisai sto search page
     public function searchShow(Request $request)
-    {   
+    {
         if($request->type == 'athletes'){
             $athletes = Athlete::search($request->searchQuery)->published()->get();
             $competitions = collect();
@@ -148,7 +148,7 @@ class HomeController extends Controller
             $competitions = Competition::search($request->searchQuery)->published()->get();
             $athletes = collect();
         }else{
-            $athletes = Athlete::search($request->searchQuery)->published()->get(); 
+            $athletes = Athlete::search($request->searchQuery)->published()->get();
             $competitions = Competition::search($request->searchQuery)->published()->get();
         }
 
@@ -157,5 +157,5 @@ class HomeController extends Controller
 
     }
 
-    
+
 }

@@ -137,6 +137,7 @@
                                     <table width="100%">
                                       <th>Κατάταξη</th>
                                       <th>Επίδοση</th>
+                                      <th>Άνεμος</th>
                                       <th>Αθλητής</th>
                                       <th>Σύλλογος</th>
                                       <th>Θέση</th>
@@ -149,7 +150,7 @@
                                             $check->push(0);
 
                                       ?>
-                                        @foreach($results as $result)
+                                        @foreach($results->where('is_recordable', true) as $result)
                                           <?php
                                             if(!$check->search($result->athlete->id, true)){
                                               $check->push($result->athlete->id);
@@ -162,6 +163,7 @@
                                             <tr class={{$rank}}>
                                                 <td>{{$rank}}</td>
                                                 <td>{{$result->mark}}</td>
+                                                <td>{{$result->wind}}</td>
                                                 <td>
                                                 <a href="/athlete/{{$result->athlete->id}}">
                                                 {{$result->athlete->name}}</a>
@@ -183,7 +185,55 @@
                                     </table>
                                 </div>
                             </div>
-                            <div id="chart1" style="width:100%; height:200px;"></div>
+                        </div>
+                    @endif
+
+                    <!-- Main Content -->
+                    @if($results->where('is_recordable', false))
+                        <div class="col-md-12">
+
+                            <div class="panel panel-default">
+
+                                <div class="panel-body">
+                                    <table width="100%">
+                                      <th>Κατάταξη</th>
+                                      <th>Επίδοση</th>
+                                      <th>Άνεμος</th>
+                                      <th>Αθλητής</th>
+                                      <th>Σύλλογος</th>
+                                      <th>Θέση</th>
+                                      <th>Αγώνας</th>
+                                      <th>Τοποθεσία</th>
+                                      <th>Ημερομηνία</th>
+
+                                      <h4>Μη αναγνωρισμένες επιδόσης</h4>
+                                        @foreach($results->where('is_recordable', false) as $result)
+
+                                            <tr class={{$rank}}>
+                                                <td>-</td>
+                                                <td>{{$result->mark}}</td>
+                                                <td>{{$result->wind}}</td>
+                                                <td>
+                                                <a href="/athlete/{{$result->athlete->id}}">
+                                                {{$result->athlete->name}}</a>
+                                                </td>
+                                                <td>
+                                                  <a href="/club/{{$result->athlete->club->id}}">{{$result->athlete->club->acronym}}</a>
+                                                </td>
+                                                <td>{{$result->position}}</td>
+                                                <td>
+                                                  <a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a>
+                                                </td>
+                                                <td>{{$result->competition->city}}, {{$result->competition->country}}</td>
+                                                <td>{{$result->date}}</td>
+
+                                            </tr>
+
+                                        @endforeach
+
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     @endif
 
@@ -266,8 +316,8 @@
 
 
     });
-   
+
 </script>
- 
+
 
 @endsection

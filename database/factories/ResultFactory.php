@@ -21,6 +21,7 @@ $factory->define(App\Result::class, function (Faker $faker) {
         'score' => $faker->numberBetween($min = 0, $max = 2000),
         'race' => $faker->randomElement(['Heat', 'Semi-Final', 'Final']),
         'age' => $faker->numberBetween($min = 13, $max = 60),
+        'is_recordable' => $faker->boolean(),
     ];
 
 });
