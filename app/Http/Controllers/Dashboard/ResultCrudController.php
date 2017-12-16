@@ -179,6 +179,13 @@ class ResultCrudController extends Controller
         $result->race = $request->race;
         $result->score = $request->score;
 
+        if(!$request->recordable || $result->wind > 2){
+          $result->is_recordable = false;
+          $result->records()->detach();
+        }else{
+          $result->is_recordable = true;
+        }
+
         //
         //Find and store age category
         //
@@ -198,18 +205,21 @@ class ResultCrudController extends Controller
           $result->relayAthletes()->sync($request->relay_id);
         }
 
-        //
-        //EDIT Records
-        //
-        // 1. Detach all records from result
-        $resultRecords = $result->records()->detach();
-        // 2. Add new record if they exist
-        if($request->records){
-            foreach($request->records as $record){
-                //atach result with record and event
-                $result->records()->attach($record, ['event_id' => $request->event_id]  );
-            }
-        }
+
+        $result->event->refreshRecords();
+
+        // //
+        // //EDIT Records
+        // //
+        // // 1. Detach all records from result
+        // $resultRecords = $result->records()->detach();
+        // // 2. Add new record if they exist
+        // if($request->records){
+        //     foreach($request->records as $record){
+        //         //atach result with record and event
+        //         $result->records()->attach($record, ['event_id' => $request->event_id]  );
+        //     }
+        // }
         return redirect()->route('result.index');
     }
 

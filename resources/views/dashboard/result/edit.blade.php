@@ -12,19 +12,40 @@
         {{ Form::token() }}
         {{ method_field('PATCH') }}
 
-        <!--Position input field-->
-        <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
-            <label for="position" class="col-md-4 control-label">Position</label>
-            <div class="col-md-6">
-                {{ Form::text('position',null,["class"=> 'form-control'])}}
 
-                @if ($errors->has('position'))
+        <!--Competition input field-->
+        <div class="form-group{{ $errors->has('competition_id') ? ' has-error' : '' }}">
+            <label for="competition_id" class="col-md-4 control-label">Competition</label>
+            <div class="col-md-6">
+                <select  id="competition_id" name="competition_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
+                    @foreach($competitions as $competition)
+                        <option @if($competition->id ==$result->competition->id) selected @endif value="{{$competition->id}}">{{$competition->name}} {{$competition->date_start}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('competition_id'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('position') }}</strong>
+                        <strong>{{ $errors->first('competition_id') }}</strong>
                     </span>
                 @endif
             </div>
         </div>
+
+        <!--date input field-->
+        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
+            <label for="date" class="col-md-4 control-label">Date</label>
+            <div class="col-md-6">
+              <select  id="date" name="date" >
+
+              </select>
+                @if ($errors->has('date'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('date') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+
 
         <!--Event Type input field-->
         <div class="form-group">
@@ -97,6 +118,33 @@
             </div>
         </div>
 
+        <!--Race input field-->
+        <div class="form-group{{ $errors->has('race') ? ' has-error' : '' }}">
+            <label for="race" class="col-md-4 control-label">Race</label>
+            <div class="col-md-6">
+                {{ Form::text('race',null,["class"=> 'form-control','required'])}}
+
+                @if ($errors->has('race'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('race') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <!--Position input field-->
+        <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
+            <label for="position" class="col-md-4 control-label">Position</label>
+            <div class="col-md-6">
+                {{ Form::text('position',null,["class"=> 'form-control'])}}
+
+                @if ($errors->has('position'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('position') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
         <!--Mark input field-->
         <div class="form-group{{ $errors->has('mark') ? ' has-error' : '' }}">
@@ -112,9 +160,10 @@
             </div>
         </div>
 
+
         <!--Wind input field-->
         <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">
-            <label for="wind" class="col-md-4 control-label">Wind</label>
+            <label for="wind" class="col-md-4 control-label">Wind (nullable)</label>
             <div class="col-md-6">
                 {{ Form::text('wind',null,["class"=> 'form-control'])}}
 
@@ -126,55 +175,13 @@
             </div>
         </div>
 
-        <!--Competition input field-->
-        <div class="form-group{{ $errors->has('competition_id') ? ' has-error' : '' }}">
-            <label for="competition_id" class="col-md-4 control-label">Competition</label>
-            <div class="col-md-6">
-                <select  id="competition_id" name="competition_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
-                    @foreach($competitions as $competition)
-                        <option @if($competition->id ==$result->competition->id) selected @endif value="{{$competition->id}}">{{$competition->name}} {{$competition->date_start}}</option>
-                    @endforeach
-                </select>
-                @if ($errors->has('competition_id'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('competition_id') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
 
-        <!--date input field-->
-        <div class="form-group{{ $errors->has('date') ? ' has-error' : '' }}">
-            <label for="date" class="col-md-4 control-label">Date</label>
-            <div class="col-md-6">
-              <select  id="date" name="date" >
 
-              </select>
-                @if ($errors->has('date'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('date') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
 
-        <!--Race input field-->
-        <div class="form-group{{ $errors->has('race') ? ' has-error' : '' }}">
-            <label for="race" class="col-md-4 control-label">Race</label>
-            <div class="col-md-6">
-                {{ Form::text('race',null,["class"=> 'form-control','required'])}}
-
-                @if ($errors->has('race'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('race') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
 
         <!--Score input field-->
         <div class="form-group{{ $errors->has('score') ? ' has-error' : '' }}">
-            <label for="result" class="col-md-4 control-label">Score Points</label>
+            <label for="result" class="col-md-4 control-label">Score Points (nullable)</label>
             <div class="col-md-6">
                 {{ Form::text('score',null,["class"=> 'form-control'])}}
                 @if ($errors->has('score'))
@@ -185,15 +192,13 @@
             </div>
         </div>
 
-
-        <!--Records input fields-->
-        @foreach($records as $record)
-            <div class="form-group">
-                <label for="records[]" class="col-md-4 control-label">{{$record->acronym}}</label>
-                <input id="records[]" name="records[]" type="checkbox" value="{{$record->id}}" @if($achievements->contains($record->id)) checked @endif>
+        <!--Score input field-->
+        <div class="form-group">
+            <label for="result" class="col-md-4 control-label">Is Recordable?</label>
+            <div class="col-md-6">
+              <input id="recordable" name="recordable" type="checkbox" @if($result->is_recordable) checked @endif>
             </div>
-        @endforeach
-
+        </div>
 
 
         <div class="form-group">

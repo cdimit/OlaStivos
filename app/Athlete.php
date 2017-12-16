@@ -262,8 +262,9 @@ class Athlete extends Model
     /*
     // Returns THE PB of this athlete for a specific EVENT
     */
-    public function getPb($event)
+    public function getPb($event, $date = null)
     {
+
       //Get PB record ID
       $record = Record::where('acronym','PB')->first();
       $recordId = $record->id;
@@ -271,7 +272,7 @@ class Athlete extends Model
       //Get all PBs of athlete for this event
       $pbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
-      })->where('athlete_id',$this->id)->where('event_id',$event->id)->get();
+      })->where('athlete_id',$this->id)->where('event_id',$event->id)->whereBetween('date',['1000-01-01' ,$date])->get();
 
       //Find best PB based on event type
       $pb = $this->bestRecord($event,$pbs);
@@ -359,7 +360,7 @@ class Athlete extends Model
     // Returns the best SB of this athlete for a specific YEAR
     ///and for a specific EVENT
     */
-    public function getSB($year, $event)
+    public function getSB($year, $event, $date = null)
     {
       //Get SB record ID
       $record = Record::where('acronym','SB')->first();
@@ -368,7 +369,7 @@ class Athlete extends Model
       //Get SB of athlete for the year
       $sbs = Result::whereHas('records',function ($query) use ($recordId) {
         $query->where('record_id','=', $recordId);
-      })->where('athlete_id',$this->id)->where(DB::raw('YEAR(date)'), '=',$year)->where('event_id',$event->id)->get();
+      })->where('athlete_id',$this->id)->where(DB::raw('YEAR(date)'), '=',$year)->where('event_id',$event->id)->whereBetween('date',['1000-01-01' ,$date])->get();
 
       //Find best PB based on event type
       $sb = $this->bestRecord($event,$sbs);
@@ -475,7 +476,7 @@ class Athlete extends Model
 
     public function setPbIfExist($result, $event)
     {
-      $pb = $this->getPb($event);
+      $pb = $this->getPb($event, $result->date);
 
       if(!$pb){
         $result->setPb($event);
@@ -500,7 +501,7 @@ class Athlete extends Model
     public function setSbIfExist($result, $event)
     {
       $date = Carbon::parse($result->date);
-      $sb = $this->getSb($date->year ,$event);
+      $sb = $this->getSb($date->year ,$event, $result->date);
 
       if(!$sb){
         $result->setSb($event);
@@ -524,7 +525,7 @@ class Athlete extends Model
 
     public function setNRIfExist($result, $event)
     {
-      $NR = $event->getNR();
+      $NR = $event->getNR($result->date);
 
       if(!$NR){
         $result->setNR($event);
@@ -553,7 +554,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NUR = $event->getNUR();
+      $NUR = $event->getNUR($result->date);
 
       if(!$NUR){
         $result->setNUR($event);
@@ -582,7 +583,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NJR = $event->getNJR();
+      $NJR = $event->getNJR($result->date);
 
       if(!$NJR){
         $result->setNJR($event);
@@ -611,7 +612,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NYR = $event->getNYR();
+      $NYR = $event->getNYR($result->date);
 
       if(!$NYR){
         $result->setNYR($event);
@@ -633,8 +634,19 @@ class Athlete extends Model
       return false;
     }
 
-    public function setRecordIfExist($result)
+    public function setEventRecords($event){
+      foreach($event->results->where('is_recordable', 'true') as $result){
+        $result->athlete->setRecordIfExist($result, true);
+      }
+    }
+
+
+    public function setRecordIfExist($result, $editable = false)
     {
+
+      if($editable){
+        $result->records()->detach();
+      }
 
       $this->setPbIfExist($result, $result->event);
       $this->setSbIfExist($result, $result->event);

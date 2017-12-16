@@ -18,6 +18,11 @@ class Event extends Model
         return $this->hasMany('App\PivotRecord');
     }
 
+    public function record_results($recordId)
+    {
+      return $this->BelongsToMany('App\Result', 'result_record', 'event_id', 'result_id')->where('record_id', '$recordId');
+    }
+
     public function isTrack()
     {
       return $this->type=='track';
@@ -28,44 +33,70 @@ class Event extends Model
       return $this->type=='field';
     }
 
-    public function getNR()
+    public function getNR($date = null)
     {
-      $result = $this->records->where('record_id', Record::where('acronym', 'NR')->first()->id)->sortByDesc('date')->first();
-      if($result){
-        return Result::find($result->result_id);
-      }
 
-      return null;
+      //Get PB record ID
+      $record = Record::where('acronym','NR')->first();
+      $recordId = $record->id;
+
+      //Get all PBs of athlete for this event
+      $nrs = Result::whereHas('records',function ($query) use ($recordId) {
+        $query->where('record_id', $recordId)->where('event_id', $this->id);
+      })->whereBetween('date',['1000-01-01' ,$date])->get();
+
+      $nr = $nrs->sortByDesc('date')->first();
+
+      return $nr;
+
     }
 
-    public function getNUR()
+    public function getNUR($date = null)
     {
-      $result = $this->records->where('record_id', Record::where('acronym', 'NUR')->first()->id)->sortByDesc('date')->first();
-      if($result){
-        return Result::find($result->result_id);
-      }
+      //Get PB record ID
+      $record = Record::where('acronym','NUR')->first();
+      $recordId = $record->id;
 
-      return null;
+      //Get all PBs of athlete for this event
+      $nrs = Result::whereHas('records',function ($query) use ($recordId) {
+        $query->where('record_id', $recordId)->where('event_id', $this->id);
+      })->whereBetween('date',['1000-01-01' ,$date])->get();
+
+      $nr = $nrs->sortByDesc('date')->first();
+
+      return $nr;
     }
 
-    public function getNJR()
+    public function getNJR($date = null)
     {
-      $result = $this->records->where('record_id', Record::where('acronym', 'NJR')->first()->id)->sortByDesc('date')->first();
-      if($result){
-        return Result::find($result->result_id);
-      }
+      //Get PB record ID
+      $record = Record::where('acronym','NJR')->first();
+      $recordId = $record->id;
 
-      return null;
+      //Get all PBs of athlete for this event
+      $nrs = Result::whereHas('records',function ($query) use ($recordId) {
+        $query->where('record_id', $recordId)->where('event_id', $this->id);
+      })->whereBetween('date',['1000-01-01' ,$date])->get();
+
+      $nr = $nrs->sortByDesc('date')->first();
+
+      return $nr;
     }
 
-    public function getNYR()
+    public function getNYR($date = null)
     {
-      $result = $this->records->where('record_id', Record::where('acronym', 'NYR')->first()->id)->sortByDesc('date')->first();
-      if($result){
-        return Result::find($result->result_id);
-      }
+      //Get PB record ID
+      $record = Record::where('acronym','NYR')->first();
+      $recordId = $record->id;
 
-      return null;
+      //Get all PBs of athlete for this event
+      $nrs = Result::whereHas('records',function ($query) use ($recordId) {
+        $query->where('record_id', $recordId)->where('event_id', $this->id);
+      })->whereBetween('date',['1000-01-01' ,$date])->get();
+
+      $nr = $nrs->sortByDesc('date')->first();
+
+      return $nr;
     }
 
     public function scopeOutdoor($query)
@@ -109,6 +140,14 @@ class Event extends Model
         return 'Ανοικτός Στίβος';
       }else{
         return 'Ανώμαλος Δρόμος';
+      }
+    }
+
+    public function refreshRecords(){
+      $results = $this->results->where('is_recordable', true);
+
+      foreach($results as $result){
+        $result->athlete->setRecordIfExist($result, true);
       }
     }
 }
