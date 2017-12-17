@@ -265,6 +265,10 @@ class Athlete extends Model
     public function getPb($event, $date = null)
     {
 
+      if(!$date){
+        $date = Carbon::now();
+      }
+
       //Get PB record ID
       $record = Record::where('acronym','PB')->first();
       $recordId = $record->id;
@@ -362,6 +366,11 @@ class Athlete extends Model
     */
     public function getSB($year, $event, $date = null)
     {
+
+      if(!$date){
+        $date = Carbon::now();
+      }
+
       //Get SB record ID
       $record = Record::where('acronym','SB')->first();
       $recordId = $record->id;

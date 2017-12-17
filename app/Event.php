@@ -163,8 +163,13 @@ class Event extends Model
       }
     }
 
-    public function refreshRecords(){
-      $results = $this->results->where('is_recordable', true);
+    public function refreshRecords($date = null){
+
+      if($date){
+        $results =  $this->results->where('is_recordable', true)->where('date','>=', $date)->sortBy('date');
+      }else{
+        $results = $this->results->where('is_recordable', true)->sortBy('date');
+      }
 
       foreach($results as $result){
         $result->athlete->setRecordIfExist($result, true);

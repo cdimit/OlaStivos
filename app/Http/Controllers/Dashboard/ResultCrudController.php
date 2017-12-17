@@ -224,6 +224,20 @@ class ResultCrudController extends Controller
     }
 
 
+    public function destroy($id)
+    {
+      $result=Result::find($id);
+      $event = $result->event;
+      $result->records()->detach();
+
+      $result->delete();
+
+      $event->refreshRecords();
+
+      return redirect()->route('result.index');
+
+    }
+
     /**
      * Show the form for creating a new Race.
      *
