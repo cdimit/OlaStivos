@@ -206,7 +206,7 @@ class ResultCrudController extends Controller
         }
 
 
-        $result->event->refreshRecords();
+        $result->event->refreshRecords($result->date);
 
         // //
         // //EDIT Records
@@ -232,7 +232,7 @@ class ResultCrudController extends Controller
 
       $result->delete();
 
-      $event->refreshRecords();
+      $event->refreshRecords($result->date);
 
       return redirect()->route('result.index');
 

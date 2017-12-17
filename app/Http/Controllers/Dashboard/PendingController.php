@@ -71,7 +71,6 @@ class PendingController extends Controller
 
   				//Attach Records
           if($result->is_recordable){
-            // $result->athlete->setRecordIfExist($result);
             $result->event->refreshRecords($result->date);
 
           }

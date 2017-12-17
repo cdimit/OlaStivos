@@ -650,12 +650,10 @@ class Athlete extends Model
     }
 
 
-    public function setRecordIfExist($result, $editable = false)
+    public function setRecordIfExist($result)
     {
 
-      if($editable){
-        $result->records()->detach();
-      }
+      $result->records()->detach();
 
       $this->setPbIfExist($result, $result->event);
       $this->setSbIfExist($result, $result->event);
