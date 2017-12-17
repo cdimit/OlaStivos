@@ -295,7 +295,7 @@
               <div class="panel-heading">Facebook Live Feed</div>
               <div class="panel-body">
 
-<div class="fb-page" data-href="https://www.facebook.com/trackfieldcy/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/trackfieldcy/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/trackfieldcy/">Trackfieldcy</a></blockquote></div>
+                <div class="fb-page" data-href="https://www.facebook.com/trackfieldcy/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/trackfieldcy/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/trackfieldcy/">Trackfieldcy</a></blockquote></div>
               </div>
             </div>
 
@@ -313,29 +313,8 @@
 @endsection
 
 @section('scripts')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-{{--   <script type="text/javascript">
-    $(document).ready(function(){
-    	//Navbar transparent before scrolling down
-       	var scroll_start = 0;
-       	var startchange = $('#startchange');
-       	var offset = startchange.offset();
+{{--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script> --}}
 
-       	if (startchange.length){
-    	   $(document).scroll(function() {
-    	      scroll_start = $(this).scrollTop();
-    	      if(scroll_start > offset.top) {
-    	          $(".navbar-default").css('background-color', 'black');
-                $(".navbar-brand").css('display', 'inline');
-    	       } else {
-    	          $('.navbar-default').css({"background-color":"rgba(0,0,0,0.1)","transition":"background-color 250ms linear"});
-                $(".navbar-brand").css('display', 'none');
-    	       }
-    	   });
-        };
-
-    });
-  </script> --}}
 
 @endsection

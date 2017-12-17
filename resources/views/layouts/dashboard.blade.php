@@ -96,8 +96,9 @@
                         <a href="{{ route('image.index') }}" class="list-group-item list-group-item-action">Images</a>
                         <a href="{{ route('video.index') }}" class="list-group-item list-group-item-action">Videos</a>
                         @if(Auth::user() && Auth::user()->isAdmin())
-                            <a href="{{ route('pending.index') }}" class="list-group-item list-group-item-action">Pending</a>
+                            <a href="{{ route('event.index') }}" class="list-group-item list-group-item-action">Events</a>
                             <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action">Users</a>
+                            <a href="{{ route('pending.index') }}" class="list-group-item list-group-item-action active">Pending</a>
                         @endif
                     </div>
 

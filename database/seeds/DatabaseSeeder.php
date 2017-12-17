@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
       $this->call(RoleTableSeeder::class);
       // Create Standard Competition Series
       $this->call(CompetitionSeriesTableSeeder::class);
+      // Create Standard Competition Series
+      $this->call(EventTableSeeder::class);
 
       Record::forceCreate(['name' => 'National Record', 'acronym' => 'NR']);
       Record::forceCreate(['name' => 'National U23 Record', 'acronym' => 'NUR']);
