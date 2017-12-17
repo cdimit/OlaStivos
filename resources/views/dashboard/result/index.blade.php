@@ -6,7 +6,7 @@
     	<a href="{{ route('result.createRace') }}" class="btn btn-info btn-responsive" role="button">Add new Race</a>
 	</p>
 	<div style="width:265px;">
-		*Results still pending are in color: 
+		*Results still pending are in color:
 		<div class="red-square"></div>
 	</div>
 
@@ -22,7 +22,7 @@
 	      		<th>Event</th>
 	      		<th>Mark</th>
 	      		<th>Score</th>
-	      		<th>Edit</th>
+	      		<th>Option</th>
 	    	</tr>
 	  	</thead>
 	  		@foreach($results as $result)
@@ -38,8 +38,12 @@
 		      		<td>{{$result->score}}</td>
 		      		<td>
 		      			<a href="{{ route('result.edit',$result->id)}}" class="btn btn-primary btn-sm">
-  							Edit
-						</a>
+  								Edit
+								</a>
+
+								{{ Form::open(['route' => ['result.destroy', $result->id], 'method' => 'delete']) }}
+									{{ Form::submit('Remove') }}
+								{{ Form::close() }}
 					</td>
 
 		    	</tr>

@@ -43,6 +43,6 @@ class DatabaseSeeder extends Seeder
       Club::forceCreate(['name' => 'Γυμναστικός Σύλλογος Κόροιβος', 'acronym' => 'ΓΣΚ', 'city' => 'Πάφος', 'since' => '1898']);
       Club::forceCreate(['name' => 'Γυμναστικός Συλλογος Πράξανδρος', 'acronym' => 'ΓΣΠΡ', 'city' => 'Κερύνεια', 'since' => '1919']);
 
-      
+
     }
 }
