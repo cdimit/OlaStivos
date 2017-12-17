@@ -24,7 +24,7 @@ class EventTableSeeder extends Seeder
     	$this->createEvents($names,'track','outdoor','male');
     	
     	// 1b. Track Events - Female
-    	$names = ['80m','100m','200m','400m','800m','1ηΜίλι','1500m','2000m στήπλ','3000m στήπλ', '5000m','10000m','Ημιμαραθώνιος','Μαραθώνιος','100m εμπόδια','100m εμπόδια(76cm)','400m εμπόδια','4x80m','4x100m','4x300m','4x400m'];
+    	$names = ['80m','100m','200m','400m','800m','1 Μίλι','1500m','2000m στήπλ','3000m στήπλ', '5000m','10000m','Ημιμαραθώνιος','Μαραθώνιος','100m εμπόδια','100m εμπόδια(76cm)','400m εμπόδια','4x80m','4x100m','4x300m','4x400m'];
     	$this->createEvents($names,'track','outdoor','female');
     	
     	// 1c. Field Events - Male

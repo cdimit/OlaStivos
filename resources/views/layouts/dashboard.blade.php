@@ -22,6 +22,9 @@
             background: #ffd6cc;
         }
     </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
     @yield('styles')
 </head>
 <body>
@@ -96,7 +99,7 @@
                         <a href="{{ route('image.index') }}" class="list-group-item list-group-item-action">Images</a>
                         <a href="{{ route('video.index') }}" class="list-group-item list-group-item-action">Videos</a>
                         @if(Auth::user() && Auth::user()->isAdmin())
-                            <a href="{{ route('event.index') }}" class="list-group-item list-group-item-action">Events</a>
+                            <a href="{{ route('events.index') }}" class="list-group-item list-group-item-action">Events</a>
                             <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action">Users</a>
                             <a href="{{ route('pending.index') }}" class="list-group-item list-group-item-action active">Pending</a>
                         @endif
@@ -115,6 +118,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     @yield('scripts')
 </body>
 </html>
