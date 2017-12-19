@@ -44,6 +44,12 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', 'admin')->exists();
     }
+
+    //check if user is moderator
+    public function isModerator()
+    {
+        return $this->roles()->where('name', 'moderator')->exists();
+    }
     
 
 }

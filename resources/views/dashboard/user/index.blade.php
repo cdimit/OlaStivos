@@ -18,7 +18,7 @@
 		    	<tr>
 		      		<th scope="row">{{$user->id}}</th>
 		      		<td>{{$user->name}}</td>
-		      		<td>@if($user->hasRole('admin'))<b>Admin</b> @elseif($user->hasRole('moderator')) Moderator@else User @endif</td>
+		      		<td>@if($user->hasRole('admin'))<b>Admin</b> @elseif($user->hasRole('moderator')) Moderator @else User @endif</td>
 		      		<td>	
 		      			<a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary btn-sm">
   							Edit

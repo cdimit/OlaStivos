@@ -38,12 +38,13 @@
 		      		<td>{{$result->score}}</td>
 		      		<td>
 		      			<a href="{{ route('result.edit',$result->id)}}" class="btn btn-primary btn-sm">
-  								Edit
-								</a>
-
-								{{ Form::open(['route' => ['result.destroy', $result->id], 'method' => 'delete']) }}
-									{{ Form::submit('Remove') }}
-								{{ Form::close() }}
+  							Edit
+						</a>
+						@if (Auth::user()->can('delete', Result::class))
+							{{ Form::open(['route' => ['result.destroy', $result->id], 'method' => 'delete']) }}
+								{{ Form::submit('Remove') }}
+							{{ Form::close() }}
+						@endif
 					</td>
 
 		    	</tr>

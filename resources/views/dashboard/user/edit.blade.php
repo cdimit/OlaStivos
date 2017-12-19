@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary">
-                    Save Athlete
+                    Save Changes
                 </button>
             </div>
         </div>

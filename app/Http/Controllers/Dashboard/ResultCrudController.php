@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Auth;
 use App\Result;
 use App\Athlete;
 use App\Event;
@@ -226,6 +227,7 @@ class ResultCrudController extends Controller
 
     public function destroy($id)
     {
+      $this->authorize('delete', Result::class);
       $result=Result::find($id);
       $event = $result->event;
       $result->records()->detach();
@@ -233,7 +235,7 @@ class ResultCrudController extends Controller
       $result->delete();
 
       $event->refreshRecords($result->date);
-
+      
       return redirect()->route('result.index');
 
     }

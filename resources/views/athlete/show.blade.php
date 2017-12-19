@@ -6,6 +6,7 @@
 
  --}}
     <link href="{{ asset('/css/profiles/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/headings/heading-in-profile.css') }}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="container" style="min-height: calc(100vh - 400px);">

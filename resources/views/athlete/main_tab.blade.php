@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-6">
     <div class="well">
-        <p><h1>{{$athlete->first_name}} {{$athlete->last_name}}</h1></p>
+        <p><h1>{{$athlete->name}}</h1></p>
         <p>
             <ul class="list-inline">
                 @if ( $athlete->gender == 'male')

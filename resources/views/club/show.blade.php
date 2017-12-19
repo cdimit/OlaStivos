@@ -2,6 +2,7 @@
 @section('styles')
    
     <link href="{{ asset('/css/profiles/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/headings/heading-in-profile.css') }}" rel="stylesheet">
 
 @endsection
 @section('content')

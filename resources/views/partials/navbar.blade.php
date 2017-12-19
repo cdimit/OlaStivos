@@ -30,7 +30,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
-                @if(Auth::user() && Auth::user()->isAdmin())
+                @if(Auth::user() && (Auth::user()->isAdmin() || Auth::user()->isModerator()))
                     <li><a href="\dashboard"><i>Dashboard</i></a></li>
                 @endif
                 <!-- Navbar Links -->
