@@ -42,11 +42,21 @@
             </div>
             
             <div class="banner-content-center">
-                <a href="#"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter-square fa-3x"></i></a>
-                <a href="#"><i class="fa fa-linkedin-square fa-3x"></i></a>
-                <a href="#"><i class="fa fa-github-square fa-3x"></i></a>
-
+                <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+                <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                <a href="#"><i class="fa fa-github-square fa-2x"></i></a>
+                <ul>
+                    <li>
+                        Μοναδική βάση δεδομένων για τον Κυπριακού στίβο
+                    </li><li>
+                        Καλύτερες επιδόσεις χρόνιάς ανά κατηγορία
+                    </li><li>
+                        Παγκύπρια Ρεκόρ όλων των κατηγοριών
+                    </li><li>
+                        Εκατοντάδες προφίλ Κύπριων αθλητών
+                    </li>
+                </ul>
             </div>
         </div>
         <div id="startchange"></div>

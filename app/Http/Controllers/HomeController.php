@@ -11,16 +11,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    */
 
     /**
      * Show the application dashboard.
@@ -39,13 +30,13 @@ class HomeController extends Controller
         $maleNRs = $this->getNationalRecords('outdoor','male');
         $femaleNRs = $this->getNationalRecords('outdoor','female');
 
-// dd($maleNRs);
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('outdoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('outdoor','female');
 
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
+        
 
         //Data for Search
         $athletesSearch = Athlete::all()->sortBy('first_name');

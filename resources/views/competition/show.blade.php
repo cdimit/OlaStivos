@@ -1,72 +1,8 @@
 @extends('layouts.app')
 @section('styles')
-   
 
-<style>
-    li.uppercase {
-        text-transform: uppercase;
-    }
-    
-    .list-inline{display:block;}
-    
-    .list-inline li{display:inline-block;}
-    
-    .list-inline li.seperator:after{content:'|'; margin:auto 20px;}
-
-    /* Overrides list-group-item from Bootstrap */ 
-    .list-group-item {
-        padding: 3px 10px;
-        font-size: 11px;
-    }
-    li.borderless {
-        border-top: 0 none;
-        border-right: 0 none;
-        border-left: 0 none;
-    }
-
-    .table-condensed{
-        font-size: 12px;
-    }
-
-
-    .list-group-item-achievement img{
-        max-height: 20px;
-        max-width: 20px;
-        height: auto;
-        width: auto;
-        float: left;
-        margin-left: -2px;
-    }
-
-    .panel.with-nav-tabs .panel-heading{
-        padding: 5px 5px 0 5px;
-    }
-    .panel.with-nav-tabs .nav-tabs{
-        border-bottom: none;
-    }
-    .panel.with-nav-tabs .nav-justified{
-        margin-bottom: -1px;
-    }
-
-    h1{
-        color: black;
-        font-weight: bold; 
-        text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    }
-
-    .well {
-       background-color: rgba(245, 245, 245, 0.4);
-       margin-left: 1px;
-       margin-right: 1px;
-       margin-top: 1px;
-       margin-bottom: 1px;
-       border: 0;
-    }
-
-
-
-
-</style>
+    <link href="{{ asset('/css/profiles/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/headings/heading-in-profile.css') }}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="container">

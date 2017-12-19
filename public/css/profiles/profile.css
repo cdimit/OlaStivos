@@ -1,0 +1,64 @@
+/* LIST CSS */
+li.uppercase {
+	text-transform: uppercase;
+}
+
+.list-inline{display:block;}
+
+.list-inline li{display:inline-block;}
+
+/* Overrides list-group-item from Bootstrap */ 
+.list-group-item {
+    padding: 3px 10px;
+    font-size: 11px;
+}
+
+li.borderless {
+    border-top: 0 none;
+    border-right: 0 none;
+    border-left: 0 none;
+}
+
+/* ACHIEVEMENTS LIST */
+.list-group-item-achievement img{
+    max-height: 20px;
+    max-width: 20px;
+    height: auto;
+    width: auto;
+    float: left;
+    margin-left: -2px;
+}
+
+/* WELL WITH INFORMATION */
+.well {
+	background-color: rgba(245, 245, 245, 0.4);
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	border: 0;
+}
+
+
+/* TABLE condensed */
+.table-condensed{
+    font-size: 12px;
+}
+
+
+/* TABS */
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+    border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+    margin-bottom: -1px;
+}
+
+
+/*img-responsive */
+.img-responsive{
+    max-height: 300px;
+}

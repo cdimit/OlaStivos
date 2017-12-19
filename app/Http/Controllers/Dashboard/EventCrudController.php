@@ -104,19 +104,5 @@ class EventCrudController extends Controller
         return redirect()->route('events.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $event=Event::find($id);
-            
-        // $event->delete();
 
-
-        return redirect()->route('events.index');
-    }
 }

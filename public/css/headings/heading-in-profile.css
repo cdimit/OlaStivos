@@ -1,0 +1,6 @@
+/* Heading style */
+h1{
+    color: black;
+    font-weight: bold; 
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}

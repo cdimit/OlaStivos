@@ -115,7 +115,7 @@ Route::middleware(['auth','role:admin,moderator'])->group(function () {
 });
 //For admins only
 Route::middleware(['auth','role:admin'])->group(function () {
-	Route::resource('dashboard/events', 'Dashboard\EventCrudController', ['except' => ['show']]);
+	Route::resource('dashboard/events', 'Dashboard\EventCrudController', ['except' => ['show','destroy']]);
 	Route::resource('dashboard/users', 'Dashboard\UserCrudController', ['except' => ['create','store','show']]);
 	Route::get('dashboard/pending', 'Dashboard\PendingController@index')->name('pending.index');
 	Route::post('dashboard/pending', 'Dashboard\PendingController@publish')->name('pending.publish');

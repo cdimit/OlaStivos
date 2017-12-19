@@ -43,9 +43,9 @@
   background: linear-gradient(right, black, white);
   background-repeat: no-repeat;
   background-size: 100% ;
-  background-position: center -30px;
+  background-position: 200px -30px;
   overflow: hidden;
-*/
+
 /*
   background-size: 100% 100%; //stretch resize
 */
@@ -82,10 +82,17 @@ div.banner-content-center{
   padding-left:280px;
   float:left;
 }
-
-div.banner-content-right >ul li{
+div.banner-content-center >ul{
+    list-style-image: url("/img/bullet.png");
+    padding-left: 0pt;
+}
+div.banner-content-center >ul li{
+  float:0;
+  color: #1A6B70;
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 11px;
+  margin:0;
+
 }
 
 

@@ -166,6 +166,7 @@
             </div>
         </div>
 
+
         <!--Wind input field-->
         <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">
             <label for="wind" class="col-md-4 control-label">Wind (nullable)</label>
@@ -307,6 +308,7 @@
               });
               return;
           }
+
 
 
 

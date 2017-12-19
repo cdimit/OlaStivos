@@ -26,7 +26,7 @@
 			      		<th>Season</th>
 			      		<th>Gender</th>
 			      		<th>Edit</th>
-			      		<th>Delete</th>
+
 			    	</tr>
 			  	</thead>
 			  	
@@ -42,11 +42,6 @@
 				      			<a href="{{ route('events.edit',$event->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>
-							</td>
-				      		<td>	
-								{{ Form::open(['route' => ['events.destroy',$event->id], 'method' => 'delete']) }}
-									{{ Form::submit('Delete') }}
-								{{ Form::close() }}
 							</td>
 
 				    	</tr>
@@ -78,7 +73,7 @@
 			      		<th>Season</th>
 			      		<th>Gender</th>
 			      		<th>Edit</th>
-			      		<th>Delete</th>
+
 			    	</tr>
 			  	</thead>
 			  	
@@ -95,11 +90,7 @@
 		  							Edit
 								</a>
 							</td>
-				      		<td>	
-								{{ Form::open(['route' => ['events.destroy',$event->id], 'method' => 'delete']) }}
-									{{ Form::submit('Delete') }}
-								{{ Form::close() }}
-							</td>
+
 
 				    	</tr>
 			    	@endforeach
@@ -130,7 +121,7 @@
 			      		<th>Season</th>
 			      		<th>Gender</th>
 			      		<th>Edit</th>
-			      		<th>Delete</th>
+
 			    	</tr>
 			  	</thead>
 			  	
@@ -147,11 +138,7 @@
 		  							Edit
 								</a>
 							</td>
-				      		<td>	
-								{{ Form::open(['route' => ['events.destroy',$event->id], 'method' => 'delete']) }}
-									{{ Form::submit('Delete') }}
-								{{ Form::close() }}
-							</td>
+				      		
 
 				    	</tr>
 			    	@endforeach
