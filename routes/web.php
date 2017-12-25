@@ -87,6 +87,16 @@ Route::post('/alltime/events', 'AllTimeController@getEvents')->name('alltime.get
 
 /*
 |--------------------------------------------------------------------------
+| Contact us Routes
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('/contact-us', 'ContactController@show')->name('contact.show');
+Route::post('/contact-us', 'ContactController@send')->name('contact.send');
+
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN DASHBOARD Routes
 |--------------------------------------------------------------------------
 |	resource routes for CRUD

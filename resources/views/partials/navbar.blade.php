@@ -50,7 +50,7 @@
                     <li><a href="{{ route('record.showNRsHistory') }}">Πρόοδος Παγκύπριων Ρεκόρ</a></li>
                 @endif
                 <li><a href="{{ route('competition.calendar') }}">Ημερολόγιο Αγώνων</a></li>
-                <li><a href="#">Επικοινωνία</a></li>
+                <li><a href="{{ route('contact.show') }}">Επικοινωνία</a></li>
 
             </ul>
         </div>
