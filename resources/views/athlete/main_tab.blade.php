@@ -22,19 +22,19 @@
                         <span class="list-group-item-achievement">
                             <img src="https://cdn3.iconfinder.com/data/icons/glypho-generic-icons/64/prize-badge-512.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ {{$NR->event->sezon}}: &ensp; <i>{{$NR->event->name}}   &ensp;  <b>{{$NR->mark}}</b></i>
+                        Παγκύπριο Ρεκόρ {{$NR->event->sezon}}: &ensp; <i>{{$NR->event->name}}   &ensp;  <b>{{$NR->markstr}}</b></i>
                     </li>
                 @endforeach
                 @foreach($NURs as $NUR)
                     <li class="list-group-item">
-                        Παγκύπριο Ρεκόρ U23 {{$NUR->event->sezon}}: &ensp; <i>{{$NUR->event->name}} &ensp; <b>{{$NUR->mark}}</b></i>
+                        Παγκύπριο Ρεκόρ U23 {{$NUR->event->sezon}}: &ensp; <i>{{$NUR->event->name}} &ensp; <b>{{$NUR->markstr}}</b></i>
                     </li>
                 @endforeach
                 @foreach($NJRs as $NJR)
-                    <li class="list-group-item">Παγκύπριο Ρεκόρ U19 {{$NJR->event->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->mark}}</b></i></li>
+                    <li class="list-group-item">Παγκύπριο Ρεκόρ U19 {{$NJR->event->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i></li>
                 @endforeach
                 @foreach($NYRs as $NYR)
-                    <li class="list-group-item">Παγκύπριο Ρεκόρ U17 {{$NYR->event->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->mark}}</b></i></li>
+                    <li class="list-group-item">Παγκύπριο Ρεκόρ U17 {{$NYR->event->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i></li>
                 @endforeach
 
                 <li class="list-group-item">Παγκύπριες νίκες: &ensp; <i><b>{{$nwins}}</b></i></li>
@@ -68,7 +68,7 @@
                             <tr>
                                 <th scope="row">{{$sb->event->name}}</th>
                                 <td><a href="/competition/{{$sb->competition->id}}">{{$sb->competition->name}}</a></td>
-                                <td>{{$sb->mark}}</td>
+                                <td>{{$sb->markstr}}</td>
                                 <td>{{$sb->score}}</td>
 
                             </tr>
@@ -99,7 +99,7 @@
                             <tr>
                                 <th scope="row">{{$pb->event->name}}</th>
                                 <td><a href="/competition/{{$pb->competition->id}}">{{$pb->competition->name}}</a></td>
-                                <td>{{$pb->mark}}</td>
+                                <td>{{$pb->markstr}}</td>
                                 <td>{{$pb->score}}</td>
 
                             </tr>
@@ -135,7 +135,7 @@
                                     <td>Καλύτερες επιδόσεις {{$year}}</td>
                                     @foreach($sb->values() as $s)
                                         @if($s)
-                                            <td><a href="/competition/{{$s->competition->id}}">{{$s->mark}}</a></td>
+                                            <td><a href="/competition/{{$s->competition->id}}">{{$s->markstr}}</a></td>
                                         @else
                                             <td>-</td>
                                         @endif              

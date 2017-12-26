@@ -32,8 +32,8 @@
               @if($lead)
               <tr>
                 <td>{{$lead->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$lead->athlete->id]) }}">{{$lead->athlete->first_name}} {{$lead->athlete->last_name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$lead->competition->id]) }}">{{$lead->mark}}</a></td>
+                <td><a href="{{ route('athlete.show',['athlete'=>$lead->athlete->id]) }}">{{$lead->athlete->name}} </a></td>
+                <td><a href="{{ route('competition.show',['competition'=>$lead->competition->id]) }}">{{$lead->markstr}}</a></td>
               </tr>
               @endif
             @endforeach
@@ -61,8 +61,8 @@
               @if($lead)
               <tr>
                 <td>{{$lead->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$lead->athlete->id]) }}">{{$lead->athlete->first_name}} {{$lead->athlete->last_name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$lead->competition->id]) }}">{{$lead->mark}}</a></td>
+                <td><a href="{{ route('athlete.show',['athlete'=>$lead->athlete->id]) }}">{{$lead->athlete->name}}</a></td>
+                <td><a href="{{ route('competition.show',['competition'=>$lead->competition->id]) }}">{{$lead->markstr}}</a></td>
               </tr>
               @endif
             @endforeach
@@ -117,8 +117,8 @@
               @if($nr)
               <tr>
                 <td>{{$nr->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$nr->athlete->id]) }}">{{$nr->athlete->first_name}} {{$nr->athlete->last_name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$nr->competition->id]) }}">{{$nr->mark}}</a></td>
+                <td><a href="{{ route('athlete.show',['athlete'=>$nr->athlete->id]) }}">{{$nr->athlete->name}}</a></td>
+                <td><a href="{{ route('competition.show',['competition'=>$nr->competition->id]) }}">{{$nr->markstr}}</a></td>
               </tr>
               @endif
             @endforeach
@@ -147,8 +147,8 @@
               @if($nr)
               <tr>
                 <td>{{$nr->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$nr->athlete->id]) }}">{{$nr->athlete->first_name}} {{$nr->athlete->last_name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$nr->competition->id]) }}">{{$nr->mark}}</a></td>
+                <td><a href="{{ route('athlete.show',['athlete'=>$nr->athlete->id]) }}">{{$nr->athlete->name}}</a></td>
+                <td><a href="{{ route('competition.show',['competition'=>$nr->competition->id]) }}">{{$nr->markstr}}</a></td>
               </tr>
               @endif
             @endforeach

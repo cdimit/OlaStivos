@@ -94,7 +94,7 @@
                                                                         <tr>
                                                                             <td>{{$result->position}}</th>
                                                                             <td> <a href="/athlete/{{$result->athlete->id}}">{{$result->athlete->name}} </a></td>
-                                                                            <th>{{$result->mark}}</td>
+                                                                            <th>{{$result->markstr}}</td>
                                                                             <td>{{$result->score}}</td>
                                                                             <td>
                                                                             @foreach($result->records as $record)

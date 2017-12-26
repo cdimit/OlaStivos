@@ -33,7 +33,29 @@ class Result extends Model
 
     public function records()
     {
-		return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id')->withTimestamps();
+		  return $this->BelongsToMany('App\Record', 'result_record', 'result_id', 'record_id')->withTimestamps();
+    }
+
+
+
+    public function getMarkstrAttribute(): string
+    {
+      if($this->event->isTrack()){
+        if(starts_with($this->mark, '00:00:0')){
+          return str_replace_first('00:00:0', '', $this->mark);
+        }elseif(starts_with($this->mark, '00:00:')){
+          return str_replace_first('00:00:', '', $this->mark);
+        }elseif(starts_with($this->mark, '00:0')){
+          return str_replace_first('00:0', '', $this->mark);
+        }elseif(starts_with($this->mark, '00:0')){
+          return str_replace_first('00:', '', $this->mark);
+        }elseif(starts_with($this->mark, '00:')){
+          return str_replace_first('00:', '', $this->mark);
+        }elseif(starts_with($this->mark, '0')){
+          return str_replace_first('0', '', $this->mark);
+        }
+      }
+      return $this->mark;
     }
 
     public function setPb($event)

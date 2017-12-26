@@ -119,12 +119,7 @@
         </div>
 
         <!--Race input field-->
-        <div class="form-group{{ $errors->has('race') ? ' has-error
-
-
-
-
-          ' : '' }}">
+        <div class="form-group{{ $errors->has('race') ? ' has-error ' : '' }}">
             <label for="race" class="col-md-4 control-label">Race</label>
             <div class="col-md-6">
                 {{ Form::text('race',null,["class"=> 'form-control','placeholder'=>'Heat, Semi-final...','required'])}}
@@ -152,18 +147,91 @@
             </div>
         </div>
 
-        <!--Mark input field-->
-        <div class="form-group{{ $errors->has('mark') ? ' has-error' : '' }}">
-            <label for="mark" class="col-md-4 control-label">Mark</label>
-            <div class="col-md-6">
-                <input id="mark" type="text" class="form-control" name="mark" value="{{ old('mark') }}" required>
+        <!--Field-Mark input field-->
+        <div id="field_mark">
+          <div class="form-group{{ $errors->has('meters') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('cmeters') ? ' has-error' : '' }}">
+              <label class="col-md-4 control-label">Mark</label>
+                <div class="col-md-6" display="inline-block">
+                  <div class="col-md-6">
+                    
+                    <input id="meters" type="number" class="form-control" name="meters" value="{{ old('meters') }}"  step="1" min="0" placeholder="m">
+                    @if ($errors->has('meters'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('meters') }}</strong>
+                        </span>
+                    @endif
 
-                @if ($errors->has('mark'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('mark') }}</strong>
-                    </span>
-                @endif
+                  </div>
+                                    
+                  <div class="col-md-6">
+                      <input id="cmeters" type="number" class="form-control" name="cmeters" value="{{ old('cmeters') }}" step="1" min="0" max="99" placeholder="cm">
+
+                      @if ($errors->has('cmeters'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('cmeters') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+                </div>
             </div>
+          </div>
+        </div>
+
+
+        <!--Track-Mark input field-->
+        <div id="track_mark">
+          <div class="form-group{{ $errors->has('hours') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('minutes') ? ' has-error' : '' }}">
+              <div class="form-group{{ $errors->has('seconds') ? ' has-error' : '' }}">
+                <div class="form-group{{ $errors->has('decimal') ? ' has-error' : '' }}">
+                  <label class="col-md-4 control-label">Mark</label>
+                  <div class="col-md-8">
+                    <div class="col-md-3">
+      
+                      <input id="hours" type="number" class="form-control" name="hours" value="{{ old('hours') }}"  step="1" min="0" placeholder="hours">
+                      @if ($errors->has('hours'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('hours') }}</strong>
+                          </span>
+                      @endif
+
+                    </div>
+                                    
+                    <div class="col-md-3">
+                      <input id="minutes" type="number" class="form-control" name="minutes" value="{{ old('minutes') }}" step="1" min="0" max="59" placeholder="min">
+
+                      @if ($errors->has('minutes'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('minutes') }}</strong>
+                          </span>
+                      @endif
+                    </div>
+
+                    <div class="col-md-3">
+                      <input id="seconds" type="number" class="form-control" name="seconds" value="{{ old('seconds') }}" step="1" min="0" max="59" placeholder="sec">
+
+                      @if ($errors->has('seconds'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('seconds') }}</strong>
+                          </span>
+                      @endif
+                    </div>
+
+                    <div class="col-md-3">
+                      <input id="decimal" type="number" class="form-control" name="decimal" value="{{ old('decimal') }}" step="1" min="0" max="99" placeholder="00">
+
+                      @if ($errors->has('decimal'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('decimal') }}</strong>
+                          </span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
 
@@ -243,11 +311,14 @@
   <script type="text/javascript">
       jQuery(document).ready(function(){
 
+          
           getDates();
           getEvents();
+          markInput();
 
           $('#type').on('change',function(){
               getEvents();
+              markInput();
           });
 
           $('#competition_id').on('change',function(){
@@ -287,7 +358,19 @@
               return;
           }
 
-          /* Functions */
+          function markInput() {
+              if( $('#type').val()==="field" ){
+                  $("#field_mark").show();
+
+                  $("#track_mark").hide();
+              }else{
+                  $("#field_mark").hide();
+                  $("#track_mark").show();
+              }
+
+              return;
+          }
+
           function getDates() {
               document.getElementById('date').innerHTML = "";
 

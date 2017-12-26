@@ -42,7 +42,7 @@
                                     @foreach($value as $result)
                                         <tr>
                                             <th scope="row">{{$result->date}}</th>
-                                            <th>{{$result->mark}}</td>
+                                            <th>{{$result->markstr}}</td>
                                             <td>{{$result->position}}</th>
                                             <td>{{$result->event->name}} {{$result->event->sezon}}</td>
                                             <td><a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a></td>

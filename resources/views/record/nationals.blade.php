@@ -115,20 +115,20 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <table width="100%">
-                                    <th>Event</th>
-                                    <th>Mark</th>
-                                    <th>Athlete</th>
-                                    <th>Club</th>
-                                    <th>Position</th>
-                                    <th>Competition</th>
-                                    <th>Place</th>
-                                    <th>Date</th>
+                                    <th>Αγώνισμα</th>
+                                    <th>Επίδοση</th>
+                                    <th>Αθλητής</th>
+                                    <th>Σύλλογος</th>
+                                    <th>Θέση</th>
+                                    <th>Αγώνας</th>
+                                    <th>Τοποθεσία</th>
+                                    <th>Ημερομηνία</th>
 
                                     @foreach($records as $record)
                                         @if($record)
                                             <tr>
                                                 <td>{{$record->event->name}}</td>
-                                                <td>{{$record->mark}}</td>
+                                                <td>{{$record->markstr}}</td>
                                                 <td>
                                                     <a href="/athlete/{{$record->athlete->id}}">{{$record->athlete->name}}</a>
                                                 </td>

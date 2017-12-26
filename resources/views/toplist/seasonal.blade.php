@@ -162,7 +162,7 @@
                                           ?>
                                             <tr class={{$rank}}>
                                                 <td>{{$rank}}</td>
-                                                <td>{{$result->mark}}</td>
+                                                <td>{{$result->markstr}}</td>
                                                 <td>{{$result->wind}}</td>
                                                 <td>
                                                 <a href="/athlete/{{$result->athlete->id}}">
@@ -211,7 +211,7 @@
 
                                             <tr class='-'>
                                                 <td>-</td>
-                                                <td>{{$result->mark}}</td>
+                                                <td>{{$result->markstr}}</td>
                                                 <td>{{$result->wind}}</td>
                                                 <td>
                                                 <a href="/athlete/{{$result->athlete->id}}">
