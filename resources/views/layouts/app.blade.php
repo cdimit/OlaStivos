@@ -69,7 +69,7 @@
             </div>
         </div>
         <div id="startchange"></div>
-        @include('partials.navbar' , ['nav_class' => ''])
+        @include('partials.navbar' , ['nav_class' => 'navbar-static-top'])
 
         
 
