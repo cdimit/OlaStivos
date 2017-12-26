@@ -69,8 +69,7 @@
             </div>
         </div>
         <div id="startchange"></div>
-        @include('partials.navbar' , ['nav_class' => 'navbar-static-top'])
-
+        @include('partials.navbar' , ['nav_class' => ''])
         
 
         @yield('content')
@@ -88,7 +87,7 @@
     <!-- Search Panel Script -->
     <script type="text/javascript" src="/js/search/search_results_panel.js"></script>
     <!-- Navbar Animation Script -->
-    <script src="{{ asset('js/navbar/navbar_animation.js') }}"></script>
+    <script src="{{ asset('js/navbar/navbar_animation.js') }}"></script> 
 </body>
 
 </html>

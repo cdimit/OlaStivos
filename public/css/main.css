@@ -99,25 +99,26 @@ div.banner-content-center >ul li{
     visibility: hidden;
     height: 0px;
   }
-  .startchange {
-    visibility: hidden;
-  }
 
   .navbar-brand{
     display: inline !important;
   }
 
-  .nav-collapse .dropdown-menu {
+/*  .nav-collapse .dropdown-menu {
     display: none;
   }
   .nav-collapse .open>.dropdown-menu{
     display:block;
-  }
-  .nav-collapse .close>.dropdown-menu{
-    display: none;
+  }*/
+  .navbar-default{
+    /*background: transparent;*/
+    background: linear-gradient(to right, rgba(0,0,0,0) , rgba(0,0,0,0.9)); /* Standard syntax (must be last) */
+    border:none !important;
   }
 
+
 }
+
 
 /* Table CSS */
 table {

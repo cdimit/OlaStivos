@@ -57,6 +57,3 @@
   </div>
 </div>
 @endsection
-@section('scripts')
-    <script type="text/javascript" src="/js/animations/home.js"></script>
-@endsection
