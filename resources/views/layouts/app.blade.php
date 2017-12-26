@@ -20,7 +20,7 @@
     </script>
 
     <!-- Styles -->
-    
+
     <!-- Bootstrap Styles -->
 {{--         <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-h21C2fcDk/eFsW9sC9h0dhokq5pDinLNklTKoxIZRUn3+hvmgQSffLLQ4G4l2eEr" crossorigin="anonymous">
@@ -33,7 +33,7 @@
 
     <!-- Main CSS file  -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    
+
 
 
     @yield('styles')
@@ -43,35 +43,35 @@
     <div id="app">
         <!-- NAVBAR -->
 
-        
+
         <!-- Banner with logo and navbar -->
         <div class="divWithBgImage">
             <div class="image" style="cursor: pointer;" onclick="window.location='/';">
                 <a href="/home"></a>
             </div>
-            
+
             <div class="banner-content-center">
                 <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
                 <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
                 <a href="#"><i class="fa fa-github-square fa-2x"></i></a>
                 <ul>
-                    <li>
-                        Μοναδική βάση δεδομένων για τον Κυπριακού στίβο
-                    </li><li>
-                        Καλύτερες επιδόσεις χρόνιάς ανά κατηγορία
-                    </li><li>
-                        Παγκύπρια Ρεκόρ όλων των κατηγοριών
-                    </li><li>
-                        Εκατοντάδες προφίλ Κύπριων αθλητών
-                    </li>
+                  <li>
+                      Η μοναδική βάση δεδομένων για τον Κυπριακού στίβο
+                  </li><li>
+                      Καλύτερες επιδόσεις
+                  </li><li>
+                      Παγκύπρια Ρεκόρ
+                  </li><li>
+                      Προφίλ Κύπριων αθλητών
+                  </li>
                 </ul>
             </div>
         </div>
         <div id="startchange"></div>
         @include('partials.navbar' , ['nav_class' => 'navbar-static-top'])
 
-        
+
 
         @yield('content')
 
@@ -82,9 +82,9 @@
     <!-- Scripts -->
     <!-- Bootstrap Script -->
     <script src="{{ asset('js/app.js') }}"></script>
-    
+
     @yield('scripts')
-    
+
     <!-- Search Panel Script -->
     <script type="text/javascript" src="/js/search/search_results_panel.js"></script>
     <!-- Navbar Animation Script -->
