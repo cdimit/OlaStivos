@@ -18,6 +18,8 @@ $(document).ready(function(){
               //$(".navbar-default").css('background-color', 'black');
               $(".navbar-brand").css({'display': 'inline'});
               $(".navbar").addClass("navbar-fixed-top");
+              $('.navbar-default').css({"background": "black", "background": "linear-gradient(to right, white , black)"});
+
            } else {
               $('.navbar-default').css({"background-color":"rgba(0,0,0,0.8)","transition":"background-color 600ms linear"});
               $(".navbar-brand").css('display', 'none');

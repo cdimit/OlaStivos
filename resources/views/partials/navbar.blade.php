@@ -12,7 +12,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}" style="position: relative;
-            background: url(/img/logosmall.png) no-repeat;
+            background: url(/img/1logo.png) no-repeat;
             width: 150px;
             left: 15px;
             background-size: contain;
