@@ -14,7 +14,7 @@
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-5407304991320601",
+        google_ad_client: "ca-pub-5865998929012682",
         enable_page_level_ads: true
       });
     </script>
@@ -88,7 +88,7 @@
     <!-- Search Panel Script -->
     <script type="text/javascript" src="/js/search/search_results_panel.js"></script>
     <!-- Navbar Animation Script -->
-    <script src="{{ asset('js/navbar/navbar_animation.js') }}"></script> 
+    <script src="{{ asset('js/navbar/navbar_animation.js') }}"></script>
 </body>
 
 </html>

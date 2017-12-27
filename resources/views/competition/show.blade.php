@@ -38,7 +38,7 @@
                                                 <li class="list-inline-item">{{$competition->venue}}</li>
                                             </ul>
                                         </p>
-                                    </div>    
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
@@ -48,6 +48,7 @@
                             </div>
 
                             <!-- RESULTS -->
+                            @if($competition->results)
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="panel with-nav-tabs panel-default">
@@ -61,7 +62,7 @@
                                                     @foreach($results as $key => $value)
                                                         @if ($value->first()->event->gender == 'male')
                                                             <li><a href="#tab{{$key}}result" data-toggle="tab">ΑΝΔΡEΣ {{$value->first()->event->name}}</a></li>
-                                                        @else         
+                                                        @else
                                                             <li><a href="#tab{{$key}}result" data-toggle="tab">ΓΥΝΑΙΚEΣ {{$value->first()->event->name}}</a></li>
                                                         @endif
                                                     @endforeach
@@ -74,9 +75,9 @@
 
                                                 @foreach($results as $key => $value)
                                                     <div class="tab-pane fade" id="tab{{$key}}result">
-                                                        
+
                                                         <h4><b>{{$value->first()->event->name}}  -  {{date('d-m-Y', strtotime($value->first()->date))}}</b></h4>
-                                                        
+
                                                         @foreach($value->keyby('race')->keys() as $heat)
                                                             <h4>{{$heat}}</h4>
                                                             <table class="table table-condensed table-responsive">
@@ -89,7 +90,7 @@
                                                                         <th></th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="myTable">                                 
+                                                                <tbody id="myTable">
                                                                     @foreach($value->where('race',$heat) as $result)
                                                                         <tr>
                                                                             <td>{{$result->position}}</th>
@@ -108,17 +109,18 @@
 
                                                             </table>
                                                         @endforeach
-                                                        
+
                                                     </div>
-                                                
+
                                                 @endforeach
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                          @endif
                         </div>
-                        
+
                         <!-- ****************************************** -->
                         <!--              PHOTOS TAB                    -->
                         <!-- ****************************************** -->
@@ -127,7 +129,7 @@
                             @if($competition->images->first())
                                 @include('gallery.images', ['var' => $competition])
                             @endif
-                            
+
                         </div>
 
 
@@ -139,10 +141,10 @@
                             @if($competition->videos->first())
                                 @include('gallery.videos', ['var' => $competition])
                             @endif
-                            
+
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
