@@ -94,7 +94,7 @@
                                 </select>
                             </div>
                         </div>
-
+{{-- 
                         <div class="form-group">
                             <div class="col-xs-5 text-left">
                                 <label for="season">Ένα αποτέλεσμα ανά αθλητή:</label>
@@ -103,7 +103,7 @@
                                 <input type="checkbox" id="unique" class="form-control">
                             </div>
 
-                        </div>
+                        </div> --}}
 
                         <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
                             <div class="col-xs-10 col-xs-offset-2">
@@ -129,6 +129,9 @@
                     <!-- Main Content -->
                     @if($results)
                         <h3>{{$event->name}} {{$event->gender}} Top-List</h3>
+                        <label for="unique">*Ένα αποτέλεσμα ανά αθλητή:</label>
+                        <input type="checkbox" id="unique">
+
                         <div class="col-md-12">
 
                             <div class="panel panel-default">

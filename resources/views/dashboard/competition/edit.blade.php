@@ -3,7 +3,7 @@
 @section('content')
     <p><u><h4>Edit Competition</h4></u></p>
 
-    {!! Form::model($competition, ['route' => ['competition.update',$competition->id],'class'=>'form-horizontal']) !!}
+    {!! Form::model($competition, ['route' => ['competition.update',$competition->id],'class'=>'form-horizontal','files'=>true]) !!}
 
         {{ Form::token() }}
         {{ method_field('PATCH') }}

@@ -127,10 +127,7 @@ class CompetitionCrudController extends Controller
         $competition->city = $request->city;
         $competition->venue = $request->venue;
 
-// dd($request['picture']);
         if (!empty($request->picture)) {
-
-
             $picture = $request['picture']->store('pictures/competitions');
             $competition->picture = $picture;
         }

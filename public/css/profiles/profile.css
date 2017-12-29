@@ -20,13 +20,17 @@ li.borderless {
 }
 
 /* ACHIEVEMENTS LIST */
+.list-group-item{
+    min-height: 30px;
+}
 .list-group-item-achievement img{
-    max-height: 20px;
-    max-width: 20px;
+    max-height: 24px;
+    max-width: 24px;
     height: auto;
     width: auto;
     float: left;
     margin-left: -2px;
+    margin-right: 2px;
 }
 
 /* WELL WITH INFORMATION */

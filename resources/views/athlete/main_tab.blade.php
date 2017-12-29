@@ -20,24 +20,41 @@
                 @foreach($NRs as $NR)
                     <li class="list-group-item icon icon-bullet">
                         <span class="list-group-item-achievement">
-                            <img src="https://cdn3.iconfinder.com/data/icons/glypho-generic-icons/64/prize-badge-512.png" class="img-responsive center">
+                            <img src="/img/nr.png" class="img-responsive center">
                         </span>
                         Παγκύπριο Ρεκόρ {{$NR->event->sezon}}: &ensp; <i>{{$NR->event->name}}   &ensp;  <b>{{$NR->markstr}}</b></i>
                     </li>
                 @endforeach
                 @foreach($NURs as $NUR)
-                    <li class="list-group-item">
+                    <li class="list-group-item icon icon-bullet">
+                        <span class="list-group-item-achievement">
+                            <img src="/img/nru23.png" class="img-responsive center">
+                        </span>
                         Παγκύπριο Ρεκόρ U23 {{$NUR->event->sezon}}: &ensp; <i>{{$NUR->event->name}} &ensp; <b>{{$NUR->markstr}}</b></i>
                     </li>
                 @endforeach
                 @foreach($NJRs as $NJR)
-                    <li class="list-group-item">Παγκύπριο Ρεκόρ U19 {{$NJR->event->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i></li>
+                    <li class="list-group-item icon icon-bullet">
+                        <span class="list-group-item-achievement">
+                            <img src="/img/nrjunior.png" class="img-responsive center">
+                        </span>
+                        Παγκύπριο Ρεκόρ U19 {{$NJR->event->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i>
+                    </li>
                 @endforeach
                 @foreach($NYRs as $NYR)
-                    <li class="list-group-item">Παγκύπριο Ρεκόρ U17 {{$NYR->event->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i></li>
+                    <li class="list-group-item icon icon-bullet">
+                        <span class="list-group-item-achievement">
+                            <img src="/img/nryouth.png" class="img-responsive center">
+                        </span>
+                        Παγκύπριο Ρεκόρ U17 {{$NYR->event->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
+                    </li>
                 @endforeach
-
-                <li class="list-group-item">Παγκύπριες νίκες: &ensp; <i><b>{{$nwins}}</b></i></li>
+                <li class="list-group-item icon icon-bullet">
+                    <span class="list-group-item-achievement">
+                        <img src="/img/first.png" class="img-responsive center">
+                    </span>
+                    Παγκύπριες νίκες: &ensp; <i><b>{{$nwins}}</b></i>
+                </li>
             </ul>
         </p>
     </div>

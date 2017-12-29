@@ -86,7 +86,7 @@
             <div class="panel panel-default">            
                 <div class="panel-body">
                     <!-- Main Content -->
-                    <h3> Παγκύπρια Ρεκόρ - {{strtoupper($season)}} -           
+                    <h3> Παγκύπρια Ρεκόρ - {{$events->first()->sezon}} -           
 
                     @if($events->first()->gender == 'male') 
                         @if($category == 'Senior')
