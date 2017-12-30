@@ -19,7 +19,7 @@ class CompetitionCrudController extends Controller
       'date_finish'  => 'nullable|date',
       'country' => 'string',
       'city' => 'string',
-      'venue' => 'string',
+      'venue' => 'string|nullable',
       'competition_series_id' => 'nullable|integer',
 
       'link_name.*' => 'required|string',
@@ -81,8 +81,8 @@ class CompetitionCrudController extends Controller
         }else{
             $picture = '/img/competition.png';
         }
-
         $competition->picture = $picture;
+
 
 
         $competition->save();

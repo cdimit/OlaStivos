@@ -88,7 +88,7 @@
 
         <!--Venue input field-->
         <div class="form-group{{ $errors->has('venue') ? ' has-error' : '' }}">
-            <label for="venue" class="col-md-4 control-label">Venue</label>
+            <label for="venue" class="col-md-4 control-label">Venue (nullable)</label>
             <div class="col-md-6">
                 {{ Form::text('venue',null,["class"=> 'form-control'])}}
 

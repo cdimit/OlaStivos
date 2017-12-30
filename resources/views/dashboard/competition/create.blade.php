@@ -91,9 +91,9 @@
 
         <!--Venue input field-->
         <div class="form-group{{ $errors->has('venue') ? ' has-error' : '' }}">
-            <label for="venue" class="col-md-4 control-label">Venue</label>
+            <label for="venue" class="col-md-4 control-label">Venue (nullable)</label>
             <div class="col-md-6">
-                <input id="venue" type="text" class="form-control" name="venue" value="{{ old('venue') }}" required autofocus>
+                <input id="venue" type="text" class="form-control" name="venue" value="{{ old('venue') }}">
 
                 @if ($errors->has('venue'))
                     <span class="help-block">
