@@ -25,7 +25,7 @@
         <div class="form-group">
             <label for="picture" class="col-md-4 control-label">Competition Image</label>
             <div class="col-md-6">
-              <img src="/storage/{{ $competition->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;">
+              <img src="{{ $competition->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;">
                 {!! Form::file('picture', null) !!}
             </div>
         </div>
