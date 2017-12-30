@@ -247,7 +247,7 @@ class ResultCrudController extends Controller
       $result->delete();
 
       $event->refreshRecords($result->date);
-      
+
       return redirect()->route('result.index');
 
     }
@@ -295,13 +295,13 @@ class ResultCrudController extends Controller
             // 'meters.*' => 'integer|nullable',
             // 'cmeters' => 'array',
             // 'cmeters.*' => 'integer|nullable|max:99',
-            // 'hours' => 'array',            
+            // 'hours' => 'array',
             // 'hours.*' => 'integer|nullable',
-            // 'minutes' => 'array',            
+            // 'minutes' => 'array',
             // 'minutes.*' => 'integer|nullable|max:59',
-            // 'seconds' => 'array',            
+            // 'seconds' => 'array',
             // 'seconds.*' => 'integer|nullable|max:59',
-            // 'decimal' => 'array',            
+            // 'decimal' => 'array',
             // 'decimal.*' => 'integer|nullable|max:99'
         ]);
 
@@ -320,7 +320,14 @@ class ResultCrudController extends Controller
             $result->wind = $request->wind;
             $result->date = $request->date;
             $result->race = $request->race;
-            
+
+            if(!$request->recordable || $result->wind > 2){
+              $result->is_recordable = false;
+              $result->records()->detach();
+            }else{
+              $result->is_recordable = true;
+            }
+
             //Store mark based on event
             if($request->type=="field"){
               $result->mark = $this->createFieldMark($request->meters[$key],$request->cmeters[$key]);
@@ -342,9 +349,6 @@ class ResultCrudController extends Controller
 
 
             $result->save();
-
-// $athlete->setRecordIfExist($result);
-
 
         }
 
@@ -384,21 +388,21 @@ class ResultCrudController extends Controller
         }
 
 
-        public function createFieldMark($meters,$cmeters){          
+        public function createFieldMark($meters,$cmeters){
           return ($meters ? $meters : '00').'.'.$this->generateMarkString($cmeters);
         }
 
-        public function createTrackMark($hours,$minutes,$seconds,$decimal){          
+        public function createTrackMark($hours,$minutes,$seconds,$decimal){
           return $this->generateMarkString($hours).':'.$this->generateMarkString($minutes).':'.$this->generateMarkString($seconds).'.'.$this->generateMarkString($decimal);
         }
- 
+
         public function generateMarkString($str){
           if(strlen($str)>=2){
             return $str;
           }elseif ( strlen($str)===1 ) {
             return '0'.$str;
           }else{
-            return '00';  
+            return '00';
           }
 
         }

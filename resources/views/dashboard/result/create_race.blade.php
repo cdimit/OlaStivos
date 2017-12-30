@@ -109,6 +109,14 @@
             </div>
         </div>
 
+        <!--Score input field-->
+        <div class="form-group">
+            <label for="result" class="col-md-4 control-label">Is Recordable?</label>
+            <div class="col-md-6">
+              <input id="recordable" name="recordable" type="checkbox" checked>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="numberAthletes" class="col-md-4 control-label">Add Number of Athletes</label>
             <div class="col-md-6">
@@ -133,11 +141,11 @@
                 <tbody id="athletesTableBody">
                     <tr>
                         <td><input id="positions" name="positions[]" type="text" class="form-control" required></td></td>
-                        <td><select  id="athlete_ids" name="athlete_ids[]" class="selectpicker" data-show-subtext="true" data-live-search="true"> 
-                            @foreach($athletes as $athlete) 
-                                <option value="{{$athlete->id}}"> 
-                                    {{$athlete->first_name}} {{$athlete->last_name}}  {{$athlete->dob}} 
-                                </option> 
+                        <td><select  id="athlete_ids" name="athlete_ids[]" class="selectpicker" data-show-subtext="true" data-live-search="true">
+                            @foreach($athletes as $athlete)
+                                <option value="{{$athlete->id}}">
+                                    {{$athlete->first_name}} {{$athlete->last_name}}  {{$athlete->dob}}
+                                </option>
                             @endforeach
                             </select>
                         </td>
@@ -164,7 +172,7 @@
                         <td><input id="scores" name="scores[]" type="number"  class="form-control" required></td></td>
                         <td></td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>
@@ -206,10 +214,10 @@
                 var position =('<input id="positions" name="positions[]" type="text" value="" class="form-control" required></td>');
                 var athlete = ('<select  id="athlete_ids" name="athlete_ids[]" class="selectpicker" data-show-subtext="true" data-live-search="true"> @foreach($athletes as $athlete) <option value="{{$athlete->id}}"> {{$athlete->first_name}} {{$athlete->last_name}}  {{$athlete->dob}} </option> @endforeach</select>');
                 //var athlete = ('"'+document.getElementById("athletesRow").innerHTML +'"');
-                
+
                 var marks=('<div class="field_mark"><div class="col-md-6"><input id="meters" type="number" class="form-control" name="meters[]"  step="1" min="0" placeholder="m"></div><div class="col-md-6"><input id="cmeters" type="number" class="form-control" name="cmeters[]" step="1" min="0" max="99" placeholder="cm"></div></div><div class="track_mark"><div class="input-group" style="display: block;"><input id="hours" type="number" class="form-control" name="hours[]"  step="1" min="0" placeholder="h"  style="display:inline; width:5vw;"><input id="minutes" type="number" class="form-control" name="minutes[]" step="1" min="0" max="59" placeholder="min" style="display:inline; width:5vw;"><input id="seconds" type="number" class="form-control" name="seconds[]" step="1" min="0" max="59" placeholder="sec" style="display:inline; width:5vw;"><input id="decimal" type="number" class="form-control" name="decimal[]" step="1" min="0" max="99" placeholder="00" style="display:inline; width:5vw;"></div></div>')
 
-                var score =  ('<input id="scores" name="scores[]" type="number"  class="form-control" required></td>');               
+                var score =  ('<input id="scores" name="scores[]" type="number"  class="form-control" required></td>');
                 var deleteRow =  ('<span class="input-group-addon remove_field" id="basic-addon" style=" color:rgb(240,20,20);"><b>x</b></span>');
                 console.log(position);
                 $('#athletesTableBody').append('<tr>'+
@@ -219,7 +227,7 @@
                     '<td>'+ score+'</td>'+
                     '<td>'+ deleteRow+'</td>'+
                     '</tr>');
-                
+
             }
             markInput();
             $(".selectpicker").selectpicker();
@@ -227,16 +235,16 @@
 
 
 
-        $('#athletesRow').change(function(){ 
+        $('#athletesRow').change(function(){
             var value = $(this).val();
         });
 
         $('#athletesTable').on("click",".remove_field", function(g){ //user click on remove text
-            g.preventDefault(); 
+            g.preventDefault();
             $(this).closest ('tr').remove ();
         });
 
-        
+
         $('#competition_id').on('change',function(){
             getDates();
         });
@@ -271,7 +279,7 @@
                     console.log('error');
             });
             return;
-        } 
+        }
 
         function markInput() {
           if( $('#type').val()==="field" ){
