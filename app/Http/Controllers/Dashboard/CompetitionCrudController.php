@@ -77,9 +77,10 @@ class CompetitionCrudController extends Controller
         if (!empty($request->picture)) {
 
             $picture = $request['picture']->store('pictures/competitions');
+            $competition->picture = $picture;
+
         }
 
-        $competition->picture = $picture;
 
 
         $competition->save();
