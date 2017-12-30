@@ -7,6 +7,7 @@ use App\CompetitionSeries;
 use App\Link;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class CompetitionCrudController extends Controller
 {
@@ -76,7 +77,9 @@ class CompetitionCrudController extends Controller
 
         if (!empty($request->picture)) {
 
-            $picture = $request['picture']->store('pictures/competitions');
+            $picture = '/storage/'.$request['picture']->store('pictures/competitions');
+        }else{
+            $picture = '/img/competition.png';
         }
 
         $competition->picture = $picture;
@@ -128,7 +131,10 @@ class CompetitionCrudController extends Controller
         $competition->venue = $request->venue;
 
         if (!empty($request->picture)) {
-            $picture = $request['picture']->store('pictures/competitions');
+            if($competition->picture != '/img/competition.png' ){
+                Storage::delete(str_replace_first('/storage/', '', $competition->picture));
+            }
+            $picture = '/storage/'.$request['picture']->store('pictures/competitions');
             $competition->picture = $picture;
         }
 

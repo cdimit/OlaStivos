@@ -20,7 +20,7 @@ class CreateCompetitionsTable extends Migration
             $table->date('date_finish');
             $table->string('country');
             $table->string('city');
-            $table->string('picture')->default('competition.jpg');
+            $table->string('picture')->default('/img/competition.png');
             $table->string('venue')->nullable();
             $table->boolean('status')->default(0);
             $table->integer('competition_series_id')->unsigned();

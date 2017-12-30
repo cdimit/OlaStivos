@@ -13,6 +13,6 @@ class CompetitionSeriesTableSeeder extends Seeder
     public function run()
     {
         CompetitionSeries::forceCreate(['name' => 'Παγκύπριο Πρωτάθλημα Ανδρών/Γυναικών Ανοικτού Στίβου']);
-        CompetitionSeries::forceCreate(['name' => 'Παγκύπριο Πρωτάθλημα Ανδρών/Γυναικών Κλειστού Στίβου']);
+
     }
 }

@@ -63,7 +63,7 @@
     <div class="panel-heading">Έχει Γενέθλια Σήμερα!</div>
     <div class="panel-body">
       <div well="">
-        <img src="/storage/{{ $birthdayAthlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+        <img src="{{ $birthdayAthlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
         <a href="{{ route('athlete.show',['athlete'=>$birthdayAthlete->id]) }}">
             <h4><b>
             {{$birthdayAthlete->first_name}} {{$birthdayAthlete->last_name }} - {{\Carbon\Carbon::now()->diffInYears(new \Carbon\Carbon($birthdayAthlete->dob))}} ετών

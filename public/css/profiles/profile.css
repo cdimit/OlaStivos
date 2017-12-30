@@ -11,6 +11,7 @@ li.uppercase {
 .list-group-item {
     padding: 3px 10px;
     font-size: 11px;
+    min-height: 30px;
 }
 
 li.borderless {
@@ -20,9 +21,7 @@ li.borderless {
 }
 
 /* ACHIEVEMENTS LIST */
-.list-group-item{
-    min-height: 30px;
-}
+
 .list-group-item-achievement img{
     max-height: 24px;
     max-width: 24px;

@@ -22,7 +22,7 @@
 		      		<td>{{$club->name}}</td>
 		      		<td>{{$club->acronym}}</td>
 		     		<td>{{$club->city}}</td>
-		      		<td><img src="/storage/{{ $club->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;"></td>
+		      		<td><img src="{{ $club->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;"></td>
 		      		<td>{{$club->since}}</td>
 		      		<td>	
 		      			<a href="{{ route('club.edit',$club->id)}}" class="btn btn-primary btn-sm">

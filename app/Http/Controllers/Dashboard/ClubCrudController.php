@@ -7,6 +7,7 @@ use App\Link;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ClubCrudController extends Controller
 {
@@ -64,10 +65,10 @@ class ClubCrudController extends Controller
         $club->city = $request->city;
         $club->since = $request->since;
 
-        if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/clubs');
+        if (!empty($request->picture)) {
+            $picture = '/storage/'.$request['picture']->store('pictures/clubs');
         }else{
-            $picture = '';
+            $picture = '/img/club.png';
         }
         $club->picture = $picture;
 
@@ -112,7 +113,10 @@ class ClubCrudController extends Controller
         $club->since = $request->since;
 
         if (!empty($request['picture'])) {
-            $picture = $request['picture']->store('pictures/clubs');
+            if($club->picture != '/img/club.png' ){
+                Storage::delete(str_replace_first('/storage/', '', $club->picture));
+            }
+            $picture = '/storage/'.$request['picture']->store('pictures/clubs');
             $club->picture = $picture;
         }
 

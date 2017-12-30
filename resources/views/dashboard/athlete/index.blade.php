@@ -43,7 +43,7 @@
 				     		<td>{{$athlete->dob}}</td>
 				     		<td>{{$athlete->gender}}</td>
 				     		<td>{{$athlete->club->name}}</td>
-				      		<td><img src="/storage/{{ $athlete->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;"></td>
+				      		<td><img src="{{ $athlete->picture }}" class="img-responsive" style="max-width: 8vw; max-height: 8vh;"></td>
 				      		<td>	
 				      			<a href="{{ route('athlete.edit',$athlete->id)}}" class="btn btn-primary btn-sm">
 		  							Edit

@@ -61,7 +61,7 @@
     </div>
     <div class="col-sm-6">
         <p>
-            <img src="/storage/{{ $athlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+            <img src="{{ $athlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;"> 
         </p>
     </div>
     </div>

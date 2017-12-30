@@ -19,14 +19,17 @@ class EventTableSeeder extends Seeder
     	// 1a. Track Events - Male
     	$names = ['80m','100m','150m','200m','300m','400m','600m','800m','1000m','1 Μίλι','1500m','3000m στηπλ', '5000m','10000m','Μαραθώνιος'
     	,'110m εμπόδια','110m εμπόδια(91,4cm)','110m εμπόδια(99cm)'
-    	,'400m εμπόδια'
-    	,'4x80m','4x100m','4x300m','4x400m'];
+    	,'400m εμπόδια'];
     	$this->createEvents($names,'track','outdoor','male');
+        $names = ['4x80m','4x100m','4x300m','4x400m'];
+        $this->createEvents($names,'relay','outdoor','male');
     	
     	// 1b. Track Events - Female
-    	$names = ['80m','100m','200m','400m','800m','1 Μίλι','1500m','2000m στήπλ','3000m στήπλ', '5000m','10000m','Ημιμαραθώνιος','Μαραθώνιος','100m εμπόδια','100m εμπόδια(76cm)','400m εμπόδια','4x80m','4x100m','4x300m','4x400m'];
+    	$names = ['80m','100m','200m','400m','800m','1 Μίλι','1500m','2000m στήπλ','3000m στήπλ', '5000m','10000m','Ημιμαραθώνιος','Μαραθώνιος','100m εμπόδια','100m εμπόδια(76cm)','400m εμπόδια'];
     	$this->createEvents($names,'track','outdoor','female');
-    	
+    	$names = ['4x80m','4x100m','4x300m','4x400m'];
+        $this->createEvents($names,'relay','outdoor','female');
+
     	// 1c. Field Events - Male
     	$names = ['Άλμα εις μήκος','Άλμα εις ύψος','Άλμα επι κοντώ','Άλμα εις τριπλούν',
     		'Σφαιροβολία','Σφαιροβολία(5kg)','Σφαιροβολία(6kg)'
@@ -53,7 +56,9 @@ class EventTableSeeder extends Seeder
     	// 2a. Track Events - Male
     	$names = ['60m','100m','200m','400m','800m','1 Μίλι','1500m','3000m','60m εμπόδια','4x400m'];
     	$this->createEvents($names,'track','indoor','male');
-    	
+    	$names = ['4x100m'];
+        $this->createEvents($names,'relay','indoor','male');
+
     	// 2b. Track Events - Female
     	$names = ['60m','100m','200m','400m','800m','1 Μίλι','1500m','3000m','60m εμπόδια'];
     	$this->createEvents($names,'track','indoor','female');
