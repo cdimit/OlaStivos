@@ -19,7 +19,7 @@
               @if($competition->date_start == $competition->date_finish)
                 <td>{{date('d.M', strtotime($competition->date_start))}}</td>
               @else
-                <td>{{date('d.M', strtotime($competition->date_start))}} - {{date('d.m', strtotime($competition->date_finish))}}</td>
+                <td>{{date('d.M', strtotime($competition->date_start))}} - {{date('d.M', strtotime($competition->date_finish))}}</td>
               @endif
               <td class="grow"><a href="/competition/{{$competition->id}}">{{$competition->name}}</a></td>
             </tr>
