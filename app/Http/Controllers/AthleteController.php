@@ -13,6 +13,10 @@ class AthleteController extends Controller
     public function show(Athlete $athlete)
     {
 
+        if(!$athlete->status){
+          abort(404);
+        }
+
         //Get best PBs and SBs
         $pbs= $athlete->getPbs();
         $sbs = $athlete->getSbs(\Carbon\Carbon::now()->year);

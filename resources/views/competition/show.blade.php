@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
-                                        <img src="{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;">
+                                        <img src="/storage/{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
                                     </p>
                                 </div>
                             </div>
