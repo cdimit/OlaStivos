@@ -31,7 +31,7 @@
                                         <p><h3>{{$competition->series->name}}</h3></p>
                                         <p>
                                             <ul class="list-inline">
-                                                <li class="list-inline-item seperator">{{date('d-m-Y', strtotime($competition->date_start))}} - {{date('d-m-Y', strtotime($competition->date_finish))}}
+                                                <li class="list-inline-item seperator">{{date('d-M-Y', strtotime($competition->date_start))}} - {{date('d-M-Y', strtotime($competition->date_finish))}}
                                                 </li>
                                                 <li class="list-inline-item seperator">{{$competition->city}}</li>
                                                 <li class="list-inline-item  seperator">{{$competition->country}}</li>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
-                                        <img src="/storage/{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+                                        <img src="{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
                                     </p>
                                 </div>
                             </div>

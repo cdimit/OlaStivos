@@ -48,7 +48,7 @@
                 <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
                 <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
-                <a href="#"><i class="fa fa-github-square fa-2x"></i></a>
+                <a href="#"><i class="fa fa-youtube-square fa-2x"></i></a>
                 <ul>
                   <li>
                       Η μοναδική βάση δεδομένων για τον Κυπριακού στίβο
