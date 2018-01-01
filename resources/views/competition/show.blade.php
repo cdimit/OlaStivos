@@ -38,6 +38,9 @@
                                                 <li class="list-inline-item">{{$competition->venue}}</li>
                                             </ul>
                                         </p>
+                                        @foreach($competition->links as $link)
+                                          <p><a href="{{$link->path}}">{{$link->name}}</a></p>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

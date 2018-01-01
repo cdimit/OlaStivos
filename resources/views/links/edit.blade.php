@@ -3,7 +3,7 @@
   @foreach($var->links as $link)
     <div>
       <input type="text" name="link_name[]" value="{{$link->name}}" required >
-      <input type="text" name="link_path[]" value="{{$link->name}}" required >
+      <input type="text" name="link_path[]" value="{{$link->path}}" required >
       <a href="#" class="remove_field">Remove</a>
     </div>
   @endforeach
