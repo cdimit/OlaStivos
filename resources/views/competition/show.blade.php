@@ -39,7 +39,7 @@
                                             </ul>
                                         </p>
                                         @foreach($competition->links as $link)
-                                          <p><a href="{{$link->path}}">{{$link->name}}</a></p>
+                                          <p><a href="{{$link->path}}" target="_blank">{{$link->name}}</a></p>
                                         @endforeach
                                     </div>
                                 </div>
