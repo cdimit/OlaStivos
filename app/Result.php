@@ -52,7 +52,8 @@ class Result extends Model
         }elseif(starts_with($this->mark, '00:')){
           return str_replace_first('00:', '', $this->mark);
         }elseif(starts_with($this->mark, '0')){
-          return str_replace_first('0', '', $this->mark);
+          $tmp =  str_replace_first('0', '', $this->mark);
+          return substr($tmp, 0, 7);
         }
       }
       return $this->mark;
