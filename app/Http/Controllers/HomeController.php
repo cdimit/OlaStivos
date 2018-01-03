@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index()
     {
         //Upcoming Competitions
-        $competitions = $this->nextComps(10);
+        $competitions = $this->nextComps(5);
 
         //Athlete with birthday
         $birthdayAthlete = $this->birthdayAthlete();
@@ -36,7 +36,7 @@ class HomeController extends Controller
 
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
-        
+
 
         //Data for Search
         $athletesSearch = Athlete::all()->sortBy('first_name');

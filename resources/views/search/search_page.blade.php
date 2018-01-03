@@ -27,14 +27,14 @@
 
 
 			    <div class="input-group">
-			    
+
 					<button id="searchButton" class="btn btn-default" type="submit">
 						<i class="fa fa-search" aria-hidden="true"></i>
 					</button>
-			      	
+
 			    </div>
 			{!! Form::close() !!}
-		
+
 
 			<!-- Show Results of Search -->
 			<div class="panel panel-default" style="margin-top: 10px;">
@@ -48,22 +48,22 @@
 					           		@foreach($athletes as $athlete)
 					           			<tr>
 					           				<td>
-					           					<a href="/athlete/{{$athlete->id}}">{{$athlete->name}}</a> 
+					           					<a href="/athlete/{{$athlete->id}}">{{$athlete->name}}</a>
 					           				</td>
-					           				<td>{{$athlete->age}} ετών ({{date('d-m-Y', strtotime($athlete->dob))}})</td>
-					           				<td><a href="/club/{{$athlete->club->id}}">{{$athlete->club->name}}</a></td>
+					           				<td>({{date('d-m-Y', strtotime($athlete->dob))}})</td>
+					           				<td><a href="/club/{{$athlete->club->id}}">{{$athlete->club->acronym}}</a></td>
 					           			</tr>
 					           		@endforeach
 				           		</tbody>
     						</table>
-						</div> 
+						</div>
 		           	@endif
 		           	@if(!$competitions->isEmpty())
 		           		<h4>Αγώνες:</h4>
 			        	<div class="table-responsive">
   							<table class="table table-condensed">
 				        		<tbody>
-					           		@foreach($competitions as $competition)   
+					           		@foreach($competitions as $competition)
 					           			<tr>
 					           				<td>
 					           					<a href="/competition/{{$competition->id}}">{{$competition->name}}</a>
@@ -74,7 +74,7 @@
 					           		@endforeach
 				           		</tbody>
     						</table>
-						</div> 
+						</div>
 		           	@endif
 
 		        </div>
