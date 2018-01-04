@@ -71,7 +71,7 @@ class AthleteCrudController extends Controller
         if (!empty($request['picture'])) {
             $picture = $request['picture']->store('pictures/athletes');
         }else{
-            $picture = 'default_athlete.png';
+            $picture = '/img/athlete.png';
         }
         $athlete->picture = $picture;
 
