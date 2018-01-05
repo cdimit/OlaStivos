@@ -88,7 +88,8 @@ div.image:before {
   position: absolute;
   top: 1.5vh;
   left: 25vw;  
-
+  height:20vh;
+  overflow: hidden;
 }
 .banner-content-center >ul{
     list-style-image: url("/img/bullet.png");

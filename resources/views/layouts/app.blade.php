@@ -45,12 +45,15 @@
             <div class="banner-content-left">
                 <a href="/"><img src="/img/1logo.png" alt=""></a>
             </div>
-            <div class="banner-content-center">
+            <div class="banner-content-center hidden-xs">
                 <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
                 <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
-                <a href="#"><i class="fa fa-github-square fa-2x"></i></a>
+                <a href="#"><i class="fa fa-youtube-square fa-2x"></i></a>
+                                <div style="height:20vh;">
+                </div>
 {{--                 <ul>
+
                   <li>
                       Η μοναδική βάση δεδομένων για τον Κυπριακού στίβο
                   </li><li>
@@ -60,7 +63,7 @@
                   </li><li>
                       Προφίλ Κύπριων αθλητών
                   </li>
-                </ul> --}}
+                </ul>  --}}
             </div>
         </div>
         <div id="startchange"></div>

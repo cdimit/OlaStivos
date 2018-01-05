@@ -7,7 +7,6 @@ use App\Club;
 use App\Link;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 
 class AthleteCrudController extends Controller
 {
@@ -70,7 +69,7 @@ class AthleteCrudController extends Controller
         $athlete->gender = $request->gender;
 
         if (!empty($request['picture'])) {
-            $picture = '/storage/'.$request['picture']->store('pictures/athletes');
+            $picture = $request['picture']->store('pictures/athletes');
         }else{
             $picture = '/img/athlete.png';
         }
@@ -121,10 +120,7 @@ class AthleteCrudController extends Controller
         $athlete->gender = $request->gender;
 
         if (!empty($request['picture'])) {
-            if($athlete->picture != '/img/athlete.png' ){
-                Storage::delete(str_replace_first('/storage/', '', $athlete->picture));
-            }
-            $picture = '/storage/'.$request['picture']->store('pictures/athletes');
+            $picture = $request['picture']->store('pictures/athletes');
             $athlete->picture = $picture;
         }
 

@@ -49,19 +49,21 @@
                         Παγκύπριο Ρεκόρ U17 {{$NYR->event->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
                     </li>
                 @endforeach
+                @if($nwins>0)
                 <li class="list-group-item icon icon-bullet">
                     <span class="list-group-item-achievement">
                         <img src="/img/first.png" class="img-responsive center">
                     </span>
                     Παγκύπριες νίκες: &ensp; <i><b>{{$nwins}}</b></i>
                 </li>
+              @endif
             </ul>
         </p>
     </div>
     </div>
     <div class="col-sm-6">
         <p>
-            <img src="{{ $athlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;"> 
+            <img src="{{ $athlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;">
         </p>
     </div>
     </div>
@@ -129,8 +131,8 @@
         </div>
     </div>
     </div>
-    <div class="row">     
-    <div class="col-sm-12">            
+    <div class="row">
+    <div class="col-sm-12">
         <!-- SB History -->
         @if(!$sbHistory->isEmpty())
             <div class="panel panel-default">
@@ -140,9 +142,9 @@
                         <thead>
                             <th>Σεζόν</th>
                             @foreach($sbHistory->first()->keys() as $event)
-                                
+
                                 <th>{{\App\Event::find($event)->name}}</th>
-                                
+
                             @endforeach
                         </thead>
                         <tbody>
@@ -155,22 +157,22 @@
                                             <td><a href="/competition/{{$s->competition->id}}">{{$s->markstr}}</a></td>
                                         @else
                                             <td>-</td>
-                                        @endif              
-                                    @endforeach     
+                                        @endif
+                                    @endforeach
                                 </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
-                    
-                </dir> 
+
+                </dir>
             </div>
         @endif
 
 
         <!-- GRAPHS -->
 
-        
+
         <!-- GRAPH TABS FOR PBS -->
     {{--                            <div class="panel with-nav-tabs panel-default">
             <div class="panel-heading">

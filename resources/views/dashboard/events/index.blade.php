@@ -29,7 +29,7 @@
 
 			    	</tr>
 			  	</thead>
-			  	
+
 			  	<tbody>
 			  		@foreach($outdoorEvents as $event)
 				    	<tr>
@@ -38,7 +38,7 @@
 				      		<td>{{$event->type}}</td>
 				     		<td>{{$event->season}}</td>
 				     		<td>{{$event->gender}}</td>
-				      		<td>	
+				      		<td>
 				      			<a href="{{ route('events.edit',$event->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>
@@ -76,7 +76,7 @@
 
 			    	</tr>
 			  	</thead>
-			  	
+
 			  	<tbody>
 			  		@foreach($indoorEvents as $event)
 				    	<tr>
@@ -85,7 +85,7 @@
 				      		<td>{{$event->type}}</td>
 				     		<td>{{$event->season}}</td>
 				     		<td>{{$event->gender}}</td>
-				      		<td>	
+				      		<td>
 				      			<a href="{{ route('events.edit',$event->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>
@@ -103,7 +103,7 @@
 	<!-- OUTDOOR EVENTS -->
     <div class="panel panel-default">
     	<div class="panel-heading">
-    		<b>Cross Country Events</b> - Search a CC event:
+    		<b>Cross Country Events</b> - Search a XC event:
     		<select  class="selectpicker" data-live-search="true" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
     		    <option data-tokens="" value=""></option>
                 @foreach($ccEvents as $event)
@@ -124,7 +124,7 @@
 
 			    	</tr>
 			  	</thead>
-			  	
+
 			  	<tbody>
 			  		@foreach($ccEvents as $event)
 				    	<tr>
@@ -133,12 +133,12 @@
 				      		<td>{{$event->type}}</td>
 				     		<td>{{$event->season}}</td>
 				     		<td>{{$event->gender}}</td>
-				      		<td>	
+				      		<td>
 				      			<a href="{{ route('events.edit',$event->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>
 							</td>
-				      		
+
 
 				    	</tr>
 			    	@endforeach

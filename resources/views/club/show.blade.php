@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-   
+
     <link href="{{ asset('/css/profiles/profile.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/headings/heading-in-profile.css') }}" rel="stylesheet">
 
@@ -37,26 +37,26 @@
                                                 <li class="list-inline-item">{{$club->city}}</li>
                                             </ul>
                                         </p>
-                                    </div>    
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
-                                        <img src="/storage/{{ $club->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+                                        <img src="{{ $club->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- ****************************************** -->
                         <!--              PHOTOS TAB                    -->
                         <!-- ****************************************** -->
                         <div class="tab-pane fade" id="tab2default">
-                
+
                             <h3>Φωτογραφίες Συλλόγου</h3>
                             @if($club->images->first())
                                 @include('gallery.images', ['var' => $club])
                             @endif
-                            
+
                         </div>
 
 
@@ -70,7 +70,7 @@
                             @endif
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>

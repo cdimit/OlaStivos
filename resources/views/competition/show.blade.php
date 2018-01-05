@@ -31,18 +31,21 @@
                                         <p><h3>{{$competition->series->name}}</h3></p>
                                         <p>
                                             <ul class="list-inline">
-                                                <li class="list-inline-item seperator">{{date('d-m-Y', strtotime($competition->date_start))}} - {{date('d-m-Y', strtotime($competition->date_finish))}}
+                                                <li class="list-inline-item seperator">{{date('d-M-Y', strtotime($competition->date_start))}} - {{date('d-M-Y', strtotime($competition->date_finish))}}
                                                 </li>
                                                 <li class="list-inline-item seperator">{{$competition->city}}</li>
                                                 <li class="list-inline-item  seperator">{{$competition->country}}</li>
                                                 <li class="list-inline-item">{{$competition->venue}}</li>
                                             </ul>
                                         </p>
+                                        @foreach($competition->links as $link)
+                                          <p><a href="{{$link->path}}" target="_blank">{{$link->name}}</a></p>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <p>
-                                        <img src="{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;">
+                                        <img src="{{ $competition->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
                                     </p>
                                 </div>
                             </div>

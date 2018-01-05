@@ -9,6 +9,11 @@ class CompetitionController extends Controller
 {
     public function show(Competition $competition)
     {
+
+      if(!$competition->status){
+        abort(404);
+      }
+
     	$results = $competition->getAllResultsByEvent();
     	return view('competition.show')->with('competition',$competition)
     									->with('results',$results);
