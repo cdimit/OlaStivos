@@ -31,16 +31,15 @@
 }
 
 
+
 .divWithBgImage {
   width: 100%;
-  height: 120px;
-/*  background-image: url(https://image.freepik.com/free-photo/person-running_1112-546.jpg);*/
-  /*filter: sepia(20%) saturate(100%) hue-rotate(150deg);*/
+  height: auto;
   background-image: url("/img/Banner2.jpg");
   background: linear-gradient(right, black, white);
   background-repeat: no-repeat;
-  background-size: 100% ;
-  background-position: 200px -30px;
+/*  background-size: 100% auto;*/
+/*  background-position: 200px -30px;*/
   overflow: hidden;
 
 /*
@@ -67,29 +66,43 @@ div.image:before {
     background-size: contain;
     
 }
-/* Div at the right side of the banner */
-div.banner-content-right{
-  padding-top: 10px;
-  margin-right: 400px;
-  float:right;
+
+/* BANNER HEADER */
+.headers {
+    position: relative;
+
+}
+.headers img {
+    width: 100%;
+    height: auto;
+}
+/* Div at the left side of the banner */
+.banner-content-left{
+  position:absolute;
+  top: 2vh;
+  left: 2vw;
+  width:20vw;
 }
 /* Div at the center of the banner */
-div.banner-content-center{
-  padding-top: 10px;
-  padding-left:280px;
-  float:left;
+.banner-content-center{
+  position: absolute;
+  top: 1.5vh;
+  left: 25vw;  
+
 }
-div.banner-content-center >ul{
+.banner-content-center >ul{
     list-style-image: url("/img/bullet.png");
     padding-left: 0pt;
 }
-div.banner-content-center >ul li{
-  float:0;
-  color: #1A6B70;
-  font-weight: bolder;
-  font-size: 11px;
-  margin:0;
-  font-family: "Arial", Verdana, sans-serif;
+.banner-content-center >ul li{
+/*    float:0;*/
+    color: #1A6B70;
+    font-weight: bolder;
+    /*font-size: 11px;*/
+      font-size: 1vw;
+      
+    margin:0;
+    font-family: "Arial", Verdana, sans-serif;
 }
 
 

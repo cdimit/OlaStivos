@@ -39,17 +39,18 @@
 
 
         <!-- Banner with logo and navbar -->
-        <div class="divWithBgImage">
-            <div class="image" style="cursor: pointer;" onclick="window.location='/';">
-                <a href="/home"></a>
-            </div>
+        <div class="headers">
+            <img class="img img-responsive" src="/img/banner_list.jpg">
 
+            <div class="banner-content-left">
+                <a href="/"><img src="/img/1logo.png" alt=""></a>
+            </div>
             <div class="banner-content-center">
                 <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
                 <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
                 <a href="#"><i class="fa fa-github-square fa-2x"></i></a>
-                <ul>
+{{--                 <ul>
                   <li>
                       Η μοναδική βάση δεδομένων για τον Κυπριακού στίβο
                   </li><li>
@@ -59,10 +60,11 @@
                   </li><li>
                       Προφίλ Κύπριων αθλητών
                   </li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
         <div id="startchange"></div>
+
 
         @include('partials.navbar' , ['nav_class' => 'navbar-static-top'])
 
