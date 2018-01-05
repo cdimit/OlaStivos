@@ -5,13 +5,13 @@
     	<a href="{{ route('athlete.create') }}" class="btn btn-success btn-responsive" role="button">Add new Athlete</a>
     </p>
     <div style="width:265px;">
-		*Athletes still pending are in color: 
+		*Athletes still pending are in color:
 		<div class="red-square"></div>
 	</div>
 
     <div class="panel panel-default">
     	<div class="panel-heading">
-    		Search Athlete to edit : 
+    		Search Athlete to edit :
     		<select  class="selectpicker" data-live-search="true" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
 				<option data-tokens="" value=""></option>
 		      	@foreach($athletes as $athlete)
@@ -33,9 +33,9 @@
 			      		<th>Edit</th>
 			    	</tr>
 			  	</thead>
-			  	
+
 			  	<tbody>
-			  		@foreach($athletes as $athlete)
+			  		@foreach($athletes->sortByDesc('id') as $athlete)
 				    	<tr @if($athlete->isPending()) bgcolor="#ffd6cc" @endif>
 				      		<th scope="row">{{$athlete->id}}</th>
 				      		<td>{{$athlete->first_name}}</td>
@@ -44,7 +44,7 @@
 				     		<td>{{$athlete->gender}}</td>
 				     		<td>{{$athlete->club->name}}</td>
 				      		<td><img src="{{ $athlete->picture }}" class="img-responsive" style="max-width: 8vw; max-height: 8vh;"></td>
-				      		<td>	
+				      		<td>
 				      			<a href="{{ route('athlete.edit',$athlete->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>

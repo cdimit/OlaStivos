@@ -25,7 +25,7 @@
 	      		<th>Option</th>
 	    	</tr>
 	  	</thead>
-	  		@foreach($results as $result)
+	  		@foreach($results->sortByDesc('id') as $result)
 		    	<tr @if($result->isPending()) bgcolor="#ffd6cc" @endif>
 		      		<th scope="row">{{$result->id}}</th>
 		      		<td>{{$result->position}}</td>
@@ -34,7 +34,7 @@
 		      		<td>{{$result->race}}</td>
 		      		<td>{{$result->date}}</td>
 		      		<td>{{$result->event->name}}</td>
-		      		<td>{{$result->mark}}</td>
+		      		<td>{{$result->markstr}}</td>
 		      		<td>{{$result->score}}</td>
 		      		<td>
 		      			<a href="{{ route('result.edit',$result->id)}}" class="btn btn-primary btn-sm">
