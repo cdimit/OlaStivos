@@ -113,7 +113,10 @@ div.image:before {
     visibility: hidden;
     height: 0px;
   }
-
+  .headers {
+    visibility: hidden;
+    height: 0px;
+  }
   .navbar-brand{
     display: inline !important;
   }
