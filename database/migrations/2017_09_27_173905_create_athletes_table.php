@@ -26,6 +26,8 @@ class CreateAthletesTable extends Migration
 
             $table->foreign('club_id')->references('id')->on('clubs');
 
+            $table->unique(['first_name','last_name', 'dob', 'gender']);
+
             $table->timestamps();
         });
     }

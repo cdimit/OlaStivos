@@ -88,7 +88,7 @@ class ResultCrudController extends Controller
           $result->mark = $this->createTrackMark($request->hours,$request->minutes,$request->seconds,$request->decimal);
         }
 
-        if(!$request->recordable || $result->wind > 2){
+        if(!$request->recordable || $result->wind > 2 || $result->event->season=="cross country"){
           $result->is_recordable = false;
         }
 
@@ -192,7 +192,7 @@ class ResultCrudController extends Controller
         $result->race = $request->race;
         $result->score = $request->score;
 
-        if(!$request->recordable || $result->wind > 2){
+        if(!$request->recordable || $result->wind > 2 || $result->event->season=="cross country"){
           $result->is_recordable = false;
           $result->records()->detach();
         }else{
@@ -321,7 +321,7 @@ class ResultCrudController extends Controller
             $result->date = $request->date;
             $result->race = $request->race;
 
-            if(!$request->recordable || $result->wind > 2){
+            if(!$request->recordable || $result->wind > 2 || $result->event->season=="cross country"){
               $result->is_recordable = false;
               $result->records()->detach();
             }else{
