@@ -34,6 +34,15 @@ class Event extends Model
       return $this->type=='field';
     }
 
+    public function getIndoor()
+    {
+      return self::where('name', $this->name)
+                    ->where('type', $this->type)
+                    ->where('season', 'indoor')
+                    ->where('gender', $this->gender)
+                    ->first();
+    }
+
     public function getNR($date = null)
     {
 
@@ -167,12 +176,23 @@ class Event extends Model
 
       if($date){
         $results =  $this->results->where('is_recordable', true)->where('date','>=', $date)->sortBy('date');
+        if($this->type!="indoor"){
+          $resultsIndoor =  $this->getIndoor()->results->where('is_recordable', true)->where('date','>=', $date);
+          $results = $results->merge($resultsIndoor)->sortBy('date');
+
+        }
       }else{
         $results = $this->results->where('is_recordable', true)->sortBy('date');
+        if($this->type!="indoor"){
+          $resultsIndoor =  $this->getIndoor()->results->where('is_recordable', true);
+          $results = $results->merge($resultsIndoor)->sortBy('date');
+        }
       }
 
       foreach($results as $result){
         $result->athlete->setRecordIfExist($result, true);
       }
+
+
     }
 }
