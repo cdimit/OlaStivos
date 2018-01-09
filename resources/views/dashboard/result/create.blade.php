@@ -20,7 +20,7 @@
             <label for="competition_id" class="col-md-4 control-label">Competition</label>
             <div class="col-md-6">
                 <select  id="competition_id" name="competition_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
-                    @foreach($competitions as $competition)
+                    @foreach($competitions->sortByDesc('id') as $competition)
                         <option value="{{$competition->id}}">{{$competition->name}} {{$competition->date_start}}</option>
                     @endforeach
                 </select>
@@ -154,7 +154,7 @@
               <label class="col-md-4 control-label">Mark</label>
                 <div class="col-md-6" display="inline-block">
                   <div class="col-md-6">
-                    
+
                     <input id="meters" type="number" class="form-control" name="meters" value="{{ old('meters') }}"  step="1" min="0" placeholder="m">
                     @if ($errors->has('meters'))
                         <span class="help-block">
@@ -163,7 +163,7 @@
                     @endif
 
                   </div>
-                                    
+
                   <div class="col-md-6">
                       <input id="cmeters" type="number" class="form-control" name="cmeters" value="{{ old('cmeters') }}" step="1" min="0" max="99" placeholder="cm">
 
@@ -188,7 +188,7 @@
                   <label class="col-md-4 control-label">Mark</label>
                   <div class="col-md-8">
                     <div class="col-md-3">
-      
+
                       <input id="hours" type="number" class="form-control" name="hours" value="{{ old('hours') }}"  step="1" min="0" placeholder="hours">
                       @if ($errors->has('hours'))
                           <span class="help-block">
@@ -197,7 +197,7 @@
                       @endif
 
                     </div>
-                                    
+
                     <div class="col-md-3">
                       <input id="minutes" type="number" class="form-control" name="minutes" value="{{ old('minutes') }}" step="1" min="0" max="59" placeholder="min">
 
@@ -311,7 +311,7 @@
   <script type="text/javascript">
       jQuery(document).ready(function(){
 
-          
+
           getDates();
           getEvents();
           markInput();
