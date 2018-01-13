@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('.panel-2').hide();
+	$('.headers').hide();
 //	$('div').fadeIn(3600);
-	$(".panel-2").delay(400).slideToggle(1000);
+	$(".headers").delay(100).slideToggle(1000);
 });

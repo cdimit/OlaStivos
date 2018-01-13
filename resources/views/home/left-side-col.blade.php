@@ -44,12 +44,15 @@
 
       <a href="{{ route('competition.show',['competition'=>$countdownComp->id]) }}">
         <h2 style="text-align: center; font-weight: bold; margin-top: 0; margin-bottom: 0;">
-          {{\Carbon\Carbon::now()->diffInDays(new \Carbon\Carbon($countdownComp->date_start))}} μέρες
+          {{\Carbon\Carbon::now()->diffInDays(new \Carbon\Carbon($countdownComp->date_start)) + 1}} μέρες
         </h2>
         <h2 style="text-align: center; margin-top: 0; margin-bottom: 0;">
           {{$countdownComp->name}}
         </h2>
       </a>
+      @if($countdownComp->picture !== '/img/competition.png')
+        <img src="{{ $countdownComp->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;">
+      @endif
 
     </div>
   </div>
@@ -63,7 +66,7 @@
     <div class="panel-heading">Έχει Γενέθλια Σήμερα!</div>
     <div class="panel-body">
       <div well="">
-        <img src="{{ $birthdayAthlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;">
+        <img src="{{ $birthdayAthlete->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto;  display: block; margin: auto auto;">
         <a href="{{ route('athlete.show',['athlete'=>$birthdayAthlete->id]) }}">
             <h4><b>
             {{$birthdayAthlete->first_name}} {{$birthdayAthlete->last_name }} - {{\Carbon\Carbon::now()->diffInYears(new \Carbon\Carbon($birthdayAthlete->dob))}} ετών

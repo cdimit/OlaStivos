@@ -27,7 +27,7 @@ class CreateCompetitionsTable extends Migration
             $table->foreign('competition_series_id')->references('id')->on('competition_series');
             $table->timestamps();
 
-            $table->unique(['name','date_start', 'country', 'city', 'competition_series_id']);
+            
 
         });
     }

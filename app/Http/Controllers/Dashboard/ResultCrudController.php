@@ -110,11 +110,12 @@ class ResultCrudController extends Controller
         //
         // 1. Get athlete DOB
         $athlete = Athlete::find($request->athlete_id);
-        // 2. Find difference between DOB and result date
-        $date = new \DateTime($request->date);
-        $difference = $date->diff(new \DateTime($athlete->dob));
+        // 2. Find difference between DOB and result date YEAR
+        $result_year = (new \DateTime($request->date))->format('Y');//year of result
+        $dob_year = (new \DateTime($athlete->dob))->format('Y');//year of birth
+        $difference = $result_year-$dob_year;
         // 3. Save age category in years format to result record
-        $result->age = $difference->format('%y');
+        $result->age = $difference;
 
 
         $result->save();
@@ -217,12 +218,13 @@ class ResultCrudController extends Controller
         //
         // 1. Get athlete DOB
         $athlete = Athlete::find($request->athlete_id);
-        $athlete_dob = $athlete->dob;
-        // 2. Find difference between DOB and result date
-        $date = new \DateTime($request->date);
-        $difference = $date->diff(new \DateTime($athlete->dob));
+        // 2. Find difference between DOB and result date YEAR
+        $result_year = (new \DateTime($request->date))->format('Y');//year of result
+        $dob_year = (new \DateTime($athlete->dob))->format('Y');//year of birth
+        $difference = $result_year-$dob_year;
         // 3. Save age category in years format to result record
-        $result->age = $difference->format('%y');
+        $result->age = $difference;
+
 
 
         $result->save();
@@ -349,16 +351,18 @@ class ResultCrudController extends Controller
             }
 
 
+
             //
             //Find and store age category
             //
             // 1. Get athlete DOB
             $athlete = Athlete::find($request->athlete_ids[$key]);
-            // 2. Find difference between DOB and result date
-            $date = new \DateTime($request->date);
-            $difference = $date->diff(new \DateTime($athlete->dob));
+            // 2. Find difference between DOB and result date YEAR
+            $result_year = (new \DateTime($request->date))->format('Y');//year of result
+            $dob_year = (new \DateTime($athlete->dob))->format('Y');//year of birth
+            $difference = $result_year-$dob_year;
             // 3. Save age category in years format to result record
-            $result->age = $difference->format('%y');
+            $result->age = $difference;
 
 
             $result->save();
