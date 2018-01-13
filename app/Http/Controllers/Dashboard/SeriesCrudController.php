@@ -45,13 +45,9 @@ class SeriesCrudController extends Controller
             'name' => 'required|string|max:255|min:1',
         ]);
 
-        //CREATE new Series instance
-        $series= new CompetitionSeries;
+        //Elexi ean iparxi idi stin vasi
+        $series = CompetitionSeries::firstOrCreate(['name' => $request->name]);
 
-        $series->name = $request->name;
-
-        $series->save();
-        
         return redirect()->route('series.index');
     }
 
@@ -88,7 +84,7 @@ class SeriesCrudController extends Controller
         $series->name = $request->name;
 
         $series->save();
-        
+
         return redirect()->route('series.index');
     }
 

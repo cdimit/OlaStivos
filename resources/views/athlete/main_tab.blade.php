@@ -85,7 +85,7 @@
                     <tbody>
                         @foreach($sbs as $sb)
                             <tr>
-                                <th scope="row">{{$sb->event->name}}</th>
+                                <th scope="row">{{$sb->event->name}} @if($pb->event->season=="indoor") Κλειστού @endif</th>
                                 <td><a href="/competition/{{$sb->competition->id}}">{{$sb->competition->name}}</a></td>
                                 <td>{{$sb->markstr}}</td>
                                 <td>{{$sb->score}}</td>
@@ -116,7 +116,7 @@
                     <tbody>
                         @foreach($pbs as $pb)
                             <tr>
-                                <th scope="row">{{$pb->event->name}}</th>
+                                <th scope="row">{{$pb->event->name}} @if($pb->event->season=="indoor") Κλειστού @endif</th>
                                 <td><a href="/competition/{{$pb->competition->id}}">{{$pb->competition->name}}</a></td>
                                 <td>{{$pb->markstr}}</td>
                                 <td>{{$pb->score}}</td>
@@ -143,7 +143,7 @@
                             <th>Σεζόν</th>
                             @foreach($sbHistory->first()->keys() as $event)
 
-                                <th>{{\App\Event::find($event)->name}}</th>
+                                <th>{{\App\Event::find($event)->name}} @if($pb->event->season=="indoor") Κλειστού @endif</th>
 
                             @endforeach
                         </thead>

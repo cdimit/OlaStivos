@@ -69,6 +69,19 @@ class ResultCrudController extends Controller
             'seconds' => 'integer|nullable|max:59',
             'decimal' => 'integer|nullable|max:99'
         ]);
+
+        $resultDB = Result::where([
+          'athlete_id' => $request->athlete_id,
+          'event_id' => $request->event_id,
+          'competition_id' => $request->competition_id,
+          'race' => $request->race
+        ])->get();
+
+
+        if(!$resultDB->isEmpty()){
+          return redirect()->route('result.index')->withStatus("Result is already exist!");
+        }
+
         //CREATE new Result instance
         $result = new Result;
 
@@ -120,7 +133,7 @@ class ResultCrudController extends Controller
 
 
 
-        return redirect()->route('result.index');
+        return redirect()->route('result.index')->withStatus('Result stored!');
       }
 
 
@@ -233,7 +246,7 @@ class ResultCrudController extends Controller
         //         $result->records()->attach($record, ['event_id' => $request->event_id]  );
         //     }
         // }
-        return redirect()->route('result.index');
+        return redirect()->route('result.index')->withStatus('Result updated!');
     }
 
 

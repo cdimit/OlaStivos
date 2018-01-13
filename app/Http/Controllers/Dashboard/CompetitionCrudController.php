@@ -62,6 +62,20 @@ class CompetitionCrudController extends Controller
         //VALIDATE DATA
         $this->validate($request, $this->form_rules);
 
+        $competitionDB = Competition::where([
+          'name' => $request->name,
+          'date_start' => $request->date_start,
+          'date_finish' => $request->date_finish,
+          'competition_series_id' => $request->competition_series_id,
+          'country' => $request->country,
+          'city' => $request->city
+        ])->get();
+
+
+        if(!$competitionDB->isEmpty()){
+          return redirect()->route('competition.index')->withStatus("Competition is already exist!");
+        }
+
 
         //CREATE new Competition instance
         $competition = new Competition;
@@ -89,7 +103,7 @@ class CompetitionCrudController extends Controller
 
         Link::store($competition, $request->link_name, $request->link_path);
 
-        return redirect()->route('competition.index');
+        return redirect()->route('competition.index')->withStatus('Competition created successfuly!');
     }
 
 
@@ -142,7 +156,7 @@ class CompetitionCrudController extends Controller
 
         Link::edit($competition, $request->link_name, $request->link_path);
 
-        return redirect()->route('competition.index');
+        return redirect()->route('competition.index')->withStatus('Competition updated!');
     }
 
 }

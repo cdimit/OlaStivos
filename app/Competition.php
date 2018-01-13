@@ -80,7 +80,7 @@ class Competition extends Model
     /****************************************************/
     public function scopeSearch($query,$search){
       // split on 1+ whitespace & ignore empty (eg. trailing space)
-      $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY); 
+      $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
 
       return $query->where(function ($q) use ($searchValues) {
         foreach ($searchValues as $value) {

@@ -1,6 +1,13 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+  @if (session('status'))
+	<div class="alert alert-success">
+	<strong>{{ session('status') }}</strong>
+	</div>
+	@endif
+
     <a href="{{ route('club.create') }}" class="btn btn-success btn-responsive" role="button">Add new Club</a>
 	<table class="table table-bordered table-sm">
 	  	<thead>
@@ -14,7 +21,7 @@
 	      		<th>Edit</th>
 	    	</tr>
 	  	</thead>
-	  	
+
 	  	<tbody>
 	  		@foreach($clubs as $club)
 		    	<tr>
@@ -24,7 +31,7 @@
 		     		<td>{{$club->city}}</td>
 		      		<td><img src="{{ $club->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;"></td>
 		      		<td>{{$club->since}}</td>
-		      		<td>	
+		      		<td>
 		      			<a href="{{ route('club.edit',$club->id)}}" class="btn btn-primary btn-sm">
   							Edit
 						</a>

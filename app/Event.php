@@ -183,7 +183,7 @@ class Event extends Model
         }
       }else{
         $results = $this->results->where('is_recordable', true)->sortBy('date');
-        if($this->type!="indoor"){
+        if($this->type!="indoor" && $this->getIndoor()!=null){
           $resultsIndoor =  $this->getIndoor()->results->where('is_recordable', true);
           $results = $results->merge($resultsIndoor)->sortBy('date');
         }

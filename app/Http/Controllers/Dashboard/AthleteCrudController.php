@@ -59,6 +59,17 @@ class AthleteCrudController extends Controller
         //VALIDATE DATA
         $this->validate($request, $this->form_rules);
 
+        $athleteDB = Athlete::where([
+                              'first_name' => $request->first_name,
+                              'last_name' => $request->last_name,
+                              'dob' => $request->dob,
+                              'gender' => $request->gender
+                            ])->get();
+
+        if(!$athleteDB->isEmpty()){
+          return redirect()->route('athlete.index')->withStatus("Athlete is already exist!");
+        }
+
         //CREATE new Athlete instance
         $athlete = new Athlete;
 
@@ -79,7 +90,7 @@ class AthleteCrudController extends Controller
 
         Link::store($athlete, $request->link_name, $request->link_path);
 
-        return redirect()->route('athlete.index');
+        return redirect()->route('athlete.index')->withStatus("Athlete stored!");;
 
     }
 
@@ -128,7 +139,7 @@ class AthleteCrudController extends Controller
 
         Link::edit($athlete, $request->link_name, $request->link_path);
 
-        return redirect()->route('athlete.index');
+        return redirect()->route('athlete.index')->withStatus("Athlete updated!");;
 
     }
 

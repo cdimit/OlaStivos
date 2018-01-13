@@ -1,7 +1,14 @@
 @extends('layouts.dashboard')
 
 @section('content')
-	<p>
+
+	@if (session('status'))
+	<div class="alert alert-success">
+	<strong>{{ session('status') }}</strong>
+	</div>
+	@endif
+	
+		<p>
     	<a href="{{ route('athlete.create') }}" class="btn btn-success btn-responsive" role="button">Add new Athlete</a>
     </p>
     <div style="width:265px;">
