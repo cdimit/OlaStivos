@@ -426,7 +426,7 @@ class Athlete extends Model
       $recordId = $record->id;
 
       $events = $this->uniqueEvents($this->results);
-
+      $events = Event::where('gender',$this->gender)->orderBy('id')->pluck('id');
       //create a collection with keys the event_id and values the NRs
       $collection=collect([]);
       foreach($events as $event){
