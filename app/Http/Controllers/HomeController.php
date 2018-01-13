@@ -37,7 +37,6 @@ class HomeController extends Controller
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
 
-
         //Data for Search
         $athletesSearch = Athlete::all()->sortBy('first_name');
         $competitionsSearch = Competition::all();

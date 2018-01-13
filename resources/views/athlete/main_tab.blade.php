@@ -16,39 +16,44 @@
         <p>
             <!--      Achievements      -->
             <ul class="list-group">
-                <li class="list-group-item borderless" style="font-size:12px "><b>Επιτεύγματα:</b></li>
-                @foreach($NRs as $NR)
+                <li class="list-group-item borderless" style="font-size:12px "><b>Επιτεύγματα:</b></li>                
+
+                @foreach($NRs as $event => $NR)
                     <li class="list-group-item icon icon-bullet">
                         <span class="list-group-item-achievement">
                             <img src="/img/nr.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ {{$NR->event->sezon}}: &ensp; <i>{{$NR->event->name}}   &ensp;  <b>{{$NR->markstr}}</b></i>
+                        Παγκύπριο Ρεκόρ {{App\Event::find($event)->sezon}}: &ensp; <i>{{$NR->event->name}}   &ensp;  <b>{{$NR->markstr}}</b></i>
                     </li>
                 @endforeach
-                @foreach($NURs as $NUR)
+
+                @foreach($NURs as $event => $NUR)
                     <li class="list-group-item icon icon-bullet">
                         <span class="list-group-item-achievement">
                             <img src="/img/nru23.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ U23 {{$NUR->event->sezon}}: &ensp; <i>{{$NUR->event->name}} &ensp; <b>{{$NUR->markstr}}</b></i>
+                        Παγκύπριο Ρεκόρ U23 {{App\Event::find($event)->sezon}}: &ensp; <i>{{$NUR->event->name}} &ensp; <b>{{$NUR->markstr}}</b></i>
                     </li>
                 @endforeach
-                @foreach($NJRs as $NJR)
+
+                @foreach($NJRs as $event => $NJR)
                     <li class="list-group-item icon icon-bullet">
                         <span class="list-group-item-achievement">
                             <img src="/img/nrjunior.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ U19 {{$NJR->event->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i>
+                        Παγκύπριο Ρεκόρ U19 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i>
                     </li>
                 @endforeach
-                @foreach($NYRs as $NYR)
+    
+                @foreach($NYRs as $event => $NYR)
                     <li class="list-group-item icon icon-bullet">
                         <span class="list-group-item-achievement">
                             <img src="/img/nryouth.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ U17 {{$NYR->event->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
+                        Παγκύπριο Ρεκόρ U17 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
                     </li>
                 @endforeach
+                
                 @if($nwins>0)
                 <li class="list-group-item icon icon-bullet">
                     <span class="list-group-item-achievement">
@@ -85,7 +90,7 @@
                     <tbody>
                         @foreach($sbs as $sb)
                             <tr>
-                                <th scope="row">{{$sb->event->name}} @if($pb->event->season=="indoor") Κλειστού @endif</th>
+                                <th scope="row">{{$sb->event->name}} @if($sb->event->season=="indoor") Κλειστού @endif</th>
                                 <td><a href="/competition/{{$sb->competition->id}}">{{$sb->competition->name}}</a></td>
                                 <td>{{$sb->markstr}}</td>
                                 <td>{{$sb->score}}</td>

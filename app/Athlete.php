@@ -425,25 +425,24 @@ class Athlete extends Model
       $record = Record::where('acronym','like',$acronym)->first();
       $recordId = $record->id;
 
-      //Get all NRs of athlete
-      $NRs = Result::whereHas('records',function ($query) use ($recordId) {
-        $query->where('record_id','=', $recordId);
-      })->where('athlete_id',$this->id)->get();
-
-      //Find events in which athlete has NRs
-      $events = $this->uniqueEvents($NRs);
+      $events = $this->uniqueEvents($this->results);
 
       //create a collection with keys the event_id and values the NRs
       $collection=collect([]);
       foreach($events as $event){
         //All NRs made for the event by the athlete
-        $eventNRs = $NRs->where('event_id',$event);
+        $eventNRs = Result::whereHas('records',function ($query) use ($recordId,$event) {
+              $query->where('record_id','=', $recordId)->where('event_id',$event);
+            })->where('athlete_id',$this->id)->get();
 
-        //Find best NR
-        $eventNR = $this->bestRecord(Event::find($event),$eventNRs);
+        //If the athlete has NRs in this event
+        if($eventNRs->first()){
+          //Find best NR
+          $eventNR = $this->bestRecord(Event::find($event),$eventNRs);
 
-        //Add NR to collection with key the event id
-        $collection = $collection->put($event, $eventNR);
+          //Add NR to collection with key the event id
+          $collection = $collection->put($event, $eventNR);
+        }
       }
 
       return $collection;
@@ -460,11 +459,12 @@ class Athlete extends Model
     */
     public function uniqueEvents($results)
     {
+      
       $events = $results->mapWithKeys(function ($item) {
         return [$item['event_id']=>$item];
       })->keys();
 
-      return $events->toArray();
+      return $events;
     }
 
 
