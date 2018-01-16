@@ -21,17 +21,17 @@
                     <!-- Search Form -->
                     {!! Form::open(
                             array(
-                                'route' => 'record.searchNRs', 
+                                'route' => 'record.searchNRs',
                                 'class' => 'form-horizontal'
                                 )
-                            ) 
+                            )
                         !!}
-                        
-                        {{ csrf_field() }} 
+
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <div class="col-xs-5 text-left">
                                 <label for="category">Ηλικιακή Κατηγορία</label>
-                            </div> 
+                            </div>
                             <div class="col-xs-7">
                             <select  id="category" name="category" class="form-control">
                                 <option value="Senior">Άνδρες/Γυναίκες</option>
@@ -40,9 +40,9 @@
                                 <option value="Youth">Παίδες/Κορασίδες</option>
                             </select>
                             </div>
-                            
+
                         </div>
-                      
+
                         <div class="form-group">
                             <div class="col-xs-5 text-left">
                                 <label for="season">Σεζόν</label>
@@ -66,7 +66,7 @@
                                 </select>
                             </div>
                         </div>
-                      
+
                         <div class="form-group">
                             <div class="col-xs-2 text-left">
                                 <button type="submit" class="btn btn-default">Ψάξε Παγκύπρια Ρεκόρ</button>
@@ -83,32 +83,32 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">            
+            <div class="panel panel-default">
                 <div class="panel-body">
                     <!-- Main Content -->
-                    <h3> Παγκύπρια Ρεκόρ - {{$events->first()->sezon}} -           
+                    <h3> Παγκύπρια Ρεκόρ - {{$events->first()->sezon}} -
 
-                    @if($events->first()->gender == 'male') 
+                    @if($events->first()->gender == 'male')
                         @if($category == 'Senior')
                             Άνδρες
-                        @elseif ($category == 'U23') 
+                        @elseif ($category == 'U23')
                             Νέοι (U23)
-                        @elseif ($category == 'Youth') 
+                        @elseif ($category == 'Youth')
                             έφηβοι
-                        @else 
+                        @else
                             Παίδες
                         @endif
-                    @else 
+                    @else
                         @if($category == 'Senior')
                             Γυναίκες
-                        @elseif ($category == 'U23') 
+                        @elseif ($category == 'U23')
                             Νέες (U23)
-                        @elseif ($category == 'Youth') 
+                        @elseif ($category == 'Youth')
                             Νεανίδες
-                        @else 
+                        @else
                             Κορασίδες
                         @endif
-                    @endif 
+                    @endif
 
                     </h3>
                     <div class="col-md-12">
@@ -137,16 +137,16 @@
                                                 <td>
                                                     <a href="/competition/{{$record->competition->id}}">{{$record->competition->name}}</a>
                                                 </td>
-                                                 <td>{{$record->competition->city}}, {{$record->competition->country}}</td>
+                                                 <td>{{$record->competition->city}}</td>
                                                 <td>{{$record->date}}</td>
 
                                             </tr>
                                         @endif
                                     @endforeach
 
-                                </table> 
+                                </table>
                             </div>
-                        
+
                         </div>
                     </div>
                 </div>
@@ -157,4 +157,3 @@
 
 </div>
 @endsection
-

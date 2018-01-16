@@ -94,11 +94,17 @@ class ResultCrudController extends Controller
         $result->race = $request->race;
         $result->score = $request->score;
 
+        if($request->handed){
+          $decimal = $request->decimal."H";
+        }else{
+          $decimal = $request->decimal;
+        }
+
         //Save mark based on event type
         if($request->type=="field"){
           $result->mark = $this->createFieldMark($request->meters,$request->cmeters);
         }else{
-          $result->mark = $this->createTrackMark($request->hours,$request->minutes,$request->seconds,$request->decimal);
+          $result->mark = $this->createTrackMark($request->hours,$request->minutes,$request->seconds,$decimal);
         }
 
         if(!$request->recordable || $result->wind > 2 || $result->event->season=="cross country"){
