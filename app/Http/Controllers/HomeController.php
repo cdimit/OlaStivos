@@ -31,8 +31,8 @@ class HomeController extends Controller
         $femaleNRs = $this->getNationalRecords('outdoor','female');
 
         //Seasonal Bests Outdoor
-        $maleLeaders = $this->getSeasonalLeaders('outdoor','male');
-        $femaleLeaders = $this->getSeasonalLeaders('outdoor','female');
+        $maleLeaders = $this->getSeasonalLeaders('indoor','male');
+        $femaleLeaders = $this->getSeasonalLeaders('indoor','female');
 
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
