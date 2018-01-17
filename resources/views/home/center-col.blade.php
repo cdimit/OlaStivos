@@ -1,7 +1,7 @@
 <!-- TOP LIST SEASON -->
 <div class="panel panel-1 with-nav-tabs">
   <div class="panel-heading">
-    Καλύτερες Επιδόσεις Σεζόν- Ανοικτός Στίβος
+    Καλύτερες Επιδόσεις Σεζόν- Κλειστός Στίβος
     <!-- TABS List -->
     <ul class="nav nav-tabs">
       <li class="active"><a href="#tabMaleLead" data-toggle="tab">Άνδρες</a></li>

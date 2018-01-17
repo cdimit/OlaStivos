@@ -190,7 +190,7 @@ class Event extends Model
       }
 
       foreach($results as $result){
-        $result->athlete->setRecordIfExist($result, true);
+        $result->athlete->setRecordIfExist($result);
       }
 
 

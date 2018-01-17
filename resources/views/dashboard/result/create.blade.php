@@ -234,6 +234,14 @@
           </div>
         </div>
 
+        <!--Score input field-->
+        <div class="form-group">
+            <label for="result" class="col-md-4 control-label">Is Handed?</label>
+            <div class="col-md-6">
+              <input id="handed" name="handed" type="checkbox" >
+            </div>
+        </div>
+
 
         <!--Wind input field-->
         <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">

@@ -94,7 +94,7 @@
                                 </select>
                             </div>
                         </div>
-{{-- 
+{{--
                         <div class="form-group">
                             <div class="col-xs-5 text-left">
                                 <label for="season">Ένα αποτέλεσμα ανά αθλητή:</label>
@@ -178,7 +178,7 @@
                                                 <td>
                                                   <a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a>
                                                 </td>
-                                                <td>{{$result->competition->city}}, {{$result->competition->country}}</td>
+                                                <td>{{$result->competition->city}}</td>
                                                 <td>{{$result->date}}</td>
 
                                             </tr>

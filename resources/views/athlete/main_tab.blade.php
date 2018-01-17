@@ -16,7 +16,7 @@
         <p>
             <!--      Achievements      -->
             <ul class="list-group">
-                <li class="list-group-item borderless" style="font-size:12px "><b>Επιτεύγματα:</b></li>                
+                <li class="list-group-item borderless" style="font-size:12px "><b>Επιτεύγματα:</b></li>
 
                 @foreach($NRs as $event => $NR)
                     <li class="list-group-item icon icon-bullet">
@@ -44,7 +44,7 @@
                         Παγκύπριο Ρεκόρ U19 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i>
                     </li>
                 @endforeach
-    
+
                 @foreach($NYRs as $event => $NYR)
                     <li class="list-group-item icon icon-bullet">
                         <span class="list-group-item-achievement">
@@ -53,7 +53,7 @@
                         Παγκύπριο Ρεκόρ U17 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
                     </li>
                 @endforeach
-                
+
                 @if($nwins>0)
                 <li class="list-group-item icon icon-bullet">
                     <span class="list-group-item-achievement">
@@ -148,7 +148,7 @@
                             <th>Σεζόν</th>
                             @foreach($sbHistory->first()->keys() as $event)
 
-                                <th>{{\App\Event::find($event)->name}} @if($pb->event->season=="indoor") Κλειστού @endif</th>
+                                <th>{{\App\Event::find($event)->name}} @if(\App\Event::find($event)->season=="indoor") Κλειστού @endif</th>
 
                             @endforeach
                         </thead>
