@@ -24,39 +24,37 @@
     <!-- Main Content -->
     <!--************* -->
     <!-- 2nd and 3rd columns -->
-    <div class="col-lg-9 col-lg-push-3">
+    <div class="col-lg-9">
       <div class="row">
 
         <!--***********-->
         <!-- 2nd COLUMN-->
         <!--***********-->
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-lg-push-4 padding-3">
           @include('home.center-col')
         </div>
-
-
-        <!-- *****************
-        *** 3rd Column ******
-        *****************-->
-        <div class="col-lg-4 padding-3">
-          @include('home.right-side-col')
+        
+        <!--***********-->
+        <!-- SIDE COLUMN-->
+        <!--***********-->
+        <div class="col-lg-4 col-lg-pull-8 padding-3">
+          @include('home.left-side-col')
         </div>
 
       </div>
-
-
-
+    </div>
+    <!-- *****************
+    *** 3rd Column ******
+    *****************-->
+    <div class="col-lg-3 padding-3">
+      @include('home.right-side-col')
     </div>
 
-    <!--***********-->
-    <!-- SIDE COLUMN-->
-    <!--***********-->
-    <div class="col-lg-3 col-lg-pull-9 padding-3">
-      @include('home.left-side-col')
-    </div>
+    
   </div>
 </div>
 @endsection
 @section('scripts')
     {{-- <script src="{{ asset('js/animations/home.js') }}"></script> --}}
 @endsection
+
