@@ -441,12 +441,12 @@ class Athlete extends Model
 
           //Add NR to collection with key the event id
           $collection = $collection->put($event, $eventNR);
+          
         }
       }
 
       return $collection;
     }
-
 
 
     /**********************************

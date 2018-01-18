@@ -46,6 +46,11 @@ class AthleteController extends Controller
         $NJRs= $athlete->getNRs('NJR');
         $NYRs= $athlete->getNRs('NYR');
 
+        $NRs= $this->athleteCurrentNRs($athlete,'NR');
+        $NURs= $this->athleteCurrentNRs($athlete,'NUR');
+        $NJRs= $this->athleteCurrentNRs($athlete,'NJR');
+        $NYRs= $this->athleteCurrentNRs($athlete,'NYR');
+
         //GET National competition wins
         $nwins = $athlete->countPlaces(\App\CompetitionSeries::find('1'),'1');
 
@@ -103,5 +108,40 @@ class AthleteController extends Controller
             $sbHistory->put($year,$sbsOfYear);
         }
         return $sbHistory;
+    }
+
+    public function athleteCurrentNRs(Athlete $athlete,$acronym = "NR")
+    {
+                
+        //Get all NR records of the athlete
+        $NRs= $athlete->getNRs($acronym);
+
+        $collection=collect([]);
+        foreach($NRs as $eventID=>$NR){
+            //event of NR
+            $event = Event::find($eventID);
+            switch ($acronym) {
+                case 'NR':
+                    $eventNR = $event->getNR();
+                    break;
+                case 'NYR':
+                    $eventNR = $event->getNYR();
+                    break;
+                case 'NUR':
+                    $eventNR = $event->getNUR();
+                    break;
+                case 'NJR':
+                    $eventNR = $event->getNJR();
+                    break;
+                default:
+                    $eventNR = $event->getNR();
+                    break;
+            }
+            
+            if($eventNR == $NR){
+                $collection = $collection->put($eventID, $NR);
+            }      
+        }
+        return $collection;
     }
 }
