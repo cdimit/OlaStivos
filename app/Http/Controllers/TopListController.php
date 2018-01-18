@@ -15,7 +15,7 @@ class TopListController extends Controller
     //get all events
     // $events = Event::outdoor();
     $ages = Age::all();
-    $years = Result::years();
+    $years = Result::years()->reverse();
     $event = Event::outdoor()->first();
 
 

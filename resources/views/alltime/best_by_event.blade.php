@@ -120,8 +120,6 @@
                                       <th>Άνεμος</th>
                                       <th>Αθλητής</th>
                                       <th>Σύλλογος</th>
-                                      <th>Θέση</th>
-                                      <th>Αγώνας</th>
                                       <th>Τοποθεσία</th>
                                       <th>Ημερομηνία</th>
 
@@ -151,11 +149,9 @@
                                                 <td>
                                                   <a href="/club/{{$result->athlete->club->id}}">{{$result->athlete->club->acronym}}</a>
                                                 </td>
-                                                <td>{{$result->position}}</td>
                                                 <td>
-                                                  <a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a>
+                                                  <a href="/competition/{{$result->competition->id}}">{{$result->competition->city}}</a>
                                                 </td>
-                                                <td>{{$result->competition->city}}</td>
                                                 <td>{{$result->date}}</td>
 
                                             </tr>
