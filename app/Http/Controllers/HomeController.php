@@ -78,7 +78,7 @@ class HomeController extends Controller
             foreach ($athletes as $athlete) {
                 $last_result = $athlete->results->sortByDesc('date')->first();
                 $now = Carbon::now();
-                if($now->diffInYears(Carbon::parse($last_result->date)) < 1){
+                if($now->diffInMonths(Carbon::parse($last_result->date)) < 24){
                     return $athlete;
                 }
             }

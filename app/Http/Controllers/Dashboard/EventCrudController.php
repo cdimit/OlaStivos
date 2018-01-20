@@ -62,11 +62,12 @@ class EventCrudController extends Controller
         $event->type = $request->type;
         $event->season = $request->season;
         $event->gender = $request->gender;
+
         $event->order = $request->order;
-        $this->fixOrder($request->gender,$request->season,$request->order);
+
         $event->save();
 
-
+        $this->fixOrder("store",$event);
  
         return redirect()->route('events.index');
     }
@@ -96,26 +97,62 @@ class EventCrudController extends Controller
     {
         $this->validate($request, $this->form_rules);
 
-        $event = Event::find($id);
-        $event->name = $request->name;
-        $event->type = $request->type;
-        $event->season = $request->season;
-        $event->gender = $request->gender;
-        $event->order = $request->order;
-        $this->fixOrder($request->gender,$request->season,$request->order);
-        $event->save();
+        $oldevent = Event::find($id);
+        
+        $newevent = Event::find($id);
+        $newevent->name = $request->name;
+        $newevent->type = $request->type;
+        $newevent->season = $request->season;
+        $newevent->gender = $request->gender;
 
+        $newevent->order = $request->order;
+        
+        $newevent->save();
+        
+        $this->fixOrder("update",$newevent,$oldevent);
+        
         return redirect()->route('events.index');
     }
 
-    private function fixOrder($gender,$season,$order)
+    private function fixOrder($action,$newevent,$oldevent = null)
     {
-        $events = Event::where('order','>=',$order)->get();
-        foreach ($events as $event) {
-            $event->order = $event->order + 1;
-            $event->save();
+        if($action =="store"){
+            
+            $change_events = Event::where('id','!=',$newevent->id)
+                                    ->where('order','>=',$newevent->order)
+                                    ->get();
+            foreach ($change_events as $change_event) {
+                $event->order = $event->order + 1;
+                $event->save();    
+            }
+
+        }elseif($action="update"){
+            //if order hasnt changed------> return
+            if ($newevent->order == $oldevent->order){
+                return;
+
+            }elseif($newevent->order > $oldevent->order){//if order is changed to bigger number
+                $events_before = Event::where('id','!=',$newevent->id)
+                                        ->where('order','<=',$newevent->order)
+                                        ->where('order','>=',$oldevent->order)
+                                        ->get();
+                foreach ($events_before as $change_event) {
+                    $change_event->order = $change_event->order - 1;
+                    $change_event->save();    
+                }   
+                     
+            }elseif($newevent->order < $oldevent->order){//if order is changed to smaller number
+                $events_before = Event::where('id','!=',$newevent->id)
+                                        ->where('order','>=',$newevent->order)
+                                        ->where('order','<=',$oldevent->order)
+                                        ->get();
+                foreach ($events_before as $change_event) {
+                    $change_event->order = $change_event->order + 1;
+                    $change_event->save();    
+                }  
+            }
+
         }
- 
         return;
     }
 
