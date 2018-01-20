@@ -128,7 +128,7 @@ class EventCrudController extends Controller
 
         }elseif($action="update"){
             //if order hasnt changed------> return
-            if ($newevent->order == $oldevent->order){
+            if ($newevent->order === $oldevent->order){
                 return;
 
             }elseif($newevent->order > $oldevent->order){//if order is changed to bigger number
