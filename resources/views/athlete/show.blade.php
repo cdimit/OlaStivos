@@ -7,6 +7,13 @@
  --}}
     <link href="{{ asset('/css/profiles/profile.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/headings/heading-in-profile.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .seperator:after {
+            padding-right: 1vw;
+            padding-left: 1vw;
+            content: "|";
+        }
+    </style>
 @endsection
 @section('content')
 <div class="container" style="min-height: calc(100vh - 400px);">

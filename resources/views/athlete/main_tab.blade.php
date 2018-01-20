@@ -9,7 +9,9 @@
                 @else
                     <li class="list-inline-item seperator  uppercase">ΓΥΝΑΙΚΑ</li>
                 @endif
-                <li class="list-inline-item seperator">{{$athlete->dob}}</li>
+                <li class="list-inline-item seperator">
+                    {{date('d-m-Y', strtotime($athlete->dob))}}
+                </li>
                 <li class="list-inline-item">{{$athlete->club->acronym}}</li>
             </ul>
         </p>

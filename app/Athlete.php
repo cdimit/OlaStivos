@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Athlete;
 use App\Age;
 use App\Traits\Linkable;
 use App\Traits\Statusable;
@@ -482,6 +483,10 @@ class Athlete extends Model
     }
 
 
+
+    /*
+    *SET RECORDS FUNCTIONS:
+    */
     public function setPbIfExist($result, $event)
     {
       $pb = $this->getPb($event, $result->date);
@@ -683,3 +688,5 @@ class Athlete extends Model
 
 
 }
+    
+

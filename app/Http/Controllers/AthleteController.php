@@ -41,11 +41,6 @@ class AthleteController extends Controller
         //ACHIEVEMENTS//
 
         //GET NRs : NR, NUR, NJR, NYR
-        $NRs= $athlete->getNRs('NR');
-        $NURs= $athlete->getNRs('NUR');
-        $NJRs= $athlete->getNRs('NJR');
-        $NYRs= $athlete->getNRs('NYR');
-
         $NRs= $this->athleteCurrentNRs($athlete,'NR');
         $NURs= $this->athleteCurrentNRs($athlete,'NUR');
         $NJRs= $this->athleteCurrentNRs($athlete,'NJR');

@@ -29,7 +29,7 @@ class HomeController extends Controller
         //GET National Records
         $maleNRs = $this->getNationalRecords('outdoor','male');
         $femaleNRs = $this->getNationalRecords('outdoor','female');
-
+        
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('indoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('indoor','female');
@@ -70,10 +70,20 @@ class HomeController extends Controller
     */
     public function birthdayAthlete()
     {
-        //Get a random athlete that has birthday
-        $athlete = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->published()->first();
-        return $athlete;
-
+        //Get a shiffled collection of athletes that have their birthday today
+        $athletes = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->published()->get()->shuffle();
+        //Check one by one if they are active over the last year
+        // If yes then show their birthday 
+        if($athletes->first()){
+            foreach ($athletes as $athlete) {
+                $last_result = $athlete->results->sortByDesc('date')->first();
+                $now = Carbon::now();
+                if($now->diffInYears(Carbon::parse($last_result->date)) < 1){
+                    return $athlete;
+                }
+            }
+        }
+        return null;
     }
 
 
@@ -88,10 +98,15 @@ class HomeController extends Controller
 
         //for each event add the NR in the collection
         foreach($events as $event){
-            $records->push($event->getNR());
+            if($event->getNR()){
+                //get event NR and set attribute order based on event
+                $record = $event->getNR()->setAttribute('order', $event->order);
+                $records->push($record);
+            }
         }
 
-        return $records;
+        //sort records based of event order attribute
+        return $records->sortBy('order');
     }
 
     public function getSeasonalLeaders($season ,$gender){
@@ -111,10 +126,15 @@ class HomeController extends Controller
             }else{
               $results = $res->sortBy('mark');
             }
-            $leaders->push($results->first());
+
+            if($results->first()){
+                $leader = $results->first()->setAttribute('order', $event->order);
+                $leaders->push($leader);
+            }
         }
 
-        return $leaders;
+        //sort leaders based of event order attribute
+        return $leaders->sortBy('order');
     }
 
 
