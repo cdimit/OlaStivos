@@ -64,11 +64,10 @@ class EventCrudController extends Controller
         $event->gender = $request->gender;
 
         $event->order = $request->order;
+        $this->fixOrder("store",$event);
 
         $event->save();
 
-        $this->fixOrder("store",$event);
- 
         return redirect()->route('events.index');
     }
 
@@ -106,47 +105,59 @@ class EventCrudController extends Controller
         $newevent->gender = $request->gender;
 
         $newevent->order = $request->order;
-        
+        if($oldevent->order === null || $oldevent->order <= 0){
+            $this->fixOrder("store",$newevent,$oldevent);
+        }else{
+            $this->fixOrder("update",$newevent,$oldevent);
+        }
+       
         $newevent->save();
-        
-        $this->fixOrder("update",$newevent,$oldevent);
         
         return redirect()->route('events.index');
     }
 
     private function fixOrder($action,$newevent,$oldevent = null)
     {
+        // IF new order is not taken then do nothing. No fixes needed
+        if(!Event::where('order',$newevent->order)->exists()){
+            return;
+        }
+
         if($action =="store"){
-            
-            $change_events = Event::where('id','!=',$newevent->id)
-                                    ->where('order','>=',$newevent->order)
+            $change_events = Event::where('id',"!=",$newevent->id)
+                                    ->where('order',">=",$newevent->order)
                                     ->get();
             foreach ($change_events as $change_event) {
-                $event->order = $event->order + 1;
-                $event->save();    
+                $change_event->order = $change_event->order + 1;
+                $change_event->save();    
             }
 
-        }elseif($action="update"){
-            //if order hasnt changed------> return
-            if ($newevent->order === $oldevent->order){
-                return;
+        }elseif($action=="update"){
 
+            //if order hasnt changed or is over maximum value------> return
+            if (($newevent->order === $oldevent->order)|| ($newevent->order <= 0)){
+                return;
             }elseif($newevent->order > $oldevent->order){//if order is changed to bigger number
+                
                 $events_before = Event::where('id','!=',$newevent->id)
-                                        ->where('order','<=',$newevent->order)
-                                        ->where('order','>=',$oldevent->order)
-                                        ->get();
+                                    ->where(function($query) use($newevent,$oldevent){
+                                        $query->where('order','<=',$newevent->order)
+                                            ->where('order','>=',$oldevent->order);
+                                    })->get();
                 foreach ($events_before as $change_event) {
                     $change_event->order = $change_event->order - 1;
                     $change_event->save();    
                 }   
-                     
+ 
             }elseif($newevent->order < $oldevent->order){//if order is changed to smaller number
-                $events_before = Event::where('id','!=',$newevent->id)
-                                        ->where('order','>=',$newevent->order)
-                                        ->where('order','<=',$oldevent->order)
+                $events_after = Event::where('id','!=',$newevent->id)
+                                        ->where(function($query) use($newevent,$oldevent){
+                                            $query->where('order','>=',$newevent->order)
+                                                ->where('order','<=',$oldevent->order);
+                                        })
                                         ->get();
-                foreach ($events_before as $change_event) {
+                // dd($events_after);
+                foreach ($events_after as $change_event) {
                     $change_event->order = $change_event->order + 1;
                     $change_event->save();    
                 }  
