@@ -28,7 +28,17 @@
                                 <div class="col-sm-6">
                                     <div class="well">
                                         <p><h1>{{$competition->name}}</h1></p>
-                                        <p><h3>{{$competition->series->name}}</h3></p>
+                                        <p>
+                                            <ul style="list-style: square;">
+                                                
+                                                @foreach($competition->competition_series as $series)
+                                                    <li>
+                                                        <h4>{{$series->name}}</h4>
+                                                    </li>
+                                                @endforeach
+                                                
+                                            </ul>
+                                        </p>
                                         <p>
                                             <ul class="list-inline">
                                                 <li class="list-inline-item seperator">{{date('d-M-Y', strtotime($competition->date_start))}} - {{date('d-M-Y', strtotime($competition->date_finish))}}

@@ -18,6 +18,11 @@ class Competition extends Model
         return $this->belongsTo('App\CompetitionSeries', 'competition_series_id');
     }
 
+    public function competition_series()
+    {
+      return $this->belongsToMany(CompetitionSeries::class);
+    }
+
     public function results()
     {
         return $this->hasMany('App\Result')->published();

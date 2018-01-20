@@ -117,6 +117,23 @@
             </div>
         </div>
 
+        <!--Competition-Series input field-->
+        <div class="form-group{{ $errors->has('competition_series') ? ' has-error' : '' }}" id="competition_series">
+            <label for="competition_series" class="col-md-4 control-label">Competition Series Pivot</label>
+            <div class="col-md-6">
+                <select  id="competition_series" name="competition_series[]" class="selectpicker" data-show-subtext="true" data-live-search="true" data-max-options="10" multiple>
+                    @foreach($series as $id => $sira)
+                        <option value="{{$id}}">{{$sira}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('competition_series'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('competition_series') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
 
         @include('links.create')
 

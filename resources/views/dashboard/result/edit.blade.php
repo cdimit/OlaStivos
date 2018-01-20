@@ -188,9 +188,9 @@
             </div>
         </div>
 
-        <!--Score input field-->
+        <!--Is recordable field-->
         <div class="form-group">
-            <label for="result" class="col-md-4 control-label">Is Recordable?</label>
+            <label for="recordable" class="col-md-4 control-label">Is Recordable?</label>
             <div class="col-md-6">
               <input id="recordable" name="recordable" type="checkbox" @if($result->is_recordable) checked @endif>
             </div>

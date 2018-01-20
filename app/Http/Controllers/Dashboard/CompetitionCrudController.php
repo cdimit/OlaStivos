@@ -59,6 +59,7 @@ class CompetitionCrudController extends Controller
      */
     public function store(Request $request)
     {
+
         //VALIDATE DATA
         $this->validate($request, $this->form_rules);
 
@@ -73,7 +74,7 @@ class CompetitionCrudController extends Controller
 
 
         if(!$competitionDB->isEmpty()){
-          return redirect()->route('competition.index')->withStatus("Competition is already exist!");
+          return redirect()->route('competition.index')->withStatus("Competition already exist!");
         }
 
 
@@ -97,9 +98,10 @@ class CompetitionCrudController extends Controller
         }
         $competition->picture = $picture;
 
-
-
         $competition->save();
+
+        //Atach competition series
+        $competition->competition_series()->sync($request->competition_series);
 
         Link::store($competition, $request->link_name, $request->link_path);
 
@@ -116,8 +118,10 @@ class CompetitionCrudController extends Controller
     public function edit($id)
     {
         $series = CompetitionSeries::pluck('name','id'); //list of series for select field in create form
+        $competition_series = CompetitionSeries::all();
         $competition = Competition::find($id);
-        return view('dashboard.competition.edit')->with('competition',$competition)->with('series',$series);
+        return view('dashboard.competition.edit')->with('competition',$competition)->with('series',$series)
+                                                ->with('competition_series',$competition_series);
     }
 
     /**
@@ -144,6 +148,8 @@ class CompetitionCrudController extends Controller
         $competition->city = $request->city;
         $competition->venue = $request->venue;
 
+
+        
         if (!empty($request->picture)) {
             if($competition->picture != '/img/competition.png' ){
                 Storage::delete(str_replace_first('/storage/', '', $competition->picture));
@@ -154,6 +160,9 @@ class CompetitionCrudController extends Controller
 
         $competition->save();
 
+        //Atach competition series
+        $competition->competition_series()->sync($request->competition_series);
+        
         Link::edit($competition, $request->link_name, $request->link_path);
 
         return redirect()->route('competition.index')->withStatus('Competition updated!');

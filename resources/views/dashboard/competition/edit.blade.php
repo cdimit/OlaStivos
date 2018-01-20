@@ -114,6 +114,26 @@
             </div>
         </div>
 
+        <!--Competition_series input field-->
+        <div class="form-group{{ $errors->has('competition_series') ? ' has-error' : '' }}" id="competition_series">
+            <label for="competition_series" class="col-md-4 control-label">Relay Athletes</label>
+            <div class="col-md-6">
+                <select  id="competition_series" name="competition_series[]" class="selectpicker" data-show-subtext="true" data-live-search="true" data-max-options="10" multiple>
+                    @foreach($competition->competition_series as $comp_series)
+                        <option selected value="{{$comp_series->id}}">{{$comp_series->name}}</option>
+                    @endforeach
+                    @foreach($competition_series->diff($competition->competition_series) as $comp_series)
+                        <option value="{{$comp_series->id}}">{{$comp_series->name}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('competition_series'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('competition_series') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
 
         @include('links.edit', ['var' => $competition])
 
