@@ -10,10 +10,11 @@ class EventCrudController extends Controller
 {
 
     private $form_rules = [
-      'name' => 'required|string|max:255|min:1',
-      'type' => 'required|string|max:255|min:1',
-      'season' => 'string|required',
-      'gender' => 'string|required',
+        'name' => 'required|string|max:255|min:1',
+        'type' => 'required|string|max:255|min:1',
+        'season' => 'string|required',
+        'gender' => 'string|required',
+        'order' => 'integer'
     ];
 
     /**
@@ -25,9 +26,9 @@ class EventCrudController extends Controller
     {
         //GET all the events
 
-        $outdoorEvents = Event::where('season','outdoor')->get();
-        $indoorEvents = Event::where('season','indoor')->get();
-        $ccEvents = Event::where('season','cross country')->get();
+        $outdoorEvents = Event::where('season','outdoor')->get()->sortBy('order');
+        $indoorEvents = Event::where('season','indoor')->get()->sortBy('order');
+        $ccEvents = Event::where('season','cross country')->get()->sortBy('order');
         return view('dashboard.events.index')->with('outdoorEvents',$outdoorEvents)
                                          ->with('indoorEvents',$indoorEvents)
                                          ->with('ccEvents',$ccEvents);    
@@ -61,8 +62,10 @@ class EventCrudController extends Controller
         $event->type = $request->type;
         $event->season = $request->season;
         $event->gender = $request->gender;
-
+        $event->order = $request->order;
+        $this->fixOrder($request->gender,$request->season,$request->order);
         $event->save();
+
 
  
         return redirect()->route('events.index');
@@ -98,10 +101,22 @@ class EventCrudController extends Controller
         $event->type = $request->type;
         $event->season = $request->season;
         $event->gender = $request->gender;
-
+        $event->order = $request->order;
+        $this->fixOrder($request->gender,$request->season,$request->order);
         $event->save();
 
         return redirect()->route('events.index');
+    }
+
+    private function fixOrder($gender,$season,$order)
+    {
+        $events = Event::where('order','>=',$order)->get();
+        foreach ($events as $event) {
+            $event->order = $event->order + 1;
+            $event->save();
+        }
+ 
+        return;
     }
 
 

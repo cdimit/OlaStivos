@@ -13,8 +13,10 @@ class AddOrderToEvents extends Migration
      */
     public function up()
     {
-        Schema::table('events', function($table) {
-            $table->string('order')->after('gender')->nullable()->default(null);
+        Schema::table('events', function (Blueprint $table) {
+           
+            $table->integer('order')->after('gender')->nullable();
+
         });
     }
 

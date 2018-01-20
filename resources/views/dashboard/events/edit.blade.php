@@ -62,6 +62,18 @@
             </div>
         </div>
 
+        <!--Order input filed-->
+        <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
+            <label for="order" class="col-md-4 control-label">Order</label>
+            <div class="col-md-6">
+                {{ Form::text('order',null,["class"=> 'form-control'])}}
+                @if ($errors->has('order'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('order') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
 
         <div class="form-group">
