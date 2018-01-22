@@ -109,6 +109,7 @@
                             <div class="panel panel-default">
 
                                 <div class="panel-body">
+                                    <div class="table table-responsive">
                                     <table width="100%">
 
                                         @foreach($records as $record)
@@ -129,6 +130,7 @@
                                         @endforeach
 
                                     </table> 
+                                    </div>
                                 </div>
                             </div>
                             <div id="chart1" style="width:100%; height:200px;"></div>

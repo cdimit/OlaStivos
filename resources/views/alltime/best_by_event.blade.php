@@ -114,6 +114,7 @@
                             <div class="panel panel-default">
 
                                 <div class="panel-body">
+                                    <div class="table table-responsive">
                                     <table width="100%">
                                       <th>Κατάταξη</th>
                                       <th>Επίδοση</th>
@@ -159,6 +160,7 @@
                                         @endforeach
 
                                     </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

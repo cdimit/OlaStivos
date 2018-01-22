@@ -21,11 +21,12 @@
     		<select  class="selectpicker" data-live-search="true" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
 				<option data-tokens="" value=""></option>
 		      	@foreach($competitions as $competition)
-		            <option data-tokens="{{$competition->name}} {{$competition->date_start}}" value="{{route('competition.edit',$competition->id)}}">{{$competition->name}} {{$competition->date_start}}</option>
+		            <option data-tokens="{{$competition->name}} {{$competition->country}} {{$competition->city}} {{$competition->date_start}}" value="{{route('competition.edit',$competition->id)}}">{{$competition->name}} - {{$competition->country}}, {{$competition->city}} - {{$competition->date_start}}</option>
 		        @endforeach
 		    </select>
     	</div>
 		<div class="panel-body">
+			<div class="table table-responsive">
 			<table class="table table-bordered table-sm">
 			  	<thead>
 			    	<tr>
@@ -62,6 +63,7 @@
 			    	@endforeach
 			  </tbody>
 			</table>
+			</div>
 		</div>
 	</div>
 @endsection

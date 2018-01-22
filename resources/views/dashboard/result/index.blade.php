@@ -16,7 +16,7 @@
 		*Results still pending are in color:
 		<div class="red-square"></div>
 	</div>
-
+	<div class="table table-responsive">
 	<table class="table table-bordered table-sm" style="position:static;">
 	  	<thead>
 	    	<tr>
@@ -40,7 +40,7 @@
 		     		<td>{{$result->competition->name}}</td>
 		      		<td>{{$result->race}}</td>
 		      		<td>{{$result->date}}</td>
-		      		<td>{{$result->event->name}}</td>
+		      		<td>{{$result->event->name}} {{$result->event->season}} {{$result->event->gender}}</td>
 		      		<td>{{$result->markstr}}</td>
 		      		<td>{{$result->score}}</td>
 		      		<td>
@@ -60,4 +60,5 @@
 
 	  </tbody>
 	</table>
+	</div>
 @endsection
