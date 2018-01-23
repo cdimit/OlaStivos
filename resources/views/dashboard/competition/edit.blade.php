@@ -116,7 +116,7 @@
 
         <!--Competition_series input field-->
         <div class="form-group{{ $errors->has('competition_series') ? ' has-error' : '' }}" id="competition_series">
-            <label for="competition_series" class="col-md-4 control-label">Relay Athletes</label>
+            <label for="competition_series" class="col-md-4 control-label">Competition Series</label>
             <div class="col-md-6">
                 <select  id="competition_series" name="competition_series[]" class="selectpicker" data-show-subtext="true" data-live-search="true" data-max-options="10" multiple>
                     @foreach($competition->competition_series as $comp_series)

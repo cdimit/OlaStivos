@@ -120,8 +120,6 @@
                                     <th>Επίδοση</th>
                                     <th>Αθλητής</th>
                                     <th>Σύλλογος</th>
-                                    <th>Θέση</th>
-                                    <th>Αγώνας</th>
                                     <th>Τοποθεσία</th>
                                     <th>Ημερομηνία</th>
 
@@ -134,11 +132,9 @@
                                                     <a href="/athlete/{{$record->athlete->id}}">{{$record->athlete->name}}</a>
                                                 </td>
                                                 <td><a href="/club/{{$record->athlete->club->id}}">{{$record->athlete->club->acronym}}</a></td>
-                                                <td>{{$record->position}}</td>
                                                 <td>
-                                                    <a href="/competition/{{$record->competition->id}}">{{$record->competition->name}}</a>
+                                                    <a href="/competition/{{$record->competition->id}}">{{$record->competition->city}}</a>
                                                 </td>
-                                                 <td>{{$record->competition->city}}</td>
                                                 <td>{{$record->date}}</td>
 
                                             </tr>

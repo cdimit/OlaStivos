@@ -21,7 +21,6 @@
 	  	<thead>
 	    	<tr>
 	      		<th>ID</th>
-	      		<th>Position</th>
 	      		<th>Athlete</th>
 	      		<th>Competition</th>
 	      		<th>Race</th>
@@ -35,7 +34,6 @@
 	  		@foreach($results->sortByDesc('id') as $result)
 		    	<tr @if($result->isPending()) bgcolor="#ffd6cc" @endif>
 		      		<th scope="row">{{$result->id}}</th>
-		      		<td>{{$result->position}}</td>
 		      		<td>{{$result->athlete->first_name}} {{$result->athlete->last_name}}</td>
 		     		<td>{{$result->competition->name}}</td>
 		      		<td>{{$result->race}}</td>

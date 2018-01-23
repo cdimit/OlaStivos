@@ -54,6 +54,7 @@ class ResultCrudController extends Controller
         //VALIDATE DATA
         $this->validate($request, [
             'position' => 'required|string|max:3|min:1',
+            'overall' => 'required|string|max:3|min:1',
             'athlete_id' => 'required|integer',
             'event_id' => 'required|integer',
             'competition_id' => 'required|integer',
@@ -86,6 +87,7 @@ class ResultCrudController extends Controller
         $result = new Result;
 
         $result->position = $request->position;
+        $result->overall = $request->overall;
         $result->athlete_id = $request->athlete_id;
         $result->event_id = $request->event_id;
         $result->competition_id = $request->competition_id;
@@ -189,6 +191,7 @@ class ResultCrudController extends Controller
         //VALIDATE DATA
         $this->validate($request, [
             'position' => 'required|string|max:3|min:1',
+            'overall' => 'required|string|max:3|min:1',
             'athlete_id' => 'required|integer',
             'event_id' => 'required|integer',
             'competition_id' => 'required|integer',
@@ -203,6 +206,7 @@ class ResultCrudController extends Controller
         $result = Result::find($id);
 
         $result->position = $request->position;
+        $result->overall = $request->overall;
         $result->athlete_id = $request->athlete_id;
         $result->event_id = $request->event_id;
         $result->competition_id = $request->competition_id;

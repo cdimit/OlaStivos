@@ -142,6 +142,20 @@
             </div>
         </div>
 
+        <!--Position input field-->
+        <div class="form-group{{ $errors->has('overall') ? ' has-error' : '' }}">
+            <label for="overall" class="col-md-4 control-label">Overall</label>
+            <div class="col-md-6">
+                {{ Form::text('overall',null,["class"=> 'form-control'])}}
+
+                @if ($errors->has('overall'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('overall') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
         <!--Mark input field-->
         <div class="form-group{{ $errors->has('mark') ? ' has-error' : '' }}">
             <label for="mark" class="col-md-4 control-label">Mark</label>

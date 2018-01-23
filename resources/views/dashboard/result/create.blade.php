@@ -147,6 +147,20 @@
             </div>
         </div>
 
+        <!--Position input field-->
+        <div class="form-group{{ $errors->has('overall') ? ' has-error' : '' }}">
+            <label for="overall" class="col-md-4 control-label">Overall</label>
+            <div class="col-md-6">
+                <input id="overall" type="text" class="form-control" name="overall" value="{{ old('overall') }}" >
+
+                @if ($errors->has('overall'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('overall') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
         <!--Field-Mark input field-->
         <div id="field_mark">
           <div class="form-group{{ $errors->has('meters') ? ' has-error' : '' }}">
