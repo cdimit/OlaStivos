@@ -72,7 +72,7 @@
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                     <label for="title" class="col-md-4 control-label">Τίτλος Μηνύματος:</label>
 
-                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required>
 
                     @if ($errors->has('title'))
                         <span class="help-block">
@@ -104,7 +104,7 @@
                 <div class="form-group{{ $errors->has('message') ? ' has-error' : '' }}">
                     <label for="message" class="col-md-4 control-label">Μήνυμα:</label>
 
-                    <textarea id="message" rows="10" class="form-control" name="message" value="{{ old('message') }}" required autofocus></textarea>
+                    <textarea id="message" rows="10" class="form-control" name="message" value="{{ old('message') }}" required></textarea>
 
                     @if ($errors->has('message'))
                         <span class="help-block">

@@ -158,11 +158,12 @@ class Athlete extends Model
     */
     public function countPlaces($series,$position)
     {
-      $competitions = Competition::where('competition_series_id',$series->id)->get();
+      $competitions = $series->competitions()->get();
+      $race = "Τελικός";
       $count = 0;
       foreach($competitions as $competition){
-        $results = $competition->results
-                          ->where('athlete_id',$this->id)
+        $results = $competition->results->where('athlete_id',$this->id)
+                          ->where('race','=',$race.'%')
                           ->where('position','=',$position)
                           ->sortByDesc('date')
                           ->count();

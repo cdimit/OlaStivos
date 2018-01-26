@@ -132,15 +132,19 @@
             <table class="table table-bordered table-sm" style="position:static;">
                 <thead>
                     <tr>
-                        <th width="10%">Pos.</th>
-                        <th width="30%">Athlete</th>
-                        <th width="45%">Mark</th>
+                        <th width="8%">Pos.</th>
+                        <th width="8%">Ov.</th>
+                        <th width="26%">Athlete</th>
+                        <th width="44%">Mark</th>
                         <th width="15%">Score</th>
+                        <th></th>
+
                     </tr>
                 </thead>
                 <tbody id="athletesTableBody">
                     <tr>
                         <td><input id="positions" name="positions[]" type="text" class="form-control" required></td></td>
+                        <td><input id="overall" name="overall[]" type="text" class="form-control" required></td></td>
                         <td><select  id="athlete_ids" name="athlete_ids[]" class="selectpicker" data-show-subtext="true" data-live-search="true">
                             @foreach($athletes as $athlete)
                                 <option value="{{$athlete->id}}">
@@ -212,16 +216,18 @@
             for (i = 1; i <= nathletes; i ++)
             {
                 var position =('<input id="positions" name="positions[]" type="text" value="" class="form-control" required></td>');
+                var overall =('<input id="overall" name="overall[]" type="text" value="" class="form-control" required></td>');
                 var athlete = ('<select  id="athlete_ids" name="athlete_ids[]" class="selectpicker" data-show-subtext="true" data-live-search="true"> @foreach($athletes as $athlete) <option value="{{$athlete->id}}"> {{$athlete->first_name}} {{$athlete->last_name}}  {{$athlete->dob}} </option> @endforeach</select>');
                 //var athlete = ('"'+document.getElementById("athletesRow").innerHTML +'"');
 
                 var marks=('<div class="field_mark"><div class="col-md-6"><input id="meters" type="number" class="form-control" name="meters[]"  step="1" min="0" placeholder="m"></div><div class="col-md-6"><input id="cmeters" type="number" class="form-control" name="cmeters[]" step="1" min="0" max="99" placeholder="cm"></div></div><div class="track_mark"><div class="input-group" style="display: block;"><input id="hours" type="number" class="form-control" name="hours[]"  step="1" min="0" placeholder="h"  style="display:inline; width:5vw;"><input id="minutes" type="number" class="form-control" name="minutes[]" step="1" min="0" max="59" placeholder="min" style="display:inline; width:5vw;"><input id="seconds" type="number" class="form-control" name="seconds[]" step="1" min="0" max="59" placeholder="sec" style="display:inline; width:5vw;"><input id="decimal" type="number" class="form-control" name="decimal[]" step="1" min="0" max="99" placeholder="00" style="display:inline; width:5vw;"></div></div>')
 
                 var score =  ('<input id="scores" name="scores[]" type="number"  class="form-control" required></td>');
-                var deleteRow =  ('<span class="input-group-addon remove_field" id="basic-addon" style=" color:rgb(240,20,20);"><b>x</b></span>');
+                var deleteRow =  ('<span class="remove_field" id="basic-addon" style=" color:rgb(240,20,20);"><b>x</b></span>');
                 console.log(position);
                 $('#athletesTableBody').append('<tr>'+
                     '<td>'+ position +'</td>'+
+                    '<td>'+ overall +'</td>'+
                     '<td>'+ athlete+'</td>'+
                     '<td>'+ marks +'</td>'+
                     '<td>'+ score+'</td>'+
