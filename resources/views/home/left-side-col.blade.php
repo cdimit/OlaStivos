@@ -1,3 +1,21 @@
+<!-- COMPETITION TODAY -->
+@if(!is_null($todayComp))
+  <div class="panel panel-2">
+    <div class="panel-heading">Αγώνας Σήμερα!</div>
+    <div class="panel-body">
+      <a href="{{ route('competition.show',['competition'=>$todayComp->id]) }}">
+        <h2 style="text-align: center; margin-top: 0; margin-bottom: 0;">
+          {{$todayComp->name}}
+        </h2>
+      </a>
+      @if($todayComp->picture !== '/img/competition.png')
+        <img src="{{ $todayComp->picture }}" class="img-responsive center" style="max-width: auto; max-height: auto; display: block; margin: auto auto;">
+      @endif
+      
+    </div>
+  </div>
+@endif
+
 <!-- 10 EPOMENOI AGWNES -->
 <div class="panel panel-2">
   <div class="panel-heading">Επόμενοι Αγώνες</div>
