@@ -3,9 +3,9 @@
 @section('content')
 
 	@if (session('status'))
-	<div class="alert alert-success">
-	<strong>{{ session('status') }}</strong>
-	</div>
+		<div class="alert alert-success">
+			<strong>{{ session('status') }}</strong>
+		</div>
 	@endif
 
 	<p>
