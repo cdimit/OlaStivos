@@ -3,9 +3,9 @@
 @section('content')
 
 	@if (session('status'))
-	<div class="alert alert-success">
-	<strong>{{ session('status') }}</strong>
-	</div>
+		<div class="alert alert-success">
+			<strong>{{ session('status') }}</strong>
+		</div>
 	@endif
 
 	<p>
@@ -26,7 +26,6 @@
 		    </select>
     	</div>
 		<div class="panel-body">
-			<div class="table table-responsive">
 			<table class="table table-bordered table-sm">
 			  	<thead>
 			    	<tr>
@@ -63,7 +62,6 @@
 			    	@endforeach
 			  </tbody>
 			</table>
-			</div>
 		</div>
 	</div>
 @endsection

@@ -139,4 +139,6 @@ class AthleteController extends Controller
         }
         return $collection;
     }
+
+
 }

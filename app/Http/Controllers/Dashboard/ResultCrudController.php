@@ -337,6 +337,7 @@ class ResultCrudController extends Controller
             $result = new Result;
 
             $result->position = $value;
+            $result->overall = $request->overall[$key];
             $result->athlete_id = $request->athlete_ids[$key];
             $result->score = $request->scores[$key];
 

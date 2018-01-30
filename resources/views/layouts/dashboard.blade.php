@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/nav-side/nav-side.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
     <style type="text/css">
@@ -28,98 +29,90 @@
     @yield('styles')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+    <div id="throbber" style="display:none; min-height:120px;"></div>
+    <div id="noty-holder"></div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Branding image-->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
             </div>
+
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li><a href="{{ route('club.index') }}">Clubs</a></li>
+                    <li><a href="{{ route('athlete.index') }}">Athletes</a></li>
+                    <li> <a href="{{ route('series.index') }}">Series</a></li>
+                    <li> <a href="{{ route('competition.index') }}">Competitions</a></li>
+                    <li> <a href="{{ route('result.index') }}">Results</a></li>
+                    <li> <a href="{{ route('image.index') }}">Images</a></li>
+                    <li> <a href="{{ route('video.index') }}">Videos</a></li>
+                    @if(Auth::user() && Auth::user()->isAdmin())
+                        <li> <a href="{{ route('events.index') }}">Events</a></li>
+                        <li><a href="{{ route('users.index') }}">Users</a></li>
+                        <li> <a href="{{ route('pending.index') }}">Pending</a></li>
+                    @endif 
+                    <!-- Authentication Links -->
+                    @guest
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @else
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </nav>
 
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="list-group">
-                        <a href="{{ route('club.index') }}" class="list-group-item">
-                        Clubs</a>
-                        <a href="{{ route('athlete.index') }}" class="list-group-item list-group-item-action">Athletes</a>
-                        <a href="{{ route('series.index') }}" class="list-group-item list-group-item-action">Series</a>
-                        <a href="{{ route('competition.index') }}" class="list-group-item list-group-item-action">Competitions</a>
-                        <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action">Results</a>
-                        <a href="{{ route('image.index') }}" class="list-group-item list-group-item-action">Images</a>
-                        <a href="{{ route('video.index') }}" class="list-group-item list-group-item-action">Videos</a>
-                        @if(Auth::user() && Auth::user()->isAdmin())
-                            <a href="{{ route('events.index') }}" class="list-group-item list-group-item-action">Events</a>
-                            <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action">Users</a>
-                            <a href="{{ route('pending.index') }}" class="list-group-item list-group-item-action active">Pending</a>
-                        @endif
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="row" id="main" >
+                    <div class="col-sm-12 col-md-12 well" id="content">
+                        @yield('content')  
                     </div>
-
                 </div>
-                <div class="col-sm-8">
-                    @yield('content')
-                </div>
-                <div class="col-sm-2">
-                    @yield('right_col')
-                </div>
+                <!-- /.row -->
             </div>
+            <!-- /.container-fluid -->
         </div>
-    </div>
+        <!-- /#page-wrapper -->
+    </div><!-- /#wrapper -->
 
+
+
+       
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     @yield('scripts')
+    <script>
+        $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("active");
+        });
+    </script>
 </body>
 </html>

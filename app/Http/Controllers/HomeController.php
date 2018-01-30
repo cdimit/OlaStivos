@@ -23,6 +23,10 @@ class HomeController extends Controller
         //Upcoming Competitions
         $competitions = $this->nextComps(5);
 
+        $todayComp = Competition::where('date_start','>=',Carbon::today())
+                                ->where('date_finish','<=',Carbon::today())
+                                ->first();
+                                
         //Athlete with birthday
         $birthdayAthlete = $this->birthdayAthlete();
 
@@ -49,7 +53,8 @@ class HomeController extends Controller
                         ->with('femaleLeaders',$femaleLeaders)
                         ->with('countdownComp',$countdownComp)
                         ->with('competitionsSearch',$competitionsSearch)
-                        ->with('athletesSearch',$athletesSearch);
+                        ->with('athletesSearch',$athletesSearch)
+                        ->with('todayComp',$todayComp);
 
     }
 

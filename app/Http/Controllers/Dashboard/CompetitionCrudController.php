@@ -21,6 +21,7 @@ class CompetitionCrudController extends Controller
       'city' => 'string',
       'venue' => 'string|nullable',
       'competition_series_id' => 'nullable|integer',
+      'competition_series' => 'nullable|array',
 
       'link_name.*' => 'required|string',
       'link_path.*' => 'required|string',

@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Athlete;
 use App\Age;
 use App\Traits\Linkable;
 use App\Traits\Statusable;
@@ -158,16 +157,21 @@ class Athlete extends Model
     */
     public function countPlaces($series,$position)
     {
-      $competitions = Competition::where('competition_series_id',$series->id)->get();
+      $competitions = $series->competitions()->get();
+      $race = "Τελικός";
+
       $count = 0;
       foreach($competitions as $competition){
-        $results = $competition->results
-                          ->where('athlete_id',$this->id)
-                          ->where('position','=',$position)
-                          ->sortByDesc('date')
-                          ->count();
-
-        $count = $count+$results;
+        $results = $competition->results()->where('athlete_id',$this->id)
+                                          ->where('overall','LIKE',$position)
+                                          ->get();
+        
+        foreach ($results as $result) {
+          if  (starts_with($result->race, 'Τελικός')){
+            $count += 1;
+          }
+          
+        }
       }
 
       return $count;
