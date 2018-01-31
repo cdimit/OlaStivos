@@ -26,14 +26,14 @@ class HomeController extends Controller
         $todayComp = Competition::where('date_start','>=',Carbon::today())
                                 ->where('date_finish','<=',Carbon::today())
                                 ->first();
-                                
+
         //Athlete with birthday
         $birthdayAthlete = $this->birthdayAthlete();
 
         //GET National Records
         $maleNRs = $this->getNationalRecords('outdoor','male');
         $femaleNRs = $this->getNationalRecords('outdoor','female');
-        
+
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('indoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('indoor','female');
@@ -78,7 +78,7 @@ class HomeController extends Controller
         //Get a shiffled collection of athletes that have their birthday today
         $athletes = Athlete::whereDay('dob', '=', date('d'))->whereMonth('dob', '=', date('m'))->inRandomOrder()->published()->get()->shuffle();
         //Check one by one if they are active over the last year
-        // If yes then show their birthday 
+        // If yes then show their birthday
         if($athletes->first()){
             foreach ($athletes as $athlete) {
                 $last_result = $athlete->results->sortByDesc('date')->first();

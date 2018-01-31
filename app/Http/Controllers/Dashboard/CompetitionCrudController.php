@@ -20,8 +20,7 @@ class CompetitionCrudController extends Controller
       'country' => 'string',
       'city' => 'string',
       'venue' => 'string|nullable',
-      'competition_series_id' => 'nullable|integer',
-      'competition_series' => 'nullable|array',
+      'competition_series' => 'required|array',
 
       'link_name.*' => 'required|string',
       'link_path.*' => 'required|string',
@@ -68,7 +67,6 @@ class CompetitionCrudController extends Controller
           'name' => $request->name,
           'date_start' => $request->date_start,
           'date_finish' => $request->date_finish,
-          'competition_series_id' => $request->competition_series_id,
           'country' => $request->country,
           'city' => $request->city
         ])->get();
@@ -85,7 +83,6 @@ class CompetitionCrudController extends Controller
         $competition->name = $request->name;
         $competition->date_start = $request->date_start;
         $competition->date_finish = $request->date_finish;
-        $competition->competition_series_id = $request->competition_series_id;
         $competition->country = $request->country;
         $competition->city = $request->city;
         $competition->venue = $request->venue;
@@ -144,13 +141,12 @@ class CompetitionCrudController extends Controller
         $competition->name = $request->name;
         $competition->date_start = $request->date_start;
         $competition->date_finish = $request->date_finish;
-        $competition->competition_series_id = $request->competition_series_id;
         $competition->country = $request->country;
         $competition->city = $request->city;
         $competition->venue = $request->venue;
 
 
-        
+
         if (!empty($request->picture)) {
             if($competition->picture != '/img/competition.png' ){
                 Storage::delete(str_replace_first('/storage/', '', $competition->picture));
@@ -163,7 +159,7 @@ class CompetitionCrudController extends Controller
 
         //Atach competition series
         $competition->competition_series()->sync($request->competition_series);
-        
+
         Link::edit($competition, $request->link_name, $request->link_path);
 
         return redirect()->route('competition.index')->withStatus('Competition updated!');

@@ -12,11 +12,6 @@ class Competition extends Model
 
     use Linkable;
     use Statusable;
-    
-    public function series()
-    {
-        return $this->belongsTo('App\CompetitionSeries', 'competition_series_id');
-    }
 
     public function competition_series()
     {

@@ -36,7 +36,6 @@
 			      		<th>Country</th>
 			      		<th>City</th>
 			      		<th>Venue</th>
-			      		<th>Series</th>
 			      		<th>Edit</th>
 			    	</tr>
 			  	</thead>
@@ -51,7 +50,6 @@
 				      		<td>{{$competition->country}}</td>
 				      		<td>{{$competition->city}}</td>
 				      		<td>{{$competition->venue}}</td>
-				      		<td>{{$competition->series->name}}</td>
 				      		<td>
 				      			<a href="{{ route('competition.edit',$competition->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
