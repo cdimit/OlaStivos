@@ -127,7 +127,13 @@
                                         <?php $index=0; ?>
                                         @foreach($lead as $key => $sameLead)                
                                             <tr>
-                                                <td>@if($index == 0){{$sameLead->event->name}}@else - @endif</td>else - @endif</td>
+                                                <td>
+                                                @if($index == 0)
+                                                    {{$sameLead->event->name}}
+                                                @else 
+                                                    - 
+                                                @endif
+                                                </td>
                                                 <td>{{$sameRecord->markstr}}</td>
                                                 <td>
                                                     <a href="/athlete/{{$sameRecord->athlete->id}}">{{$sameRecord->athlete->name}}</a>
