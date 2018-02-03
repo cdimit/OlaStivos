@@ -124,21 +124,21 @@
                                     <th>Ημερομηνία</th>
 
                                     @foreach($records as $record)
-                                        @if($record)
+                                        @foreach($record as $key => $sameRecord)
                                             <tr>
-                                                <td>{{$record->event->name}}</td>
-                                                <td>{{$record->markstr}}</td>
+                                                <td>@if($key == 0){{$sameRecord->event->name}}@else - @endif</td>
+                                                <td>{{$sameRecord->markstr}}</td>
                                                 <td>
-                                                    <a href="/athlete/{{$record->athlete->id}}">{{$record->athlete->name}}</a>
+                                                    <a href="/athlete/{{$sameRecord->athlete->id}}">{{$sameRecord->athlete->name}}</a>
                                                 </td>
-                                                <td><a href="/club/{{$record->athlete->club->id}}">{{$record->athlete->club->acronym}}</a></td>
+                                                <td><a href="/club/{{$sameRecord->athlete->club->id}}">{{$sameRecord->athlete->club->acronym}}</a></td>
                                                 <td>
-                                                    <a href="/competition/{{$record->competition->id}}">{{$record->competition->city}}</a>
+                                                    <a href="/competition/{{$sameRecord->competition->id}}">{{$sameRecord->competition->city}}</a>
                                                 </td>
-                                                <td>{{$record->date}}</td>
+                                                <td>{{$sameRecord->date}}</td>
 
                                             </tr>
-                                        @endif
+                                        @endforeach
                                     @endforeach
 
                                 </table>

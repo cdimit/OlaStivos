@@ -430,7 +430,8 @@ class Athlete extends Model
       $record = Record::where('acronym','like',$acronym)->first();
       $recordId = $record->id;
 
-      $events = Event::where('gender',$this->gender)->orderBy('id')->pluck('id');
+      $events = Event::where('gender',$this->gender)->orderBy('order')->pluck('id');
+
       //create a collection with keys the event_id and values the NRs
       $collection=collect([]);
       foreach($events as $event){
@@ -438,7 +439,6 @@ class Athlete extends Model
         $eventNRs = Result::whereHas('records',function ($query) use ($recordId,$event) {
               $query->where('record_id','=', $recordId)->where('event_id',$event);
             })->where('athlete_id',$this->id)->get();
-
         //If the athlete has NRs in this event
         if($eventNRs->first()){
           //Find best NR
@@ -542,7 +542,7 @@ class Athlete extends Model
 
     public function setNRIfExist($result, $event)
     {
-      $NR = $event->getNR($result->date);
+      $NR = $event->getNR($result->date)->first();
 
       if(!$NR){
         $result->setNR($event);
@@ -571,7 +571,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NUR = $event->getNUR($result->date);
+      $NUR = $event->getNUR($result->date)->first();
 
       if(!$NUR){
         $result->setNUR($event);
@@ -600,7 +600,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NJR = $event->getNJR($result->date);
+      $NJR = $event->getNJR($result->date)->first();
 
       if(!$NJR){
         $result->setNJR($event);
@@ -629,7 +629,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NYR = $event->getNYR($result->date);
+      $NYR = $event->getNYR($result->date)->first();
 
       if(!$NYR){
         $result->setNYR($event);
@@ -637,12 +637,12 @@ class Athlete extends Model
       }
 
       if($event->isTrack()){
-        if($NYR->mark>=$result->mark){
+        if($NYR->mark >= $result->mark){
           $result->setNYR($event);
           return true;
         }
       }else{
-        if($NYR->mark<=$result->mark){
+        if($NYR->mark <= $result->mark){
           $result->setNYR($event);
           return true;
         }

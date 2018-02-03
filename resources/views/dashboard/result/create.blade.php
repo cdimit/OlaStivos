@@ -137,7 +137,7 @@
         <div class="form-group{{ $errors->has('position') ? ' has-error' : '' }}">
             <label for="position" class="col-md-4 control-label">Position</label>
             <div class="col-md-6">
-                <input id="position" type="text" class="form-control" name="position" value="{{ old('position') }}" required autofocus>
+                <input id="position" type="text" class="form-control" name="position" value="{{ old('position') }}" required>
 
                 @if ($errors->has('position'))
                     <span class="help-block">

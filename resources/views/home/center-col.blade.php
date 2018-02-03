@@ -29,13 +29,13 @@
           <tbody>
 
             @foreach($maleLeaders as $lead)
-              @if($lead)
-              <tr>
-                <td>{{$lead->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$lead->athlete->id]) }}">{{$lead->athlete->name}} </a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$lead->competition->id]) }}">{{$lead->markstr}}</a></td>
-              </tr>
-              @endif
+              @foreach($lead as $key => $sameLead)
+                <tr>
+                  <td>@if($key == 0){{$sameLead->event->name}}@else - @endif</td>
+                  <td><a href="{{ route('athlete.show',['athlete'=>$sameLead->athlete->id]) }}">{{$sameLead->athlete->name}} </a></td>
+                  <td><a href="{{ route('competition.show',['competition'=>$sameLead->competition->id]) }}">{{$sameLead->markstr}}</a></td>
+                </tr>
+              @endforeach
             @endforeach
           </tbody>
         </table>
@@ -58,13 +58,13 @@
           <tbody>
 
             @foreach($femaleLeaders as $lead)
-              @if($lead)
-              <tr>
-                <td>{{$lead->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$lead->athlete->id]) }}">{{$lead->athlete->name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$lead->competition->id]) }}">{{$lead->markstr}}</a></td>
-              </tr>
-              @endif
+              @foreach($lead as $key => $sameLead)
+                <tr>
+                  <td>@if($key == 0){{$sameLead->event->name}}@else - @endif</td>
+                  <td><a href="{{ route('athlete.show',['athlete'=>$sameLead->athlete->id]) }}">{{$sameLead->athlete->name}}</a></td>
+                  <td><a href="{{ route('competition.show',['competition'=>$sameLead->competition->id]) }}">{{$sameLead->markstr}}</a></td>
+                </tr>
+              @endforeach
             @endforeach
           </tbody>
         </table>
@@ -114,13 +114,13 @@
           <tbody>
 
             @foreach($maleNRs as $nr)
-              @if($nr)
-              <tr>
-                <td>{{$nr->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$nr->athlete->id]) }}">{{$nr->athlete->name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$nr->competition->id]) }}">{{$nr->markstr}}</a></td>
-              </tr>
-              @endif
+              @foreach($nr as $key => $sameNr)
+                <tr>
+                  <td>@if($key == 0){{$sameNr->event->name}}@else - @endif</td>
+                  <td><a href="{{ route('athlete.show',['athlete'=>$sameNr->athlete->id]) }}">{{$sameNr->athlete->name}}</a></td>
+                  <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}}</a></td>
+                </tr>
+              @endforeach
             @endforeach
           </tbody>
         </table>
@@ -144,13 +144,13 @@
           <tbody>
 
             @foreach($femaleNRs as $nr)
-              @if($nr)
-              <tr>
-                <td>{{$nr->event->name}}</td>
-                <td><a href="{{ route('athlete.show',['athlete'=>$nr->athlete->id]) }}">{{$nr->athlete->name}}</a></td>
-                <td><a href="{{ route('competition.show',['competition'=>$nr->competition->id]) }}">{{$nr->markstr}}</a></td>
-              </tr>
-              @endif
+              @foreach($nr as $key => $sameNr)
+                <tr>
+                  <td>@if($key == 0){{$sameNr->event->name}}@else - @endif</td>
+                  <td><a href="{{ route('athlete.show',['athlete'=>$sameNr->athlete->id]) }}">{{$sameNr->athlete->name}}</a></td>
+                  <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}}</a></td>
+                </tr>
+              @endforeach
             @endforeach
           </tbody>
         </table>

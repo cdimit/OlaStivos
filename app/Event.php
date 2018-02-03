@@ -61,7 +61,9 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
-      return $nr;
+      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+
+      return $sameNRs;
 
     }
 
@@ -83,7 +85,9 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
-      return $nr;
+      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+
+      return $sameNRs;
     }
 
     public function getNJR($date = null)
@@ -104,7 +108,9 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
-      return $nr;
+      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+
+      return $sameNRs;
     }
 
     public function getNYR($date = null)
@@ -124,8 +130,9 @@ class Event extends Model
       })->whereBetween('date',['1000-01-01' ,$date])->get();
 
       $nr = $nrs->sortByDesc('date')->first();
+      $sameNRs = $nrs->where('mark','=',$nr['mark']);
 
-      return $nr;
+      return $sameNRs;
     }
 
     public function scopeOutdoor($query)

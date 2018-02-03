@@ -43,7 +43,7 @@
                         <span class="list-group-item-achievement">
                             <img src="/img/nrjunior.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ U19 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i>
+                        Παγκύπριο Ρεκόρ U20 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NJR->event->name}} &ensp;<b>{{$NJR->markstr}}</b></i>
                     </li>
                 @endforeach
 

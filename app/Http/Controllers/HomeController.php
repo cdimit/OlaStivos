@@ -33,7 +33,7 @@ class HomeController extends Controller
         //GET National Records
         $maleNRs = $this->getNationalRecords('outdoor','male');
         $femaleNRs = $this->getNationalRecords('outdoor','female');
-        
+
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('indoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('indoor','female');
@@ -95,7 +95,7 @@ class HomeController extends Controller
     public function getNationalRecords($season ,$gender){
 
         //get all events
-        $events = Event::where('season',$season)->where('gender',$gender)->get();
+        $events = Event::where('season',$season)->where('gender',$gender)->orderBy('order')->get();
 
 
         //EMPTY collections of national records
@@ -103,21 +103,21 @@ class HomeController extends Controller
 
         //for each event add the NR in the collection
         foreach($events as $event){
-            if($event->getNR()){
+            if($event->getNR()->first()){
                 //get event NR and set attribute order based on event
-                $record = $event->getNR()->setAttribute('order', $event->order);
+                $record = $event->getNR();//->setAttribute('order', $event->order);
                 $records->push($record);
             }
         }
 
         //sort records based of event order attribute
-        return $records->sortBy('order');
+        return $records;//->sortBy('order');
     }
 
     public function getSeasonalLeaders($season ,$gender){
 
         //get all events
-        $events = Event::where('season',$season)->where('gender',$gender)->get();
+        $events = Event::where('season',$season)->where('gender',$gender)->orderBy('order')->get();
 
         //EMPTY collections of leading results
         $leaders = collect([]);
@@ -133,13 +133,15 @@ class HomeController extends Controller
             }
 
             if($results->first()){
-                $leader = $results->first()->setAttribute('order', $event->order);
-                $leaders->push($leader);
+                $leader = $results->first();
+                $sameLeader = $results->where('mark','=',$leader['mark']);
+
+                $leaders->push($sameLeader);
             }
         }
 
-        //sort leaders based of event order attribute
-        return $leaders->sortBy('order');
+
+        return $leaders;
     }
 
 

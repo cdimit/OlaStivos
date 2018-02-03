@@ -132,8 +132,7 @@ class AthleteController extends Controller
                     $eventNR = $event->getNR();
                     break;
             }
-            
-            if($eventNR == $NR){
+            if($eventNR->first()['mark'] == $NR->mark){
                 $collection = $collection->put($eventID, $NR);
             }      
         }
