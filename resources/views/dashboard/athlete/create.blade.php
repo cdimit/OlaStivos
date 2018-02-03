@@ -41,6 +41,15 @@
             </div>
         </div>
 
+
+        <div class="form-group">
+            <label for="udob" class="col-md-4 control-label">Unknown DOB?</label>
+            <div class="col-md-6">
+              <input type="checkbox" id="udob" name="udob">
+
+            </div>
+        </div>
+
         <!--Acronym input field-->
         <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
             <label for="dob" class="col-md-4 control-label">Date of Birth</label>
@@ -50,6 +59,20 @@
                 @if ($errors->has('dob'))
                     <span class="help-block">
                         <strong>{{ $errors->first('dob') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <!--Acronym input field-->
+        <div id="year" class="form-group{{ $errors->has('year') ? ' has-error' : '' }} year">
+            <label id="year" for="year" class="col-md-4 control-label">Year of Birth</label>
+            <div class="col-md-6">
+              <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" >
+
+                @if ($errors->has('year'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('year') }}</strong>
                     </span>
                 @endif
             </div>
@@ -106,6 +129,20 @@
 
     {!! Form::close() !!}
 
+@endsection
 
+@section('scripts')
+
+
+  <script type="text/javascript">
+      jQuery(document).ready(function(){
+
+
+        $('.year').hide();
+
+
+      });
+
+  </script>
 
 @endsection

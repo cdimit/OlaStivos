@@ -176,7 +176,7 @@
                                                 <td>
                                                   <a href="/competition/{{$result->competition->id}}">{{$result->competition->city}}</a>
                                                 </td>
-                                                <td>{{$result->date}}</td>
+                                                <td>{{date('d M Y', strtotime($result->date))}}</td>
 
                                             </tr>
 
@@ -226,7 +226,7 @@
                                                   <a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a>
                                                 </td>
                                                 <td>{{$result->competition->city}}, {{$result->competition->country}}</td>
-                                                <td>{{$result->date}}</td>
+                                                <td>{{date('d M Y', strtotime($result->date))}}</td>
 
                                             </tr>
 

@@ -120,7 +120,7 @@ class ResultCrudController extends Controller
         $athlete = Athlete::find($request->athlete_id);
         // 2. Find difference between DOB and result date YEAR
         $result_year = (new \DateTime($request->date))->format('Y');//year of result
-        $dob_year = (new \DateTime($athlete->dob))->format('Y');//year of birth
+        $dob_year = $athlete->year;//year of birth
         $difference = $result_year-$dob_year;
         // 3. Save age category in years format to result record
         $result->age = $difference;
@@ -230,7 +230,7 @@ class ResultCrudController extends Controller
         $athlete = Athlete::find($request->athlete_id);
         // 2. Find difference between DOB and result date YEAR
         $result_year = (new \DateTime($request->date))->format('Y');//year of result
-        $dob_year = (new \DateTime($athlete->dob))->format('Y');//year of birth
+        $dob_year = $athlete->year;//year of birth
         $difference = $result_year-$dob_year;
         // 3. Save age category in years format to result record
         $result->age = $difference;
