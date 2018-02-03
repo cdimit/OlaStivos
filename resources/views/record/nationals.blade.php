@@ -125,11 +125,11 @@
 
                                     @foreach($records as $record)
                                         <?php $index=0; ?>
-                                        @foreach($lead as $key => $sameLead)                
+                                        @foreach($record as $key => $sameRecord)                
                                             <tr>
                                                 <td>
                                                 @if($index == 0)
-                                                    {{$sameLead->event->name}}
+                                                    {{$sameRecord->event->name}}
                                                 @else 
                                                     - 
                                                 @endif
