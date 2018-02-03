@@ -100,19 +100,6 @@
             </div>
         </div>
 
-        <!--Series input field-->
-        <div class="form-group{{ $errors->has('competition_series_id') ? ' has-error' : '' }}">
-            <label for="competition_series_id" class="col-md-4 control-label">Competition Series</label>
-            <div class="col-md-6">
-                {{ Form::select('competition_series_id', $series, null) }}
-
-                @if ($errors->has('competition_series_id'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('competition_series_id') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
 
         <!--Competition_series input field-->
         <div class="form-group{{ $errors->has('competition_series') ? ' has-error' : '' }}" id="competition_series">

@@ -54,7 +54,7 @@ class ResultCrudController extends Controller
         //VALIDATE DATA
         $this->validate($request, [
             'position' => 'required|string|max:3|min:1',
-            'overall' => 'string|max:3|min:1',
+            'overall' => 'nullable|string|max:3|min:1',
             'athlete_id' => 'required|integer',
             'event_id' => 'required|integer',
             'competition_id' => 'required|integer',
