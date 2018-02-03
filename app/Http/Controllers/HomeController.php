@@ -37,7 +37,7 @@ class HomeController extends Controller
         //Seasonal Bests Outdoor
         $maleLeaders = $this->getSeasonalLeaders('indoor','male');
         $femaleLeaders = $this->getSeasonalLeaders('indoor','female');
-
+        
         //Countdown Comp
         $countdownComp = $competitions->where('date_start','>',Carbon::now())->shuffle()->first();
 
@@ -121,7 +121,6 @@ class HomeController extends Controller
 
         //EMPTY collections of leading results
         $leaders = collect([]);
-
         //for each event add the NR in the collection
         foreach($events as $event){
             $res = Result::published()->fromYear(Carbon::now()->year)->where('event_id', $event->id)->where('is_recordable', true);
@@ -134,12 +133,12 @@ class HomeController extends Controller
 
             if($results->first()){
                 $leader = $results->first();
+                
                 $sameLeader = $results->where('mark','=',$leader['mark']);
 
                 $leaders->push($sameLeader);
             }
         }
-
 
         return $leaders;
     }
