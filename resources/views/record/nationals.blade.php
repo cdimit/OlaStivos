@@ -124,9 +124,10 @@
                                     <th>Ημερομηνία</th>
 
                                     @foreach($records as $record)
-                                        @foreach($record as $key => $sameRecord)
+                                        <?php $index=0; ?>
+                                        @foreach($lead as $key => $sameLead)                
                                             <tr>
-                                                <td>@if($key == 0){{$sameRecord->event->name}}@else - @endif</td>
+                                                <td>@if($index == 0){{$sameLead->event->name}}@else - @endif</td>else - @endif</td>
                                                 <td>{{$sameRecord->markstr}}</td>
                                                 <td>
                                                     <a href="/athlete/{{$sameRecord->athlete->id}}">{{$sameRecord->athlete->name}}</a>
@@ -138,6 +139,7 @@
                                                 <td>{{$sameRecord->date}}</td>
 
                                             </tr>
+                                            <?php $index = $index + 1; ?>             
                                         @endforeach
                                     @endforeach
 

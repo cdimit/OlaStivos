@@ -61,7 +61,7 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
-      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+      $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
 
@@ -85,7 +85,7 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
-      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+      $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
     }
@@ -108,7 +108,7 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
-      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+      $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
     }
@@ -130,7 +130,7 @@ class Event extends Model
       })->whereBetween('date',['1000-01-01' ,$date])->get();
 
       $nr = $nrs->sortByDesc('date')->first();
-      $sameNRs = $nrs->where('mark','=',$nr['mark']);
+      $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
     }

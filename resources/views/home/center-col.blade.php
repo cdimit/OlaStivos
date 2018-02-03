@@ -118,12 +118,14 @@
           <tbody>
 
             @foreach($maleNRs as $nr)
+              <?php $index=0; ?>
               @foreach($nr as $key => $sameNr)
                 <tr>
-                  <td>@if($key == 0){{$sameNr->event->name}}@else - @endif</td>
+                  <td>@if($index == 0){{$sameNr->event->name}}@else - @endif</td>
                   <td><a href="{{ route('athlete.show',['athlete'=>$sameNr->athlete->id]) }}">{{$sameNr->athlete->name}}</a></td>
                   <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}}</a></td>
                 </tr>
+                <?php $index = $index + 1; ?>   
               @endforeach
             @endforeach
           </tbody>
@@ -148,12 +150,14 @@
           <tbody>
 
             @foreach($femaleNRs as $nr)
+              <?php $index=0; ?>
               @foreach($nr as $key => $sameNr)
                 <tr>
-                  <td>@if($key == 0){{$sameNr->event->name}}@else - @endif</td>
+                  <td>@if($index == 0){{$sameNr->event->name}}@else - @endif</td>
                   <td><a href="{{ route('athlete.show',['athlete'=>$sameNr->athlete->id]) }}">{{$sameNr->athlete->name}}</a></td>
                   <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}}</a></td>
                 </tr>
+                <?php $index = $index + 1; ?>   
               @endforeach
             @endforeach
           </tbody>
