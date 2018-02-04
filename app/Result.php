@@ -91,6 +91,10 @@ class Result extends Model
       return $this->records()->attach(Record::where('acronym', 'NYR')->first()->id, ['event_id' => $event->id]);
     }
 
+    public function setNU16R($event)
+    {
+      return $this->records()->attach(Record::where('acronym', 'NU16R')->first()->id, ['event_id' => $event->id]);
+    }
 
     public function scopeYears($query)
     {

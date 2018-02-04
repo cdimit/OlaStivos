@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   $(add_button).click(function(e){ //on add input button click
       e.preventDefault();
-          $(wrapper).append('<div><label>Name</label><input type="text" name="link_name[]" required><label>Path</label><input type="text" name="link_path[]" required><a href="#" class="remove_field">Remove</a></div>'); //add input box
+          $(wrapper).append('<div style="display:inline-block;"><label>Name</label><input type="text" name="link_name[]" required><label>Path</label><input type="text" name="link_path[]" required><a href="#" class="remove_field">Remove</a></div>'); //add input box
   });
 
   $(wrapper).on("click",".remove_field", function(e){ //user click on remove text

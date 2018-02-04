@@ -39,6 +39,7 @@
                                     <option value="U23">Κάτω των 23</option>
                                     <option value="Junior">Έφηφοι/Νεανίδες</option>
                                     <option value="Youth">Παίδες/Κορασίδες</option>
+                                    <option value="U16">Παμπαίδες/Παγκορασίδες</option>
                                 </select>
                             </div>
 

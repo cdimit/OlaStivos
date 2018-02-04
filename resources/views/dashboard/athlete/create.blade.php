@@ -50,31 +50,33 @@
             </div>
         </div>
 
-        <!--Acronym input field-->
-        <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
-            <label for="dob" class="col-md-4 control-label">Date of Birth</label>
-            <div class="col-md-6">
-                {{Form::date('dob', \Carbon\Carbon::now())}}
+        <div id="dobDiv">
+            <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
+                <label for="dob" class="col-md-4 control-label">Date of Birth</label>
+                <div class="col-md-6">
+                    {{Form::date('dob', \Carbon\Carbon::now())}}
 
-                @if ($errors->has('dob'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('dob') }}</strong>
-                    </span>
-                @endif
+                    @if ($errors->has('dob'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('dob') }}</strong>
+                        </span>
+                    @endif
+                </div>
             </div>
-        </div>
+        </div> 
+        <!--Year input field-->
+        <div id="udobDiv" name="udobDiv">
+            <div id="year" class="form-group{{ $errors->has('year') ? ' has-error' : '' }} year">
+                <label id="year" for="year" class="col-md-4 control-label">Year of Birth</label>
+                <div class="col-md-6">
+                  <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" >
 
-        <!--Acronym input field-->
-        <div id="year" class="form-group{{ $errors->has('year') ? ' has-error' : '' }} year">
-            <label id="year" for="year" class="col-md-4 control-label">Year of Birth</label>
-            <div class="col-md-6">
-              <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" >
-
-                @if ($errors->has('year'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('year') }}</strong>
-                    </span>
-                @endif
+                    @if ($errors->has('year'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('year') }}</strong>
+                        </span>
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -111,8 +113,11 @@
                 {!! Form::file('picture', null) !!}
             </div>
         </div>
-
-          @include('links.create')
+    
+        <div class="form-group">
+            <label for="picture" class="col-md-4 control-label">Add Athlete Links:</label>
+            @include('links.create')
+        </div>
 
         <div class="form-group">
 
@@ -130,19 +135,30 @@
     {!! Form::close() !!}
 
 @endsection
-
 @section('scripts')
+    {{-- links Script --}}
+    <script type="text/javascript" src="/js/links/add_links.js"></script>
+    {{-- dob or year input script --}}
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+            birthdayInput();
+            // $('#udobDiv').hide();
+            $('#udob').on('change',function(){
+                birthdayInput();
+            });
 
-  <script type="text/javascript">
-      jQuery(document).ready(function(){
+            function birthdayInput() {
+                if(document.getElementById("udob").checked === true){
+                    $('#udobDiv').show();
+                    $('#dobDiv').hide();
+                }else{
+                    $('#udobDiv').hide();
+                    $('#dobDiv').show();
+                }
+                
+            };
+        });
 
-
-        $('.year').hide();
-
-
-      });
-
-  </script>
-
+    </script>
 @endsection

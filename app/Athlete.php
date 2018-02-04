@@ -651,6 +651,35 @@ class Athlete extends Model
       return false;
     }
 
+    public function setNU16RIfExist($result, $event)
+    {
+
+      if(!Age::isU18($result->age)){
+        return false;
+      }
+
+      $NU16R = $event->getNU16R($result->date)->first();
+
+      if(!$NU16R){
+        $result->setNU16R($event);
+        return true;
+      }
+
+      if($event->isTrack()){
+        if($NU16R->mark >= $result->mark){
+          $result->setNU16R($event);
+          return true;
+        }
+      }else{
+        if($NU16R->mark <= $result->mark){
+          $result->setNU16R($event);
+          return true;
+        }
+      }
+
+      return false;
+    }
+
     public function setEventRecords($event){
       foreach($event->results->where('is_recordable', 'true') as $result){
         $result->athlete->setRecordIfExist($result, true);
@@ -669,6 +698,7 @@ class Athlete extends Model
       $this->setNJRIfExist($result, $result->event);
       $this->setNURIfExist($result, $result->event);
       $this->setNRIfExist($result, $result->event);
+      $this->setNU16RIfExist($result, $result->event);
 
       if($result->event->season=='indoor'){
         $out_event = Event::where('name', $result->event->name)
@@ -684,6 +714,7 @@ class Athlete extends Model
           $this->setNJRIfExist($result, $out_event);
           $this->setNURIfExist($result, $out_event);
           $this->setNRIfExist($result, $out_event);
+          $this->setNU16RIfExist($result, $out_event);
         }
       }
 

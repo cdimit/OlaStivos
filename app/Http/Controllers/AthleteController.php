@@ -45,6 +45,7 @@ class AthleteController extends Controller
         $NURs= $this->athleteCurrentNRs($athlete,'NUR');
         $NJRs= $this->athleteCurrentNRs($athlete,'NJR');
         $NYRs= $this->athleteCurrentNRs($athlete,'NYR');
+        $NU16Rs= $this->athleteCurrentNRs($athlete,'NU16R');
 
         //GET National competition wins
         $nwins = $athlete->countPlaces(\App\CompetitionSeries::find('1'),'1');
@@ -58,6 +59,7 @@ class AthleteController extends Controller
         						->with('NURs',$NURs)
         						->with('NJRs',$NJRs)
         						->with('NYRs',$NYRs)
+                                ->with('NU16Rs',$NU16Rs)
         						->with('nwins',$nwins)
         						->with('chartsPbs',$chartsPbs)
         						->with('chartsResults',$chartsResults)
@@ -127,6 +129,9 @@ class AthleteController extends Controller
                     break;
                 case 'NJR':
                     $eventNR = $event->getNJR();
+                    break;
+                case 'NU16R':
+                    $eventNR = $event->getNU16R();
                     break;
                 default:
                     $eventNR = $event->getNR();

@@ -135,6 +135,28 @@ class Event extends Model
       return $sameNRs;
     }
 
+    public function getNU16R($date = null)
+    {
+
+      if(!$date){
+        $date = Carbon::now();
+      }
+
+      //Get PB record ID
+      $record = Record::where('acronym','NU16R')->first();
+      $recordId = $record->id;
+
+      //Get all PBs of athlete for this event
+      $nrs = Result::whereHas('records',function ($query) use ($recordId) {
+        $query->where('record_id', $recordId)->where('event_id', $this->id);
+      })->whereBetween('date',['1000-01-01' ,$date])->get();
+
+      $nr = $nrs->sortByDesc('date')->first();
+      $sameNRs = $nrs->where('mark','===',$nr['mark']);
+
+      return $sameNRs;
+    }
+
     public function scopeOutdoor($query)
     {
       return $query->where('season', 'outdoor')->get();

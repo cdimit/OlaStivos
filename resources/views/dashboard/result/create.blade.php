@@ -147,7 +147,7 @@
             </div>
         </div>
 
-        <!--Position input field-->
+        <!--Overall Position input field-->
         <div class="form-group{{ $errors->has('overall') ? ' has-error' : '' }}">
             <label for="overall" class="col-md-4 control-label">Overall</label>
             <div class="col-md-6">

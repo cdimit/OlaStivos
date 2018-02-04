@@ -56,7 +56,16 @@
                         <span class="list-group-item-achievement">
                             <img src="/img/nryouth.png" class="img-responsive center">
                         </span>
-                        Παγκύπριο Ρεκόρ U17 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
+                        Παγκύπριο Ρεκόρ U18 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NYR->event->name}} &ensp; <b>{{$NYR->markstr}}</b></i>
+                    </li>
+                @endforeach
+
+                @foreach($NU16Rs as $event => $NU16R)
+                    <li class="list-group-item icon icon-bullet">
+                        <span class="list-group-item-achievement">
+                            <img src="/img/nryouth.png" class="img-responsive center">
+                        </span>
+                        Παγκύπριο Ρεκόρ U16 {{App\Event::find($event)->sezon}}: &ensp; <i> {{$NU16R->event->name}} &ensp; <b>{{$NU16R->markstr}}</b></i>
                     </li>
                 @endforeach
 

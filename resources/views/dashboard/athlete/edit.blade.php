@@ -45,31 +45,35 @@
             </div>
         </div>
 
-        <!--Acronym input field-->
-        <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
-            <label for="dob" class="col-md-4 control-label">Date of Birth</label>
-            <div class="col-md-6">
-                {{Form::date('dob', null)}}
+        <!--Dob input field-->
+        <div id="dobDiv">
+            <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
+                <label for="dob" class="col-md-4 control-label">Date of Birth</label>
+                <div class="col-md-6">
+                    {{Form::date('dob', null)}}
 
-                @if ($errors->has('dob'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('dob') }}</strong>
-                    </span>
-                @endif
+                    @if ($errors->has('dob'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('dob') }}</strong>
+                        </span>
+                    @endif
+                </div>
             </div>
         </div>
 
-        <!--Acronym input field-->
-        <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
-            <label for="year" class="col-md-4 control-label">Year of Birth</label>
-            <div class="col-md-6">
-              {{ Form::text('year',null,["class"=> 'form-control'])}}
+        <!--Year input field-->
+        <div id="udobDiv">
+            <div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
+                <label for="year" class="col-md-4 control-label">Year of Birth</label>
+                <div class="col-md-6">
+                  {{ Form::text('year',null,["class"=> 'form-control'])}}
 
-                @if ($errors->has('year'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('year') }}</strong>
-                    </span>
-                @endif
+                    @if ($errors->has('year'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('year') }}</strong>
+                        </span>
+                    @endif
+                </div>
             </div>
         </div>
 
@@ -108,7 +112,12 @@
             </div>
         </div>
 
-        @include('links.edit', ['var' => $athlete])
+        {{-- LINKS --}}
+        <div class="form-group">
+            <label for="picture" class="col-md-4 control-label">Add Athlete Links:</label>
+            @include('links.edit', ['var' => $athlete])
+        </div>
+
 
         <div class="form-group">
 
@@ -127,6 +136,33 @@
 @endsection
 
 @section('scripts')
+
+        {{-- links Script --}}
+         <script type="text/javascript" src="/js/links/add_links.js"></script>
+        {{-- dob or year input script --}}
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                birthdayInput();
+                // $('#udobDiv').hide();
+                $('#udob').on('change',function(){
+                    birthdayInput();
+                });
+
+                function birthdayInput() {
+                    if(document.getElementById("udob").checked === true){
+                        $('#udobDiv').show();
+                        $('#dobDiv').hide();
+                    }else{
+                        $('#udobDiv').hide();
+                        $('#dobDiv').show();
+                    }
+                    
+                };
+            });
+
+        </script>
+{{-- 
   <script>
   $(document).ready(function() {
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -141,5 +177,5 @@
         e.preventDefault(); $(this).parent('div').remove();
     })
   });
-  </script>
+  </script> --}}
 @endsection

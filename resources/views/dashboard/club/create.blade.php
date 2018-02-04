@@ -74,8 +74,12 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="links" class="col-md-4 control-label">Add Club Links:</label>
+            @include('links.create')
+        </div>
 
-        @include('links.create')
+
 
 
         <div class="form-group">
@@ -93,3 +97,6 @@
 
     {!! Form::close() !!}
 @endsection
+@section('scripts')
+  <script type="text/javascript" src="/js/links/add_links.js"></script>
+@endsection 

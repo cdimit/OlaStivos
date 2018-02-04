@@ -133,9 +133,16 @@ class AthleteCrudController extends Controller
 
         $athlete->first_name = $request->first_name;
         $athlete->last_name = $request->last_name;
-        $athlete->dob = $request->dob;
         $athlete->club_id = $request->club_id;
         $athlete->gender = $request->gender;
+
+        if($request->udob){
+          $athlete->year = $request->year;
+          $athlete->dob = null;
+        }else{
+          $athlete->dob = $request->dob;
+          $athlete->year = (new \DateTime($request->dob))->format('Y');
+        }
 
         if (!empty($request['picture'])) {
             $picture = $request['picture']->store('pictures/athletes');

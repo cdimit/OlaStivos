@@ -47,7 +47,10 @@ class RecordController extends Controller
         		$records->push($event->getNJR());
     		}elseif($request->category == 'Youth'){
     			$records->push($event->getNYR());
-    		}
+    		}elseif($request->category == 'U16'){
+                $records->push($event->getNU16R());
+            }
+
     	}
     	
 
@@ -80,7 +83,10 @@ class RecordController extends Controller
             $records = $event->getAllRecords('NJR');
         }elseif($request->category == 'Youth'){
             $records = $event->getAllRecords('NYR');
+        }elseif($request->category == 'U16'){
+            $records = $event->getAllRecords('NU16R');
         }
+
 
         
         return view('record.nationals_history')->with('event',$event)
