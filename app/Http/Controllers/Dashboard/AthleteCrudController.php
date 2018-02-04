@@ -97,7 +97,7 @@ class AthleteCrudController extends Controller
 
         Link::store($athlete, $request->link_name, $request->link_path);
 
-        return redirect()->route('athlete.index')->withStatus("Athlete stored!");;
+        return redirect()->route('athlete.index')->withStatus("Athlete stored!");
 
     }
 

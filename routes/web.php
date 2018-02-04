@@ -130,7 +130,12 @@ Route::middleware(['closed'])->group(function () {
 	Route::middleware(['auth','role:admin'])->group(function () {
 		Route::resource('dashboard/events', 'Dashboard\EventCrudController', ['except' => ['show','destroy']]);
 		Route::resource('dashboard/users', 'Dashboard\UserCrudController', ['except' => ['create','store','show']]);
+		//PENDING AND PUBLISHING
 		Route::get('dashboard/pending', 'Dashboard\PendingController@index')->name('pending.index');
 		Route::post('dashboard/pending', 'Dashboard\PendingController@publish')->name('pending.publish');
+
+		//COMMANDS
+		Route::get('dashboard/commands', 'Dashboard\CommandController@index')->name('commands.index');
+		Route::get('dashboard/commands/fixyearinathletes', 'Dashboard\CommandController@fixYearInAthletes')->name('commands.fixYearInAthletes');
 	});
 });

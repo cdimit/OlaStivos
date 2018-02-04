@@ -60,6 +60,7 @@
                     <li> <a href="{{ route('video.index') }}">Videos</a></li>
                     @if(Auth::user() && Auth::user()->isAdmin())
                         <li> <a href="{{ route('events.index') }}">Events</a></li>
+                        <li> <a href="{{ route('commands.index') }}">Commands</a></li>
                         <li><a href="{{ route('users.index') }}">Users</a></li>
                         <li> <a href="{{ route('pending.index') }}">Pending</a></li>
                     @endif 
