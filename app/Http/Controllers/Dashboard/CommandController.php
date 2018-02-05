@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Athlete;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Event;
 
 class CommandController extends Controller
 {
@@ -15,7 +16,9 @@ class CommandController extends Controller
      */
     public function index()
     {
-        return view('dashboard.commands.index');
+      $events = Event::all();
+
+        return view('dashboard.commands.index')->withEvents($events);
     }
 
     /**
@@ -35,6 +38,16 @@ class CommandController extends Controller
         	$athlete->save();
    		}
         return redirect()->route('commands.index')->withStatus("Athletes Year Collumn updated!");
+    }
+
+    public function refreshRecordByEvent()
+    {
+      $event = Event::find(request()->event);
+
+      $event->refreshRecords();
+
+      return redirect()->route('commands.index')->withStatus("Event Records was updated!");
+
     }
 
 }
