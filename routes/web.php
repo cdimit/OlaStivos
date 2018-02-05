@@ -137,6 +137,7 @@ Route::middleware(['closed'])->group(function () {
 		//COMMANDS
 		Route::get('dashboard/commands', 'Dashboard\CommandController@index')->name('commands.index');
 		Route::get('dashboard/commands/fixyearinathletes', 'Dashboard\CommandController@fixYearInAthletes')->name('commands.fixYearInAthletes');
+		Route::get('dashboard/commands/fixageinresults', 'Dashboard\CommandController@fixAgeInResults')->name('commands.fixAgeInResults');
 		Route::post('dashboard/commands/refreshrecordbyevent', 'Dashboard\CommandController@refreshRecordByEvent')->name('commands.refreshRecordByEvent');
 
 	});

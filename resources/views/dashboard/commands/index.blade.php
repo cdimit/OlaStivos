@@ -12,6 +12,9 @@
 		<li><button onclick="location.href='{{ route('commands.fixYearInAthletes') }}'">
      Fix Year In Athletes With DOB</button></li>
 
+		 <li><button onclick="location.href='{{ route('commands.fixAgeInResults') }}'">
+      Fix Age In Results</button></li>
+
 
 
 		 {!! Form::open(
