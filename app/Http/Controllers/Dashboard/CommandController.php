@@ -42,9 +42,20 @@ class CommandController extends Controller
 
     public function refreshRecordByEvent()
     {
-      $event = Event::find(request()->event);
 
-      $event->refreshRecords();
+      $eventId = request()->event;
+
+      if($eventId=="all"){
+        $events = Event::all();
+        foreach($events as $event){
+          $event->refreshRecords();
+        }
+      }else{
+        $event = Event::find($eventId);
+
+        $event->refreshRecords();
+      }
+
 
       return redirect()->route('commands.index')->withStatus("Event Records was updated!");
 

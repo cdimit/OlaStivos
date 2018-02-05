@@ -28,8 +28,9 @@
 			 <button>
       Refresh Records By Event</button>
 			<select  name="event" class="selectpicker" >
+							<option value="all">All (Results: {{App\Result::count()}})</option>
 					@foreach($events as $event)
-							<option value="{{$event->id}}">{{$event->name}} {{$event->season}} {{$event->gender}}</option>
+							<option value="{{$event->id}}">{{$event->name}} {{$event->season}} {{$event->gender}} (Results: {{$event->results->count()}})</option>
 					@endforeach
 			</select>
 		</li>
