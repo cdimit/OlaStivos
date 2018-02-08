@@ -64,9 +64,9 @@
                 <a href="/"><img src="/img/1logo.png" alt=""></a>
             </div>
             <div class="banner-content-center hidden-xs">
-                <a href="#"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+                <a href="https://www.facebook.com/olastivos/" target="_blank"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
-                <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                <a href="#"><i class="fa fa-instagram fa-2x"></i></a>
                 <a href="#"><i class="fa fa-youtube-square fa-2x"></i></a>
                                 <div style="height:20vh;">
                 </div>

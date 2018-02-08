@@ -165,12 +165,12 @@ class Athlete extends Model
         $results = $competition->results()->where('athlete_id',$this->id)
                                           ->where('overall','LIKE',$position)
                                           ->get();
-        
+
         foreach ($results as $result) {
           if  (starts_with($result->race, 'Τελικός')){
             $count += 1;
           }
-          
+
         }
       }
 
@@ -446,7 +446,7 @@ class Athlete extends Model
 
           //Add NR to collection with key the event id
           $collection = $collection->put($event, $eventNR);
-          
+
         }
       }
 
@@ -463,7 +463,7 @@ class Athlete extends Model
     */
     public function uniqueEvents($results)
     {
-      
+
       $events = $results->mapWithKeys(function ($item) {
         return [$item['event_id']=>$item];
       })->keys();
@@ -625,7 +625,7 @@ class Athlete extends Model
     public function setNYRIfExist($result, $event)
     {
 
-      if(!Age::isU18($result->age)){
+      if(!Age::isU16($result->age)){
         return false;
       }
 
@@ -723,5 +723,3 @@ class Athlete extends Model
 
 
 }
-    
-
