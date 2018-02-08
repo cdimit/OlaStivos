@@ -9,7 +9,7 @@ class Age extends Model
 
   public static function isU16($age)
   {
-    $raw = $this->where('category', 'u16')->first();
+    $raw = Age::where('category', 'u16')->first();
     return $age >= $raw->min && $age <= $raw->max;
   }
 
