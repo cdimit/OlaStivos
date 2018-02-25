@@ -33,7 +33,17 @@
             </div>
         </div>
 
+
+        <div class="form-group">
+            <label for="mdays" class="col-md-4 control-label">Multiple Days?</label>
+            <div class="col-md-6">
+              <input type="checkbox" id="mdays" name="mdays">
+
+            </div>
+        </div>
+
         <!--Start Date input field-->
+        <div id="mdstart">
         <div class="form-group{{ $errors->has('date_start') ? ' has-error' : '' }}">
             <label for="date_start" class="col-md-4 control-label">Start Date</label>
             <div class="col-md-6">
@@ -46,8 +56,10 @@
                 @endif
             </div>
         </div>
+        </div>
 
         <!--Finish Date input field-->
+        <div id="mdfinish" name="mdfinish">
         <div class="form-group{{ $errors->has('date_finish') ? ' has-error' : '' }}">
             <label for="date_finish" class="col-md-4 control-label">Finish Date</label>
             <div class="col-md-6">
@@ -59,6 +71,7 @@
                     </span>
                 @endif
             </div>
+        </div>
         </div>
 
         <!--Country input field-->
@@ -145,5 +158,27 @@
 @endsection
 @section('scripts')
     <script type="text/javascript" src="/js/links/add_links.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            daysInput();
+            // $('#udobDiv').hide();
+            $('#mdays').on('change',function(){
+                daysInput();
+            });
+
+            function daysInput() {
+                if(document.getElementById("mdays").checked === true){
+                    $('#mdfinish').show();
+                }else{
+                    $('#mdfinish').hide();
+                    $('#mdstart').show();
+                }
+
+            };
+        });
+
+    </script>
 
 @endsection
