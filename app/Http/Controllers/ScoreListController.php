@@ -55,6 +55,8 @@ class ScoreListController extends Controller
 
     if($request->gender!="all"){
       $event_group = $group->where('gender', $request->gender);
+    }else{
+      $event_group = $group;
     }
 
     $ages = Age::all();
