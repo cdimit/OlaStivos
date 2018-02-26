@@ -17,6 +17,8 @@ class ScoreListController extends Controller
     $ages = Age::all();
     $years = Result::years()->reverse();
     $event = Event::outdoor()->first();
+    $selected = collect([]);
+    $selected->push(null)->push(null)->push(null)->push(null)->push(null);
 
 
     $res = Result::published()->fromYear(Carbon::now()->year)->where('event_id', $event->id);
@@ -28,7 +30,7 @@ class ScoreListController extends Controller
       $results = $res->sortBy('mark');
     }
 
-    return view('scorelist.scorelist')->with('event', $event)
+    return view('scorelist.scorelist')->with('selected', $selected)
                                    ->with('ages', $ages)
                                    ->with('years',$years)
                                    ->with('results',$results);
