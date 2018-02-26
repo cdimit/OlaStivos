@@ -80,6 +80,16 @@ Route::middleware(['closed'])->group(function () {
 
 	/*
 	|--------------------------------------------------------------------------
+	| Score-List Routes
+	|--------------------------------------------------------------------------
+	|
+	*/
+	Route::get('/scorelist', 'ScoreListController@show')->name('scorelist.show');
+	Route::post('/scorelist', 'ScoreListController@search')->name('scorelist.search');
+
+
+	/*
+	|--------------------------------------------------------------------------
 	| All-Time Performance Routes
 	|--------------------------------------------------------------------------
 	|

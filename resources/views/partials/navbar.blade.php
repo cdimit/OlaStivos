@@ -17,8 +17,8 @@
             left: 15px;
             background-size: contain;
             ">
-            
-                
+
+
             </a>
         </div>
 
@@ -42,6 +42,7 @@
                     <ul class="dropdown-menu" style="color:white; background-color: black;">
                       <li><a href="{{route('alltime.show')}}" style="color:white;">Κορυφαίές Επιδόσεις</a></li>
                       <li><a href="{{route('toplist.show')}}" style="color:white;">Ανά Σεζόν</a></li>
+                      <li><a href="{{route('scorelist.show')}}" style="color:white;">Πόντοι</a></li>
                     </ul>
                 </li>
 
