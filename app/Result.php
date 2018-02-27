@@ -37,6 +37,11 @@ class Result extends Model
     }
 
 
+    public function isHanded()
+    {
+      return substr($this->mark, -1)=="H";
+    }
+
 
     public function getMarkstrAttribute(): string
     {

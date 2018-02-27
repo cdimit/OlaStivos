@@ -109,7 +109,7 @@ class AthleteController extends Controller
 
     public function athleteCurrentNRs(Athlete $athlete,$acronym = "NR")
     {
-                
+
         //Get all NR records of the athlete
         $NRs= $athlete->getNRs($acronym);
 
@@ -137,9 +137,9 @@ class AthleteController extends Controller
                     $eventNR = $event->getNR();
                     break;
             }
-            if($eventNR->first()['mark'] == $NR->mark){
+            if($eventNR->first()->athlete->id==$athlete->id){
                 $collection = $collection->put($eventID, $NR);
-            }      
+            }
         }
         return $collection;
     }

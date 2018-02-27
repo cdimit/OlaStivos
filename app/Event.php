@@ -43,7 +43,7 @@ class Event extends Model
                     ->first();
     }
 
-    public function getNR($date = null)
+    public function getNR($date = null, $not_hand = null)
     {
 
       if(!$date){
@@ -59,7 +59,22 @@ class Event extends Model
         $query->where('record_id', $recordId)->where('event_id', $this->id);
       })->whereBetween('date',['1000-01-01' ,$date])->get();
 
-      $nr = $nrs->sortByDesc('date')->first();
+
+
+        $nr = $nrs->sortByDesc('date')->first();
+
+        if($nr){
+          if($not_hand && $nr->isHanded()){
+              foreach($nrs->sortByDesc('date') as $n){
+                if(!$n->isHanded()){
+                  $nr = $n;
+                  break;
+                }
+              }
+
+              $nr = null;
+          }
+        }
 
       $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
@@ -85,6 +100,19 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
+      if($nr){
+        if($not_hand && $nr->isHanded()){
+            foreach($nrs->sortByDesc('date') as $n){
+              if(!$n->isHanded()){
+                $nr = $n;
+                break;
+              }
+            }
+
+            $nr = null;
+        }
+      }
+
       $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
@@ -108,6 +136,19 @@ class Event extends Model
 
       $nr = $nrs->sortByDesc('date')->first();
 
+      if($nr){
+        if($not_hand && $nr->isHanded()){
+            foreach($nrs->sortByDesc('date') as $n){
+              if(!$n->isHanded()){
+                $nr = $n;
+                break;
+              }
+            }
+
+            $nr = null;
+        }
+      }
+
       $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
@@ -130,6 +171,20 @@ class Event extends Model
       })->whereBetween('date',['1000-01-01' ,$date])->get();
 
       $nr = $nrs->sortByDesc('date')->first();
+
+      if($nr){
+        if($not_hand && $nr->isHanded()){
+            foreach($nrs->sortByDesc('date') as $n){
+              if(!$n->isHanded()){
+                $nr = $n;
+                break;
+              }
+            }
+
+            $nr = null;
+        }
+      }
+
       $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;
@@ -152,6 +207,20 @@ class Event extends Model
       })->whereBetween('date',['1000-01-01' ,$date])->get();
 
       $nr = $nrs->sortByDesc('date')->first();
+
+      if($nr){
+        if($not_hand && $nr->isHanded()){
+            foreach($nrs->sortByDesc('date') as $n){
+              if(!$n->isHanded()){
+                $nr = $n;
+                break;
+              }
+            }
+
+            $nr = null;
+        }
+      }
+
       $sameNRs = $nrs->where('mark','===',$nr['mark']);
 
       return $sameNRs;

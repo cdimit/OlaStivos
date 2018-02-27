@@ -542,7 +542,7 @@ class Athlete extends Model
 
     public function setNRIfExist($result, $event)
     {
-      $NR = $event->getNR($result->date)->first();
+      $NR = $event->getNR($result->date, true)->first();
 
       if(!$NR){
         $result->setNR($event);
