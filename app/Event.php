@@ -82,7 +82,7 @@ class Event extends Model
 
     }
 
-    public function getNUR($date = null)
+    public function getNUR($date = null, $not_hand = null)
     {
 
       if(!$date){
@@ -118,7 +118,7 @@ class Event extends Model
       return $sameNRs;
     }
 
-    public function getNJR($date = null)
+    public function getNJR($date = null, $not_hand = null)
     {
 
       if(!$date){
@@ -154,7 +154,7 @@ class Event extends Model
       return $sameNRs;
     }
 
-    public function getNYR($date = null)
+    public function getNYR($date = null, $not_hand = null)
     {
 
       if(!$date){
@@ -190,7 +190,7 @@ class Event extends Model
       return $sameNRs;
     }
 
-    public function getNU16R($date = null)
+    public function getNU16R($date = null, $not_hand = null)
     {
 
       if(!$date){

@@ -571,7 +571,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NUR = $event->getNUR($result->date)->first();
+      $NUR = $event->getNUR($result->date, true)->first();
 
       if(!$NUR){
         $result->setNUR($event);
@@ -600,7 +600,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NJR = $event->getNJR($result->date)->first();
+      $NJR = $event->getNJR($result->date, true)->first();
 
       if(!$NJR){
         $result->setNJR($event);
@@ -629,7 +629,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NYR = $event->getNYR($result->date)->first();
+      $NYR = $event->getNYR($result->date, true)->first();
 
       if(!$NYR){
         $result->setNYR($event);
@@ -658,7 +658,7 @@ class Athlete extends Model
         return false;
       }
 
-      $NU16R = $event->getNU16R($result->date)->first();
+      $NU16R = $event->getNU16R($result->date, true)->first();
 
       if(!$NU16R){
         $result->setNU16R($event);
