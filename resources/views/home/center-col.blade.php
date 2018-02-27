@@ -30,13 +30,13 @@
 
             @foreach($maleLeaders as $lead)
               <?php $index=0; ?>
-              @foreach($lead as $key => $sameLead)                
+              @foreach($lead as $key => $sameLead)
                 <tr>
                   <td>@if($index == 0){{$sameLead->event->name}}@else - @endif</td>
                   <td><a href="{{ route('athlete.show',['athlete'=>$sameLead->athlete->id]) }}">{{$sameLead->athlete->name}} </a></td>
                   <td><a href="{{ route('competition.show',['competition'=>$sameLead->competition->id]) }}">{{$sameLead->markstr}}</a></td>
                 </tr>
-                <?php $index = $index + 1; ?>               
+                <?php $index = $index + 1; ?>
               @endforeach
             @endforeach
           </tbody>
@@ -67,7 +67,7 @@
                   <td><a href="{{ route('athlete.show',['athlete'=>$sameLead->athlete->id]) }}">{{$sameLead->athlete->name}}</a></td>
                   <td><a href="{{ route('competition.show',['competition'=>$sameLead->competition->id]) }}">{{$sameLead->markstr}}</a></td>
                 </tr>
-                <?php $index = $index + 1; ?>   
+                <?php $index = $index + 1; ?>
               @endforeach
             @endforeach
           </tbody>
@@ -123,9 +123,9 @@
                 <tr>
                   <td>@if($index == 0){{$sameNr->event->name}}@else - @endif</td>
                   <td><a href="{{ route('athlete.show',['athlete'=>$sameNr->athlete->id]) }}">{{$sameNr->athlete->name}}</a></td>
-                  <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}}</a></td>
+                  <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}} @if($sameNr->event->isIndoor()) (i) @endif </a></td>
                 </tr>
-                <?php $index = $index + 1; ?>   
+                <?php $index = $index + 1; ?>
               @endforeach
             @endforeach
           </tbody>
@@ -155,9 +155,9 @@
                 <tr>
                   <td>@if($index == 0){{$sameNr->event->name}}@else - @endif</td>
                   <td><a href="{{ route('athlete.show',['athlete'=>$sameNr->athlete->id]) }}">{{$sameNr->athlete->name}}</a></td>
-                  <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}}</a></td>
+                  <td><a href="{{ route('competition.show',['competition'=>$sameNr->competition->id]) }}">{{$sameNr->markstr}} @if($sameNr->event->isIndoor()) (i) @endif </a></td>
                 </tr>
-                <?php $index = $index + 1; ?>   
+                <?php $index = $index + 1; ?>
               @endforeach
             @endforeach
           </tbody>

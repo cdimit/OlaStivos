@@ -126,16 +126,16 @@
 
                                     @foreach($records as $record)
                                         <?php $index=0; ?>
-                                        @foreach($record as $key => $sameRecord)                
+                                        @foreach($record as $key => $sameRecord)
                                             <tr>
                                                 <td>
                                                 @if($index == 0)
                                                     {{$sameRecord->event->name}}
-                                                @else 
-                                                    - 
+                                                @else
+                                                    -
                                                 @endif
                                                 </td>
-                                                <td>{{$sameRecord->markstr}}</td>
+                                                <td>{{$sameRecord->markstr}} @if($events->first()->isOutdoor() && $sameRecord->event->isIndoor()) (i) @endif </td>
                                                 <td>
                                                     <a href="/athlete/{{$sameRecord->athlete->id}}">{{$sameRecord->athlete->name}}</a>
                                                 </td>
@@ -146,7 +146,7 @@
                                                 <td>{{$sameRecord->date}}</td>
 
                                             </tr>
-                                            <?php $index = $index + 1; ?>             
+                                            <?php $index = $index + 1; ?>
                                         @endforeach
                                     @endforeach
 

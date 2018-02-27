@@ -24,6 +24,16 @@ class Event extends Model
       return $this->BelongsToMany('App\Result', 'result_record', 'event_id', 'result_id')->where('record_id', '$recordId');
     }
 
+    public function isIndoor()
+    {
+      return $this->season=='indoor';
+    }
+
+    public function isOutdoor()
+    {
+      return $this->season=='outdoor';
+    }
+
     public function isTrack()
     {
       return $this->type=='track';
