@@ -249,7 +249,7 @@
         </div>
 
         <!--Score input field-->
-        <div class="form-group">
+        <div class="form-group" id="handed">
             <label for="result" class="col-md-4 control-label">Is Handed?</label>
             <div class="col-md-6">
               <input id="handed" name="handed" type="checkbox" >
@@ -352,9 +352,15 @@
           function getEvents() {
               document.getElementById('event_id').innerHTML = "";
               if( $('#type').val()==="relay" ){
+                  $("#handed").show();
                   $("#relay_id").show();
                   $("#athlete_label").text("Team");
+              }if( $('#type').val()==="field" ){
+                $("#relay_id").hide();
+                $("#handed").hide();
+                $("#athlete_label").text("Athlete");
               }else{
+                  $("#handed").show();
                   $("#relay_id").hide();
                   $("#athlete_label").text("Athlete");
 
