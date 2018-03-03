@@ -107,7 +107,7 @@
             <div class="col-md-6">
                 <select  id="relay_id" name="relay_id[]" class="selectpicker" data-show-subtext="true" data-live-search="true" data-max-options="4" multiple>
                     @foreach($athletes as $athlete)
-                        <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
+                        <option value="{{$athlete->id}} {{$athlete->year}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('relay_id'))
@@ -248,7 +248,7 @@
           </div>
         </div>
 
-        <!--Score input field-->
+        <!--Is Handed input field-->
         <div class="form-group" id="handed">
             <label for="result" class="col-md-4 control-label">Is Handed?</label>
             <div class="col-md-6">
@@ -352,19 +352,21 @@
           function getEvents() {
               document.getElementById('event_id').innerHTML = "";
               if( $('#type').val()==="relay" ){
-                  $("#handed").show();
                   $("#relay_id").show();
                   $("#athlete_label").text("Team");
-              }if( $('#type').val()==="field" ){
-                $("#relay_id").hide();
-                $("#handed").hide();
-                $("#athlete_label").text("Athlete");
               }else{
-                  $("#handed").show();
                   $("#relay_id").hide();
                   $("#athlete_label").text("Athlete");
 
               }
+
+              if( $('#type').val()==="field" ){
+                  $("#handed").hide();
+              }else{
+                  $("#handed").show();
+
+              }
+
               var myUrl = '/dashboard/result/events';
               var myData = {
                 type: $('#type').val(),

@@ -76,12 +76,11 @@
 			<table class="table table-bordered table-sm" style="position:static;">
 			  	<thead>
 			    	<tr>
-			      		<th>ID</th>
+			      		<th>Order</th>
 			      		<th>Event</th>
 			      		<th>Type</th>
 			      		<th>Season</th>
 			      		<th>Gender</th>
-			      		<th>Order</th>			      		
 			      		<th>Edit</th>
 
 			    	</tr>
@@ -90,12 +89,11 @@
 			  	<tbody>
 			  		@foreach($indoorEvents as $event)
 				    	<tr>
-				      		<th scope="row">{{$event->id}}</th>
+				      		<th scope="row">{{$event->order}}</th>
 				      		<td>{{$event->name}}</td>
 				      		<td>{{$event->type}}</td>
 				     		<td>{{$event->season}}</td>
 				     		<td>{{$event->gender}}</td>
-				     		<td>{{$event->order}}</td>
 				      		<td>
 				      			<a href="{{ route('events.edit',$event->id)}}" class="btn btn-primary btn-sm">
 		  							Edit

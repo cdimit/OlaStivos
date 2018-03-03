@@ -100,10 +100,10 @@
             <div class="col-md-6">
                 <select  id="relay_id" name="relay_id[]" class="selectpicker" data-show-subtext="true" data-live-search="true" data-max-options="4" multiple>
                     @foreach($result->relayAthletes as $athlete)
-                        <option selected value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
+                        <option selected value="{{$athlete->id}} {{$athlete->year}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
                     @endforeach
                     @foreach($athletes->diff($result->relayAthletes) as $athlete)
-                        <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
+                        <option value="{{$athlete->id}} {{$athlete->year}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('relay_id'))
@@ -170,6 +170,13 @@
             </div>
         </div>
 
+        <!--Is Handed input field-->
+        <div class="form-group" id="handed">
+            <label for="result" class="col-md-4 control-label">Is Handed?</label>
+            <div class="col-md-6">
+              <input id="handed" name="handed" type="checkbox" @if($result->isHanded()) checked @endif>
+            </div>
+        </div>
 
         <!--Wind input field-->
         <div class="form-group{{ $errors->has('wind') ? ' has-error' : '' }}">
@@ -252,8 +259,15 @@
               }else{
                   $("#relay_id").hide();
                   $("#athlete_label").text("Athlete");
+              }
+
+              if( $('#type').val()==="field" ){
+                  $("#handed").hide();
+              }else{
+                  $("#handed").show();
 
               }
+              
               var myUrl = '/dashboard/result/events';
               var myData = {
                 type: $('#type').val(),
