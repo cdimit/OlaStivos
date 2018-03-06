@@ -139,11 +139,11 @@
                                                 <td>
                                                     <a href="/athlete/{{$sameRecord->athlete->id}}">{{$sameRecord->athlete->name}}</a>
                                                 </td>
-                                                <td><a href="/club/{{$sameRecord->athlete->club->id}}">{{$sameRecord->athlete->club->acronym}}</a></td>
+                                                <td><a href="/club/{{optional($sameRecord->athlete->club)->id}}">{{optional($sameRecord->athlete->club)->acronym}}</a></td>
                                                 <td>
                                                     <a href="/competition/{{$sameRecord->competition->id}}">{{$sameRecord->competition->city}}</a>
                                                 </td>
-                                                <td>{{$sameRecord->date}}</td>
+                                                <td>{{date('d.m.Y', strtotime($sameRecord->date))}}</td>
 
                                             </tr>
                                             <?php $index = $index + 1; ?>

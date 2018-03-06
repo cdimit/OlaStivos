@@ -14,8 +14,9 @@ class AthleteCrudController extends Controller
     private $form_rules = [
       'first_name' => 'required|string|max:255|min:1',
       'last_name' => 'required|string|max:255|min:1',
-      'dob'  => 'date',
-      'club_id' => 'integer',
+      'dob'  => 'date|nullable',
+      'year' => 'required',
+      'club_id' => 'integer|nullable',
       'gender' => 'string|required',
       'picture' => 'nullable|mimes:jpeg,bmp,png',
 
@@ -43,7 +44,7 @@ class AthleteCrudController extends Controller
      */
     public function create()
     {
-        $clubs = Club::pluck('name','id'); //list of clubs for select field in create form
+        $clubs = Club::all(); //list of clubs for select field in create form
 
         return view('dashboard.athlete.create')->with('clubs',$clubs);
     }
@@ -111,7 +112,7 @@ class AthleteCrudController extends Controller
     public function edit($id)
     {
         $athlete=Athlete::find($id);
-        $clubs = Club::pluck('name','id'); //list of clubs for select field in form
+        $clubs = Club::all(); //list of clubs for select field in form
 
         return view('dashboard.athlete.edit')->with('clubs',$clubs)->with('athlete',$athlete);
     }

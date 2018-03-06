@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Auth;
 use App\Result;
 use App\Athlete;
+use App\Age;
 use App\Event;
 use App\Competition;
 use App\Record;
@@ -71,13 +72,21 @@ class ResultCrudController extends Controller
             'decimal' => 'integer|nullable|max:99'
         ]);
 
-        $resultDB = Result::where([
-          'athlete_id' => $request->athlete_id,
-          'event_id' => $request->event_id,
-          'competition_id' => $request->competition_id,
-          'race' => $request->race
-        ])->get();
-
+        if($request->type=="relay"){
+          $resultDB = Result::where([
+            'athlete_id' => $request->team_id,
+            'event_id' => $request->event_id,
+            'competition_id' => $request->competition_id,
+            'race' => $request->race
+          ])->get();
+        }else{
+          $resultDB = Result::where([
+            'athlete_id' => $request->athlete_id,
+            'event_id' => $request->event_id,
+            'competition_id' => $request->competition_id,
+            'race' => $request->race
+          ])->get();
+        }
 
         if(!$resultDB->isEmpty()){
           return redirect()->route('result.index')->withStatus("Result is already exist!");
@@ -88,7 +97,13 @@ class ResultCrudController extends Controller
 
         $result->position = $request->position;
         $result->overall = $request->overall;
-        $result->athlete_id = $request->athlete_id;
+
+        if($request->type=="relay"){
+          $result->athlete_id = $request->team_id;
+        }else{
+          $result->athlete_id = $request->athlete_id;
+        }
+
         $result->event_id = $request->event_id;
         $result->competition_id = $request->competition_id;
         $result->wind = $request->wind;
@@ -121,7 +136,7 @@ class ResultCrudController extends Controller
             $years[] = $data[1];
             $ids[] = $data[0];
           }
-          $dob_year = min($years);
+          $older_athlete = min($years);
         }else{
           $athlete = Athlete::find($request->athlete_id);
 
@@ -133,9 +148,22 @@ class ResultCrudController extends Controller
         //
         //Find and store age category
         $result_year = (new \DateTime($request->date))->format('Y');//year of result
-        $difference = $result_year-$dob_year;
+        $difference = $result_year-$older_athlete;
         // 3. Save age category in years format to result record
-        $result->age = $difference;
+
+        if(Age::isU23($difference)){
+          $younger_athlete = max($years);
+          if(Age::isU23($result_year-$younger_athlete)){
+            $age=$difference;
+          }else{
+            $age = 100;
+          }
+        }else{
+          $age = $difference;
+        }
+
+
+        $result->age = $age;
 
         $result->save();
 
@@ -229,7 +257,7 @@ class ResultCrudController extends Controller
             $years[] = $data[1];
             $ids[] = $data[0];
           }
-          $dob_year = min($years);
+          $older_athlete = min($years);
         }else{
           $athlete = Athlete::find($request->athlete_id);
 
@@ -243,9 +271,21 @@ class ResultCrudController extends Controller
         // 1. Get athlete DOB
         // 2. Find difference between DOB and result date YEAR
         $result_year = (new \DateTime($request->date))->format('Y');//year of result
-        $difference = $result_year-$dob_year;
+        $difference = $result_year-$older_athlete;
         // 3. Save age category in years format to result record
-        $result->age = $difference;
+
+        if(Age::isU23($difference)){
+          $younger_athlete = max($years);
+          if(Age::isU23($result_year-$younger_athlete)){
+            $age=$difference;
+          }else{
+            $age = 100;
+          }
+        }else{
+          $age = $difference;
+        }
+
+        $result->age = $age;
 
 
 

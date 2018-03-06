@@ -44,6 +44,11 @@ class Event extends Model
       return $this->type=='field';
     }
 
+    public function isRelay()
+    {
+      return $this->type=='relay';
+    }
+
     public function getIndoor()
     {
       return self::where('name', $this->name)

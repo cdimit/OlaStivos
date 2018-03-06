@@ -21,13 +21,13 @@
                     <h4>Εισάγετε Παγκύπριο Ρεκόρ για να δείτε την πρόοδο του:</h4>
                     {!! Form::open(
                             array(
-                                'route' => 'record.searchNRsHistory', 
+                                'route' => 'record.searchNRsHistory',
                                 'class' => 'form-horizontal'
                                 )
-                            ) 
+                            )
                         !!}
-                        
-                        {{ csrf_field() }} 
+
+                        {{ csrf_field() }}
 
                         <div class="form-group">
                             <div class="col-xs-5 text-left">
@@ -44,7 +44,7 @@
                             </div>
 
                         </div>
-                      
+
                         <div class="form-group">
                             <div class="col-xs-5 text-left">
                                 <label for="season">Σεζόν</label>
@@ -55,7 +55,7 @@
                                     <option value="indoor">Κλειστός</option>
                                 </select>
                             </div>
-                            
+
                         </div>
 
                         <div class="form-group">
@@ -69,7 +69,7 @@
                                     <option value="female">Γυναίκες</option>
                                 </select>
                             </div>
-                      
+
                         </div>
 
                         <div id="event_select" class="form-group">
@@ -102,9 +102,9 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <!-- Main Content -->
-                    @if($records)    
+                    @if($records)
                         <h3>{{$event->name}} {{$event->gender}} {{$category}} Records - {{strtoupper($season)}}</h3>
-                
+
                         <div class="col-md-12">
 
                             <div class="panel panel-default">
@@ -120,7 +120,7 @@
                                             <td>
                                                 <a href="/athlete/{{$record->athlete->id}}">{{$record->athlete->name}}</a>
                                             </td>
-                                            <td><a href="/club/{{$record->athlete->club->id}}">{{$record->athlete->club->acronym}}</a></td>
+                                            <td><a href="/club/{{optional($record->athlete->club)->id}}">{{optional($record->athlete->club)->acronym}}</a></td>
                                             <td>{{$record->position}}</td>
                                             <td>
                                                 <a href="/competition/{{$record->competition->id}}">{{$record->competition->name}}</a>
@@ -130,14 +130,14 @@
 
                                         @endforeach
 
-                                    </table> 
+                                    </table>
                                     </div>
                                 </div>
                             </div>
                             <div id="chart1" style="width:100%; height:200px;"></div>
                         </div>
-                    @endif                   
-                    
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@
 
         $('#submit').hide();
         $('#event_select').hide();
-        
+
         $('#gender').on('change',function(){
             getEvents();
         });
@@ -161,7 +161,7 @@
             getEvents();
         });
 
-        
+
 
 
         /* Functions */
@@ -171,7 +171,7 @@
                 var myUrl = '/records/nationals/history/events';
                 var myData = {
                   gender: $('#gender').val(),
-                  season: $('#season').val(), 
+                  season: $('#season').val(),
                 };
                 var events;
 
@@ -181,7 +181,7 @@
                         $('#event').append($('<option>', {
                             value: value.id,
                             text: value.name
-                        }));  
+                        }));
                     });
                 })
                 .catch(function (error) {

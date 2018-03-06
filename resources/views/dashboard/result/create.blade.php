@@ -85,11 +85,29 @@
         </div>
 
         <!--Athlete input field-->
-        <div class="form-group{{ $errors->has('athlete_id') ? ' has-error' : '' }}">
+        <div class="form-group{{ $errors->has('athlete_id') ? ' has-error' : '' }}" id="athlete_id">
             <label id="athlete_label" for="athlete_id" class="col-md-4 control-label">Athlete</label>
             <div class="col-md-6">
                 <select  id="athlete_id" name="athlete_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
                     @foreach($athletes as $athlete)
+                        <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('athlete_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('athlete_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+
+        <!--Athlete input field-->
+        <div class="form-group{{ $errors->has('athlete_id') ? ' has-error' : '' }}" id="team_id">
+            <label id="team_label" for="athlete_id" class="col-md-4 control-label">Relay Team</label>
+            <div class="col-md-6">
+                <select  id="team_id" name="team_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
+                    @foreach($athletes->where('year', 1000) as $athlete)
                         <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
                     @endforeach
                 </select>
@@ -353,11 +371,13 @@
               document.getElementById('event_id').innerHTML = "";
               if( $('#type').val()==="relay" ){
                   $("#relay_id").show();
-                  $("#athlete_label").text("Team");
+                  $('#team_id').show();
+                  $('#athlete_id').hide();
+
               }else{
                   $("#relay_id").hide();
-                  $("#athlete_label").text("Athlete");
-
+                  $('#team_id').hide();
+                  $('#athlete_id').show();
               }
 
               if( $('#type').val()==="field" ){

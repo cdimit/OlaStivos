@@ -40,7 +40,7 @@
         <div class="form-group">
             <label for="udob" class="col-md-4 control-label">Unknown DOB?</label>
             <div class="col-md-6">
-              <input type="checkbox" id="udob" name="udob">
+              <input type="checkbox" id="udob" name="udob" @if(!$athlete->dob) checked @endif>
 
             </div>
         </div>
@@ -81,7 +81,14 @@
         <div class="form-group{{ $errors->has('club_id') ? ' has-error' : '' }}">
             <label for="club_id" class="col-md-4 control-label">Club</label>
             <div class="col-md-6">
-            {{ Form::select('club_id', $clubs, null) }}
+
+              <select  id="club_id" name="club_id" class="form-control">
+                  @foreach($clubs as $club)
+                    <option value="{{$club->id}}" @if($athlete->club==$club) selected @endif>{{$club->name}}</option>
+                  @endforeach
+                  <option value="" @if($athlete->club_id==null) selected @endif>Unknown/Null</option>
+
+              </select>
 
                 @if ($errors->has('club_id'))
                     <span class="help-block">
@@ -157,12 +164,12 @@
                         $('#udobDiv').hide();
                         $('#dobDiv').show();
                     }
-                    
+
                 };
             });
 
         </script>
-{{-- 
+{{--
   <script>
   $(document).ready(function() {
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper

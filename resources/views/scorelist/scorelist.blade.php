@@ -176,7 +176,7 @@
                                                 {{$result->athlete->name}}</a>
                                                 </td>
                                                 <td>
-                                                  <a href="/club/{{$result->athlete->club->id}}">{{$result->athlete->club->acronym}}</a>
+                                                  <a href="/club/{{optional($result->athlete->club)->id}}">{{optional($result->athlete->club)->acronym}}</a>
                                                 </td>
                                                 <td>
                                                   <a href="/competition/{{$result->competition->id}}">{{$result->competition->city}}</a>

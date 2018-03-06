@@ -26,6 +26,7 @@
 	      		<th>Race</th>
 	      		<th>Date</th>
 	      		<th>Event</th>
+						<th>Age Category</th>
 	      		<th>Mark</th>
 	      		<th>Score</th>
 	      		<th>Option</th>
@@ -39,6 +40,7 @@
 		      		<td>{{$result->race}}</td>
 		      		<td>{{$result->date}}</td>
 		      		<td>{{$result->event->name}} {{$result->event->season}} {{$result->event->gender}}</td>
+							<td> {{$result->getAgeCategory()}}</td>
 		      		<td>{{$result->markstr}}</td>
 		      		<td>{{$result->score}}</td>
 		      		<td>

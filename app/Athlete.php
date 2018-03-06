@@ -82,6 +82,20 @@ class Athlete extends Model
       return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function getBirthAttribute(): string
+    {
+      if($this->dob){
+        return date('d.m.Y', strtotime($this->dob));
+      }elseif($this->year=="1000"){
+        return "Relay Team";
+      }elseif($this->year=="1700"){
+        return "Unkown Date of Birth";
+      }else{
+        return $this->year;
+      }
+
+    }
+
     public function isU16()
     {
       $age = Age::where('category', 'u16')->first();

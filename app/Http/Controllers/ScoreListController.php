@@ -46,7 +46,6 @@ class ScoreListController extends Controller
     //gender
     //event
 
-
     if($request->event=="all"){
       $group = Event::where('season', $request->season)->get();
     }else{
@@ -66,14 +65,15 @@ class ScoreListController extends Controller
 
       if($request->year=='all'){
         $res = Result::published()->where('score', '<>', null)
-                                                            ->where('age', '<', $age->max)
-                                                            ->where('age', '>', $age->min)->get();
+                                                            ->where('age', '<=', $age->max)
+                                                            ->where('age', '>=', $age->min)->get();
       }else{
         $res = Result::published()->fromYear($request->year)
                                                           ->where('score', '<>', null)
-                                                            ->where('age', '<', $age->max)
-                                                            ->where('age', '>', $age->min);
+                                                            ->where('age', '<=', $age->max)
+                                                            ->where('age', '>=', $age->min);
       }
+
 
 $events_id = $event_group->pluck('id');
 
