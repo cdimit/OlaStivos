@@ -153,13 +153,14 @@
 
                                       <?php $count=1;
                                             $check = collect([]);
-                                            $check->push(0);
+                                            $check->put(0,0);
 
                                       ?>
                                         @foreach($results->where('is_recordable', true) as $result)
                                           <?php
-                                            if(!$check->search($result->athlete->id, true)){
-                                              $check->push($result->athlete->id);
+                                            $ath = $check->get($result->athlete->id);
+                                            if(!$ath || $ath!=$result->event->id){
+                                              $check->put($result->athlete->id, $result->event->id);
                                               $rank = $count;
                                               $count++;
                                             }else{
