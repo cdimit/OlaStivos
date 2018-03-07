@@ -151,18 +151,26 @@
                                       <th>Τοποθεσία</th>
                                       <th>Ημερομηνία</th>
 
-                                      <?php $count=1;
+                                      <?php $count=0;
                                             $check = collect([]);
                                             $check->put(0,0);
-
+                                            $score = 0;
+                                            $index = 0;
                                       ?>
                                         @foreach($results->where('is_recordable', true) as $result)
                                           <?php
                                             $ath = $check->get($result->athlete->id);
                                             if(!$ath || $ath!=$result->event->id){
                                               $check->put($result->athlete->id, $result->event->id);
-                                              $rank = $count;
-                                              $count++;
+                                              if($score==$result->score){
+                                                $rank = $count;
+                                                $index++;
+                                              }else{
+                                                $score = $result->score;
+                                                $count = $count + $index + 1;
+                                                $index = 0;
+                                                $rank = $count;
+                                              }
                                             }else{
                                               $rank = '-';
                                             }
