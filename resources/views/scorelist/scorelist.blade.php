@@ -160,8 +160,14 @@
                                         @foreach($results->where('is_recordable', true) as $result)
                                           <?php
                                             $ath = $check->get($result->athlete->id);
-                                            if(!$ath || $ath!=$result->event->id){
-                                              $check->put($result->athlete->id, $result->event->id);
+                                            if(!$ath || !collect($ath)->contains($result->event->id)){
+                                              if($ath){
+                                                $ath[] = $result->event->id;
+                                                $check->put($result->athlete->id, $ath);
+                                              }else{
+                                                $check->put($result->athlete->id, [$result->event->id]);
+                                              }
+
                                               if($score==$result->score){
                                                 $rank = $count;
                                                 $index++;
@@ -174,6 +180,7 @@
                                             }else{
                                               $rank = '-';
                                             }
+
                                           ?>
                                             <tr class={{$rank}}>
                                                 <td>{{$rank}}</td>
