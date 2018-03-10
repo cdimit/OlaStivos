@@ -140,7 +140,7 @@ class ResultCrudController extends Controller
         }else{
           $athlete = Athlete::find($request->athlete_id);
 
-          $dob_year = $athlete->year;//year of birth
+          $older_athlete = $athlete->year;//year of birth
 
         }
 
@@ -151,7 +151,7 @@ class ResultCrudController extends Controller
         $difference = $result_year-$older_athlete;
         // 3. Save age category in years format to result record
 
-        if(Age::isU23($difference)){
+        if($request->type=='relay' && Age::isU23($difference)){
           $younger_athlete = max($years);
           if(Age::isU23($result_year-$younger_athlete)){
             $age=$difference;
@@ -261,7 +261,7 @@ class ResultCrudController extends Controller
         }else{
           $athlete = Athlete::find($request->athlete_id);
 
-          $dob_year = $athlete->year;//year of birth
+          $older_athlete = $athlete->year;//year of birth
 
         }
 
@@ -274,7 +274,7 @@ class ResultCrudController extends Controller
         $difference = $result_year-$older_athlete;
         // 3. Save age category in years format to result record
 
-        if(Age::isU23($difference)){
+        if($request->type=="relay" && Age::isU23($difference)){
           $younger_athlete = max($years);
           if(Age::isU23($result_year-$younger_athlete)){
             $age=$difference;
