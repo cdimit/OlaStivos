@@ -15,7 +15,7 @@ class AthleteCrudController extends Controller
       'first_name' => 'required|string|max:255|min:1',
       'last_name' => 'required|string|max:255|min:1',
       'dob'  => 'date|nullable',
-      'year' => 'required',
+      'year' => '',
       'club_id' => 'integer|nullable',
       'gender' => 'string|required',
       'picture' => 'nullable|mimes:jpeg,bmp,png',
