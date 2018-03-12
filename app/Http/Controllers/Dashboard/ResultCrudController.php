@@ -84,7 +84,8 @@ class ResultCrudController extends Controller
             'athlete_id' => $request->athlete_id,
             'event_id' => $request->event_id,
             'competition_id' => $request->competition_id,
-            'race' => $request->race
+            'race' => $request->race,
+            'mark' => $request->mark
           ])->get();
         }
 

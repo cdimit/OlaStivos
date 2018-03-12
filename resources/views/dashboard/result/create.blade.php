@@ -90,7 +90,7 @@
             <div class="col-md-6">
                 <select  id="athlete_id" name="athlete_id" class="selectpicker" data-show-subtext="true" data-live-search="true">
                     @foreach($athletes as $athlete)
-                        <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->dob}}</option>
+                        <option value="{{$athlete->id}}">{{$athlete->first_name}} {{$athlete->last_name}} {{$athlete->birth}}</option>
                     @endforeach
                 </select>
                 @if ($errors->has('athlete_id'))
