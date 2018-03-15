@@ -52,6 +52,8 @@ class ResultCrudController extends Controller
      */
     public function store(Request $request)
     {
+
+
         //VALIDATE DATA
         $this->validate($request, [
             'position' => 'required|string|max:3|min:1',
@@ -85,7 +87,7 @@ class ResultCrudController extends Controller
             'event_id' => $request->event_id,
             'competition_id' => $request->competition_id,
             'race' => $request->race,
-            'mark' => $request->mark
+            // 'mark' => $request->mark
           ])->get();
         }
 
@@ -389,6 +391,28 @@ class ResultCrudController extends Controller
         foreach ($request->positions as $key => $value)  {
             // $key = 0,1,2,3.... , $value= Position of Athlete
 
+            if($request->type=="relay"){
+              // $resultDB = Result::where([
+              //   'athlete_id' => $request->team_id,
+              //   'event_id' => $request->event_id,
+              //   'competition_id' => $request->competition_id,
+              //   'race' => $request->race
+              // ])->get();
+            }else{
+              $resultDB = Result::where([
+                'athlete_id' => $request->athlete_ids[$key],
+                'event_id' => $request->event_id,
+                'competition_id' => $request->competition_id,
+                'race' => $request->race,
+                // 'mark' => $request->mark
+              ])->get();
+            }
+
+            if(!$resultDB->isEmpty()){
+              // return redirect()->route('result.index')->withStatus("Result is already exist!");
+              continue;
+            }
+
             //CREATE new Result instance
             $result = new Result;
 
@@ -408,6 +432,12 @@ class ResultCrudController extends Controller
               $result->records()->detach();
             }else{
               $result->is_recordable = true;
+            }
+
+            if($request->handed){
+              $decimal = $request->decimal."H";
+            }else{
+              $decimal = $request->decimal;
             }
 
             //Store mark based on event

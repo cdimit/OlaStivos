@@ -514,13 +514,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($pb->mark>=$result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setPb($event);
           return true;
         }
       }else{
-        if($pb->mark<=$result->mark){
+        if($NR->mark>=$result->mark){
           $result->setPb($event);
           return true;
         }
@@ -539,13 +539,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($sb->mark>=$result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setSb($event);
           return true;
         }
       }else{
-        if($sb->mark<=$result->mark){
+        if($NR->mark>=$result->mark){
           $result->setSb($event);
           return true;
         }
@@ -563,13 +563,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($NR->mark>=$result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setNR($event);
           return true;
         }
       }else{
-        if($NR->mark<=$result->mark){
+        if($NR->mark>=$result->mark){
           $result->setNR($event);
           return true;
         }
@@ -592,13 +592,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($NUR->mark>=$result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setNUR($event);
           return true;
         }
       }else{
-        if($NUR->mark<=$result->mark){
+        if($NR->mark>=$result->mark){
           $result->setNUR($event);
           return true;
         }
@@ -621,13 +621,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($NJR->mark>=$result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setNJR($event);
           return true;
         }
       }else{
-        if($NJR->mark<=$result->mark){
+        if($NR->mark>=$result->mark){
           $result->setNJR($event);
           return true;
         }
@@ -650,13 +650,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($NYR->mark >= $result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setNYR($event);
           return true;
         }
       }else{
-        if($NYR->mark <= $result->mark){
+        if($NR->mark>=$result->mark){
           $result->setNYR($event);
           return true;
         }
@@ -679,13 +679,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($NU16R->mark >= $result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setNU16R($event);
           return true;
         }
       }else{
-        if($NU16R->mark <= $result->mark){
+        if($NR->mark>=$result->mark){
           $result->setNU16R($event);
           return true;
         }
