@@ -515,12 +515,12 @@ class Athlete extends Model
       }
 
       if($event->isField()){
-        if($NR->mark<=$result->mark){
+        if($pb->mark<=$result->mark){
           $result->setPb($event);
           return true;
         }
       }else{
-        if($NR->mark>=$result->mark){
+        if($pb->mark>=$result->mark){
           $result->setPb($event);
           return true;
         }
@@ -540,12 +540,12 @@ class Athlete extends Model
       }
 
       if($event->isField()){
-        if($NR->mark<=$result->mark){
+        if($sb->mark<=$result->mark){
           $result->setSb($event);
           return true;
         }
       }else{
-        if($NR->mark>=$result->mark){
+        if($sb->mark>=$result->mark){
           $result->setSb($event);
           return true;
         }
@@ -593,12 +593,12 @@ class Athlete extends Model
       }
 
       if($event->isField()){
-        if($NR->mark<=$result->mark){
+        if($NUR->mark<=$result->mark){
           $result->setNUR($event);
           return true;
         }
       }else{
-        if($NR->mark>=$result->mark){
+        if($NUR->mark>=$result->mark){
           $result->setNUR($event);
           return true;
         }
@@ -622,12 +622,12 @@ class Athlete extends Model
       }
 
       if($event->isField()){
-        if($NR->mark<=$result->mark){
+        if($NJR->mark<=$result->mark){
           $result->setNJR($event);
           return true;
         }
       }else{
-        if($NR->mark>=$result->mark){
+        if($NJR->mark>=$result->mark){
           $result->setNJR($event);
           return true;
         }
@@ -651,12 +651,12 @@ class Athlete extends Model
       }
 
       if($event->isField()){
-        if($NR->mark<=$result->mark){
+        if($NYR->mark<=$result->mark){
           $result->setNYR($event);
           return true;
         }
       }else{
-        if($NR->mark>=$result->mark){
+        if($NYR->mark>=$result->mark){
           $result->setNYR($event);
           return true;
         }
@@ -680,12 +680,12 @@ class Athlete extends Model
       }
 
       if($event->isField()){
-        if($NR->mark<=$result->mark){
+        if($NU16R->mark<=$result->mark){
           $result->setNU16R($event);
           return true;
         }
       }else{
-        if($NR->mark>=$result->mark){
+        if($NU16R->mark>=$result->mark){
           $result->setNU16R($event);
           return true;
         }
