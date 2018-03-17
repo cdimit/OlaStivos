@@ -11,7 +11,7 @@ class CompetitionController extends Controller
     {
 
         if(!$competition->status){
-        abort(404);
+            abort(404);
         }
 
     	$results = $competition->getAllResultsByEvent();

@@ -19,4 +19,6 @@ class PivotRecord extends Model
    * @var string
    */
   protected $table = 'result_record';
+
+  
 }

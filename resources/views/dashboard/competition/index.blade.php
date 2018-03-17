@@ -33,6 +33,7 @@
 			      		<th>Name</th>
 			      		<th>Start Date</th>
 			      		<th>Finish Date</th>
+			      		<th>Series</th>
 			      		<th>Country</th>
 			      		<th>City</th>
 			      		<th>Venue</th>
@@ -46,7 +47,13 @@
 				      		<th scope="row">{{$competition->id}}</th>
 				      		<td>{{$competition->name}}</td>
 				      		<td>{{$competition->date_start}}</td>
-				     		<td>{{$competition->date_finish}}</td>
+				      		<td>{{$competition->date_finish}}</td>
+				      		<td>
+
+				      			@foreach($competition->competition_series as $series)
+				      				{{$series->name.','}}<br />
+				      			@endforeach
+				      		</td>
 				      		<td>{{$competition->country}}</td>
 				      		<td>{{$competition->city}}</td>
 				      		<td>{{$competition->venue}}</td>

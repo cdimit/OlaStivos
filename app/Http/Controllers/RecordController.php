@@ -10,7 +10,7 @@ class RecordController extends Controller
     public function showNRs()
     {
     	//get all events
-    	$events = Event::where('season','outdoor')->where('gender','male')->get();
+    	$events = Event::where('season','outdoor')->where('gender','male')->orderBy('order')->get();
     	
     	//EMPTY collections of national records
     	$records = collect([]);
@@ -31,7 +31,7 @@ class RecordController extends Controller
     {	
 
     	//get all events
-        $events = Event::where('season',$request->season)->where('gender',$request->gender)->get();
+        $events = Event::where('season',$request->season)->where('gender',$request->gender)->orderBy('order')->get();
 
 
     	//EMPTY collections of national records

@@ -5,7 +5,7 @@
     <link href="{{ asset('/css/headings/heading-in-profile.css') }}" rel="stylesheet">
 @endsection
 @section('content')
-<div class="container">
+<div class="container"  style="min-height: calc(100vh - 400px);">
     <div class="row">
         <div class="col-md-12">
             <div class="panel with-nav-tabs panel-default">
@@ -89,7 +89,7 @@
                                                 @foreach($results as $key => $value)
                                                     <div class="tab-pane fade" id="tab{{$key}}result">
 
-                                                        <h4><b>{{$value->first()->event->name}}  -  {{date('d-m-Y', strtotime($value->first()->date))}}</b></h4>
+                                                        <h4><b>{{$value->first()->event->name}}  </b>-  {{date('d-m-Y', strtotime($value->first()->date))}}</h4>
 
                                                         @foreach($value->keyby('race')->keys() as $heat)
                                                             <h4>{{$heat}}</h4>
@@ -112,7 +112,8 @@
                                                                             <td>{{$result->score}}</td>
                                                                             <td>
                                                                             @foreach($result->records as $record)
-                                                                                {{$record->acronym}} &nbsp;
+                                                                                {{$record->acronym}}
+                                                                                &nbsp;
                                                                             @endforeach
                                                                             </td>
                                                                         </tr>
