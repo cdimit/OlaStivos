@@ -16,12 +16,12 @@
 
         <div class="col-md-12">
             <div class="col-md-6">
-                <h1>Τοπ Λίστες</h1>
+                <h1>Πόντοι</h1>
                 <div class="well">
-                    <h4>Εισάγετε δεδομένα για τη χρονιά που σας ενδιαφέρει:</h4>
+                    <h4>Εισάγετε δεδομένα για το στατιστικό που σας ενδιαφέρει:</h4>
                     {!! Form::open(
                             array(
-                                'route' => 'toplist.search',
+                                'route' => 'scorelist.search',
                                 'class' => 'form-horizontal'
                                 )
                             )
@@ -35,8 +35,9 @@
                             </div>
                             <div class="col-xs-7">
                                 <select  id="year" name="year" class="form-control" style="width: auto; height:auto; font-size: 10px; overflow: hidden;">
+                                  <option value="all">Όλες</option>
                                   @foreach($years as $year)
-                                    <option value="{{$year}}">{{$year}}</option>
+                                    <option value="{{$year}}" @if($selected[0]==$year) selected @endif>{{$year}}</option>
                                   @endforeach
                                 </select>
                             </div>
@@ -50,7 +51,7 @@
                             <div class="col-xs-7">
                                 <select  id="age" name="age" class="form-control" style="width: auto; height:auto; font-size: 10px; overflow: hidden;">
                                   @foreach($ages as $age)
-                                    <option value="{{$age->id}}">{{$age->name}}</option>
+                                    <option value="{{$age->id}}" @if($selected[1]==$age->id) selected @endif>{{$age->name}}</option>
                                   @endforeach
                                 </select>
                             </div>
@@ -63,8 +64,8 @@
                             </div>
                             <div class="col-xs-7">
                                 <select  id="season" name="season" class="form-control">
-                                    <option value="outdoor">Ανοικτός</option>
-                                    <option value="indoor">Κλειστός</option>
+                                    <option value="outdoor" @if($selected[2]=='outdoor') selected @endif>Ανοικτός</option>
+                                    <option value="indoor" @if($selected[2]=='indoor') selected @endif>Κλειστός</option>
                                 </select>
                             </div>
 
@@ -77,8 +78,9 @@
                             <div class="col-xs-7">
                                 <select  id="gender" name="gender" class="form-control" required>
                                     <option value="" disabled selected>Select your option</option>
-                                    <option value="male">Άνδρες</option>
-                                    <option value="female">Γυναίκες</option>
+                                    <option value="all" @if($selected[3]=='all') selected @endif>Μαζί</option>
+                                    <option value="male" @if($selected[3]=='male') selected @endif>Άνδρες</option>
+                                    <option value="female" @if($selected[3]=='female') selected @endif>Γυναίκες</option>
                                 </select>
                             </div>
 
@@ -86,11 +88,13 @@
 
                         <div id="event_select" class="form-group">
                             <div class="col-xs-5 text-left">
-                                <label for="event">Αγώνισμα</label>
+                                <label for="event">Αγωνίσματα</label>
                             </div>
                             <div class="col-xs-7">
                                 <select  id="event" name="event" class="form-control"  required>
-                                    <option id='1' value="">-- select one -- </option>
+                                    <option value="all" @if($selected[4]=='all') selected @endif>Όλα</option>
+                                    <option value="track" @if($selected[4]=='track') selected @endif>Track</option>
+                                    <option value="field" @if($selected[4]=='field') selected @endif>Field</option>
                                 </select>
                             </div>
                         </div>
@@ -107,7 +111,7 @@
 
                         <div class="form-group" style="margin-top:5px; margin-bottom: 5px;">
                             <div class="col-xs-10 col-xs-offset-2">
-                                <button id="submit" type="submit" class="btn btn-default" >Βρές κορυφαίες επιδόσεις</button>
+                                <button id="submit" type="submit" class="btn btn-default" >Βρές τα στατιστικά</button>
                             </div>
                         </div>
                     {!! Form::close() !!}
@@ -128,7 +132,6 @@
 
                     <!-- Main Content -->
                     @if($results)
-                        <h3>{{$event->name}} {{$event->gender}} Top-List</h3>
                         <label for="unique">*Ένα αποτέλεσμα ανά αθλητή:</label>
                         <input type="checkbox" id="unique">
 
@@ -140,32 +143,50 @@
                                     <div class="table table-responsive">
                                     <table width="100%">
                                       <th>Κατάταξη</th>
+                                      <th>Πόντοι</th>
+                                      <th>Αγώνισμα</th>
                                       <th>Επίδοση</th>
-                                      <th>Άνεμος</th>
                                       <th>Αθλητής</th>
                                       <th>Σύλλογος</th>
                                       <th>Τοποθεσία</th>
                                       <th>Ημερομηνία</th>
 
-                                      <?php $count=1;
+                                      <?php $count=0;
                                             $check = collect([]);
-                                            $check->push(0);
-
+                                            $check->put(0,0);
+                                            $score = 0;
+                                            $index = 0;
                                       ?>
                                         @foreach($results->where('is_recordable', true) as $result)
                                           <?php
-                                            if(!$check->search($result->athlete->id, true)){
-                                              $check->push($result->athlete->id);
-                                              $rank = $count;
-                                              $count++;
+                                            $ath = $check->get($result->athlete->id);
+                                            if(!$ath || !collect($ath)->contains($result->event->id)){
+                                              if($ath){
+                                                $ath[] = $result->event->id;
+                                                $check->put($result->athlete->id, $ath);
+                                              }else{
+                                                $check->put($result->athlete->id, [$result->event->id]);
+                                              }
+
+                                              if($score==$result->score){
+                                                $rank = $count;
+                                                $index++;
+                                              }else{
+                                                $score = $result->score;
+                                                $count = $count + $index + 1;
+                                                $index = 0;
+                                                $rank = $count;
+                                              }
                                             }else{
                                               $rank = '-';
                                             }
+
                                           ?>
                                             <tr class={{$rank}}>
                                                 <td>{{$rank}}</td>
+                                                <td>{{$result->score}}</td>
+                                                <td>{{$result->event->name}}</td>
                                                 <td>{{$result->markstr}}</td>
-                                                <td>{{$result->wind}}</td>
                                                 <td>
                                                 <a href="/athlete/{{$result->athlete->id}}">
                                                 {{$result->athlete->name}}</a>
@@ -189,55 +210,6 @@
                         </div>
                     @endif
 
-                    <!-- Main Content -->
-                    @if($results->where('is_recordable', false))
-                        <div class="col-md-12">
-
-                            <div class="panel panel-default">
-
-                                <div class="panel-body">
-                                    <table width="100%">
-                                      <th>Κατάταξη</th>
-                                      <th>Επίδοση</th>
-                                      <th>Άνεμος</th>
-                                      <th>Αθλητής</th>
-                                      <th>Σύλλογος</th>
-                                      <th>Θέση</th>
-                                      <th>Αγώνας</th>
-                                      <th>Τοποθεσία</th>
-                                      <th>Ημερομηνία</th>
-
-                                      <h4>Μη αναγνωρισμένες επιδόσης</h4>
-                                        @foreach($results->where('is_recordable', false) as $result)
-
-                                            <tr class='-'>
-                                                <td>-</td>
-                                                <td>{{$result->markstr}}</td>
-                                                <td>{{$result->wind}}</td>
-                                                <td>
-                                                <a href="/athlete/{{$result->athlete->id}}">
-                                                {{$result->athlete->name}}</a>
-                                                </td>
-                                                <td>
-                                                  <a href="/club/{{$result->athlete->club->id}}">{{$result->athlete->club->acronym}}</a>
-                                                </td>
-                                                <td>{{$result->position}}</td>
-                                                <td>
-                                                  <a href="/competition/{{$result->competition->id}}">{{$result->competition->name}}</a>
-                                                </td>
-                                                <td>{{$result->competition->city}}, {{$result->competition->country}}</td>
-                                                <td>{{date('d M Y', strtotime($result->date))}}</td>
-
-                                            </tr>
-
-                                        @endforeach
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
                 </div>
             </div>
         </div>
@@ -253,72 +225,6 @@
     });
   });
   </script>
-
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-
-
-        $('#submit').hide();
-        $('#event_select').hide();
-
-        $('#gender').on('change',function(){
-            getEvents();
-        });
-
-        $('#season').on('change',function(){
-            getEvents();
-        });
-
-        $('#age').on('change',function(){
-            getEvents();
-        });
-
-        $('#year').on('change',function(){
-            getEvents();
-        });
-
-
-
-
-        /* Functions */
-        function getEvents() {
-            document.getElementById('event').innerHTML = "";
-            if( $('#gender').val()==="male" || $('#gender').val()==="female" ){
-                var myUrl = '/toplist/events';
-                var myData = {
-                  gender: $('#gender').val(),
-                  season: $('#season').val(),
-                  age: $('#age').val(),
-                  year: $('#year').val(),
-                };
-                var events;
-
-                axios.post(myUrl, myData )
-                .then(function (response) {
-                    $.each(response.data, function( index, value ) {
-                        $('#event').append($('<option>', {
-                            value: value.id,
-                            text: value.name
-                        }));
-                    });
-                })
-                .catch(function (error) {
-                    console.log('error');
-                });
-                $("#submit").show();
-                $("#event_select").show();
-            }else{
-                $("#submit").hide();
-                $("#event_select").hide();
-            }
-            return;
-        }
-
-
-
-    });
-
-</script>
 
 
 @endsection

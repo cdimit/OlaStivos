@@ -50,6 +50,14 @@
             </div>
         </div>
 
+        <div class="form-group" id="uyearDiv">
+            <label for="uyear" class="col-md-4 control-label">Unknown Year?</label>
+            <div class="col-md-6">
+              <input type="checkbox" id="uyear" name="uyear">
+
+            </div>
+        </div>
+
         <div id="dobDiv">
             <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                 <label for="dob" class="col-md-4 control-label">Date of Birth</label>
@@ -63,11 +71,11 @@
                     @endif
                 </div>
             </div>
-        </div> 
+        </div>
         <!--Year input field-->
         <div id="udobDiv" name="udobDiv">
             <div id="year" class="form-group{{ $errors->has('year') ? ' has-error' : '' }} year">
-                <label id="year" for="year" class="col-md-4 control-label">Year of Birth</label>
+                <label class="col-md-4 control-label">Year of Birth</label>
                 <div class="col-md-6">
                   <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" >
 
@@ -84,7 +92,13 @@
         <div class="form-group{{ $errors->has('club_id') ? ' has-error' : '' }}">
             <label for="club_id" class="col-md-4 control-label">Club</label>
             <div class="col-md-6">
-                {{ Form::select('club_id', $clubs, null) }}
+
+                <select  id="club_id" name="club_id" class="form-control">
+                    @foreach($clubs as $club)
+                      <option value="{{$club->id}}">{{$club->name}}</option>
+                    @endforeach
+                    <option value="">Unkown/Null</option>
+                </select>
 
                 @if ($errors->has('club_id'))
                     <span class="help-block">
@@ -113,7 +127,7 @@
                 {!! Form::file('picture', null) !!}
             </div>
         </div>
-    
+
         <div class="form-group">
             <label for="picture" class="col-md-4 control-label">Add Athlete Links:</label>
             @include('links.create')
@@ -147,17 +161,36 @@
             $('#udob').on('change',function(){
                 birthdayInput();
             });
+            $('#uyear').on('change',function(){
+                yearInput();
+            });
 
             function birthdayInput() {
                 if(document.getElementById("udob").checked === true){
                     $('#udobDiv').show();
                     $('#dobDiv').hide();
+                    $('#uyearDiv').show();
+                    yearInput();
                 }else{
                     $('#udobDiv').hide();
                     $('#dobDiv').show();
+                    $('#uyearDiv').hide();
+
                 }
-                
+
             };
+
+            function yearInput() {
+
+                if(document.getElementById("uyear").checked === true){
+                    $('#udobDiv input').val("1700");
+                    $('#udobDiv').hide();
+                }else{
+                    $('#udobDiv').show();
+                }
+
+            };
+
         });
 
     </script>

@@ -50,8 +50,8 @@
 					           				<td>
 					           					<a href="/athlete/{{$athlete->id}}">{{$athlete->name}}</a>
 					           				</td>
-					           				<td>({{date('d-m-Y', strtotime($athlete->dob))}})</td>
-					           				<td><a href="/club/{{$athlete->club->id}}">{{$athlete->club->acronym}}</a></td>
+					           				<td>({{$athlete->birth}})</td>
+					           				<td><a href="/club/{{optional($athlete->club)->id}}">{{optional($athlete->club)->acronym}}</a></td>
 					           			</tr>
 					           		@endforeach
 				           		</tbody>

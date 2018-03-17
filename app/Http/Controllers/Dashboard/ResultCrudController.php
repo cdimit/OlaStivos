@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Auth;
 use App\Result;
 use App\Athlete;
+use App\Age;
 use App\Event;
 use App\Competition;
 use App\Record;
@@ -51,6 +52,8 @@ class ResultCrudController extends Controller
      */
     public function store(Request $request)
     {
+
+
         //VALIDATE DATA
         $this->validate($request, [
             'position' => 'required|string|max:3|min:1',
@@ -71,13 +74,22 @@ class ResultCrudController extends Controller
             'decimal' => 'integer|nullable|max:99'
         ]);
 
-        $resultDB = Result::where([
-          'athlete_id' => $request->athlete_id,
-          'event_id' => $request->event_id,
-          'competition_id' => $request->competition_id,
-          'race' => $request->race
-        ])->get();
-
+        if($request->type=="relay"){
+          $resultDB = Result::where([
+            'athlete_id' => $request->team_id,
+            'event_id' => $request->event_id,
+            'competition_id' => $request->competition_id,
+            'race' => $request->race
+          ])->get();
+        }else{
+          $resultDB = Result::where([
+            'athlete_id' => $request->athlete_id,
+            'event_id' => $request->event_id,
+            'competition_id' => $request->competition_id,
+            'race' => $request->race,
+            // 'mark' => $request->mark
+          ])->get();
+        }
 
         if(!$resultDB->isEmpty()){
           return redirect()->route('result.index')->withStatus("Result is already exist!");
@@ -88,7 +100,13 @@ class ResultCrudController extends Controller
 
         $result->position = $request->position;
         $result->overall = $request->overall;
-        $result->athlete_id = $request->athlete_id;
+
+        if($request->type=="relay"){
+          $result->athlete_id = $request->team_id;
+        }else{
+          $result->athlete_id = $request->athlete_id;
+        }
+
         $result->event_id = $request->event_id;
         $result->competition_id = $request->competition_id;
         $result->wind = $request->wind;
@@ -102,6 +120,7 @@ class ResultCrudController extends Controller
           $decimal = $request->decimal;
         }
 
+
         //Save mark based on event type
         if($request->type=="field"){
           $result->mark = $this->createFieldMark($request->meters,$request->cmeters);
@@ -113,26 +132,50 @@ class ResultCrudController extends Controller
           $result->is_recordable = false;
         }
 
-        //
-        //Find and store age category
-        //
-        // 1. Get athlete DOB
-        $athlete = Athlete::find($request->athlete_id);
-        // 2. Find difference between DOB and result date YEAR
-        $result_year = (new \DateTime($request->date))->format('Y');//year of result
-        $dob_year = $athlete->year;//year of birth
-        $difference = $result_year-$dob_year;
-        // 3. Save age category in years format to result record
-        $result->age = $difference;
-
-
-        $result->save();
 
         if($request->type=="relay"){
-          $result->relayAthletes()->attach($request->relay_id);
+          foreach($request->relay_id as $rel){
+            $data = explode(" ",$rel);
+            $years[] = $data[1];
+            $ids[] = $data[0];
+          }
+          $older_athlete = min($years);
+        }else{
+          $athlete = Athlete::find($request->athlete_id);
+
+          $older_athlete = $athlete->year;//year of birth
+
         }
 
 
+        //
+        //Find and store age category
+        $result_year = (new \DateTime($request->date))->format('Y');//year of result
+        $difference = $result_year-$older_athlete;
+        // 3. Save age category in years format to result record
+
+        if($request->type=='relay' && Age::isU23($difference)){
+          $younger_athlete = max($years);
+          if(Age::isU23($result_year-$younger_athlete)){
+            $age=$difference;
+          }else{
+            $age = 100;
+          }
+        }else{
+          $age = $difference;
+        }
+
+
+        $result->age = $age;
+
+        $result->save();
+
+
+        if($request->type=="relay"){
+          foreach($ids as $id){
+            $result->relayAthletes()->attach([$id]);
+          }
+        }
 
         // $athlete->setRecordIfExist($result);
 
@@ -159,24 +202,11 @@ class ResultCrudController extends Controller
         $athletes = Athlete::all();
         $events = Event::all();
         $competitions = Competition::all();
-        $records = Record::all();
-
-        //all the records achieved in this result
-        $resultRecords = $result->records()->get();
-
-        //put record_ids in a collection
-        //this helps in the edit form
-        $achievements = collect([]);
-        foreach($resultRecords as $record){
-            $achievements->push($record->id);
-        }
 
         return view('dashboard.result.edit')->with('result',$result)
                                             ->with('athletes',$athletes)
                                             ->with('events',$events)
-                                            ->with('competitions',$competitions)
-                                            ->with('records',$records)
-                                            ->with('achievements',$achievements);
+                                            ->with('competitions',$competitions);
     }
 
     /**
@@ -223,24 +253,52 @@ class ResultCrudController extends Controller
           $result->is_recordable = true;
         }
 
+
+        if($request->type=="relay"){
+          foreach($request->relay_id as $rel){
+            $data = explode(" ",$rel);
+            $years[] = $data[1];
+            $ids[] = $data[0];
+          }
+          $older_athlete = min($years);
+        }else{
+          $athlete = Athlete::find($request->athlete_id);
+
+          $older_athlete = $athlete->year;//year of birth
+
+        }
+
         //
         //Find and store age category
         //
         // 1. Get athlete DOB
-        $athlete = Athlete::find($request->athlete_id);
         // 2. Find difference between DOB and result date YEAR
         $result_year = (new \DateTime($request->date))->format('Y');//year of result
-        $dob_year = $athlete->year;//year of birth
-        $difference = $result_year-$dob_year;
+        $difference = $result_year-$older_athlete;
         // 3. Save age category in years format to result record
-        $result->age = $difference;
+
+        if($request->type=="relay" && Age::isU23($difference)){
+          $younger_athlete = max($years);
+          if(Age::isU23($result_year-$younger_athlete)){
+            $age=$difference;
+          }else{
+            $age = 100;
+          }
+        }else{
+          $age = $difference;
+        }
+
+        $result->age = $age;
 
 
 
         $result->save();
 
         if($request->type=="relay"){
-          $result->relayAthletes()->sync($request->relay_id);
+          $result->relayAthletes()->detach();
+          foreach($ids as $id){
+            $result->relayAthletes()->attach([$id]);
+          }
         }
 
 
@@ -333,6 +391,28 @@ class ResultCrudController extends Controller
         foreach ($request->positions as $key => $value)  {
             // $key = 0,1,2,3.... , $value= Position of Athlete
 
+            if($request->type=="relay"){
+              // $resultDB = Result::where([
+              //   'athlete_id' => $request->team_id,
+              //   'event_id' => $request->event_id,
+              //   'competition_id' => $request->competition_id,
+              //   'race' => $request->race
+              // ])->get();
+            }else{
+              $resultDB = Result::where([
+                'athlete_id' => $request->athlete_ids[$key],
+                'event_id' => $request->event_id,
+                'competition_id' => $request->competition_id,
+                'race' => $request->race,
+                // 'mark' => $request->mark
+              ])->get();
+            }
+
+            if(!$resultDB->isEmpty()){
+              // return redirect()->route('result.index')->withStatus("Result is already exist!");
+              continue;
+            }
+
             //CREATE new Result instance
             $result = new Result;
 
@@ -352,6 +432,12 @@ class ResultCrudController extends Controller
               $result->records()->detach();
             }else{
               $result->is_recordable = true;
+            }
+
+            if($request->handed){
+              $decimal = $request->decimal."H";
+            }else{
+              $decimal = $request->decimal;
             }
 
             //Store mark based on event

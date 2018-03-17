@@ -25,7 +25,7 @@
 			      		<th>Edit</th>
 			    	</tr>
 			  	</thead>
-			  	
+
 			  	<tbody>
 			  		@foreach($athletes as $athlete)
 				    	<tr>
@@ -33,11 +33,11 @@
 				      		<th scope="row">{{$athlete->id}}</th>
 				      		<td>{{$athlete->first_name}}</td>
 				      		<td>{{$athlete->last_name}}</td>
-				     		<td>{{$athlete->dob}}</td>
+				     		<td>{{$athlete->birth}}</td>
 				     		<td>{{$athlete->gender}}</td>
-				     		<td>{{$athlete->club->name}}</td>
+				     		<td>{{optional($athlete->club)->name}}</td>
 				      		<td><img src="/storage/{{ $athlete->picture }}" class="img-responsive" style="max-width: 10vw; max-height: 10vh;"></td>
-				      		<td>	
+				      		<td>
 				      			<a href="{{ route('athlete.edit',$athlete->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>
@@ -72,7 +72,7 @@
 			      		<th>Edit</th>
 			    	</tr>
 			  	</thead>
-			  	
+
 			  	<tbody>
 			  		@foreach($competitions as $competition)
 				    	<tr>
@@ -83,8 +83,8 @@
 				     		<td>{{$competition->date_finish}}</td>
 				      		<td>{{$competition->country}}</td>
 				      		<td>{{$competition->city}}</td>
-				      		<td>{{$competition->venue}}</td>	
-				      		<td>	
+				      		<td>{{$competition->venue}}</td>
+				      		<td>
 				      			<a href="{{ route('competition.edit',$competition->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>
@@ -129,10 +129,10 @@
 				     		<td>{{$result->competition->name}}</td>
 				      		<td>{{$result->race}}</td>
 				      		<td>{{$result->date}}</td>
-				      		<td>{{$result->event->name}}</td>	
-				      		<td>{{$result->mark}}</td>	
+				      		<td>{{$result->event->name}}</td>
+				      		<td>{{$result->mark}}</td>
 				      		<td>{{$result->score}}</td>
-				      		<td>	
+				      		<td>
 				      			<a href="{{ route('result.edit',$result->id)}}" class="btn btn-primary btn-sm">
 		  							Edit
 								</a>

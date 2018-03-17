@@ -80,9 +80,15 @@ class CompetitionCrudController extends Controller
         //CREATE new Competition instance
         $competition = new Competition;
 
-        $competition->name = $request->name;
         $competition->date_start = $request->date_start;
-        $competition->date_finish = $request->date_finish;
+
+        if($request->mdays){
+          $competition->date_finish = $request->date_finish;
+        }else{
+          $competition->date_finish = $request->date_start;
+        }
+
+        $competition->name = $request->name;
         $competition->country = $request->country;
         $competition->city = $request->city;
         $competition->venue = $request->venue;

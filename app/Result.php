@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Record;
+use App\Age;
 use Carbon\Carbon;
 use App\Traits\Statusable;
 
@@ -37,10 +38,19 @@ class Result extends Model
     }
 
 
+    public function isHanded()
+    {
+      return substr($this->mark, -1)=="H";
+    }
+
+    public function getAgeCategory(): string  
+    {
+      return Age::getCategory($this->age);
+    }
 
     public function getMarkstrAttribute(): string
     {
-      if($this->event->isTrack()){
+      if($this->event->isTrack() || $this->event->isRelay()){
         if(starts_with($this->mark, '00:00:0')){
           return str_replace_first('00:00:0', '', $this->mark);
         }elseif(starts_with($this->mark, '00:00:')){

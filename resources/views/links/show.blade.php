@@ -1,7 +1,7 @@
 <ul>
 	@foreach($var->links as $link)
 	 	<li>
-	  		<a href="{{$link->path}}">{{$link->name}}</a>
+	  		<a href="{{$link->path}}" target="_blank">{{$link->name}}</a>
 		</li>
 	@endforeach
-</ul> 
+</ul>

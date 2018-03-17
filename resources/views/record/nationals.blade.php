@@ -95,9 +95,9 @@
                         @elseif ($category == 'U23')
                             Νέοι (U23)
                         @elseif ($category == 'Youth')
-                            έφηβοι
-                        @else
                             Παίδες
+                        @else
+                            Έφηβοι
                         @endif
                     @else
                         @if($category == 'Senior')
@@ -105,9 +105,9 @@
                         @elseif ($category == 'U23')
                             Νέες (U23)
                         @elseif ($category == 'Youth')
-                            Νεανίδες
-                        @else
                             Κορασίδες
+                        @else
+                            Νεανίδες
                         @endif
                     @endif
 
@@ -126,27 +126,27 @@
 
                                     @foreach($records as $record)
                                         <?php $index=0; ?>
-                                        @foreach($record as $key => $sameRecord)                
+                                        @foreach($record as $key => $sameRecord)
                                             <tr>
                                                 <td>
                                                 @if($index == 0)
                                                     {{$sameRecord->event->name}}
-                                                @else 
-                                                    - 
+                                                @else
+                                                    -
                                                 @endif
                                                 </td>
-                                                <td>{{$sameRecord->markstr}}</td>
+                                                <td>{{$sameRecord->markstr}} @if($events->first()->isOutdoor() && $sameRecord->event->isIndoor()) (i) @endif </td>
                                                 <td>
                                                     <a href="/athlete/{{$sameRecord->athlete->id}}">{{$sameRecord->athlete->name}}</a>
                                                 </td>
-                                                <td><a href="/club/{{$sameRecord->athlete->club->id}}">{{$sameRecord->athlete->club->acronym}}</a></td>
+                                                <td><a href="/club/{{optional($sameRecord->athlete->club)->id}}">{{optional($sameRecord->athlete->club)->acronym}}</a></td>
                                                 <td>
                                                     <a href="/competition/{{$sameRecord->competition->id}}">{{$sameRecord->competition->city}}</a>
                                                 </td>
-                                                <td>{{$sameRecord->date}}</td>
+                                                <td>{{date('d.m.Y', strtotime($sameRecord->date))}}</td>
 
                                             </tr>
-                                            <?php $index = $index + 1; ?>             
+                                            <?php $index = $index + 1; ?>
                                         @endforeach
                                     @endforeach
 

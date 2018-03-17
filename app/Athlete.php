@@ -82,6 +82,20 @@ class Athlete extends Model
       return $this->first_name . ' ' . $this->last_name;
     }
 
+    public function getBirthAttribute(): string
+    {
+      if($this->dob){
+        return date('d.m.Y', strtotime($this->dob));
+      }elseif($this->year=="1000"){
+        return "Relay Team";
+      }elseif($this->year=="1700"){
+        return "Unkown Date of Birth";
+      }else{
+        return $this->year;
+      }
+
+    }
+
     public function isU16()
     {
       $age = Age::where('category', 'u16')->first();
@@ -500,13 +514,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($pb->mark>=$result->mark){
+      if($event->isField()){
+        if($pb->mark<=$result->mark){
           $result->setPb($event);
           return true;
         }
       }else{
-        if($pb->mark<=$result->mark){
+        if($pb->mark>=$result->mark){
           $result->setPb($event);
           return true;
         }
@@ -525,13 +539,13 @@ class Athlete extends Model
         return true;
       }
 
-      if($event->isTrack()){
-        if($sb->mark>=$result->mark){
+      if($event->isField()){
+        if($sb->mark<=$result->mark){
           $result->setSb($event);
           return true;
         }
       }else{
-        if($sb->mark<=$result->mark){
+        if($sb->mark>=$result->mark){
           $result->setSb($event);
           return true;
         }
@@ -542,20 +556,20 @@ class Athlete extends Model
 
     public function setNRIfExist($result, $event)
     {
-      $NR = $event->getNR($result->date)->first();
+      $NR = $event->getNR($result->date, true)->first();
 
       if(!$NR){
         $result->setNR($event);
         return true;
       }
 
-      if($event->isTrack()){
-        if($NR->mark>=$result->mark){
+      if($event->isField()){
+        if($NR->mark<=$result->mark){
           $result->setNR($event);
           return true;
         }
       }else{
-        if($NR->mark<=$result->mark){
+        if($NR->mark>=$result->mark){
           $result->setNR($event);
           return true;
         }
@@ -571,20 +585,20 @@ class Athlete extends Model
         return false;
       }
 
-      $NUR = $event->getNUR($result->date)->first();
+      $NUR = $event->getNUR($result->date, true)->first();
 
       if(!$NUR){
         $result->setNUR($event);
         return true;
       }
 
-      if($event->isTrack()){
-        if($NUR->mark>=$result->mark){
+      if($event->isField()){
+        if($NUR->mark<=$result->mark){
           $result->setNUR($event);
           return true;
         }
       }else{
-        if($NUR->mark<=$result->mark){
+        if($NUR->mark>=$result->mark){
           $result->setNUR($event);
           return true;
         }
@@ -600,20 +614,20 @@ class Athlete extends Model
         return false;
       }
 
-      $NJR = $event->getNJR($result->date)->first();
+      $NJR = $event->getNJR($result->date, true)->first();
 
       if(!$NJR){
         $result->setNJR($event);
         return true;
       }
 
-      if($event->isTrack()){
-        if($NJR->mark>=$result->mark){
+      if($event->isField()){
+        if($NJR->mark<=$result->mark){
           $result->setNJR($event);
           return true;
         }
       }else{
-        if($NJR->mark<=$result->mark){
+        if($NJR->mark>=$result->mark){
           $result->setNJR($event);
           return true;
         }
@@ -629,20 +643,20 @@ class Athlete extends Model
         return false;
       }
 
-      $NYR = $event->getNYR($result->date)->first();
+      $NYR = $event->getNYR($result->date, true)->first();
 
       if(!$NYR){
         $result->setNYR($event);
         return true;
       }
 
-      if($event->isTrack()){
-        if($NYR->mark >= $result->mark){
+      if($event->isField()){
+        if($NYR->mark<=$result->mark){
           $result->setNYR($event);
           return true;
         }
       }else{
-        if($NYR->mark <= $result->mark){
+        if($NYR->mark>=$result->mark){
           $result->setNYR($event);
           return true;
         }
@@ -658,20 +672,20 @@ class Athlete extends Model
         return false;
       }
 
-      $NU16R = $event->getNU16R($result->date)->first();
+      $NU16R = $event->getNU16R($result->date, true)->first();
 
       if(!$NU16R){
         $result->setNU16R($event);
         return true;
       }
 
-      if($event->isTrack()){
-        if($NU16R->mark >= $result->mark){
+      if($event->isField()){
+        if($NU16R->mark<=$result->mark){
           $result->setNU16R($event);
           return true;
         }
       }else{
-        if($NU16R->mark <= $result->mark){
+        if($NU16R->mark>=$result->mark){
           $result->setNU16R($event);
           return true;
         }

@@ -47,7 +47,7 @@ class TopListController extends Controller
 
     $event = Event::find($request->event);
     $ages = Age::all();
-    $years = Result::years();
+    $years = Result::years()->reverse();
     $age = Age::find($request->age);
 
     $res = Result::published()->fromYear($request->year)->where('event_id', $event->id)

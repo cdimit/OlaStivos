@@ -6,7 +6,7 @@
 			<strong>{{ session('status') }}</strong>
 		</div>
 	@endif
-	
+
 		<p>
     	<a href="{{ route('athlete.create') }}" class="btn btn-success btn-responsive" role="button">Add new Athlete</a>
     </p>
@@ -46,9 +46,9 @@
 				      		<th scope="row">{{$athlete->id}}</th>
 				      		<td>{{$athlete->first_name}}</td>
 				      		<td>{{$athlete->last_name}}</td>
-				     		<td>{{$athlete->dob}}</td>
+				     		<td>{{$athlete->birth}}</td>
 				     		<td>{{$athlete->gender}}</td>
-				     		<td>{{$athlete->club->name}}</td>
+				     		<td>{{optional($athlete->club)->name}}</td>
 				      		<td><img src="{{ $athlete->picture }}" class="img-responsive" style="max-width: 8vw; max-height: 8vh;"></td>
 				      		<td>
 				      			<a href="{{ route('athlete.edit',$athlete->id)}}" class="btn btn-primary btn-sm">
