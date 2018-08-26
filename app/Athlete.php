@@ -639,7 +639,7 @@ class Athlete extends Model
     public function setNYRIfExist($result, $event)
     {
 
-      if(!Age::isU16($result->age)){
+      if(!Age::isU18($result->age)){
         return false;
       }
 
@@ -668,7 +668,7 @@ class Athlete extends Model
     public function setNU16RIfExist($result, $event)
     {
 
-      if(!Age::isU18($result->age)){
+      if(!Age::isU16($result->age)){
         return false;
       }
 

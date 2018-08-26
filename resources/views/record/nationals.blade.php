@@ -96,8 +96,10 @@
                             Νέοι (U23)
                         @elseif ($category == 'Youth')
                             Παίδες
-                        @else
+                        @elseif ($category == 'Junior')
                             Έφηβοι
+                        @else
+                            Πανπαίδες
                         @endif
                     @else
                         @if($category == 'Senior')
@@ -106,8 +108,10 @@
                             Νέες (U23)
                         @elseif ($category == 'Youth')
                             Κορασίδες
-                        @else
+                        @elseif ($category == 'Junior')
                             Νεανίδες
+                        @else
+                            Πανκορασίδες
                         @endif
                     @endif
 
